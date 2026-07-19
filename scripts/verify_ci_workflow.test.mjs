@@ -103,3 +103,15 @@ test('workflow verifier requires executable command lines', () => {
   assert.equal(result.valid, false);
   assert.ok(result.findings.some(({ code }) => code === 'CI_PARITY_COMMAND'));
 });
+
+test('workflow verifier requires the mobile security policy command', () => {
+  const result = validateCiWorkflowText(
+    workflowSource.replace(
+      'run: npm run test:mobile-security',
+      'run: echo mobile security policy omitted',
+    ),
+  );
+
+  assert.equal(result.valid, false);
+  assert.ok(result.findings.some(({ code }) => code === 'CI_PARITY_COMMAND'));
+});

@@ -25,27 +25,22 @@ class RouteUnavailablePage extends StatelessWidget {
       ),
       body: SafeArea(
         child: SunnahContentFrame(
-          child: Center(
-            child: Padding(
-              padding: SunnahLayout.mobilePagePadding,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  SunnahEmptyState(
-                    icon: Icons.link_off_outlined,
-                    title: localizations.routeUnavailableTitle,
-                    message: localizations.routeUnavailableMessage,
-                  ),
-                  const SizedBox(height: 24),
-                  FilledButton(
-                    key: const ValueKey('route-unavailable-return-today'),
-                    onPressed: () => context.go(MobilePath.today),
-                    child: Text(localizations.returnToToday),
-                  ),
-                ],
+          child: ListView(
+            padding: SunnahLayout.mobilePagePadding,
+            children: [
+              const SizedBox(height: 24),
+              SunnahEmptyState(
+                icon: Icons.link_off_outlined,
+                title: localizations.routeUnavailableTitle,
+                message: localizations.routeUnavailableMessage,
               ),
-            ),
+              const SizedBox(height: 24),
+              FilledButton(
+                key: const ValueKey('route-unavailable-return-today'),
+                onPressed: () => context.go(MobilePath.today),
+                child: Text(localizations.returnToToday),
+              ),
+            ],
           ),
         ),
       ),

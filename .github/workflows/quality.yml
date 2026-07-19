@@ -30,6 +30,8 @@ jobs:
         run: npm ci --ignore-scripts
       - name: Verify CI workflow policy
         run: npm run test:ci-workflow
+      - name: Verify mobile security policy
+        run: npm run test:mobile-security
       - name: Verify Flutter runner policy
         run: npm run test:flutter-runner
       - name: Verify content contract

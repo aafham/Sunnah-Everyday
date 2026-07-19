@@ -11,7 +11,8 @@
     "check:flutter": "node scripts/run_flutter_tests.mjs --check",
     "test:flutter-runner": "node --test scripts/run_flutter_tests.test.mjs",
     "verify:ci-workflow": "node scripts/verify_ci_workflow.mjs",
-    "test:ci-workflow": "node --test scripts/verify_ci_workflow.test.mjs"
+    "test:ci-workflow": "node --test scripts/verify_ci_workflow.test.mjs",
+    "test:mobile-security": "node --test scripts/verify_mobile_security.test.mjs"
   },
   "devDependencies": {
     "ajv": "8.20.0",
