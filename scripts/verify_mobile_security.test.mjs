@@ -15,7 +15,7 @@ function findingCodes(result) {
   return result.findings.map(({ code }) => code);
 }
 
-test('the current shipped-mobile security boundary passes', () => {
+test('the current main-source mobile security boundary passes', () => {
   assert.deepEqual(verifyMobileSecurity(), { valid: true, findings: [] });
 });
 

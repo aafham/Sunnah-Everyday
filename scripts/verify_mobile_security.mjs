@@ -146,28 +146,28 @@ function validateMainManifest(mainManifest, findings) {
     addFinding(
       findings,
       'MOBILE_MAIN_PERMISSION',
-      'The shipped Android manifest must not request a permission.',
+      'The Android main source manifest must not request a permission.',
     );
   }
   if (!/\bandroid:allowBackup\s*=\s*"false"/i.test(mainManifest)) {
     addFinding(
       findings,
       'MOBILE_BACKUP_GUARD',
-      'The shipped Android manifest must explicitly disable backups.',
+      'The Android main source manifest must explicitly disable backups.',
     );
   }
   if (/\bandroid:usesCleartextTraffic\s*=\s*"true"/i.test(mainManifest)) {
     addFinding(
       findings,
       'MOBILE_CLEARTEXT_TRAFFIC',
-      'The shipped Android manifest must not enable cleartext traffic.',
+      'The Android main source manifest must not enable cleartext traffic.',
     );
   }
   if (/\bandroid:debuggable\s*=\s*"true"/i.test(mainManifest)) {
     addFinding(
       findings,
       'MOBILE_DEBUGGABLE_RELEASE',
-      'The shipped Android manifest must not mark the app debuggable.',
+      'The Android main source manifest must not mark the app debuggable.',
     );
   }
   if (/\bandroid:autoVerify\s*=/i.test(mainManifest)) {
@@ -331,7 +331,7 @@ function validateCredentialCandidates(credentialCandidates, findings) {
 }
 
 /**
- * Validates the reviewed, shipped-mobile security boundary and tracked
+ * Validates the reviewed main-source mobile security boundary and tracked
  * credential surface. It never reports credential values.
  */
 export function validateMobileSecuritySurface({

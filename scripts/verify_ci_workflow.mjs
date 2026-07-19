@@ -24,6 +24,7 @@ const requiredCommands = Object.freeze([
   'npm ci --ignore-scripts',
   'npm run test:ci-workflow',
   'npm run test:mobile-security',
+  'npm run test:quality-audit',
   'npm run test:flutter-runner',
   'npm run test:content-contract',
   'npm run test:content-validation',

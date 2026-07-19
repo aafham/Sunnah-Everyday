@@ -32,6 +32,8 @@ jobs:
         run: npm run test:ci-workflow
       - name: Verify mobile security policy
         run: npm run test:mobile-security
+      - name: Verify quality audit baseline
+        run: npm run test:quality-audit
       - name: Verify Flutter runner policy
         run: npm run test:flutter-runner
       - name: Verify content contract

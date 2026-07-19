@@ -115,3 +115,15 @@ test('workflow verifier requires the mobile security policy command', () => {
   assert.equal(result.valid, false);
   assert.ok(result.findings.some(({ code }) => code === 'CI_PARITY_COMMAND'));
 });
+
+test('workflow verifier requires the quality audit command', () => {
+  const result = validateCiWorkflowText(
+    workflowSource.replace(
+      'run: npm run test:quality-audit',
+      'run: echo quality audit omitted',
+    ),
+  );
+
+  assert.equal(result.valid, false);
+  assert.ok(result.findings.some(({ code }) => code === 'CI_PARITY_COMMAND'));
+});

@@ -36,6 +36,8 @@ void main() {
         isNot(contains('flutter_deeplinking_enabled" android:value="false"')),
       );
       expect(manifest, contains('android:launchMode="singleTop"'));
+      expect(manifest, isNot(contains('<queries')));
+      expect(manifest, isNot(contains('android.intent.action.PROCESS_TEXT')));
       expect(manifest, isNot(contains('<uses-permission')));
     },
   );
