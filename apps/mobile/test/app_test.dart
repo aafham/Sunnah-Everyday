@@ -1,3 +1,4 @@
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sunnaheveryday/src/app_preferences.dart';
@@ -189,6 +190,51 @@ void main() {
     await navigateTo('Hari Ini');
     expect(find.text('Belum ada kandungan yang diluluskan'), findsOneWidget);
   });
+
+  testWidgets(
+    'large text keeps the daily status action and primary navigation usable',
+    (tester) async {
+      await pumpMobileApp(
+        tester,
+        viewport: SunnahTestViewports.mobile,
+        textScaler: const TextScaler.linear(1.5),
+      );
+
+      final navigationBar = tester.widget<NavigationBar>(
+        find.byType(NavigationBar),
+      );
+      expect(navigationBar.destinations, hasLength(4));
+      expect(find.bySemanticsLabel('Navigasi utama'), findsOneWidget);
+      expect(find.bySemanticsLabel('Lihat status kandungan'), findsOneWidget);
+      expect(
+        tester
+            .widget<SunnahContentFrame>(find.byType(SunnahContentFrame))
+            .maxWidth,
+        SunnahLayout.mobileContentMaxWidth,
+      );
+
+      final statusAction = find.byKey(const ValueKey('daily-card-status'));
+      final pageScrollable = find.descendant(
+        of: find.byType(SunnahContentFrame),
+        matching: find.byType(Scrollable),
+      );
+      expect(pageScrollable, findsOneWidget);
+      await tester.scrollUntilVisible(
+        statusAction,
+        240,
+        scrollable: pageScrollable,
+      );
+      await tester.pump();
+      final actionRect = tester.getRect(statusAction);
+      final pageRect = tester.getRect(pageScrollable);
+      expect(actionRect.top, greaterThanOrEqualTo(pageRect.top));
+      expect(actionRect.bottom, lessThanOrEqualTo(pageRect.bottom));
+      await tester.tap(statusAction);
+      await settleSunnahTestWidget(tester);
+
+      expect(find.text('Butiran belum tersedia'), findsOneWidget);
+    },
+  );
 
   testWidgets(
     'app preserves nonlinear accessibility scaling and motion settings',

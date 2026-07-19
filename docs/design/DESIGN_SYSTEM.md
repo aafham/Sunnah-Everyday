@@ -1,5 +1,9 @@
 # Design System
 
+The executable layout, component, state and accessibility contract is in
+[UX_SPECIFICATION.md](UX_SPECIFICATION.md). It records the current shell only;
+it does not authorize a content, authentication or publication path.
+
 ## Principles
 
 The interface is minimal, calm, readable and accessible. It uses Material 3,
@@ -36,7 +40,9 @@ English and Arabic correctly.
   on-device preference store; it never stores content, sources, reviews,
   reflections or credentials.
 - Layouts use responsive constraints and admin navigation switches between a
-  navigation rail and drawer.
+  navigation rail and drawer at the documented 960 logical-pixel breakpoint.
+- Mobile shell surfaces use a 560 logical-pixel readable-content cap on larger
+  displays while retaining their four-item bottom navigation.
 - Information may not be conveyed by colour alone; future content screens must
   preserve RTL, screen-reader, keyboard and large-text support. Full RTL and
   broader localisation accessibility coverage remain PDX-03 work.

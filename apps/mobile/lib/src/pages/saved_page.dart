@@ -12,10 +12,12 @@ class SavedPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text(localizations.savedTitle)),
-      body: SunnahEmptyState(
-        icon: Icons.bookmark_outline,
-        title: localizations.savedEmptyTitle,
-        message: localizations.savedEmptyMessage,
+      body: SunnahContentFrame(
+        child: SunnahEmptyState(
+          icon: Icons.bookmark_outline,
+          title: localizations.savedEmptyTitle,
+          message: localizations.savedEmptyMessage,
+        ),
       ),
     );
   }

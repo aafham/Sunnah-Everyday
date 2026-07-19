@@ -17,33 +17,35 @@ class TodayPage extends ConsumerWidget {
     final dailyContent = ref.watch(todayDailyContentProvider);
 
     return SafeArea(
-      child: ListView(
-        padding: const EdgeInsets.fromLTRB(20, 24, 20, 32),
-        children: [
-          Semantics(
-            header: true,
-            child: Text(
-              localizations.todayHeading,
-              style: Theme.of(context).textTheme.displaySmall,
+      child: SunnahContentFrame(
+        child: ListView(
+          padding: SunnahLayout.mobilePagePadding,
+          children: [
+            Semantics(
+              header: true,
+              child: Text(
+                localizations.todayHeading,
+                style: Theme.of(context).textTheme.displaySmall,
+              ),
             ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            localizations.todayIntro,
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-          const SizedBox(height: 24),
-          DailyCard(
-            state: dailyContent,
-            onViewStatus: () => context.push(MobilePath.dailyDetail),
-          ),
-          const SizedBox(height: 24),
-          SunnahEmptyState(
-            icon: Icons.verified_user_outlined,
-            title: localizations.accuracyFirstTitle,
-            message: localizations.accuracyFirstMessage,
-          ),
-        ],
+            const SizedBox(height: 8),
+            Text(
+              localizations.todayIntro,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+            const SizedBox(height: 24),
+            DailyCard(
+              state: dailyContent,
+              onViewStatus: () => context.push(MobilePath.dailyDetail),
+            ),
+            const SizedBox(height: 24),
+            SunnahEmptyState(
+              icon: Icons.verified_user_outlined,
+              title: localizations.accuracyFirstTitle,
+              message: localizations.accuracyFirstMessage,
+            ),
+          ],
+        ),
       ),
     );
   }

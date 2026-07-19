@@ -18,9 +18,11 @@ class AdminPage extends StatelessWidget {
     return SafeArea(
       child: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1040),
+          constraints: const BoxConstraints(
+            maxWidth: SunnahLayout.adminContentMaxWidth,
+          ),
           child: ListView(
-            padding: const EdgeInsets.all(32),
+            padding: SunnahLayout.adminPagePadding,
             children: [
               Semantics(
                 header: true,

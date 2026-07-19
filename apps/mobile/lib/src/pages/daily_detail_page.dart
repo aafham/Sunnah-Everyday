@@ -35,23 +35,25 @@ class DailyDetailPage extends ConsumerWidget {
           title: Text(localizations.dailyDetailTitle),
         ),
         body: SafeArea(
-          child: ListView(
-            padding: const EdgeInsets.fromLTRB(20, 24, 20, 32),
-            children: [
-              Semantics(
-                header: true,
-                child: Text(
-                  localizations.dailyDetailTitle,
-                  style: Theme.of(context).textTheme.displaySmall,
+          child: SunnahContentFrame(
+            child: ListView(
+              padding: SunnahLayout.mobilePagePadding,
+              children: [
+                Semantics(
+                  header: true,
+                  child: Text(
+                    localizations.dailyDetailTitle,
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 24),
-              SunnahEmptyState(
-                icon: Icons.verified_user_outlined,
-                title: localizations.dailyDetailUnavailableTitle,
-                message: localizations.noApprovedContentMessage,
-              ),
-            ],
+                const SizedBox(height: 24),
+                SunnahEmptyState(
+                  icon: Icons.verified_user_outlined,
+                  title: localizations.dailyDetailUnavailableTitle,
+                  message: localizations.noApprovedContentMessage,
+                ),
+              ],
+            ),
           ),
         ),
       ),

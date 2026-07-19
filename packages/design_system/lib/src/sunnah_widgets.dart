@@ -1,5 +1,32 @@
 import 'package:flutter/material.dart';
 
+import 'sunnah_layout.dart';
+
+/// Centers a scrollable or fixed shell surface within a readable max width.
+class SunnahContentFrame extends StatelessWidget {
+  const SunnahContentFrame({
+    required this.child,
+    super.key,
+    this.maxWidth = SunnahLayout.mobileContentMaxWidth,
+    this.alignment = Alignment.topCenter,
+  });
+
+  final Widget child;
+  final double maxWidth;
+  final AlignmentGeometry alignment;
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: alignment,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: maxWidth),
+        child: child,
+      ),
+    );
+  }
+}
+
 /// A consistent section container that maintains a generous readable rhythm.
 class SunnahSectionCard extends StatelessWidget {
   const SunnahSectionCard({
@@ -22,7 +49,7 @@ class SunnahSectionCard extends StatelessWidget {
     return Card(
       clipBehavior: Clip.antiAlias,
       child: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: SunnahLayout.sectionCardPadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -77,7 +104,7 @@ class SunnahEmptyState extends StatelessWidget {
       container: true,
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.all(32),
+          padding: SunnahLayout.emptyStatePadding,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

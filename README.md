@@ -66,7 +66,9 @@ and native Kotlin/Glance widget support remain planned.
 | Google Play | No app/AAB/upload/submission/availability |
 
 Full work tracking is in [TASKS.md](TASKS.md), [PROGRESS.md](PROGRESS.md),
-[ROADMAP.md](ROADMAP.md), and [DECISIONS.md](DECISIONS.md).
+[ROADMAP.md](ROADMAP.md), and [DECISIONS.md](DECISIONS.md). The current
+mobile/admin UI contract is documented in
+[UX_SPECIFICATION.md](docs/design/UX_SPECIFICATION.md).
 
 ## Local setup
 

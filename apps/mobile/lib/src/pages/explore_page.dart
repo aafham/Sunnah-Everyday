@@ -12,10 +12,12 @@ class ExplorePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text(localizations.exploreTitle)),
-      body: SunnahEmptyState(
-        icon: Icons.explore_outlined,
-        title: localizations.exploreEmptyTitle,
-        message: localizations.exploreEmptyMessage,
+      body: SunnahContentFrame(
+        child: SunnahEmptyState(
+          icon: Icons.explore_outlined,
+          title: localizations.exploreEmptyTitle,
+          message: localizations.exploreEmptyMessage,
+        ),
       ),
     );
   }

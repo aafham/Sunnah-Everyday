@@ -1,3 +1,4 @@
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:testing_utils/testing_utils.dart';
@@ -26,6 +27,10 @@ void main() {
     expect(find.byType(NavigationRail), findsNothing);
     await tester.tap(find.byIcon(Icons.menu));
     await settleSunnahTestWidget(tester);
+    final navigationSemantics = tester.widget<Semantics>(
+      find.byKey(const ValueKey('admin-navigation')),
+    );
+    expect(navigationSemantics.properties.label, 'Navigasi admin');
     await tester.tap(find.text('Draf'));
     await settleSunnahTestWidget(tester);
 
@@ -57,12 +62,40 @@ void main() {
 
     expect(find.byType(NavigationRail), findsOneWidget);
     expect(find.byType(Drawer), findsNothing);
+    final navigationSemantics = tester.widget<Semantics>(
+      find.byKey(const ValueKey('admin-navigation')),
+    );
+    expect(navigationSemantics.properties.label, 'Navigasi admin');
+    expect(
+      tester
+          .widget<NavigationRail>(find.byType(NavigationRail))
+          .minExtendedWidth,
+      SunnahLayout.adminNavigationRailWidth,
+    );
     await tester.tap(find.text('Semakan'));
     await settleSunnahTestWidget(tester);
+
+    expect(
+      tester.widget<NavigationRail>(find.byType(NavigationRail)).selectedIndex,
+      2,
+    );
 
     expect(
       find.text('Queue hadith, fiqh, bahasa dan kelulusan akhir.'),
       findsOneWidget,
     );
+  });
+
+  testWidgets('admin content keeps the documented readable width', (
+    tester,
+  ) async {
+    await pumpAdminApp(tester, viewport: SunnahTestViewports.desktop);
+
+    final contentConstraints = tester
+        .widgetList<ConstrainedBox>(find.byType(ConstrainedBox))
+        .map((widget) => widget.constraints.maxWidth)
+        .whereType<double>();
+
+    expect(contentConstraints, contains(SunnahLayout.adminContentMaxWidth));
   });
 }

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -19,61 +20,59 @@ class OnboardingPage extends ConsumerWidget {
 
     return Scaffold(
       body: SafeArea(
-        child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 560),
-            child: ListView(
-              padding: const EdgeInsets.all(24),
-              children: [
-                const SizedBox(height: 48),
-                Semantics(
-                  header: true,
-                  child: Text(
-                    localizations.onboardingTitle,
-                    style: Theme.of(context).textTheme.displaySmall,
-                  ),
+        child: SunnahContentFrame(
+          alignment: Alignment.center,
+          child: ListView(
+            padding: SunnahLayout.onboardingPagePadding,
+            children: [
+              const SizedBox(height: 48),
+              Semantics(
+                header: true,
+                child: Text(
+                  localizations.onboardingTitle,
+                  style: Theme.of(context).textTheme.displaySmall,
                 ),
-                const SizedBox(height: 16),
-                Text(
-                  localizations.onboardingDescription,
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-                const SizedBox(height: 40),
-                Text(
-                  localizations.onboardingLanguageHeading,
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const SizedBox(height: 12),
-                Semantics(
-                  label: localizations.languageLabel,
-                  child: SegmentedButton<AppLocale>(
-                    key: const ValueKey('onboarding-language'),
-                    segments: [
-                      ButtonSegment(
-                        value: AppLocale.malay,
-                        label: Text(localizations.malayLanguage),
-                      ),
-                      ButtonSegment(
-                        value: AppLocale.english,
-                        label: Text(localizations.englishLanguage),
-                      ),
-                    ],
-                    selected: {preferences.locale},
-                    onSelectionChanged: (selection) {
-                      unawaited(controller.selectLocale(selection.first));
-                    },
-                  ),
-                ),
-                const SizedBox(height: 40),
-                FilledButton(
-                  key: const ValueKey('onboarding-continue'),
-                  onPressed: () {
-                    unawaited(controller.completeOnboarding());
+              ),
+              const SizedBox(height: 16),
+              Text(
+                localizations.onboardingDescription,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              const SizedBox(height: 40),
+              Text(
+                localizations.onboardingLanguageHeading,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const SizedBox(height: 12),
+              Semantics(
+                label: localizations.languageLabel,
+                child: SegmentedButton<AppLocale>(
+                  key: const ValueKey('onboarding-language'),
+                  segments: [
+                    ButtonSegment(
+                      value: AppLocale.malay,
+                      label: Text(localizations.malayLanguage),
+                    ),
+                    ButtonSegment(
+                      value: AppLocale.english,
+                      label: Text(localizations.englishLanguage),
+                    ),
+                  ],
+                  selected: {preferences.locale},
+                  onSelectionChanged: (selection) {
+                    unawaited(controller.selectLocale(selection.first));
                   },
-                  child: Text(localizations.continueLabel),
                 ),
-              ],
-            ),
+              ),
+              const SizedBox(height: 40),
+              FilledButton(
+                key: const ValueKey('onboarding-continue'),
+                onPressed: () {
+                  unawaited(controller.completeOnboarding());
+                },
+                child: Text(localizations.continueLabel),
+              ),
+            ],
           ),
         ),
       ),

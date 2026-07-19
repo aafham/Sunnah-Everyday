@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'sunnah_colors.dart';
+import 'sunnah_layout.dart';
 
 /// Returns the shared calm, high-contrast Material 3 theme.
 ThemeData sunnahTheme(Brightness brightness) {
@@ -25,7 +26,7 @@ ThemeData sunnahTheme(Brightness brightness) {
       centerTitle: false,
     ),
     navigationBarTheme: NavigationBarThemeData(
-      height: 72,
+      height: SunnahLayout.navigationBarHeight,
       indicatorColor: scheme.secondaryContainer,
       labelTextStyle: WidgetStatePropertyAll(
         TextStyle(color: scheme.onSurface, fontWeight: FontWeight.w600),
@@ -33,10 +34,14 @@ ThemeData sunnahTheme(Brightness brightness) {
     ),
     snackBarTheme: SnackBarThemeData(
       behavior: SnackBarBehavior.floating,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(SunnahLayout.controlRadius),
+      ),
     ),
     inputDecorationTheme: InputDecorationTheme(
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(SunnahLayout.controlRadius),
+      ),
     ),
   );
 }

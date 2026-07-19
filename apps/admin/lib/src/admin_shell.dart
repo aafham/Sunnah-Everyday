@@ -1,3 +1,4 @@
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -32,7 +33,8 @@ class AdminShell extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final wideLayout = constraints.maxWidth >= 960;
+        final wideLayout =
+            constraints.maxWidth >= SunnahLayout.adminNavigationBreakpoint;
 
         void navigate(int index) {
           context.go(_destinations[index].path);
@@ -45,23 +47,29 @@ class AdminShell extends StatelessWidget {
           return Scaffold(
             body: Row(
               children: [
-                NavigationRail(
-                  extended: true,
-                  minExtendedWidth: 248,
-                  selectedIndex: _selectedIndex,
-                  onDestinationSelected: navigate,
-                  leading: const Padding(
-                    padding: EdgeInsets.fromLTRB(16, 24, 16, 20),
-                    child: _AdminBrand(),
+                Semantics(
+                  key: const ValueKey('admin-navigation'),
+                  label: 'Navigasi admin',
+                  container: true,
+                  explicitChildNodes: true,
+                  child: NavigationRail(
+                    extended: true,
+                    minExtendedWidth: SunnahLayout.adminNavigationRailWidth,
+                    selectedIndex: _selectedIndex,
+                    onDestinationSelected: navigate,
+                    leading: const Padding(
+                      padding: EdgeInsets.fromLTRB(16, 24, 16, 20),
+                      child: _AdminBrand(),
+                    ),
+                    destinations: [
+                      for (final destination in _destinations)
+                        NavigationRailDestination(
+                          icon: Icon(destination.icon),
+                          selectedIcon: Icon(destination.icon),
+                          label: Text(destination.label),
+                        ),
+                    ],
                   ),
-                  destinations: [
-                    for (final destination in _destinations)
-                      NavigationRailDestination(
-                        icon: Icon(destination.icon),
-                        selectedIcon: Icon(destination.icon),
-                        label: Text(destination.label),
-                      ),
-                  ],
                 ),
                 const VerticalDivider(width: 1),
                 Expanded(child: child),
@@ -72,23 +80,29 @@ class AdminShell extends StatelessWidget {
 
         return Scaffold(
           appBar: AppBar(title: const Text('Sunnah Everyday Admin')),
-          drawer: Drawer(
-            child: SafeArea(
-              child: ListView(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.fromLTRB(24, 8, 24, 16),
-                    child: _AdminBrand(),
-                  ),
-                  for (var index = 0; index < _destinations.length; index++)
-                    ListTile(
-                      leading: Icon(_destinations[index].icon),
-                      title: Text(_destinations[index].label),
-                      selected: index == _selectedIndex,
-                      onTap: () => navigate(index),
+          drawer: Semantics(
+            key: const ValueKey('admin-navigation'),
+            label: 'Navigasi admin',
+            container: true,
+            explicitChildNodes: true,
+            child: Drawer(
+              child: SafeArea(
+                child: ListView(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(24, 8, 24, 16),
+                      child: _AdminBrand(),
                     ),
-                ],
+                    for (var index = 0; index < _destinations.length; index++)
+                      ListTile(
+                        leading: Icon(_destinations[index].icon),
+                        title: Text(_destinations[index].label),
+                        selected: index == _selectedIndex,
+                        onTap: () => navigate(index),
+                      ),
+                  ],
+                ),
               ),
             ),
           ),
