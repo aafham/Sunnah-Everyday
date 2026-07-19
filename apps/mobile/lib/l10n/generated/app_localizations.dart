@@ -236,11 +236,107 @@ abstract class AppLocalizations {
   /// **'Belum ada simpanan'**
   String get savedEmptyTitle;
 
-  /// Penjelasan Simpanan tanpa mendakwa fungsi yang belum wujud.
+  /// Penjelasan Simpanan yang fail-closed dan tepat.
   ///
   /// In ms, this message translates to:
-  /// **'Bookmark dan catatan peribadi belum tersedia. Fungsi ini akan dibina sebagai storan setempat pada peranti.'**
+  /// **'Simpanan kandungan hanya muncul selepas rujukan kandungan awam yang disahkan tersedia. Catatan peribadi kekal setempat pada peranti.'**
   String get savedEmptyMessage;
+
+  /// Heading simpanan kandungan yang fail-closed.
+  ///
+  /// In ms, this message translates to:
+  /// **'Simpanan kandungan'**
+  String get savedContentHeading;
+
+  /// Keadaan jujur apabila tiada rujukan kandungan awam yang disahkan.
+  ///
+  /// In ms, this message translates to:
+  /// **'Belum ada kandungan disahkan untuk disimpan'**
+  String get savedContentUnavailableTitle;
+
+  /// Penerangan bahawa tiada ID kandungan palsu digunakan.
+  ///
+  /// In ms, this message translates to:
+  /// **'Bookmark dan sejarah paparan hanya tersedia selepas bundle awam yang disahkan menyediakan rujukan kandungan yang sebenar.'**
+  String get savedContentUnavailableMessage;
+
+  /// Heading untuk catatan pengguna yang disimpan secara setempat.
+  ///
+  /// In ms, this message translates to:
+  /// **'Catatan peribadi'**
+  String get privateReflectionsHeading;
+
+  /// Penerangan privasi catatan peribadi tanpa dakwaan berlebihan.
+  ///
+  /// In ms, this message translates to:
+  /// **'Catatan ini kekal pada peranti ini dan tidak dihantar daripada aplikasi.'**
+  String get privateReflectionsDescription;
+
+  /// Label input bagi catatan peribadi.
+  ///
+  /// In ms, this message translates to:
+  /// **'Catatan baharu'**
+  String get privateReflectionInputLabel;
+
+  /// Petunjuk neutral untuk input catatan peribadi.
+  ///
+  /// In ms, this message translates to:
+  /// **'Tulis untuk diri sendiri'**
+  String get privateReflectionInputHint;
+
+  /// Tindakan menyimpan catatan peribadi.
+  ///
+  /// In ms, this message translates to:
+  /// **'Simpan catatan'**
+  String get savePrivateReflection;
+
+  /// Keadaan kosong untuk catatan peribadi.
+  ///
+  /// In ms, this message translates to:
+  /// **'Belum ada catatan peribadi'**
+  String get privateReflectionsEmptyTitle;
+
+  /// Penerangan keadaan kosong catatan peribadi.
+  ///
+  /// In ms, this message translates to:
+  /// **'Catatan yang anda simpan akan muncul pada peranti ini.'**
+  String get privateReflectionsEmptyMessage;
+
+  /// Tindakan memadam satu catatan peribadi.
+  ///
+  /// In ms, this message translates to:
+  /// **'Padam catatan'**
+  String get deletePrivateReflection;
+
+  /// Keadaan fail-closed apabila stor peribadi tidak boleh dibuka.
+  ///
+  /// In ms, this message translates to:
+  /// **'Catatan peribadi tidak tersedia'**
+  String get privateReflectionStorageUnavailableTitle;
+
+  /// Penerangan umum tanpa butiran ralat atau data peribadi.
+  ///
+  /// In ms, this message translates to:
+  /// **'Stor peribadi tidak dapat dibuka dengan selamat pada peranti ini. Tiada data baharu disimpan.'**
+  String get privateReflectionStorageUnavailableMessage;
+
+  /// Mesej ralat umum yang tidak mendedahkan teks catatan.
+  ///
+  /// In ms, this message translates to:
+  /// **'Catatan tidak dapat disimpan. Cuba lagi.'**
+  String get privateReflectionSaveFailed;
+
+  /// Mesej ralat umum untuk pemadaman satu catatan.
+  ///
+  /// In ms, this message translates to:
+  /// **'Catatan tidak dapat dipadam. Cuba lagi.'**
+  String get privateReflectionDeleteFailed;
+
+  /// Mesej had storan setempat yang dibataskan.
+  ///
+  /// In ms, this message translates to:
+  /// **'Had catatan peribadi telah dicapai.'**
+  String get privateReflectionsLimitReached;
 
   /// Tajuk halaman Tetapan.
   ///
@@ -332,11 +428,65 @@ abstract class AppLocalizations {
   /// **'Privasi'**
   String get privacyHeading;
 
-  /// Penjelasan privasi semasa.
+  /// Penjelasan privasi semasa yang tepat.
   ///
   /// In ms, this message translates to:
-  /// **'Akaun pengguna tidak diperlukan. Fungsi bookmark dan catatan peribadi belum tersedia dan tidak dihantar daripada shell ini.'**
+  /// **'Akaun pengguna tidak diperlukan. Catatan peribadi kekal pada peranti ini dan tidak dihantar ke pelayan.'**
   String get privacyMessage;
+
+  /// Heading kawalan catatan peribadi setempat.
+  ///
+  /// In ms, this message translates to:
+  /// **'Catatan peribadi'**
+  String get privateDataHeading;
+
+  /// Penerangan sempadan catatan peribadi yang sebenar.
+  ///
+  /// In ms, this message translates to:
+  /// **'Catatan peribadi kekal pada peranti ini dan tidak dihantar ke pelayan. Anda boleh memadam semua catatan peribadi yang disimpan.'**
+  String get privateDataMessage;
+
+  /// Tindakan memadam semua catatan peribadi yang disimpan.
+  ///
+  /// In ms, this message translates to:
+  /// **'Padam semua catatan peribadi'**
+  String get deleteAllPrivateData;
+
+  /// Tajuk pengesahan pemadaman catatan peribadi.
+  ///
+  /// In ms, this message translates to:
+  /// **'Padam semua catatan peribadi?'**
+  String get deleteAllPrivateDataTitle;
+
+  /// Penerangan pengesahan tanpa mendakwa secure erase.
+  ///
+  /// In ms, this message translates to:
+  /// **'Tindakan ini memadam semua catatan peribadi yang disimpan pada peranti ini. Ia tidak boleh dibatalkan dalam aplikasi.'**
+  String get deleteAllPrivateDataMessage;
+
+  /// Tindakan membatalkan dialog.
+  ///
+  /// In ms, this message translates to:
+  /// **'Batal'**
+  String get cancelLabel;
+
+  /// Tindakan mengesahkan pemadaman.
+  ///
+  /// In ms, this message translates to:
+  /// **'Padam'**
+  String get deleteLabel;
+
+  /// Pengesahan selepas pemadaman yang berjaya.
+  ///
+  /// In ms, this message translates to:
+  /// **'Catatan peribadi telah dipadam.'**
+  String get privateDataDeleted;
+
+  /// Mesej ralat umum untuk pemadaman semua catatan.
+  ///
+  /// In ms, this message translates to:
+  /// **'Catatan peribadi tidak dapat dipadam. Cuba lagi.'**
+  String get privateDataDeleteFailed;
 
   /// Tajuk onboarding.
   ///

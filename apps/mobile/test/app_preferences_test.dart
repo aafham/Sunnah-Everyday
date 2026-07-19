@@ -3,6 +3,23 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:sunnaheveryday/src/app_preferences.dart';
 
 void main() {
+  test('SharedPreferences remains allowlisted to six UI-only values', () {
+    const expectedKeys = <String>{
+      AppPreferencesStorageKey.schemaVersion,
+      AppPreferencesStorageKey.onboardingCompleted,
+      AppPreferencesStorageKey.locale,
+      AppPreferencesStorageKey.theme,
+      AppPreferencesStorageKey.reduceMotion,
+      AppPreferencesStorageKey.textScale,
+    };
+
+    expect(AppPreferencesStorageKey.all, expectedKeys);
+    expect(
+      AppPreferencesState().toPersistedValues().keys.toSet(),
+      expectedKeys,
+    );
+  });
+
   test('corrupt preference values fall back to the safe defaults', () {
     final preferences = AppPreferencesState.fromPersistedValues({
       AppPreferencesStorageKey.onboardingCompleted: 'true',

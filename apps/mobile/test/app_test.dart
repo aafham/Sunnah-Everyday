@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sunnaheveryday/src/app_preferences.dart';
 import 'package:sunnaheveryday/src/app_router.dart';
+import 'package:sunnaheveryday/src/pages/saved_page.dart';
+import 'package:sunnaheveryday/src/private_reflections.dart';
 import 'package:testing_utils/testing_utils.dart';
 
 import 'support/mobile_app_harness.dart';
@@ -182,7 +184,22 @@ void main() {
     expect(find.text('Belum ada koleksi untuk diterokai'), findsOneWidget);
 
     await navigateTo('Simpanan');
-    expect(find.text('Belum ada simpanan'), findsOneWidget);
+    expect(find.text('Belum ada catatan peribadi'), findsOneWidget);
+    final savedPageScrollable = find
+        .descendant(
+          of: find.byType(SavedPage),
+          matching: find.byType(Scrollable),
+        )
+        .first;
+    await tester.scrollUntilVisible(
+      find.text('Belum ada kandungan disahkan untuk disimpan'),
+      240,
+      scrollable: savedPageScrollable,
+    );
+    expect(
+      find.text('Belum ada kandungan disahkan untuk disimpan'),
+      findsOneWidget,
+    );
 
     await navigateTo('Tetapan');
     expect(find.text('Paparan'), findsOneWidget);
@@ -222,6 +239,173 @@ void main() {
     } finally {
       semantics.dispose();
     }
+  });
+
+  testWidgets(
+    'Saved persists and removes a private reflection without inventing content references',
+    (tester) async {
+      final store = InMemoryPrivateReflectionStore();
+      await pumpMobileApp(
+        tester,
+        initialLocation: MobilePath.saved,
+        privateReflectionStore: store,
+      );
+      await settleSunnahTestWidget(tester);
+
+      expect(find.text('Belum ada catatan peribadi'), findsOneWidget);
+      final input = find.byKey(const ValueKey('private-reflection-input'));
+      final textField = tester.widget<TextField>(input);
+      expect(textField.enableIMEPersonalizedLearning, isFalse);
+      expect(textField.autofillHints, isNull);
+
+      await tester.enterText(input, 'Keep this private');
+      await tester.pump();
+      await tester.tap(find.byKey(const ValueKey('private-reflection-save')));
+      await settleSunnahTestWidget(tester);
+
+      expect(find.text('Keep this private'), findsOneWidget);
+      final saved = await store.read();
+      expect(saved.reflections, hasLength(1));
+      expect(saved.reflections.single.id, startsWith('r_'));
+      expect(saved.reflections.single.id, isNot(contains('content')));
+
+      await tester.tap(
+        find.byKey(
+          ValueKey('private-reflection-delete-${saved.reflections.single.id}'),
+        ),
+      );
+      await settleSunnahTestWidget(tester);
+
+      expect((await store.read()).isEmpty, isTrue);
+      expect(find.text('Belum ada catatan peribadi'), findsOneWidget);
+      final savedScrollable = find
+          .descendant(
+            of: find.byType(SavedPage),
+            matching: find.byType(Scrollable),
+          )
+          .first;
+      await tester.scrollUntilVisible(
+        find.text('Belum ada kandungan disahkan untuk disimpan'),
+        240,
+        scrollable: savedScrollable,
+      );
+      expect(
+        find.text('Belum ada kandungan disahkan untuk disimpan'),
+        findsOneWidget,
+      );
+    },
+  );
+
+  testWidgets(
+    'failed private-reflection save retains input and exposes only a generic error',
+    (tester) async {
+      await pumpMobileApp(
+        tester,
+        initialLocation: MobilePath.saved,
+        privateReflectionStore: InMemoryPrivateReflectionStore(
+          failWrites: true,
+        ),
+      );
+      await settleSunnahTestWidget(tester);
+
+      final input = find.byKey(const ValueKey('private-reflection-input'));
+      await tester.enterText(input, 'Unsaved private note');
+      await tester.pump();
+      await tester.tap(find.byKey(const ValueKey('private-reflection-save')));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 250));
+
+      expect(input, findsOneWidget);
+      expect(
+        tester.widget<TextField>(input).controller!.text,
+        'Unsaved private note',
+      );
+      expect(find.byType(CircularProgressIndicator), findsNothing);
+      expect(
+        find.text('Catatan tidak dapat disimpan. Cuba lagi.'),
+        findsOneWidget,
+      );
+    },
+  );
+
+  testWidgets('Settings confirms before deleting every private reflection', (
+    tester,
+  ) async {
+    final store = InMemoryPrivateReflectionStore(
+      initialSnapshot: PrivateReflectionSnapshot(
+        reflections: [_privateReflectionForTest()],
+      ),
+    );
+    await pumpMobileApp(
+      tester,
+      initialLocation: MobilePath.settings,
+      privateReflectionStore: store,
+    );
+    await settleSunnahTestWidget(tester);
+
+    final deleteAll = find.byKey(const ValueKey('private-data-delete-all'));
+    final pageScrollable = find.descendant(
+      of: find.byType(SunnahContentFrame),
+      matching: find.byType(Scrollable),
+    );
+    await tester.scrollUntilVisible(deleteAll, 240, scrollable: pageScrollable);
+    await tester.tap(deleteAll);
+    await settleSunnahTestWidget(tester);
+
+    expect(find.text('Padam semua catatan peribadi?'), findsOneWidget);
+    await tester.tap(
+      find.descendant(
+        of: find.byType(AlertDialog),
+        matching: find.text('Batal'),
+      ),
+    );
+    await settleSunnahTestWidget(tester);
+    expect((await store.read()).reflections, hasLength(1));
+
+    await tester.tap(deleteAll);
+    await settleSunnahTestWidget(tester);
+    await tester.tap(
+      find.descendant(
+        of: find.byType(AlertDialog),
+        matching: find.text('Padam'),
+      ),
+    );
+    await settleSunnahTestWidget(tester);
+
+    expect((await store.read()).isEmpty, isTrue);
+    expect(find.text('Catatan peribadi telah dipadam.'), findsOneWidget);
+  });
+
+  testWidgets('unavailable private storage hides input and disables deletion', (
+    tester,
+  ) async {
+    await pumpMobileApp(
+      tester,
+      initialLocation: MobilePath.saved,
+      privateReflectionStore: const UnavailablePrivateReflectionStore(),
+    );
+    await settleSunnahTestWidget(tester);
+
+    expect(find.text('Catatan peribadi tidak tersedia'), findsOneWidget);
+    expect(
+      find.byKey(const ValueKey('private-reflection-input')),
+      findsNothing,
+    );
+
+    await tester.tap(
+      find.descendant(
+        of: find.byType(NavigationBar),
+        matching: find.text('Tetapan'),
+      ),
+    );
+    await settleSunnahTestWidget(tester);
+    final deleteAll = find.byKey(const ValueKey('private-data-delete-all'));
+    final pageScrollable = find.descendant(
+      of: find.byType(SunnahContentFrame),
+      matching: find.byType(Scrollable),
+    );
+    await tester.scrollUntilVisible(deleteAll, 240, scrollable: pageScrollable);
+    expect(tester.widget<OutlinedButton>(deleteAll).onPressed, isNull);
   });
 
   testWidgets(
@@ -324,4 +508,14 @@ class _NonlinearTextScaler extends TextScaler {
   @override
   double scale(double fontSize) =>
       fontSize <= 16 ? fontSize * 1.5 : fontSize * 1.2;
+}
+
+PrivateReflection _privateReflectionForTest() {
+  final timestamp = DateTime.utc(2026, 7, 19, 12);
+  return PrivateReflection.create(
+    id: 'r_settings_1',
+    body: 'Private note',
+    createdAtUtc: timestamp,
+    updatedAtUtc: timestamp,
+  );
 }

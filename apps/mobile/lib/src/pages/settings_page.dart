@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../l10n/generated/app_localizations.dart';
 import '../app_preferences.dart';
+import '../private_reflections.dart';
 
 class SettingsPage extends ConsumerWidget {
   const SettingsPage({super.key});
@@ -15,6 +16,27 @@ class SettingsPage extends ConsumerWidget {
     final localizations = AppLocalizations.of(context);
     final preferences = ref.watch(appPreferencesProvider);
     final controller = ref.read(appPreferencesProvider.notifier);
+    final privateReflectionState = ref
+        .watch(privateReflectionProvider)
+        .asData
+        ?.value;
+    final canDeletePrivateData = switch (privateReflectionState) {
+      PrivateReflectionReady(:final snapshot, :final isMutating) =>
+        !snapshot.isEmpty && !isMutating,
+      _ => false,
+    };
+    final privateStorageUnavailable = switch (privateReflectionState) {
+      PrivateReflectionUnavailable() => true,
+      _ => false,
+    };
+    final isPrivateStorageMutating = switch (privateReflectionState) {
+      PrivateReflectionUnavailable(:final isMutating) => isMutating,
+      _ => false,
+    };
+    final canAttemptPrivateDataRecovery =
+        privateStorageUnavailable &&
+        !isPrivateStorageMutating &&
+        ref.read(privateReflectionStoreProvider).canAttemptRecoveryDeletion;
 
     return Scaffold(
       appBar: AppBar(
@@ -130,7 +152,73 @@ class SettingsPage extends ConsumerWidget {
             ),
             const SizedBox(height: 8),
             Text(localizations.privacyMessage),
+            const Divider(height: 40),
+            Semantics(
+              header: true,
+              child: Text(
+                localizations.privateDataHeading,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(localizations.privateDataMessage),
+            if (privateStorageUnavailable) ...[
+              const SizedBox(height: 8),
+              Text(localizations.privateReflectionStorageUnavailableMessage),
+            ],
+            const SizedBox(height: 16),
+            OutlinedButton.icon(
+              key: const ValueKey('private-data-delete-all'),
+              onPressed: canDeletePrivateData || canAttemptPrivateDataRecovery
+                  ? () => unawaited(_confirmDeletePrivateData(context, ref))
+                  : null,
+              icon: const Icon(Icons.delete_outline),
+              label: Text(localizations.deleteAllPrivateData),
+            ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _confirmDeletePrivateData(
+    BuildContext context,
+    WidgetRef ref,
+  ) async {
+    final localizations = AppLocalizations.of(context);
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(localizations.deleteAllPrivateDataTitle),
+        content: Text(localizations.deleteAllPrivateDataMessage),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+            child: Text(localizations.cancelLabel),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(dialogContext).pop(true),
+            child: Text(localizations.deleteLabel),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true) {
+      return;
+    }
+
+    final didDelete = await ref
+        .read(privateReflectionProvider.notifier)
+        .deleteAllReflections();
+    if (!context.mounted) {
+      return;
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          didDelete
+              ? localizations.privateDataDeleted
+              : localizations.privateDataDeleteFailed,
         ),
       ),
     );

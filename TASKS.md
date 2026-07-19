@@ -14,7 +14,8 @@ blocked work never counts as complete.
 | MOB-02 | Flutter core | Onboarding, local preferences and language selection | P0 | 3 | DONE | MOB-01 | Widget tests for persistence/locales | `4913b54` | M1 | First-launch gate, allowlisted on-device UI preferences and BM/English ARB shell; 9 mobile tests, debug APK and Quality run `29678240092` passed; no content data added |
 | MOB-03 | Flutter core | Today, daily-card and safe detail views | P0 | 4 | DONE | MOB-01, CNT-01 | UI/state tests; only staging-safe data | `c8ddbeb` | M1 | Fail-closed reader/state, static safe-detail route and unavailable card only; no draft/religious content. 15 mobile tests, debug APK and Quality run `29678798552` passed |
 | MOB-04 | Flutter core | Explore, categories, situation mode and offline search | P1 | 3 | NOT_STARTED | MOB-03, DEL-01 | BM/EN search and empty-state tests | — | M1 | |
-| MOB-05 | Flutter core | Local bookmarks, history and private reflections | P1 | 3 | NOT_STARTED | MOB-01 | Persistence/privacy/deletion tests | — | M1 | |
+| MOB-05 | Flutter core | Local private reflections | P1 | 1 | DONE | MOB-01 | Persistence/privacy/deletion tests | — | M1 | Bounded Android-only free-text reflections (50 × 500 characters), generic failure states, scoped corrupt-envelope deletion and backup-rule coverage; no content ID, network/admin/analytics/export path or plaintext/browser fallback. Scope split from original MOB-05 so no unimplemented content-bound feature is counted. |
+| MOB-08 | Flutter core | Content-bound bookmarks, viewed history and private practice tracking | P1 | 2 | NOT_STARTED | MOB-05, CNT-03, BE-04, DEL-01 | Verified immutable-reference, persistence, withdrawal and deletion tests | — | M3 | Must use approved immutable bundle references and show withdrawal-safe states. No synthetic content IDs, content fixture, network path or public release before its dependencies and gates exist. |
 | MOB-06 | Flutter core | Settings, dark mode, scaling and reduce motion | P1 | 3 | NOT_STARTED | MOB-01 | Theme/a11y widget tests | — | M1 | |
 | MOB-07 | Flutter core | Friendly error states and deep-link app routing | P1 | 2 | NOT_STARTED | MOB-01 | Router/error tests | — | M1 | |
 | CNT-01 | Content/evidence | Content models, schemas, import templates and staging boundary | P0 | 3 | DONE | PDX-01 | Dart model tests plus JSON Schema/Ajv template-contract tests pass; no claim-bearing demo data | `64ea492` | M0 | Header-only templates, empty guarded staging/approved boundaries, and no imported records |
@@ -58,6 +59,8 @@ religious content. `PDX-02` documented and tested the current shell contract
 without adding content, backend access or release scope. `PDX-03` made the
 BM/English, generic RTL-layout and accessibility baseline explicit without
 adding Arabic text, fonts, data, sources or a publication path. `MOB-05` is
-the next highest available unblocked task. Do not mark BE-01 complete or count
-its weight until the documented local migration, lint and pgTAP checks have
-actually passed.
+complete as the deliberately bounded free-text reflection slice. Its original
+content-bound remainder is now `MOB-08`, which cannot begin until verified
+immutable-bundle dependencies exist. `MOB-06` is the next highest available
+unblocked task. Do not mark BE-01 complete or count its weight until the
+documented local migration, lint and pgTAP checks have actually passed.

@@ -44,3 +44,20 @@ Before completing the form, audit the release build for:
 
 The declaration must reflect audit evidence, not the intended architecture. Any
 change in collection/sharing requires a fresh audit and policy update.
+
+## Current implementation evidence, not a declaration
+
+The current Android build contains a bounded local private-reflection slice:
+at most 50 free-text notes of 500 characters, stored through an isolated
+Android secure-storage adapter. The app UI offers individual deletion and a
+confirmed deletion of every stored reflection; unreadable data may only be
+cleared through the same scoped key. It does not expose reflection text to an
+admin, a network endpoint, analytics, or an export feature. Browser and
+unsupported platforms fail closed.
+
+The app manifest currently contains no declared permission and disables backup
+with legacy and Android 12+ XML exclusion rules. This is implementation
+evidence only: it does not establish secure erasure, universal OEM transfer
+behaviour, third-party SDK behaviour, encryption claims, or a completed Play
+Data Safety form. A release-time manifest, dependency, traffic and device audit
+is still mandatory.

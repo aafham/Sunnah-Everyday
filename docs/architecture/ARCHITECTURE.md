@@ -19,7 +19,10 @@ content/           Header-only templates, JSON Schemas and guarded intake bounda
 `com.aafha.sunnaheveryday`. It uses Riverpod for app-level state and go_router
 for the four public destinations: Hari Ini, Teroka, Simpanan and Tetapan.
 Current screens intentionally show only safe no-content states until an
-approved bundle exists.
+approved bundle exists. The only current personal-data feature is a bounded
+Android-only free-text reflection envelope; it has no content reference,
+network, analytics, admin or export path. Browser and unsupported platforms
+fail closed.
 
 `apps/admin` is a responsive Flutter web shell with route boundaries for a
 dashboard, drafts, reviews, sources and reports. It does not authenticate,
@@ -57,8 +60,11 @@ The public app will ultimately read immutable, approved public bundles only.
 At BE-01, every application table has forced RLS, no `PUBLIC`/`anon`/
 `authenticated` table grants and no policy, so no client can read or write the
 baseline. BE-02 through BE-05 must add audited admin access, publication and
-bundle controls; Flutter UI is never the sole enforcement point. Private
-reflections/bookmarks remain local on the public device.
+bundle controls; Flutter UI is never the sole enforcement point. The current
+private reflection envelope remains local on the public Android device.
+Content-bound bookmarks, viewed history and practice tracking cannot exist
+until a verified immutable bundle/reference contract supports them; the shell
+does not manufacture IDs in the meantime.
 
 CNT-01/CNT-02 form an additional non-runtime boundary: they accept only
 `STAGING` input, start content candidates in `DRAFT`, reject
@@ -73,6 +79,7 @@ server.
 ```text
 mobile/admin UI → design_system + content_models + future domain/data packages
 mobile/admin tests → testing_utils + local application harnesses
+current private reflection slice → bounded Android secure-storage envelope only
 future data package → Drift local cache + approved public bundle contract
 Supabase baseline migrations → future workflow, rights, RLS and publication gates
 ```

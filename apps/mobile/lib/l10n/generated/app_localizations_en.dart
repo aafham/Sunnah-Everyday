@@ -82,7 +82,63 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get savedEmptyMessage =>
-      'Bookmarks and private reflections are not available yet. This feature will use on-device storage.';
+      'Saved content appears only after a verified public content reference is available. Private reflections stay on this device.';
+
+  @override
+  String get savedContentHeading => 'Saved content';
+
+  @override
+  String get savedContentUnavailableTitle => 'No verified content to save yet';
+
+  @override
+  String get savedContentUnavailableMessage =>
+      'Bookmarks and view history become available only after a verified public bundle provides a real content reference.';
+
+  @override
+  String get privateReflectionsHeading => 'Private reflections';
+
+  @override
+  String get privateReflectionsDescription =>
+      'These notes stay on this device and are not sent from the app.';
+
+  @override
+  String get privateReflectionInputLabel => 'New note';
+
+  @override
+  String get privateReflectionInputHint => 'Write for yourself';
+
+  @override
+  String get savePrivateReflection => 'Save note';
+
+  @override
+  String get privateReflectionsEmptyTitle => 'No private reflections yet';
+
+  @override
+  String get privateReflectionsEmptyMessage =>
+      'Notes you save will appear on this device.';
+
+  @override
+  String get deletePrivateReflection => 'Delete note';
+
+  @override
+  String get privateReflectionStorageUnavailableTitle =>
+      'Private reflections are unavailable';
+
+  @override
+  String get privateReflectionStorageUnavailableMessage =>
+      'Private storage could not open safely on this device. No new data is saved.';
+
+  @override
+  String get privateReflectionSaveFailed =>
+      'The note could not be saved. Try again.';
+
+  @override
+  String get privateReflectionDeleteFailed =>
+      'The note could not be deleted. Try again.';
+
+  @override
+  String get privateReflectionsLimitReached =>
+      'The private-reflection limit has been reached.';
 
   @override
   String get settingsTitle => 'Settings';
@@ -133,7 +189,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get privacyMessage =>
-      'A user account is not required. Bookmarks and private reflections are not available yet and are not sent from this shell.';
+      'A user account is not required. Private reflections stay on this device and are not sent to a server.';
+
+  @override
+  String get privateDataHeading => 'Private reflections';
+
+  @override
+  String get privateDataMessage =>
+      'Private reflections stay on this device and are not sent to a server. You can delete all saved private reflections.';
+
+  @override
+  String get deleteAllPrivateData => 'Delete all private reflections';
+
+  @override
+  String get deleteAllPrivateDataTitle => 'Delete all private reflections?';
+
+  @override
+  String get deleteAllPrivateDataMessage =>
+      'This removes every private reflection saved on this device. It cannot be undone in the app.';
+
+  @override
+  String get cancelLabel => 'Cancel';
+
+  @override
+  String get deleteLabel => 'Delete';
+
+  @override
+  String get privateDataDeleted => 'Private reflections deleted.';
+
+  @override
+  String get privateDataDeleteFailed =>
+      'Private reflections could not be deleted. Try again.';
 
   @override
   String get onboardingTitle => 'Welcome';

@@ -37,6 +37,19 @@ versioning with Android build numbers.
   by widget tests. An internal test-only direction override exercises generic
   layout; it adds no RTL locale, Arabic text/font, religious content/data,
   source record, backend access or publication path.
+- MOB-05 private-reflection slice: the Android shell now supports up to 50
+  locally stored free-text private reflections of 500 characters each through
+  an isolated secure-storage adapter. The field disables autocorrect,
+  suggestions, autofill and IME personalized learning; it offers individual
+  and confirmed all-reflection deletion, and fails closed without a plaintext
+  or browser fallback. Corrupt data can only be cleared through the scoped
+  secure key. No reflection text reaches a network, admin, analytics or export
+  path. Content bookmarks, viewed history and practice tracking remain
+  unavailable until a verified immutable public-bundle reference exists.
+- Android backup configuration now disables backup and explicitly excludes
+  application domains from legacy, cloud and device-transfer rule sets. This
+  is not a claim of secure erasure, universal transfer prevention or completed
+  Play Data Safety review.
 - Versioned BM/English ARB source and generated localizations now cover the
   existing mobile shell copy. They add no religious-content records or claims.
 - Flutter web admin shell with responsive navigation and explicit backend setup
@@ -103,6 +116,9 @@ versioning with Android build numbers.
   inspected or changed because GitHub authentication is unavailable.
 - GitHub CLI is unauthenticated; governance and application-shell commits were
   pushed through git, but no pull request has been created or updated.
+- MOB-08 remains dependency-gated: verified immutable content references and
+  the future transactional bundle store are required before local bookmarks,
+  viewed history and practice tracking can operate safely.
 
 ### GitHub
 
@@ -143,6 +159,12 @@ versioning with Android build numbers.
   The Flutter runner (3 tests) and CI-workflow policy suite (7 tests) passed.
   Mobile debug APK and admin-web smoke builds passed locally; no release AAB
   was built.
+- The MOB-05 reflection slice passed `flutter gen-l10n`, format, mobile
+  analysis and 39 mobile tests. A fresh Android debug APK build passed; no
+  release AAB was built. Tests cover bounded persistence/reopen, generic
+  failures, write rollback with retained UI input, per-note and confirmed
+  all-reflection deletion, corrupt-envelope recovery deletion, unsupported
+  platform failure, preference allowlisting and backup-rule source.
 - `npm run test:ci-workflow` passed (7 policy tests); `npm audit` reported 0
   vulnerabilities. Local debug APK and admin-web smoke builds passed.
 - GitHub Quality run `29677407731` passed contracts, Flutter quality and

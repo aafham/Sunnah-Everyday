@@ -20,7 +20,9 @@ tanpa kebenaran bertulis.
 ## Planned capabilities
 
 - Today, evidence-led detail, situation discovery, categories and offline search.
-- Private local bookmarks/reflections, preferences, reminders and Android widget.
+- Bounded Android-local private reflections and UI preferences. Content-bound
+  bookmarks, viewed history and practice tracking remain deferred until a
+  verified immutable public-bundle reference exists.
 - BM/English, dark mode, text scaling, reduced motion and a generic RTL-layout
   baseline; Arabic locale, font and content remain deferred pending rights and
   human review.
@@ -50,17 +52,18 @@ The target monorepo contains Flutter mobile/admin apps, shared packages and
 test support, Supabase migrations/functions/tests, a draft-only content intake
 contract, Android release materials, documentation, and future GitHub Actions.
 Flutter stable, Dart,
-Material 3, Riverpod, go_router, on-device UI preferences and generated ARB
-localisation support the current shell. Drift, Supabase, local notifications
-and native Kotlin/Glance widget support remain planned.
+Material 3, Riverpod, go_router, generated ARB localisation, allowlisted UI
+preferences and a bounded Android secure-storage reflection envelope support
+the current shell. Drift, Supabase, local notifications and native
+Kotlin/Glance widget support remain planned.
 
 ## Current repository status
 
 | Area | Status |
 | --- | --- |
 | Version / milestone | `0.1.0+1` development baseline / M0 closeout with M1 core experience started |
-| Completion | 28.0% weighted; PDX-01, PDX-02, PDX-03, MOB-01, MOB-02, MOB-03, CNT-01, CNT-02, QLT-01 and REL-01 complete |
-| App / admin / migrations | The mobile shell now has a local first-launch onboarding gate, exactly BM/English UI selection, allowlisted device UI preferences and fail-closed Daily/status/detail views; those views expose only an unavailable state until a verified public bundle exists. Shared layout tokens enforce a 560 logical-pixel mobile content cap, directional mobile page insets, a direction-aware return affordance, 960 admin drawer/rail breakpoint and 1040 admin content cap. Generic RTL layout is exercised only through a widget-test override; it does not enable an RTL locale or add Arabic text/font, religious content/data, source records, backend access or publication. The web-admin shell, shared deterministic Flutter test harness, read-only GitHub Quality workflow and fail-closed structural Supabase baseline remain implemented; local Supabase runtime validation is pending Docker |
+| Completion | 29.0% weighted; PDX-01, PDX-02, PDX-03, MOB-01, MOB-02, MOB-03, MOB-05, CNT-01, CNT-02, QLT-01 and REL-01 complete. MOB-05 is deliberately the bounded reflection slice; dependency-gated content-bound bookmarks/history/practice tracking are tracked separately as MOB-08 |
+| App / admin / migrations | The mobile shell now has a local first-launch onboarding gate, exactly BM/English UI selection, allowlisted device UI preferences, bounded Android-only private reflections, and fail-closed Daily/status/detail views. Reflections have no content reference or network/admin/analytics path; browser and unsupported platforms fail closed. Bookmarks, view history and practice tracking remain unavailable until a verified immutable public-bundle reference exists. Shared layout tokens enforce a 560 logical-pixel mobile content cap, directional mobile page insets, a direction-aware return affordance, 960 admin drawer/rail breakpoint and 1040 admin content cap. Generic RTL layout is exercised only through a widget-test override; it does not enable an RTL locale or add Arabic text/font, religious content/data, source records, backend access or publication. The web-admin shell, shared deterministic Flutter test harness, read-only GitHub Quality workflow and fail-closed structural Supabase baseline remain implemented; local Supabase runtime validation is pending Docker |
 | Content intake | Draft-only models, schemas, header-only templates and a read-only CSV validation preview implemented; 0 imported/approved/public items |
 | Approved content | 0 items; no reviewer or source-rights records |
 | GitHub | `3031af2` pushed on feature branch `codex/sunnah-everyday-build`; the public GitHub API reports 0 open pull requests for the branch, and creation or update is blocked by unavailable GitHub CLI authentication/session |

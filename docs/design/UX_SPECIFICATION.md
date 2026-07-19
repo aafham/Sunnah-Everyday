@@ -63,7 +63,8 @@ dedicated task, visual review and regression coverage.
 | Onboarding | Local language choice and continue action only | First launch and deep shell routes stay behind completion; form is centered and scrollable. |
 | Hari Ini | Unavailable approved-content status only | Primary heading, status card and explicit status action; no fallback content. |
 | Daily status detail | Unavailable status only | Static route, labelled back action and no item identifier. |
-| Teroka / Simpanan | Honest empty states | Plain-language empty state; no fabricated collection, bookmark or history. |
+| Teroka | Honest empty state | Plain-language empty state; no fabricated collection, category, search result or content reference. |
+| Simpanan | Bounded Android-only free-text reflection plus fail-closed saved-content state | A labelled private-note field permits only local reflection storage and individual deletion. Content bookmarks, viewed history and practice tracking remain unavailable without a verified immutable public-bundle reference; no synthetic content identifier is created. If private storage cannot open, input is hidden and only scoped recovery deletion may be offered. |
 | Tetapan | Device-local display controls | Language, theme, reduced motion and text size use the allowlisted preference store. |
 | Admin shell | Backend-setup state only | Drawer/rail navigation and empty setup state; it does not claim authentication, role access, source records or approval capability. |
 
@@ -78,6 +79,10 @@ dedicated task, visual review and regression coverage.
   semantic label.
 - Material controls retain their platform focus, keyboard and assistive
   technology behaviour. No custom focus trap or gesture-only action is added.
+- The private-reflection field has a localized input label, disables
+  autocorrect, suggestions, autofill and IME personalized learning, and keeps
+  typed text visible if a storage write fails. Error copy is generic and never
+  echoes a private note.
 - The mobile preference multiplier composes with the platform text scaler; it
   must not flatten nonlinear OS scaling. The shell also respects OS reduced
   motion and the local reduced-motion preference.
@@ -100,8 +105,14 @@ The following tests protect this contract without adding a data fixture:
   behaviour.
 - `apps/mobile/test/app_test.dart` covers the four-item navigation, semantic
   navigation label, semantic page headings, unavailable Daily flow, generic
-  RTL return affordance, readable content frame and a 150% text-scale status
-  action.
+  RTL return affordance, readable content frame, private-reflection save/delete
+  and failure states, confirmed all-delete, unavailable storage and a 150%
+  text-scale status action.
+- `apps/mobile/test/private_reflections_test.dart`,
+  `android_privacy_config_test.dart` and `app_preferences_test.dart` cover
+  bounded/envelope persistence, corrupt-value failure and recovery deletion,
+  unsupported-platform fallback, Android backup-rule source and the six-key
+  UI-preference allowlist.
 - `apps/mobile/test/app_localizations_test.dart` proves the generated app
   delegate supports exactly BM/English and supplies localized semantic labels
   and text-scale formatting.

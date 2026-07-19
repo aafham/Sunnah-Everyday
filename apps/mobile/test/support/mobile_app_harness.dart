@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:sunnaheveryday/app.dart';
 import 'package:sunnaheveryday/src/app_preferences.dart';
 import 'package:sunnaheveryday/src/app_router.dart';
+import 'package:sunnaheveryday/src/private_reflections.dart';
 import 'package:testing_utils/testing_utils.dart';
 
 typedef MobileContainerSetup =
@@ -18,6 +19,7 @@ Future<ProviderContainer> pumpMobileApp(
   TextDirection? textDirectionOverride,
   bool disableAnimations = false,
   AppPreferencesStore? preferencesStore,
+  PrivateReflectionStore? privateReflectionStore,
   bool onboardingCompleted = true,
   String initialLocation = MobilePath.today,
   MobileContainerSetup? configure,
@@ -32,6 +34,9 @@ Future<ProviderContainer> pumpMobileApp(
                     onboardingCompleted,
               },
             ),
+      ),
+      privateReflectionStoreProvider.overrideWithValue(
+        privateReflectionStore ?? InMemoryPrivateReflectionStore(),
       ),
     ],
   );

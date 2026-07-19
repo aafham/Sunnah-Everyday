@@ -56,6 +56,19 @@
   ujian delegate yang mengesahkan hanya BM/English disokong. Override RTL hanya
   untuk ujian widget; ia tidak mengaktifkan locale RTL atau menambah teks/font
   Arab, kandungan/data agama, sumber, akses backend atau laluan penerbitan.
+- MOB-05 kini membolehkan sehingga 50 catatan
+  peribadi teks bebas (maksimum 500 aksara setiap satu) disimpan secara lokal
+  pada Android. Medan catatan mematikan autocorrect, cadangan, autofill dan
+  pembelajaran peribadi IME; catatan boleh dipadam satu persatu atau semuanya
+  selepas pengesahan. Jika stor tidak boleh dibuka, aplikasi fail-closed dan
+  tidak menggunakan fallback plaintext atau pelayar. Tiada catatan dihantar ke
+  rangkaian, admin, analitik atau export.
+- Bookmark kandungan, sejarah paparan dan penjejakan amalan masih belum
+  tersedia kerana bundle awam dengan rujukan kandungan immutable belum wujud;
+  aplikasi tidak mencipta ID kandungan palsu. Konfigurasi backup Android kini
+  mematikan backup serta mengecualikan domain aplikasi untuk peraturan legacy,
+  cloud dan device-transfer. Ini bukan dakwaan secure erase atau deklarasi
+  Play Data Safety lengkap.
 - Tiada kandungan agama telah diterbitkan atau diluluskan.
 
 ### English
@@ -110,6 +123,17 @@
   delegate test proving exactly BM/English support. The RTL override is only
   for widget tests; it does not enable an RTL locale or add Arabic text/font,
   religious content/data, sources, backend access or a publication path.
+- MOB-05 now supports up to 50 local Android free-text
+  private reflections (500 characters each). The field disables autocorrect,
+  suggestions, autofill and IME personalized learning; reflections can be
+  deleted individually or all at once after confirmation. If storage cannot
+  open, the app fails closed and does not use a plaintext or browser fallback.
+  No reflection reaches a network, admin, analytics or export path.
+- Content bookmarks, viewed history and practice tracking are still unavailable
+  because no immutable public-bundle content reference exists; the app does not
+  create fake content IDs. Android backup configuration now disables backup and
+  excludes application domains in legacy, cloud and device-transfer rules. This
+  is not a secure-erasure claim or a completed Play Data Safety declaration.
 - No religious content has been published or approved.
 
 ### Google Play
