@@ -40,6 +40,11 @@
 - Salinan shell mobile kini mempunyai sumber ARB BM/English dan localizations
   Dart yang dijana serta gerbang laluan untuk menghalang deep link shell
   sebelum onboarding lengkap. Tiada data atau dakwaan agama baharu ditambah.
+- Kad status harian dan halaman butiran kini fail-closed. Tanpa bundle awam
+  yang disahkan, ia hanya memaparkan bahawa kandungan diluluskan belum tersedia.
+  Pembaca terbina tidak menyimpan atau memaparkan ID, tajuk, sumber, dalil,
+  gred atau teks kandungan, dan tidak membaca CSV draft, staging, approved atau
+  rangkaian.
 - Tiada kandungan agama telah diterbitkan atau diluluskan.
 
 ### English
@@ -80,6 +85,10 @@
 - The mobile shell now has BM/English ARB sources, generated Dart
   localizations and a route gate that prevents shell deep links before
   onboarding completes. No religious data or claims were added.
+- The Daily status card and detail page now fail closed. Until a verified public
+  bundle exists, they show only that approved content is unavailable. The
+  built-in reader has no ID, title, source, evidence, grade or body fields and
+  reads no draft CSV, staging, approved directory or network source.
 - No religious content has been published or approved.
 
 ### Google Play
@@ -92,8 +101,8 @@
 
 ### GitHub
 
-- Branch `codex/sunnah-everyday-build` has the local-onboarding feature commit
-  `4913b54` pushed. Its Quality run `29678240092` passed all three jobs; no
+- Branch `codex/sunnah-everyday-build` has the fail-closed-daily feature commit
+  `c8ddbeb` pushed. Its Quality run `29678798552` passed all three jobs; no
   release, AAB or Play operation exists in the workflow.
 - No pull request exists: GitHub's public API reports none for the branch, and
   no authenticated GitHub CLI or browser session is available in this environment.

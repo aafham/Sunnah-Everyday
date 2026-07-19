@@ -5,6 +5,9 @@
 The interface is minimal, calm, readable and accessible. It uses Material 3,
 generous whitespace, moderate rounded corners, clear touch targets and no
 gamification, public streaks, score/reward indicators or pressure language.
+Daily UI is a status surface, not a content fallback: before a verified public
+bundle exists it may show only an unavailable state, never draft, staging,
+unreviewed or generated religious material.
 
 ## Tokens
 

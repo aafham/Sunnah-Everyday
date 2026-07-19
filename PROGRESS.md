@@ -1,19 +1,19 @@
 # Progress
 
-_Last updated: 2026-07-19 (MOB-02 complete with green GitHub Quality CI; BE-01 runtime verification pending; MOB-03 selected)_
+_Last updated: 2026-07-19 (MOB-03 complete with green GitHub Quality CI; BE-01 runtime verification pending; PDX-02 selected)_
 
 ## Weighted status
 
 | Measure | Value | Calculation / meaning |
 | --- | ---: | --- |
-| Overall completion | 20.0% | `DONE task weight / 100` |
-| Completed weight | 20 / 100 | PDX-01, MOB-01, MOB-02, CNT-01, CNT-02, QLT-01 and REL-01 are complete |
-| Remaining weight | 80 / 100 | Includes blocked work |
+| Overall completion | 24.0% | `DONE task weight / 100` |
+| Completed weight | 24 / 100 | PDX-01, MOB-01, MOB-02, MOB-03, CNT-01, CNT-02, QLT-01 and REL-01 are complete |
+| Remaining weight | 76 / 100 | Includes blocked work |
 | Blocked weight | 4 / 100 | CNT-06 and REL-04 |
-| Tasks completed | 7 / 38 | Ledger task count |
-| Tasks remaining | 31 / 38 | Unfinished tasks |
+| Tasks completed | 8 / 38 | Ledger task count |
+| Tasks remaining | 30 / 38 | Unfinished tasks |
 | Tasks blocked | 2 / 38 | Owner inputs/access required |
-| Software completion | 18.1% | `15 completed implementation weight / 83 implementation weight` |
+| Software completion | 22.9% | `19 completed implementation weight / 83 implementation weight` |
 | Approved religious content readiness | 0 / 120 | No approved dataset or reviewer evidence supplied |
 | Production readiness | 0.0% | Production gates are not met |
 
@@ -23,12 +23,12 @@ _Last updated: 2026-07-19 (MOB-02 complete with green GitHub Quality CI; BE-01 r
 | --- | --- |
 | Current milestone | M0 closeout / M1 — Core Experience started; BE-01 runtime verification remains in review |
 | Target version | `0.1.0+1` development baseline; M1 target remains `0.2.0+2` |
-| Current task | MOB-03 — implement fail-closed Today, daily-card and detail surfaces with staging-safe state only; BE-01 Docker-backed migration, lint and pgTAP verification remains pending |
+| Current task | PDX-02 — document and verify the design-system/mobile/admin UX specification; BE-01 Docker-backed migration, lint and pgTAP verification remains pending |
 | Branch | `codex/sunnah-everyday-build` |
-| Last recorded task commit | `4913b54` (`feat(mobile): add local onboarding preferences`) |
-| Local checks | MOB-02: root Dart format passed (42 files, 0 changes); `flutter analyze`/`flutter test` passed for mobile (9 tests); `npm ci --ignore-scripts` reported 0 vulnerabilities; CI policy verifier/tests passed (7); Flutter runner tests passed (3); `npm run check:flutter` passed for all four targets: 1 `testing_utils`, 3 design-system, 9 mobile and 4 admin tests; content-contract tests passed (5); content-validation tests passed (14); Supabase static guard passed; `content_models` analyze/test passed (13); mobile debug APK and admin web smoke builds passed locally. CNT-02 and prior structural checks remain passed. All four migrations also applied in an isolated PostgreSQL/PGlite structural harness. `supabase db reset --local --no-seed` could not start because no Docker engine is available, so local Supabase lint and pgTAP have not run. |
-| GitHub CI | Quality run [`29678240092`](https://github.com/aafham/Sunnah-Everyday/actions/runs/29678240092) passed contracts, Flutter quality and debug/web smoke jobs for `4913b54` on 2026-07-19; it has no release/upload/Play path |
-| GitHub push / PR | `4913b54` pushed successfully; public API reported no open PR. `gh auth status` has no logged-in host and no authenticated browser session is available, so a PR cannot be created or edited from this environment |
+| Last recorded task commit | `c8ddbeb` (`feat(mobile): add fail-closed daily status views`) |
+| Local checks | MOB-03: `dart format --set-exit-if-changed lib test` passed (21 files, 0 changes); mobile `flutter analyze` and `flutter test` passed (15 tests); `npm run test:flutter-runner` passed (3); `npm run check:flutter` passed for all four targets: 1 `testing_utils`, 3 design-system, 15 mobile and 4 admin tests; CI policy verifier/tests passed (7); content-contract tests passed (5); content-validation tests passed (14); Supabase static guard passed; `content_models` analyze/test passed (13); mobile debug APK smoke build passed. No release AAB was built. CNT-02 and prior structural checks remain passed. All four migrations also applied in an isolated PostgreSQL/PGlite structural harness. `supabase db reset --local --no-seed` could not start because no Docker engine is available, so local Supabase lint and pgTAP have not run. |
+| GitHub CI | Quality run [`29678798552`](https://github.com/aafham/Sunnah-Everyday/actions/runs/29678798552) passed contracts, Flutter quality and debug/web smoke jobs for `c8ddbeb` on 2026-07-19; it has no release/upload/Play path |
+| GitHub push / PR | `c8ddbeb` pushed successfully; public API reported zero open PRs for the branch. `gh auth status` has no logged-in host and no authenticated browser session is available, so a PR cannot be created or edited from this environment |
 | Google Play | No app, signed AAB, Console/API credential, track check, or upload |
 | Release status | No signed release AAB generated, uploaded, or submitted; local debug APK only |
 
@@ -46,11 +46,11 @@ repository settings. See `docs/handoff/GITHUB_HANDOFF.md`.
 
 ## Next five tasks
 
-1. MOB-03: add fail-closed Today, daily-card and detail views using staging-safe state only.
-2. BE-01: run the local Supabase migration, lint and pgTAP suite once Docker is available.
-3. PDX-02: document and verify the design-system/mobile/admin UX specification.
-4. PDX-03: extend localisation, RTL and accessibility baseline beyond MOB-02 shell coverage.
-5. MOB-05: add local bookmarks, history and private reflections.
+1. PDX-02: document and verify the design-system/mobile/admin UX specification.
+2. PDX-03: extend localisation, RTL and accessibility baseline beyond current shell coverage.
+3. MOB-05: add local bookmarks, history and private reflections.
+4. MOB-06: extend settings coverage for dark mode, scaling and reduced motion.
+5. BE-01: run the local Supabase migration, lint and pgTAP suite once Docker is available.
 
 ## Update protocol
 
