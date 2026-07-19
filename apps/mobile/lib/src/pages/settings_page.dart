@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../l10n/generated/app_localizations.dart';
 import '../app_preferences.dart';
 
 class SettingsPage extends ConsumerWidget {
@@ -8,80 +11,118 @@ class SettingsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final localizations = AppLocalizations.of(context);
     final preferences = ref.watch(appPreferencesProvider);
     final controller = ref.read(appPreferencesProvider.notifier);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Tetapan')),
+      appBar: AppBar(title: Text(localizations.settingsTitle)),
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
           Semantics(
             header: true,
             child: Text(
-              'Paparan',
+              localizations.displayHeading,
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ),
           const SizedBox(height: 16),
-          Text('Tema', style: Theme.of(context).textTheme.titleMedium),
+          Text(
+            localizations.languageLabel,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+          const SizedBox(height: 8),
+          Semantics(
+            label: localizations.languageLabel,
+            child: SegmentedButton<AppLocale>(
+              key: const ValueKey('settings-language'),
+              segments: [
+                ButtonSegment(
+                  value: AppLocale.malay,
+                  label: Text(localizations.malayLanguage),
+                ),
+                ButtonSegment(
+                  value: AppLocale.english,
+                  label: Text(localizations.englishLanguage),
+                ),
+              ],
+              selected: {preferences.locale},
+              onSelectionChanged: (selection) {
+                unawaited(controller.selectLocale(selection.first));
+              },
+            ),
+          ),
+          const SizedBox(height: 24),
+          Text(
+            localizations.themeLabel,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
           const SizedBox(height: 8),
           SegmentedButton<AppThemeSetting>(
-            segments: const [
+            segments: [
               ButtonSegment(
                 value: AppThemeSetting.system,
-                label: Text('Sistem'),
-                icon: Icon(Icons.brightness_auto_outlined),
+                label: Text(localizations.themeSystem),
+                icon: const Icon(Icons.brightness_auto_outlined),
               ),
               ButtonSegment(
                 value: AppThemeSetting.light,
-                label: Text('Cerah'),
-                icon: Icon(Icons.light_mode_outlined),
+                label: Text(localizations.themeLight),
+                icon: const Icon(Icons.light_mode_outlined),
               ),
               ButtonSegment(
                 value: AppThemeSetting.dark,
-                label: Text('Gelap'),
-                icon: Icon(Icons.dark_mode_outlined),
+                label: Text(localizations.themeDark),
+                icon: const Icon(Icons.dark_mode_outlined),
               ),
             ],
             selected: {preferences.themeSetting},
-            onSelectionChanged: (value) => controller.selectTheme(value.first),
+            onSelectionChanged: (selection) {
+              unawaited(controller.selectTheme(selection.first));
+            },
           ),
           const SizedBox(height: 24),
           SwitchListTile.adaptive(
             contentPadding: EdgeInsets.zero,
-            title: const Text('Kurangkan animasi'),
-            subtitle: const Text('Hadkan pergerakan yang tidak penting.'),
+            title: Text(localizations.reduceMotionTitle),
+            subtitle: Text(localizations.reduceMotionSubtitle),
             value: preferences.reduceMotion,
-            onChanged: controller.setReduceMotion,
+            onChanged: (value) {
+              unawaited(controller.setReduceMotion(value));
+            },
           ),
           const Divider(height: 32),
-          Text('Saiz teks', style: Theme.of(context).textTheme.titleMedium),
+          Text(
+            localizations.textSizeTitle,
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
           Slider(
             value: preferences.textScale,
             min: 0.9,
             max: 1.5,
             divisions: 6,
-            label: '${(preferences.textScale * 100).round()}%',
-            onChanged: controller.setTextScale,
+            label: localizations.textScalePercent(
+              (preferences.textScale * 100).round(),
+            ),
+            onChanged: (value) {
+              unawaited(controller.setTextScale(value));
+            },
           ),
           Text(
-            'Pratonton teks yang selesa untuk dibaca.',
+            localizations.textSizePreview,
             style: Theme.of(context).textTheme.bodyLarge,
           ),
           const Divider(height: 40),
           Semantics(
             header: true,
             child: Text(
-              'Privasi',
+              localizations.privacyHeading,
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ),
           const SizedBox(height: 8),
-          const Text(
-            'Akaun pengguna tidak diperlukan. Fungsi bookmark dan catatan '
-            'peribadi belum tersedia dan tidak dihantar daripada shell ini.',
-          ),
+          Text(localizations.privacyMessage),
         ],
       ),
     );

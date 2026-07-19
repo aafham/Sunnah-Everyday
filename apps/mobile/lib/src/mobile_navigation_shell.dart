@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../l10n/generated/app_localizations.dart';
 import 'app_router.dart';
 
 class MobileNavigationShell extends StatelessWidget {
@@ -13,11 +14,11 @@ class MobileNavigationShell extends StatelessWidget {
   final String location;
   final Widget child;
 
-  static const _destinations = [
-    _MobileDestination(MobilePath.today, 'Hari Ini', Icons.wb_sunny_outlined),
-    _MobileDestination(MobilePath.explore, 'Teroka', Icons.explore_outlined),
-    _MobileDestination(MobilePath.saved, 'Simpanan', Icons.bookmark_outline),
-    _MobileDestination(MobilePath.settings, 'Tetapan', Icons.tune_outlined),
+  static const _destinations = <_MobileDestination>[
+    _MobileDestination(MobilePath.today, Icons.wb_sunny_outlined),
+    _MobileDestination(MobilePath.explore, Icons.explore_outlined),
+    _MobileDestination(MobilePath.saved, Icons.bookmark_outline),
+    _MobileDestination(MobilePath.settings, Icons.tune_outlined),
   ];
 
   int get _currentIndex {
@@ -29,20 +30,28 @@ class MobileNavigationShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    final labels = <String>[
+      localizations.navToday,
+      localizations.navExplore,
+      localizations.navSaved,
+      localizations.navSettings,
+    ];
+
     return Scaffold(
       body: child,
       bottomNavigationBar: Semantics(
-        label: 'Navigasi utama',
+        label: localizations.navigationSemantics,
         child: NavigationBar(
           selectedIndex: _currentIndex,
           onDestinationSelected: (index) =>
               context.go(_destinations[index].path),
           destinations: [
-            for (final destination in _destinations)
+            for (var index = 0; index < _destinations.length; index++)
               NavigationDestination(
-                icon: Icon(destination.icon),
-                selectedIcon: Icon(destination.icon),
-                label: destination.label,
+                icon: Icon(_destinations[index].icon),
+                selectedIcon: Icon(_destinations[index].icon),
+                label: labels[index],
               ),
           ],
         ),
@@ -52,9 +61,8 @@ class MobileNavigationShell extends StatelessWidget {
 }
 
 class _MobileDestination {
-  const _MobileDestination(this.path, this.label, this.icon);
+  const _MobileDestination(this.path, this.icon);
 
   final String path;
-  final String label;
   final IconData icon;
 }

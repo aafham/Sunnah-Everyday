@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sunnaheveryday/src/app_preferences.dart';
+import 'package:sunnaheveryday/src/app_router.dart';
 import 'package:testing_utils/testing_utils.dart';
 
 import 'support/mobile_app_harness.dart';
@@ -27,6 +28,75 @@ void main() {
     expect(find.text('Tema'), findsOneWidget);
     expect(find.text('Kurangkan animasi'), findsOneWidget);
     expect(find.byType(Slider), findsOneWidget);
+  });
+
+  testWidgets('first launch chooses a locale before opening the shell', (
+    tester,
+  ) async {
+    final store = InMemoryAppPreferencesStore();
+
+    await pumpMobileApp(tester, preferencesStore: store);
+
+    expect(find.text('Selamat datang'), findsOneWidget);
+    expect(find.byType(NavigationBar), findsNothing);
+
+    await tester.tap(
+      find.descendant(
+        of: find.byKey(const ValueKey('onboarding-language')),
+        matching: find.text('English'),
+      ),
+    );
+    await settleSunnahTestWidget(tester);
+
+    expect(find.text('Welcome'), findsOneWidget);
+    expect(find.text('Continue'), findsOneWidget);
+
+    await tester.tap(find.byKey(const ValueKey('onboarding-continue')));
+    await settleSunnahTestWidget(tester);
+
+    expect(find.text('Today'), findsWidgets);
+    expect(find.byType(NavigationBar), findsOneWidget);
+    expect(store.read().onboardingCompleted, isTrue);
+    expect(store.read().locale, AppLocale.english);
+  });
+
+  testWidgets('incomplete onboarding gates a deep shell route', (tester) async {
+    await pumpMobileApp(
+      tester,
+      onboardingCompleted: false,
+      initialLocation: MobilePath.settings,
+    );
+
+    expect(find.text('Selamat datang'), findsOneWidget);
+    expect(find.text('Tetapan'), findsNothing);
+    expect(find.byType(NavigationBar), findsNothing);
+  });
+
+  testWidgets('settings updates the language for the active shell', (
+    tester,
+  ) async {
+    await pumpMobileApp(tester);
+
+    await tester.tap(
+      find.descendant(
+        of: find.byType(NavigationBar),
+        matching: find.text('Tetapan'),
+      ),
+    );
+    await settleSunnahTestWidget(tester);
+
+    await tester.tap(
+      find.descendant(
+        of: find.byKey(const ValueKey('settings-language')),
+        matching: find.text('English'),
+      ),
+    );
+    await settleSunnahTestWidget(tester);
+
+    expect(find.text('Settings'), findsWidgets);
+    expect(find.text('Language'), findsOneWidget);
+    expect(find.bySemanticsLabel('Primary navigation'), findsOneWidget);
+    expect(find.text('Tetapan'), findsNothing);
   });
 
   testWidgets('primary navigation reaches every safe shell destination', (
@@ -64,9 +134,8 @@ void main() {
         tester,
         textScaler: const _NonlinearTextScaler(),
         disableAnimations: true,
-        configure: (container) {
-          container.read(appPreferencesProvider.notifier).setTextScale(1.2);
-        },
+        configure: (container) =>
+            container.read(appPreferencesProvider.notifier).setTextScale(1.2),
       );
 
       final context = tester.element(

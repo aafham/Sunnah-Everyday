@@ -3,11 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import 'l10n/generated/app_localizations.dart';
 import 'src/app_preferences.dart';
 import 'src/app_router.dart';
 
 class SunnahEverydayApp extends ConsumerStatefulWidget {
-  const SunnahEverydayApp({super.key});
+  const SunnahEverydayApp({super.key, this.initialLocation});
+
+  /// Enables deterministic route coverage without changing the installed
+  /// application's normal first destination.
+  final String? initialLocation;
 
   @override
   ConsumerState<SunnahEverydayApp> createState() => _SunnahEverydayAppState();
@@ -15,11 +20,31 @@ class SunnahEverydayApp extends ConsumerStatefulWidget {
 
 class _SunnahEverydayAppState extends ConsumerState<SunnahEverydayApp> {
   late final GoRouter _router;
+  late final ValueNotifier<bool> _onboardingCompleted;
 
   @override
   void initState() {
     super.initState();
-    _router = createMobileRouter();
+    _onboardingCompleted = ValueNotifier(
+      ref.read(appPreferencesProvider).onboardingCompleted,
+    );
+    ref.listenManual<AppPreferencesState>(appPreferencesProvider, (
+      previous,
+      next,
+    ) {
+      _onboardingCompleted.value = next.onboardingCompleted;
+    });
+    _router = createMobileRouter(
+      onboardingCompleted: _onboardingCompleted,
+      initialLocation: widget.initialLocation ?? MobilePath.today,
+    );
+  }
+
+  @override
+  void dispose() {
+    _router.dispose();
+    _onboardingCompleted.dispose();
+    super.dispose();
   }
 
   @override
@@ -27,8 +52,11 @@ class _SunnahEverydayAppState extends ConsumerState<SunnahEverydayApp> {
     final preferences = ref.watch(appPreferencesProvider);
 
     return MaterialApp.router(
-      title: 'Sunnah Everyday',
       debugShowCheckedModeBanner: false,
+      locale: preferences.locale.locale,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
       theme: sunnahLightTheme(),
       darkTheme: sunnahDarkTheme(),
       themeMode: preferences.themeSetting.themeMode,

@@ -1,9 +1,19 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/widgets.dart';
 
 import 'app.dart';
+import 'src/app_preferences.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const ProviderScope(child: SunnahEverydayApp()));
+  final preferencesStore = await createLocalAppPreferencesStore();
+
+  runApp(
+    ProviderScope(
+      overrides: [
+        appPreferencesStoreProvider.overrideWithValue(preferencesStore),
+      ],
+      child: const SunnahEverydayApp(),
+    ),
+  );
 }
