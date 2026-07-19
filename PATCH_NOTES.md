@@ -75,6 +75,12 @@
   teks 90–150% tanpa meratakan lengkung OS, semantik BM/English dan capaian
   kawalan pada teks besar. Tiada kandungan, sumber, akaun, permission,
   rangkaian atau laluan penerbitan baharu.
+- MOB-07 menambah deep link Android khusus `sunnah://` untuk hos `daily`,
+  `content` dan `correction`, tetapi ia hanya memetakan URI yang ketat kepada
+  halaman status statik atau ralat mesra yang dilokalkan. Semua URI luaran
+  ditapis sebelum laluan onboarding; token legap tidak dipaparkan, disimpan,
+  dihantar ke rangkaian atau dilog. Tiada kandungan, App Link/HTTPS,
+  permission, akaun atau release path baharu ditambah.
 - Tiada kandungan agama telah diterbitkan atau diluluskan.
 
 ### English
@@ -146,6 +152,12 @@
   without flattening the OS curve, BM/English semantics and control reachability
   at large text. No content, source, account, permission, network or
   publication path was added.
+- MOB-07 adds the `sunnah://` Android custom scheme for `daily`, `content` and
+  `correction`, while mapping only strict URI shapes to a static status or
+  localized friendly-error surface. Every external URI is filtered before the
+  onboarding route; opaque tokens are not rendered, stored, sent over a
+  network or logged. No content, HTTPS App Link, permission, account or
+  release path was added.
 - No religious content has been published or approved.
 
 ### Google Play
@@ -158,8 +170,8 @@
 
 ### GitHub
 
-- Branch `codex/sunnah-everyday-build` has the display-settings accessibility
-  feature commit `0f4e79b` pushed. Its Quality run `29682938797` passed
+- Branch `codex/sunnah-everyday-build` has the safe-deep-link feature commit
+  `0437704` pushed. Its Quality run `29683674702` passed
   contracts, Flutter quality and debug/web smoke. No release, AAB or Play
   operation exists in the workflow.
 - No pull request exists: GitHub's public API reports none for the branch, and

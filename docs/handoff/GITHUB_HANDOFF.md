@@ -16,14 +16,15 @@
 - Pushed generic-RTL commit: `3031af27220f4897abfe305b63a40e2ebd8ed62b`
 - Pushed private-reflection commit: `86f80bafb97348e91417a675c1550fdf89023874`
 - Pushed display-settings accessibility commit: `0f4e79bec87f4c0ed9fd62f3562d3e64d7d1e362`
+- Pushed safe-deep-link commit: `0437704676d4f471cf3e6aa7f27f5f598436a8ff`
 - Pushed CI workflow/hardening commits: `1c2463d`, `4ceff86` and
   `766e1fbb4ccb78ded664216a4819c42c0246bdbc`
 - Push: successful through configured git credentials on 2026-07-19.
 - GitHub CLI authentication: unavailable (`gh auth status` has no logged-in
   account), so no pull request has been created or updated. No browser session
   was available as an authenticated fallback.
-- CI: Quality run [29682938797](https://github.com/aafham/Sunnah-Everyday/actions/runs/29682938797)
-  passed contracts, Flutter quality and debug/web smoke for `0f4e79b`.
+- CI: Quality run [29683674702](https://github.com/aafham/Sunnah-Everyday/actions/runs/29683674702)
+  passed contracts, Flutter quality and debug/web smoke for `0437704`.
   GitHub's public branch API query reported zero open PRs after the push.
 
 ## Owner action
@@ -76,6 +77,10 @@ Suggested PR body:
   semantics and widget coverage for theme selection, text scale and composed
   local/OS reduced motion. It adds no content, source, permission, account or
   network path.
+- Adds strict Android custom-scheme routing and generic localized route
+  recovery. External URI input is reduced to static safe routes before
+  onboarding/path matching, with no opaque token, content lookup, network or
+  publication path.
 - Validation: format, analyzer and tests passed for all Flutter packages;
   content Dart/schema tests, schema static guard and isolated PostgreSQL
   structural execution passed.

@@ -63,6 +63,7 @@ dedicated task, visual review and regression coverage.
 | Onboarding | Local language choice and continue action only | First launch and deep shell routes stay behind completion; form is centered and scrollable. |
 | Hari Ini | Unavailable approved-content status only | Primary heading, status card and explicit status action; no fallback content. |
 | Daily status detail | Unavailable status only | Static route, labelled back action and no item identifier. |
+| External link / unknown route | Generic localized recovery state, or the existing unavailable status for a strict `daily`/`content` custom URI | External URI hosts and opaque segments are never shown. A visible, semantic return-to-Today action recovers from the generic state; incomplete onboarding still wins. |
 | Teroka | Honest empty state | Plain-language empty state; no fabricated collection, category, search result or content reference. |
 | Simpanan | Bounded Android-only free-text reflection plus fail-closed saved-content state | A labelled private-note field permits only local reflection storage and individual deletion. Content bookmarks, viewed history and practice tracking remain unavailable without a verified immutable public-bundle reference; no synthetic content identifier is created. If private storage cannot open, input is hidden and only scoped recovery deletion may be offered. |
 | Tetapan | Device-local display controls | Language, System/Light/Dark theme, reduced motion and 90–150% text size use the allowlisted preference store. Theme, motion and text-size groups retain localized semantics and visible labels; icons never carry their state alone. |
@@ -89,6 +90,9 @@ dedicated task, visual review and regression coverage.
 - Settings has localized semantic groups for theme, reduced motion and text
   size. Its slider announces a localized percentage, and its System/Light/Dark
   selection has visible text as well as icons.
+- The generic route-recovery page has a localized semantic app-bar heading and
+  a visible return-to-Today button. It must not echo a URI, opaque identifier
+  or router exception.
 - All currently rendered status and empty states use text plus iconography, and
   their scrollable containers must remain usable at a 150% text scale in the
   supported mobile test surface.
@@ -120,6 +124,10 @@ The following tests protect this contract without adding a data fixture:
 - `apps/mobile/test/app_localizations_test.dart` proves the generated app
   delegate supports exactly BM/English and supplies localized semantic labels
   and text-scale formatting.
+- `apps/mobile/test/deep_link_routing_test.dart` and
+  `android_deep_link_config_test.dart` cover strict Android custom-scheme host
+  registration, cold/runtime URI handling, malformed/host/path collisions,
+  onboarding precedence, localized recovery and opaque-token non-disclosure.
 - `apps/admin/test/app_test.dart` covers the exact 959/960 drawer-to-rail
   boundary, named admin navigation semantics, selected rail destination, rail
   width and maximum content width.

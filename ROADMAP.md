@@ -10,9 +10,10 @@ content and no Play upload until an app can open safely.
 
 ## M1 — Core Experience (`0.2.0+2`)
 
-Onboarding; Today; safe detail; Explore; offline search; bookmarks; private
-reflections; settings; BM/English; dark mode; accessibility baseline. A stable
-shell can only go to Internal Testing while it contains staging-only content.
+Onboarding; Today; safe detail; static custom-scheme routing and recovery;
+Explore; offline search; bookmarks; private reflections; settings; BM/English;
+dark mode; accessibility baseline. A stable shell can only go to Internal
+Testing while it contains staging-only content.
 
 ## M2 — Evidence and Content Governance (`0.3.0+3`)
 
@@ -23,8 +24,9 @@ unless all relevant content and rights gates are proven.
 ## M3 — Offline, Reminder and Widget (`0.4.0+4`)
 
 Immutable public bundle sync, cache/search, local reminders, timezone handling,
-native Android widget, deep links, background refresh, withdrawal propagation,
-and scenario testing. Internal Testing is the maximum assumed track.
+native Android widget, content-bound deep-link delivery, background refresh,
+withdrawal propagation, and scenario testing. Internal Testing is the maximum
+assumed track.
 
 ## M4 — Beta (`0.9.0`)
 

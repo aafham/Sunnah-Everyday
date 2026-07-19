@@ -61,3 +61,9 @@ the gates for content import and publication.
 
 Accessibility expansion, integration coverage, security testing, CI, and
 release automation are scheduled in their dedicated quality and release tasks.
+
+`MOB-07` adds router/manifest widget tests under `apps/mobile/test/` for the
+current static custom-scheme boundary. They use opaque structural test tokens
+only to prove non-disclosure; they do not create a content fixture, fetch a
+bundle or exercise content delivery. Android device integration, broader
+accessibility and security coverage remain QLT-02 work.

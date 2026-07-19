@@ -24,6 +24,15 @@ Android-only free-text reflection envelope; it has no content reference,
 network, analytics, admin or export path. Browser and unsupported platforms
 fail closed.
 
+The Android activity accepts only `sunnah://daily`, `sunnah://content` and
+`sunnah://correction` custom-scheme hosts. Before normal path matching or the
+onboarding gate, the mobile router treats every external authority as untrusted
+and reduces it to a static fail-closed detail or generic recovery route. No
+external identifier becomes a route parameter, is rendered, stored, logged or
+used for a content lookup. HTTPS App Links, public-bundle lookups and
+content-bound deep-link delivery remain deferred to their verified domain,
+bundle and withdrawal contracts.
+
 `apps/admin` is a responsive Flutter web shell with route boundaries for a
 dashboard, drafts, reviews, sources and reports. It does not authenticate,
 query, fabricate or publish data yet. The structural Supabase baseline is

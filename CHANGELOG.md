@@ -57,6 +57,13 @@ versioning with Android build numbers.
   control reachability are exercised. A design-system regression test guards
   readable `onSurface` contrast against each theme scaffold. No content,
   source, account, permission, network or publication path was added.
+- MOB-07 safe app routing: Android registers only the `sunnah` custom scheme
+  for `daily`, `content` and `correction`. A strict classifier intercepts all
+  external authorities before path-based onboarding/routing, and maps them
+  only to static fail-closed status or generic localized recovery surfaces.
+  Opaque link tokens never enter route parameters, UI, storage, network or
+  logs; no content record, App Link domain, permission, account or release
+  path was added.
 - Versioned BM/English ARB source and generated localizations now cover the
   existing mobile shell copy. They add no religious-content records or claims.
 - Flutter web admin shell with responsive navigation and explicit backend setup
@@ -136,12 +143,12 @@ versioning with Android build numbers.
   `4913b54`, fail-closed-daily commit: `c8ddbeb`, responsive-UX commit:
   `56daf54`, generic-RTL feature commit: `3031af2`, private-reflection feature
   commit: `86f80ba`, and display-settings accessibility feature commit:
-  `0f4e79b`, pushed to
+  `0f4e79b`, and safe-deep-link feature commit: `0437704`, pushed to
   `codex/sunnah-everyday-build`; CI workflow/hardening commits: `1c2463d`,
   `4ceff86` and `766e1fb`, pushed to the same branch.
 - Pull request: not created; `gh auth login` or a scoped `GH_TOKEN` is needed.
-- CI status: Quality run `29682938797` passed contracts, Flutter quality and
-  debug/web smoke for `0f4e79b`. The runner emitted Node 20 deprecation
+- CI status: Quality run `29683674702` passed contracts, Flutter quality and
+  debug/web smoke for `0437704`. The runner emitted Node 20 deprecation
   warnings while forcing actions to Node 24; this was not a test/build failure.
 
 ### Tests
@@ -181,6 +188,12 @@ versioning with Android build numbers.
   content-contract 5, content-validation 14, the static Supabase guard and
   content-model analysis/tests (13). Android debug APK and admin web smoke
   builds passed. No release AAB was built.
+- MOB-07 passed `flutter gen-l10n`, root format (54 files, 0 changes), all
+  Flutter analyzers/tests (testing_utils 1, design system 7, mobile 51 and
+  admin 5), Flutter-runner 3, CI-workflow 7, content-contract 5,
+  content-validation 14, static Supabase guard and content-model analysis/tests
+  (13). Android debug APK and admin web smoke builds passed; no release AAB
+  was built.
 - `npm run test:ci-workflow` passed (7 policy tests); `npm audit` reported 0
   vulnerabilities. Local debug APK and admin-web smoke builds passed.
 - GitHub Quality run `29677407731` passed contracts, Flutter quality and
@@ -197,6 +210,8 @@ versioning with Android build numbers.
   debug/web smoke checks on `86f80ba`.
 - GitHub Quality run `29682938797` passed contracts, Flutter quality and
   debug/web smoke checks on `0f4e79b`.
+- GitHub Quality run `29683674702` passed contracts, Flutter quality and
+  debug/web smoke checks on `0437704`.
 - `node scripts/verify_supabase_baseline.mjs` passed; all four migrations also
   applied in an isolated PostgreSQL/PGlite structural harness.
 - `dart analyze` and `dart test` passed for `packages/content_models`.
