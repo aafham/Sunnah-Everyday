@@ -6,7 +6,7 @@ blocked work never counts as complete.
 
 | ID | Workstream | Description | Priority | Weight | Status | Dependencies | Acceptance criteria / tests | Commit | Play milestone | Notes |
 | --- | --- | --- | ---: | ---: | --- | --- | --- | --- | --- | --- |
-| PDX-01 | Product & UX | Governance, task ledger, progress, roadmap, decisions and operating rules | P0 | 3 | DONE | — | Required docs/policies/runbooks exist and are internally consistent | pending commit | M0 | Documentation validation, format and analysis passed |
+| PDX-01 | Product & UX | Governance, task ledger, progress, roadmap, decisions and operating rules | P0 | 3 | DONE | — | Required docs/policies/runbooks exist and are internally consistent | `c1b089b` | M0 | Documentation validation, format and analysis passed; branch push verified |
 | PDX-02 | Product & UX | Design system and mobile/admin UX specification | P1 | 2 | NOT_STARTED | PDX-01 | Tokens, components, responsive/a11y requirements documented and tested in UI | — | M0 | |
 | PDX-03 | Product & UX | Localisation, RTL and accessibility baseline | P1 | 2 | NOT_STARTED | MOB-01 | BM/EN ARB, semantic/scale/RTL tests | — | M1 | |
 | PDX-04 | Product & UX | Public privacy/support site, terms and legal copy | P1 | 3 | NOT_STARTED | PDX-01 | Static pages and hosting handoff; no invented contact details | — | M4 | Owner support email/hosting needed to deploy |

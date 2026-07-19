@@ -56,8 +56,8 @@ Kotlin/Glance widget support, and ARB localisation are planned.
 | Completion | 3.0% weighted; PDX-01 complete and MOB-01 selected |
 | App / admin / migrations | Not yet initialised |
 | Approved content | 0 items; no reviewer or source-rights records |
-| GitHub | Feature branch `codex/sunnah-everyday-build`; no verified push/PR for bootstrap work |
-| CI | Not configured |
+| GitHub | `c1b089b` pushed on feature branch `codex/sunnah-everyday-build`; PR creation is blocked by unauthenticated GitHub CLI |
+| CI | Not configured; GitHub reports no workflow runs for this branch |
 | Google Play | No app/AAB/upload/submission/availability |
 
 Full work tracking is in [TASKS.md](TASKS.md), [PROGRESS.md](PROGRESS.md),

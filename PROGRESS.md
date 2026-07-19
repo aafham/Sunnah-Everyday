@@ -25,10 +25,10 @@ _Last updated: 2026-07-19 (PDX-01 complete; MOB-01 selected next)_
 | Target version | 0.1.0+1 |
 | Current task | MOB-01 — initialise Flutter workspace and application/admin shells |
 | Branch | `codex/sunnah-everyday-build` |
-| Last commit | `137521e` (`Initial commit`) |
+| Last recorded task commit | `c1b089b` (`docs: establish governance and release controls`) |
 | Local checks before bootstrap | `dart format` passed with no Dart files; `flutter analyze` passed with no project; `flutter test` failed because `test/` does not exist |
-| GitHub CI | Not configured |
-| GitHub push / PR | Not yet attempted; `gh` is not authenticated |
+| GitHub CI | No workflow configured; GitHub API reports 0 runs for this branch |
+| GitHub push / PR | `c1b089b` pushed successfully; PR creation blocked because GitHub CLI is unauthenticated |
 | Google Play | No app, signed AAB, Console/API credential, track check, or upload |
 | Release status | No build generated, uploaded, or submitted |
 
@@ -37,7 +37,12 @@ _Last updated: 2026-07-19 (PDX-01 complete; MOB-01 selected next)_
 1. No approved religious-content dataset, named qualified reviewers, review evidence, or source-rights clearance.
 2. No application, migrations, tests, signed AAB, store assets, public privacy URL, support email, or release validation.
 3. No verified Google Play Console/API access, signing key, tester list, or production-access evidence.
-4. No verified GitHub authentication or push permission.
+4. Git push works, but no authenticated GitHub CLI/API session is available to
+   create/update a PR or inspect protected repository settings.
+
+The branch push was verified after the first task, but authenticated GitHub API
+access is still required to create/update a pull request and inspect protected
+repository settings. See `docs/handoff/GITHUB_HANDOFF.md`.
 
 ## Next five tasks
 

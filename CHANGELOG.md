@@ -22,7 +22,14 @@ versioning with Android build numbers.
 
 - Flutter workspace, database, tests, CI, Play assets, and release pipeline are
   not yet implemented.
-- GitHub CLI is unauthenticated; no push or pull request has been verified.
+- GitHub CLI is unauthenticated; the governance commit was pushed through git,
+  but no pull request has been created or updated.
+
+### GitHub
+
+- Governance commit: `c1b089b` pushed to `codex/sunnah-everyday-build`.
+- Pull request: not created; `gh auth login` or a scoped `GH_TOKEN` is needed.
+- CI status: no workflows/runs exist yet.
 
 ## [0.0.0+0] — 2026-07-19
 
