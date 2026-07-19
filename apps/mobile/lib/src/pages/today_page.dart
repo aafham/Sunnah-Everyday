@@ -1,14 +1,20 @@
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../l10n/generated/app_localizations.dart';
+import '../app_router.dart';
+import '../daily_content.dart';
+import '../widgets/daily_card.dart';
 
-class TodayPage extends StatelessWidget {
+class TodayPage extends ConsumerWidget {
   const TodayPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final localizations = AppLocalizations.of(context);
+    final dailyContent = ref.watch(todayDailyContentProvider);
 
     return SafeArea(
       child: ListView(
@@ -27,10 +33,9 @@ class TodayPage extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyLarge,
           ),
           const SizedBox(height: 24),
-          SunnahSectionCard(
-            eyebrow: localizations.contentStatusEyebrow,
-            title: localizations.noApprovedContentTitle,
-            child: Text(localizations.noApprovedContentMessage),
+          DailyCard(
+            state: dailyContent,
+            onViewStatus: () => context.push(MobilePath.dailyDetail),
           ),
           const SizedBox(height: 24),
           SunnahEmptyState(

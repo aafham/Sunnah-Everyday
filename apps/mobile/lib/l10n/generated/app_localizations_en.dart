@@ -33,6 +33,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get todayIntro => 'A calm space to learn one step at a time.';
 
   @override
+  String get dailyCardEyebrow => 'Daily status';
+
+  @override
+  String get dailyCardStatusAction => 'View content status';
+
+  @override
+  String get dailyDetailTitle => 'Content status';
+
+  @override
+  String get dailyDetailUnavailableTitle => 'Details are not available yet';
+
+  @override
+  String get backToToday => 'Back to Today';
+
+  @override
   String get contentStatusEyebrow => 'Content status';
 
   @override

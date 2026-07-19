@@ -30,6 +30,69 @@ void main() {
     expect(find.byType(Slider), findsOneWidget);
   });
 
+  testWidgets('daily status card opens and returns from a safe detail view', (
+    tester,
+  ) async {
+    await pumpMobileApp(tester);
+
+    expect(find.byKey(const ValueKey('daily-card')), findsOneWidget);
+    await tester.tap(find.byKey(const ValueKey('daily-card-status')));
+    await settleSunnahTestWidget(tester);
+
+    expect(find.text('Butiran belum tersedia'), findsOneWidget);
+    expect(find.text('Status kandungan'), findsWidgets);
+    expect(find.byType(NavigationBar), findsOneWidget);
+
+    await tester.tap(find.byKey(const ValueKey('daily-detail-back')));
+    await settleSunnahTestWidget(tester);
+
+    expect(find.byKey(const ValueKey('daily-card')), findsOneWidget);
+    expect(find.text('Hari Ini'), findsWidgets);
+  });
+
+  testWidgets('direct daily detail route remains fail-closed', (tester) async {
+    await pumpMobileApp(tester, initialLocation: MobilePath.dailyDetail);
+
+    expect(find.text('Butiran belum tersedia'), findsOneWidget);
+    expect(find.text('Status kandungan'), findsWidgets);
+    expect(find.byType(NavigationBar), findsOneWidget);
+  });
+
+  testWidgets('incomplete onboarding gates the daily detail route', (
+    tester,
+  ) async {
+    await pumpMobileApp(
+      tester,
+      onboardingCompleted: false,
+      initialLocation: MobilePath.dailyDetail,
+    );
+
+    expect(find.text('Selamat datang'), findsOneWidget);
+    expect(find.text('Butiran belum tersedia'), findsNothing);
+    expect(find.byType(NavigationBar), findsNothing);
+  });
+
+  testWidgets('daily status surface is localized after choosing English', (
+    tester,
+  ) async {
+    final store = InMemoryAppPreferencesStore(
+      initialValues: {
+        AppPreferencesStorageKey.onboardingCompleted: true,
+        AppPreferencesStorageKey.locale: AppLocale.english.languageCode,
+      },
+    );
+
+    await pumpMobileApp(tester, preferencesStore: store);
+
+    await tester.tap(find.byKey(const ValueKey('daily-card-status')));
+    await settleSunnahTestWidget(tester);
+
+    expect(find.text('Details are not available yet'), findsOneWidget);
+    expect(find.text('Content status'), findsWidgets);
+    expect(find.byKey(const ValueKey('daily-detail-back')), findsOneWidget);
+    expect(find.bySemanticsLabel('Back to Today'), findsOneWidget);
+  });
+
   testWidgets('first launch chooses a locale before opening the shell', (
     tester,
   ) async {

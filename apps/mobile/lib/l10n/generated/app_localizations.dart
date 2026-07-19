@@ -146,6 +146,36 @@ abstract class AppLocalizations {
   /// **'Satu ruang tenang untuk belajar langkah demi langkah.'**
   String get todayIntro;
 
+  /// Label kad status harian fail-closed.
+  ///
+  /// In ms, this message translates to:
+  /// **'Status harian'**
+  String get dailyCardEyebrow;
+
+  /// Tindakan membuka butiran status kandungan.
+  ///
+  /// In ms, this message translates to:
+  /// **'Lihat status kandungan'**
+  String get dailyCardStatusAction;
+
+  /// Tajuk halaman butiran status kandungan.
+  ///
+  /// In ms, this message translates to:
+  /// **'Status kandungan'**
+  String get dailyDetailTitle;
+
+  /// Keadaan fail-closed bagi butiran harian.
+  ///
+  /// In ms, this message translates to:
+  /// **'Butiran belum tersedia'**
+  String get dailyDetailUnavailableTitle;
+
+  /// Tindakan kembali ke halaman Hari Ini.
+  ///
+  /// In ms, this message translates to:
+  /// **'Kembali ke Hari Ini'**
+  String get backToToday;
+
   /// Label status kandungan.
   ///
   /// In ms, this message translates to:

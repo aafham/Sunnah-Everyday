@@ -34,6 +34,21 @@ class AppLocalizationsMs extends AppLocalizations {
       'Satu ruang tenang untuk belajar langkah demi langkah.';
 
   @override
+  String get dailyCardEyebrow => 'Status harian';
+
+  @override
+  String get dailyCardStatusAction => 'Lihat status kandungan';
+
+  @override
+  String get dailyDetailTitle => 'Status kandungan';
+
+  @override
+  String get dailyDetailUnavailableTitle => 'Butiran belum tersedia';
+
+  @override
+  String get backToToday => 'Kembali ke Hari Ini';
+
+  @override
   String get contentStatusEyebrow => 'Status kandungan';
 
   @override

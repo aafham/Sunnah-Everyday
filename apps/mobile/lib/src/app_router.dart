@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 
 import 'mobile_navigation_shell.dart';
+import 'pages/daily_detail_page.dart';
 import 'pages/explore_page.dart';
 import 'pages/onboarding_page.dart';
 import 'pages/saved_page.dart';
@@ -11,6 +12,7 @@ import 'pages/today_page.dart';
 abstract final class MobilePath {
   static const onboarding = '/onboarding';
   static const today = '/today';
+  static const dailyDetail = '/today/detail';
   static const explore = '/explore';
   static const saved = '/saved';
   static const settings = '/settings';
@@ -42,6 +44,10 @@ GoRouter createMobileRouter({
           GoRoute(
             path: MobilePath.today,
             builder: (context, state) => const TodayPage(),
+          ),
+          GoRoute(
+            path: MobilePath.dailyDetail,
+            builder: (context, state) => const DailyDetailPage(),
           ),
           GoRoute(
             path: MobilePath.explore,
