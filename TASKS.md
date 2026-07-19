@@ -23,7 +23,7 @@ blocked work never counts as complete.
 | CNT-04 | Content/evidence | Evidence, source, reviewer and methodology experiences | P1 | 3 | NOT_STARTED | MOB-03, BE-01 | UI/data tests | — | M2 | |
 | CNT-05 | Content/evidence | Reports, corrections and withdrawal presentation | P1 | 3 | NOT_STARTED | BE-03, MOB-03 | Report and withdrawal tests | — | M2 | |
 | CNT-06 | Content/evidence | Approved-content intake and human-review evidence | P0 | 3 | BLOCKED | Owner reviewers, source rights | 30/90/120 approved capacity only after human records | — | M4/M5 | No AI-generated religious data |
-| BE-01 | Backend/database | Initial Supabase schema and migrations | P0 | 4 | NOT_STARTED | PDX-01 | Migration/constraint tests | — | M0 | |
+| BE-01 | Backend/database | Initial Supabase schema and migrations | P0 | 4 | IN_REVIEW | PDX-01 | Static guard and isolated PostgreSQL structural execution passed; Docker-backed Supabase migration/lint/pgTAP remains pending | — | M0 | 27 required tables plus a junction table; no roles, reviewers, sources, permissions or religious content seeded |
 | BE-02 | Backend/database | Admin auth, roles and RLS | P0 | 3 | NOT_STARTED | BE-01 | SQL RLS tests | — | M2 | Supabase project required to deploy |
 | BE-03 | Backend/database | Review workflow, immutable versions and publication gate | P0 | 3 | NOT_STARTED | BE-01 | SQL publication/approval tests | — | M2 | |
 | BE-04 | Backend/database | Public bundles, scheduling and sync contract | P1 | 3 | NOT_STARTED | BE-03 | Bundle/checksum/scheduling tests | — | M3 | |
@@ -49,7 +49,7 @@ blocked work never counts as complete.
 
 ## Selection rule
 
-The highest-priority unblocked tasks are `CNT-01`, `BE-01`, `QLT-01`, and
-`REL-01`. `BE-01` is selected next because database constraints and RLS are
-the authoritative foundation for content publication safety; keep the ledger
-current.
+`BE-01` is implemented and in review: its local Supabase runtime validation is
+pending a Docker engine. The next implementation candidates are `CNT-01`,
+`QLT-01`, and `REL-01`; do not mark BE-01 complete or count its weight until
+the documented local migration, lint and pgTAP checks have actually passed.

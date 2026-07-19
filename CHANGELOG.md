@@ -23,6 +23,14 @@ versioning with Android build numbers.
   Flutter-default launcher/PWA image assets were removed rather than shipped.
 - Android release builds now fail closed until the verified signing work in
   REL-03 is complete; only a local debug APK may be built at this stage.
+- Initial Supabase structural baseline: policy-defined enums, 27 required
+  operational tables plus the content-tag junction, composite ownership
+  constraints, timestamps and indexes. It includes no seed data or religious
+  content.
+- Deny-by-default database posture: RLS is enabled and forced on every
+  application table; `PUBLIC`, `anon` and `authenticated` have no table grants
+  and no policies exist until BE-02 supplies audited least-privilege access.
+- A no-dependency schema guard and pgTAP migration/constraint test foundation.
 
 ### Religious Content
 
@@ -30,16 +38,18 @@ versioning with Android build numbers.
 
 ### Known Issues
 
-- Supabase schema/RLS, content models, import validation, approved data,
-  notifications, offline cache, widget, CI, Play assets and release pipeline
-  are not yet implemented.
+- Local Supabase reset, lint and pgTAP verification await a Docker engine.
+  The structural baseline is present, but BE-02 through BE-05 (admin access,
+  workflow/publication gates, public bundles and audit automation), content
+  models, import validation, approved data, notifications, offline cache,
+  widget, CI, Play assets and release pipeline remain incomplete.
 - GitHub CLI is unauthenticated; governance and application-shell commits were
   pushed through git, but no pull request has been created or updated.
 
 ### GitHub
 
-- Governance commit: `c1b089b` and application-shell commit: `ae1cde4` pushed
-  to `codex/sunnah-everyday-build`.
+- Governance commit: `c1b089b`, application-shell commit: `ae1cde4`, and
+  delivery-record commit: `ece499c` pushed to `codex/sunnah-everyday-build`.
 - Pull request: not created; `gh auth login` or a scoped `GH_TOKEN` is needed.
 - CI status: no workflows/runs exist yet.
 
@@ -47,6 +57,11 @@ versioning with Android build numbers.
 
 - `dart format --set-exit-if-changed .` passed.
 - `flutter analyze` and `flutter test` passed for design system, mobile and admin.
+- `node scripts/verify_supabase_baseline.mjs` passed; all four migrations also
+  applied in an isolated PostgreSQL/PGlite structural harness.
+- `supabase db reset --local --no-seed` did not run because Docker Desktop/the
+  local Docker engine is unavailable; local Supabase lint and pgTAP are not
+  reported as passed.
 - Android debug APK generated and verified with `aapt`; admin web output generated.
 - `flutter build appbundle --release` was intentionally rejected by the REL-03
   signing guard.

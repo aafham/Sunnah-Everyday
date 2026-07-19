@@ -30,8 +30,10 @@ tanpa kebenaran bertulis.
 
 No hadith or religious claim is generated, self-graded, or published by AI.
 Public content requires rights clearance and human source/hadith, fiqh/context,
-language, and final publication review by at least two people. Daily Feed will
-accept only `SAHIH` or `HASAN` evidence through a database/server gate. See
+language, and final publication review by at least two people. Daily Feed is
+specified to accept only `SAHIH` or `HASAN` evidence through a database/server
+gate; that enforcement is a future BE-03 gate, not a claim about this baseline.
+See
 [content policies](docs/content/) and [the master specification](MASTER_BUILD_SPEC.md).
 
 ## Non-goals
@@ -54,9 +56,9 @@ Kotlin/Glance widget support, and ARB localisation are planned.
 | --- | --- |
 | Version / milestone | `0.1.0+1` / M0 bootstrap |
 | Completion | 7.0% weighted; PDX-01 and MOB-01 complete |
-| App / admin / migrations | Mobile and web-admin shells initialised; migrations not yet implemented |
+| App / admin / migrations | Mobile and web-admin shells plus a fail-closed structural Supabase baseline are implemented; local Supabase runtime validation is pending Docker |
 | Approved content | 0 items; no reviewer or source-rights records |
-| GitHub | `ae1cde4` pushed on feature branch `codex/sunnah-everyday-build`; PR creation is blocked by unavailable GitHub authentication/session |
+| GitHub | `ece499c` pushed on feature branch `codex/sunnah-everyday-build`; PR creation is blocked by unavailable GitHub authentication/session |
 | CI | Not configured; GitHub reports no workflow runs for this branch |
 | Google Play | No app/AAB/upload/submission/availability |
 
@@ -83,6 +85,12 @@ Run `dart format --set-exit-if-changed .` from the repository root, then run
 `flutter analyze` and `flutter test` in `packages/design_system`, `apps/mobile`
 and `apps/admin`. The mobile Android application ID is
 `com.aafha.sunnaheveryday`; a debug APK was generated and inspected locally.
+
+The structural Supabase baseline has no seed data, public API access or content.
+Run `node scripts/verify_supabase_baseline.mjs` without Docker. The local
+Supabase migration, lint and pgTAP commands require Docker and are documented
+in [supabase/README.md](supabase/README.md); never point them at a linked or
+production project without explicit owner authority.
 
 ## Releases and Google Play
 

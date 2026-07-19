@@ -13,3 +13,4 @@
 | ADR-009 | No analytics or ad SDK by default | Accepted | Privacy and Play Data Safety accuracy | Any future telemetry needs explicit approval and policy/audit update |
 | ADR-010 | Feature branch and truthful release records | Accepted | Repository may be shared; external access is unverified | No direct main commit, force push, assumed push, or assumed Play state |
 | ADR-011 | Public repo visibility is unchanged | Accepted | Remote is already public and owner did not request a change | Do not place sensitive content or credentials in the repository |
+| ADR-012 | BE-01 begins with a deny-by-default database baseline | Accepted | No public/admin data path may exist before role, rights and publication controls are audited | All application tables force RLS and revoke table access from `PUBLIC`, `anon` and `authenticated`; BE-02 must add narrowly scoped policies before any access can work |

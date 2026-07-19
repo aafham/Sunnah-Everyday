@@ -1,6 +1,6 @@
 # Progress
 
-_Last updated: 2026-07-19 (MOB-01 complete; BE-01 selected next)_
+_Last updated: 2026-07-19 (BE-01 structural baseline implemented; runtime verification pending)_
 
 ## Weighted status
 
@@ -21,21 +21,21 @@ _Last updated: 2026-07-19 (MOB-01 complete; BE-01 selected next)_
 
 | Field | Status |
 | --- | --- |
-| Current milestone | M0 — Repository and Governance |
+| Current milestone | M0 — Repository, shells and structural schema |
 | Target version | 0.1.0+1 |
-| Current task | BE-01 — add initial Supabase schema and migrations |
+| Current task | BE-01 — structural Supabase baseline implemented; Docker-backed local migration, lint and pgTAP verification pending |
 | Branch | `codex/sunnah-everyday-build` |
 | Last recorded task commit | `ae1cde4` (`feat: establish Flutter application shells`) |
-| Local checks | Format passed; analyze and tests passed for mobile, admin and design system; Android debug APK and admin web build generated |
-| GitHub CI | No workflow configured; GitHub API reports 0 runs for this branch |
-| GitHub push / PR | `ae1cde4` pushed successfully; public API reports no open PR and creation is blocked because no authenticated GitHub CLI/browser session is available |
+| Local checks | Dart format, Flutter analyze/tests, and the Supabase static guard passed; all four migrations applied in an isolated PostgreSQL/PGlite structural harness. `supabase db reset --local --no-seed` could not start because no Docker engine is available, so local Supabase lint and pgTAP have not run. |
+| GitHub CI | No workflow configured; GitHub API last reported 0 runs for this branch |
+| GitHub push / PR | `ece499c` pushed successfully; public API last reported no open PR and creation is blocked because no authenticated GitHub CLI/browser session is available |
 | Google Play | No app, signed AAB, Console/API credential, track check, or upload |
 | Release status | No signed release AAB generated, uploaded, or submitted; local debug APK only |
 
 ## Production blockers
 
 1. No approved religious-content dataset, named qualified reviewers, review evidence, or source-rights clearance.
-2. No database migrations, signed AAB, store assets, public privacy URL, support email, or release validation.
+2. A structural database baseline exists but Docker-backed local verification, BE-02 admin policies/auth, BE-03 publication gates, signed AAB, store assets, public privacy URL, support email, and release validation remain incomplete.
 3. No verified Google Play Console/API access, signing key, tester list, or production-access evidence.
 4. Git push works, but no authenticated GitHub CLI/API session is available to
    create/update a PR or inspect protected repository settings.
@@ -46,7 +46,7 @@ repository settings. See `docs/handoff/GITHUB_HANDOFF.md`.
 
 ## Next five tasks
 
-1. BE-01: add initial Supabase schema and migration test foundation.
+1. BE-01: run the local Supabase migration, lint and pgTAP suite once Docker is available.
 2. CNT-01: create models, schemas, import templates, and staging boundary.
 3. QLT-01: establish test harness and testing utilities.
 4. REL-01: establish GitHub quality and release workflows.
