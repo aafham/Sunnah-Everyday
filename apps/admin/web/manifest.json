@@ -1,0 +1,10 @@
+{
+    "name": "Sunnah Everyday Admin",
+    "short_name": "Sunnah Admin",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#F7F4EC",
+    "theme_color": "#123F35",
+    "description": "Administration workspace for Sunnah Everyday.",
+    "prefer_related_applications": false
+}

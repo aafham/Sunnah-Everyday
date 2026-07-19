@@ -53,8 +53,8 @@ Kotlin/Glance widget support, and ARB localisation are planned.
 | Area | Status |
 | --- | --- |
 | Version / milestone | `0.1.0+1` / M0 bootstrap |
-| Completion | 3.0% weighted; PDX-01 complete and MOB-01 selected |
-| App / admin / migrations | Not yet initialised |
+| Completion | 7.0% weighted; PDX-01 and MOB-01 complete |
+| App / admin / migrations | Mobile and web-admin shells initialised; migrations not yet implemented |
 | Approved content | 0 items; no reviewer or source-rights records |
 | GitHub | `c1b089b` pushed on feature branch `codex/sunnah-everyday-build`; PR creation is blocked by unauthenticated GitHub CLI |
 | CI | Not configured; GitHub reports no workflow runs for this branch |
@@ -63,16 +63,32 @@ Kotlin/Glance widget support, and ARB localisation are planned.
 Full work tracking is in [TASKS.md](TASKS.md), [PROGRESS.md](PROGRESS.md),
 [ROADMAP.md](ROADMAP.md), and [DECISIONS.md](DECISIONS.md).
 
-## Local setup (planned)
+## Local setup
 
 Flutter 3.44.6 / Dart 3.12.2 and Android SDK 36.1 are available in the
-bootstrap environment. Exact commands will be added when the workspace exists.
-Never commit `.env`, signing keys, service-account JSON, or other secrets.
+bootstrap environment. Never commit `.env`, signing keys, service-account JSON,
+or other secrets.
+
+```powershell
+cd apps/mobile
+flutter pub get
+flutter run
+
+cd ../admin
+flutter pub get
+flutter run -d chrome
+```
+
+Run `dart format --set-exit-if-changed .` from the repository root, then run
+`flutter analyze` and `flutter test` in `packages/design_system`, `apps/mobile`
+and `apps/admin`. The mobile Android application ID is
+`com.aafha.sunnaheveryday`; a debug APK was generated and inspected locally.
 
 ## Releases and Google Play
 
-No build has been generated or uploaded. Internal Testing is the highest
-possible future track while only staging content exists; Production is blocked
+No signed release AAB has been generated or uploaded. A local debug APK exists
+for development verification only. Internal Testing is the highest possible
+future track while only staging content exists; Production is blocked
 by approved content, reviewers, source rights, privacy/support URL, signing,
 Play access, and release gates. See [release runbooks](docs/release/) and
 [Play Console runbooks](docs/play-console/).
