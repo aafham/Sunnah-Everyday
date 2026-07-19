@@ -176,7 +176,7 @@ test('workflow verifier requires failure-safe Supabase cleanup', () => {
 test('workflow verifier requires ordered local Supabase validation', () => {
   const result = validateCiWorkflowText(
     workflowSource.replace(
-      'npx --yes supabase@2.109.1 start --yes --exclude analytics,edge-runtime,functions,imgproxy,inbucket,kong,meta,realtime,rest,storage,studio,vector',
+      'npx --yes supabase@2.109.1 db start --yes',
       'npx --yes supabase@2.109.1 db reset --local --no-seed',
     ),
   );
@@ -185,6 +185,23 @@ test('workflow verifier requires ordered local Supabase validation', () => {
   assert.ok(
     result.findings.some(({ code }) => code === 'CI_SUPABASE_RUNTIME_ORDER'),
   );
+});
+
+test('workflow verifier requires scoped local Supabase PostgreSQL startup', () => {
+  const result = validateCiWorkflowText(
+    workflowSource.replace(
+      'npx --yes supabase@2.109.1 db start --yes',
+      'npx --yes supabase@2.109.1 start --yes',
+    ),
+  );
+
+  assert.equal(result.valid, false);
+  assert.ok(
+    result.findings.some(
+      ({ code }) => code === 'CI_SUPABASE_COMMAND_ALLOWLIST',
+    ),
+  );
+  assert.ok(result.findings.some(({ code }) => code === 'CI_PARITY_COMMAND'));
 });
 
 test('workflow verifier rejects early or duplicate Supabase cleanup', () => {

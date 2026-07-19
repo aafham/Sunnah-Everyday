@@ -44,8 +44,8 @@ jobs:
         run: npm run test:content-validation
       - name: Verify Supabase structural baseline
         run: node scripts/verify_supabase_baseline.mjs
-      - name: Start isolated local Supabase database
-        run: npx --yes supabase@2.109.1 start --yes --exclude analytics,edge-runtime,functions,imgproxy,inbucket,kong,meta,realtime,rest,storage,studio,vector
+      - name: Start isolated local Supabase PostgreSQL database
+        run: npx --yes supabase@2.109.1 db start --yes
       - name: Reset local Supabase database without seed data
         run: npx --yes supabase@2.109.1 db reset --local --no-seed
       - name: Lint local Supabase database

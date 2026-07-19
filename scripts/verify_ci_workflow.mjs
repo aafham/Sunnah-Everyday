@@ -21,8 +21,7 @@ const pinnedActions = Object.freeze({
 });
 
 const localSupabaseCommands = Object.freeze({
-  start:
-    'npx --yes supabase@2.109.1 start --yes --exclude analytics,edge-runtime,functions,imgproxy,inbucket,kong,meta,realtime,rest,storage,studio,vector',
+  start: 'npx --yes supabase@2.109.1 db start --yes',
   reset: 'npx --yes supabase@2.109.1 db reset --local --no-seed',
   lint: 'npx --yes supabase@2.109.1 db lint --local --schema public --level warning --fail-on warning',
   test: 'npx --yes supabase@2.109.1 test db --local supabase/tests',
