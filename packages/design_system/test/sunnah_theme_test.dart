@@ -9,6 +9,18 @@ void main() {
     expect(sunnahDarkTheme().brightness, Brightness.dark);
   });
 
+  test('shared themes keep readable on-surface contrast', () {
+    for (final theme in [sunnahLightTheme(), sunnahDarkTheme()]) {
+      expect(
+        _contrastRatio(
+          theme.colorScheme.onSurface,
+          theme.scaffoldBackgroundColor,
+        ),
+        greaterThanOrEqualTo(4.5),
+      );
+    }
+  });
+
   test('deep forest token remains stable for brand consistency', () {
     expect(SunnahColors.deepForest, const Color(0xFF123F35));
   });
@@ -131,4 +143,16 @@ void main() {
     expect(find.byType(OutlinedButton), findsNothing);
     expect(find.text('Tidak dipaparkan'), findsNothing);
   });
+}
+
+double _contrastRatio(Color first, Color second) {
+  final firstLuminance = first.computeLuminance();
+  final secondLuminance = second.computeLuminance();
+  final lighter = firstLuminance > secondLuminance
+      ? firstLuminance
+      : secondLuminance;
+  final darker = firstLuminance > secondLuminance
+      ? secondLuminance
+      : firstLuminance;
+  return (lighter + 0.05) / (darker + 0.05);
 }

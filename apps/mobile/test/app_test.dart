@@ -30,8 +30,234 @@ void main() {
 
     expect(find.text('Tema'), findsOneWidget);
     expect(find.text('Kurangkan animasi'), findsOneWidget);
-    expect(find.byType(Slider), findsOneWidget);
+    expect(find.byKey(const ValueKey('settings-theme')), findsOneWidget);
+    expect(
+      find.byKey(const ValueKey('settings-reduce-motion')),
+      findsOneWidget,
+    );
+    final textScale = find.byKey(const ValueKey('settings-text-scale'));
+    expect(textScale, findsOneWidget);
+    expect(find.bySemanticsLabel('Tema'), findsWidgets);
+    expect(find.bySemanticsLabel('Kurangkan animasi'), findsWidgets);
+    expect(find.bySemanticsLabel('Saiz teks'), findsWidgets);
+
+    final slider = tester.widget<Slider>(textScale);
+    expect(slider.min, AppPreferencesState.minimumTextScale);
+    expect(slider.max, AppPreferencesState.maximumTextScale);
+    expect(slider.divisions, 6);
+    expect(slider.semanticFormatterCallback!(1.2), '120%');
   });
+
+  testWidgets(
+    'settings theme selector applies system, light and dark modes and persists',
+    (tester) async {
+      final store = InMemoryAppPreferencesStore(
+        initialValues: {AppPreferencesStorageKey.onboardingCompleted: true},
+      );
+      final container = await pumpMobileApp(
+        tester,
+        preferencesStore: store,
+        platformBrightness: Brightness.dark,
+      );
+
+      await tester.tap(find.text('Tetapan'));
+      await settleSunnahTestWidget(tester);
+
+      final themeSelector = find.byKey(const ValueKey('settings-theme'));
+      expect(
+        Theme.of(tester.element(themeSelector)).brightness,
+        Brightness.dark,
+      );
+
+      Future<void> expectThemeSelection(
+        String label,
+        AppThemeSetting setting,
+        Brightness brightness,
+      ) async {
+        await tester.tap(
+          find.descendant(of: themeSelector, matching: find.text(label)),
+        );
+        await settleSunnahTestWidget(tester);
+
+        expect(container.read(appPreferencesProvider).themeSetting, setting);
+        expect(
+          store.persistedValues[AppPreferencesStorageKey.theme],
+          setting.name,
+        );
+        expect(Theme.of(tester.element(themeSelector)).brightness, brightness);
+      }
+
+      await expectThemeSelection(
+        'Cerah',
+        AppThemeSetting.light,
+        Brightness.light,
+      );
+      await expectThemeSelection(
+        'Gelap',
+        AppThemeSetting.dark,
+        Brightness.dark,
+      );
+      await expectThemeSelection(
+        'Sistem',
+        AppThemeSetting.system,
+        Brightness.dark,
+      );
+    },
+  );
+
+  testWidgets('settings local reduced-motion control changes app media query', (
+    tester,
+  ) async {
+    final store = InMemoryAppPreferencesStore(
+      initialValues: {AppPreferencesStorageKey.onboardingCompleted: true},
+    );
+    final container = await pumpMobileApp(tester, preferencesStore: store);
+
+    await tester.tap(find.text('Tetapan'));
+    await settleSunnahTestWidget(tester);
+
+    final reduceMotion = find.byKey(const ValueKey('settings-reduce-motion'));
+    expect(
+      MediaQuery.of(tester.element(reduceMotion)).disableAnimations,
+      isFalse,
+    );
+
+    await tester.tap(reduceMotion);
+    await settleSunnahTestWidget(tester);
+    expect(container.read(appPreferencesProvider).reduceMotion, isTrue);
+    expect(
+      store.persistedValues[AppPreferencesStorageKey.reduceMotion],
+      isTrue,
+    );
+    expect(
+      MediaQuery.of(tester.element(reduceMotion)).disableAnimations,
+      isTrue,
+    );
+
+    await tester.tap(reduceMotion);
+    await settleSunnahTestWidget(tester);
+    expect(container.read(appPreferencesProvider).reduceMotion, isFalse);
+    expect(
+      MediaQuery.of(tester.element(reduceMotion)).disableAnimations,
+      isFalse,
+    );
+  });
+
+  testWidgets('settings cannot override an OS reduced-motion preference', (
+    tester,
+  ) async {
+    final container = await pumpMobileApp(tester, disableAnimations: true);
+
+    await tester.tap(find.text('Tetapan'));
+    await settleSunnahTestWidget(tester);
+
+    final reduceMotion = find.byKey(const ValueKey('settings-reduce-motion'));
+    await tester.tap(reduceMotion);
+    await settleSunnahTestWidget(tester);
+    await tester.tap(reduceMotion);
+    await settleSunnahTestWidget(tester);
+
+    expect(container.read(appPreferencesProvider).reduceMotion, isFalse);
+    expect(
+      MediaQuery.of(tester.element(reduceMotion)).disableAnimations,
+      isTrue,
+    );
+  });
+
+  testWidgets(
+    'settings text-size slider preserves nonlinear OS scaling and persists bounds',
+    (tester) async {
+      final store = InMemoryAppPreferencesStore(
+        initialValues: {AppPreferencesStorageKey.onboardingCompleted: true},
+      );
+      final container = await pumpMobileApp(
+        tester,
+        preferencesStore: store,
+        textScaler: const _NonlinearTextScaler(),
+      );
+
+      await tester.tap(find.text('Tetapan'));
+      await settleSunnahTestWidget(tester);
+
+      final pageScrollable = find.descendant(
+        of: find.byType(SunnahContentFrame),
+        matching: find.byType(Scrollable),
+      );
+      final textScale = find.byKey(const ValueKey('settings-text-scale'));
+      await tester.scrollUntilVisible(
+        textScale,
+        240,
+        scrollable: pageScrollable,
+      );
+      await tester.drag(textScale, const Offset(400, 0));
+      await settleSunnahTestWidget(tester);
+
+      expect(
+        container.read(appPreferencesProvider).textScale,
+        AppPreferencesState.maximumTextScale,
+      );
+      expect(
+        store.persistedValues[AppPreferencesStorageKey.textScale],
+        AppPreferencesState.maximumTextScale,
+      );
+      final mediaQuery = MediaQuery.of(tester.element(textScale));
+      expect(mediaQuery.textScaler.scale(10), 22.5);
+      expect(mediaQuery.textScaler.scale(30), closeTo(54, 0.001));
+
+      await tester.drag(textScale, const Offset(-400, 0));
+      await settleSunnahTestWidget(tester);
+      expect(
+        container.read(appPreferencesProvider).textScale,
+        AppPreferencesState.minimumTextScale,
+      );
+      expect(
+        store.persistedValues[AppPreferencesStorageKey.textScale],
+        AppPreferencesState.minimumTextScale,
+      );
+    },
+  );
+
+  testWidgets(
+    'English settings semantics and large-text controls remain usable',
+    (tester) async {
+      final store = InMemoryAppPreferencesStore(
+        initialValues: {
+          AppPreferencesStorageKey.onboardingCompleted: true,
+          AppPreferencesStorageKey.locale: AppLocale.english.languageCode,
+        },
+      );
+      await pumpMobileApp(
+        tester,
+        preferencesStore: store,
+        textScaler: const TextScaler.linear(1.5),
+      );
+
+      await tester.tap(find.text('Settings'));
+      await settleSunnahTestWidget(tester);
+
+      expect(find.bySemanticsLabel('Theme'), findsWidgets);
+      expect(find.bySemanticsLabel('Reduce motion'), findsWidgets);
+      expect(find.bySemanticsLabel('Text size'), findsWidgets);
+
+      final textScale = find.byKey(const ValueKey('settings-text-scale'));
+      final pageScrollable = find.descendant(
+        of: find.byType(SunnahContentFrame),
+        matching: find.byType(Scrollable),
+      );
+      await tester.scrollUntilVisible(
+        textScale,
+        240,
+        scrollable: pageScrollable,
+      );
+      await tester.pump();
+
+      final controlRect = tester.getRect(textScale);
+      final pageRect = tester.getRect(pageScrollable);
+      expect(controlRect.top, greaterThanOrEqualTo(pageRect.top));
+      expect(controlRect.bottom, lessThanOrEqualTo(pageRect.bottom));
+      expect(tester.widget<Slider>(textScale).onChanged, isNotNull);
+    },
+  );
 
   testWidgets('daily status card opens and returns from a safe detail view', (
     tester,

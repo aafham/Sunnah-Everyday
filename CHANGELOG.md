@@ -50,6 +50,13 @@ versioning with Android build numbers.
   application domains from legacy, cloud and device-transfer rule sets. This
   is not a claim of secure erasure, universal transfer prevention or completed
   Play Data Safety review.
+- MOB-06 settings/accessibility coverage: Settings now has stable semantic
+  groups and widget keys for its theme, reduced-motion and text-size controls.
+  System/Light/Dark selection, local persistence, local-plus-OS reduced motion,
+  bounded 90–150% nonlinear text scaling, BM/English semantics and large-text
+  control reachability are exercised. A design-system regression test guards
+  readable `onSurface` contrast against each theme scaffold. No content,
+  source, account, permission, network or publication path was added.
 - Versioned BM/English ARB source and generated localizations now cover the
   existing mobile shell copy. They add no religious-content records or claims.
 - Flutter web admin shell with responsive navigation and explicit backend setup
@@ -168,6 +175,11 @@ versioning with Android build numbers.
   failures, write rollback with retained UI input, per-note and confirmed
   all-reflection deletion, corrupt-envelope recovery deletion, unsupported
   platform failure, preference allowlisting and backup-rule source.
+- MOB-06 passed root format, all Flutter analyzers/tests (testing_utils 1,
+  design system 7, mobile 44 and admin 5), Flutter-runner 3, CI-workflow 7,
+  content-contract 5, content-validation 14, the static Supabase guard and
+  content-model analysis/tests (13). Android debug APK and admin web smoke
+  builds passed. No release AAB was built.
 - `npm run test:ci-workflow` passed (7 policy tests); `npm audit` reported 0
   vulnerabilities. Local debug APK and admin-web smoke builds passed.
 - GitHub Quality run `29677407731` passed contracts, Flutter quality and

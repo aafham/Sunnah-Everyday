@@ -88,55 +88,72 @@ class SettingsPage extends ConsumerWidget {
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
-            SegmentedButton<AppThemeSetting>(
-              segments: [
-                ButtonSegment(
-                  value: AppThemeSetting.system,
-                  label: Text(localizations.themeSystem),
-                  icon: const Icon(Icons.brightness_auto_outlined),
-                ),
-                ButtonSegment(
-                  value: AppThemeSetting.light,
-                  label: Text(localizations.themeLight),
-                  icon: const Icon(Icons.light_mode_outlined),
-                ),
-                ButtonSegment(
-                  value: AppThemeSetting.dark,
-                  label: Text(localizations.themeDark),
-                  icon: const Icon(Icons.dark_mode_outlined),
-                ),
-              ],
-              selected: {preferences.themeSetting},
-              onSelectionChanged: (selection) {
-                unawaited(controller.selectTheme(selection.first));
-              },
+            Semantics(
+              container: true,
+              label: localizations.themeLabel,
+              child: SegmentedButton<AppThemeSetting>(
+                key: const ValueKey('settings-theme'),
+                segments: [
+                  ButtonSegment(
+                    value: AppThemeSetting.system,
+                    label: Text(localizations.themeSystem),
+                    icon: const Icon(Icons.brightness_auto_outlined),
+                  ),
+                  ButtonSegment(
+                    value: AppThemeSetting.light,
+                    label: Text(localizations.themeLight),
+                    icon: const Icon(Icons.light_mode_outlined),
+                  ),
+                  ButtonSegment(
+                    value: AppThemeSetting.dark,
+                    label: Text(localizations.themeDark),
+                    icon: const Icon(Icons.dark_mode_outlined),
+                  ),
+                ],
+                selected: {preferences.themeSetting},
+                onSelectionChanged: (selection) {
+                  unawaited(controller.selectTheme(selection.first));
+                },
+              ),
             ),
             const SizedBox(height: 24),
-            SwitchListTile.adaptive(
-              contentPadding: EdgeInsets.zero,
-              title: Text(localizations.reduceMotionTitle),
-              subtitle: Text(localizations.reduceMotionSubtitle),
-              value: preferences.reduceMotion,
-              onChanged: (value) {
-                unawaited(controller.setReduceMotion(value));
-              },
+            Semantics(
+              container: true,
+              label: localizations.reduceMotionTitle,
+              child: SwitchListTile.adaptive(
+                key: const ValueKey('settings-reduce-motion'),
+                contentPadding: EdgeInsets.zero,
+                title: Text(localizations.reduceMotionTitle),
+                subtitle: Text(localizations.reduceMotionSubtitle),
+                value: preferences.reduceMotion,
+                onChanged: (value) {
+                  unawaited(controller.setReduceMotion(value));
+                },
+              ),
             ),
             const Divider(height: 32),
             Text(
               localizations.textSizeTitle,
               style: Theme.of(context).textTheme.titleMedium,
             ),
-            Slider(
-              value: preferences.textScale,
-              min: 0.9,
-              max: 1.5,
-              divisions: 6,
-              label: localizations.textScalePercent(
-                (preferences.textScale * 100).round(),
+            Semantics(
+              container: true,
+              label: localizations.textSizeTitle,
+              child: Slider(
+                key: const ValueKey('settings-text-scale'),
+                value: preferences.textScale,
+                min: 0.9,
+                max: 1.5,
+                divisions: 6,
+                label: localizations.textScalePercent(
+                  (preferences.textScale * 100).round(),
+                ),
+                semanticFormatterCallback: (value) =>
+                    localizations.textScalePercent((value * 100).round()),
+                onChanged: (value) {
+                  unawaited(controller.setTextScale(value));
+                },
               ),
-              onChanged: (value) {
-                unawaited(controller.setTextScale(value));
-              },
             ),
             Text(
               localizations.textSizePreview,

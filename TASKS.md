@@ -16,7 +16,7 @@ blocked work never counts as complete.
 | MOB-04 | Flutter core | Explore, categories, situation mode and offline search | P1 | 3 | NOT_STARTED | MOB-03, DEL-01 | BM/EN search and empty-state tests | — | M1 | |
 | MOB-05 | Flutter core | Local private reflections | P1 | 1 | DONE | MOB-01 | Persistence/privacy/deletion tests | `86f80ba` | M1 | Bounded Android-only free-text reflections (50 × 500 characters), generic failure states, scoped corrupt-envelope deletion and backup-rule coverage; no content ID, network/admin/analytics/export path or plaintext/browser fallback. Scope split from original MOB-05 so no unimplemented content-bound feature is counted. Local parity and Quality run `29682293929` (contracts, Flutter quality and debug/web smoke) passed. |
 | MOB-08 | Flutter core | Content-bound bookmarks, viewed history and private practice tracking | P1 | 2 | NOT_STARTED | MOB-05, CNT-03, BE-04, DEL-01 | Verified immutable-reference, persistence, withdrawal and deletion tests | — | M3 | Must use approved immutable bundle references and show withdrawal-safe states. No synthetic content IDs, content fixture, network path or public release before its dependencies and gates exist. |
-| MOB-06 | Flutter core | Settings, dark mode, scaling and reduce motion | P1 | 3 | NOT_STARTED | MOB-01 | Theme/a11y widget tests | — | M1 | |
+| MOB-06 | Flutter core | Settings, dark mode, scaling and reduce motion | P1 | 3 | DONE | MOB-01 | Theme/a11y widget tests | — | M1 | Local System/Light/Dark selection, reduced-motion composition, 90–150% text scale and localized semantic grouping are covered by widget tests; root checks, debug APK and admin-web smoke build passed. No content, permission, network or account path added. Quality run pending task push. |
 | MOB-07 | Flutter core | Friendly error states and deep-link app routing | P1 | 2 | NOT_STARTED | MOB-01 | Router/error tests | — | M1 | |
 | CNT-01 | Content/evidence | Content models, schemas, import templates and staging boundary | P0 | 3 | DONE | PDX-01 | Dart model tests plus JSON Schema/Ajv template-contract tests pass; no claim-bearing demo data | `64ea492` | M0 | Header-only templates, empty guarded staging/approved boundaries, and no imported records |
 | CNT-02 | Content/evidence | Content validation CLI with rights/translation/duplicate checks | P0 | 3 | DONE | CNT-01 | Valid/invalid fixture tests | `e0aeb6f` | M2 | Read-only RFC 4180 CSV preview validates schemas, trim-aware metadata/locales, duplicate/reference/link/rights/date consistency and safe reports; no DB/network/write/import/approval/publication path |
@@ -46,7 +46,7 @@ blocked work never counts as complete.
 | REL-03 | Docs & release | Play readiness, signing and release handoff | P1 | 2 | NOT_STARTED | REL-01, REL-02 | Readiness checklist and signed build proof | — | M4 | Credentials required to upload |
 | REL-04 | Docs & release | Actual Play track upload and monitoring | P0 | 1 | BLOCKED | REL-03, owner Play access, content gate | Verified Console/API result only | — | M0–M5 | Never assume account access |
 
-**Total weight:** 100. **Completed weight:** 29. **Blocked weight:** 4.
+**Total weight:** 100. **Completed weight:** 32. **Blocked weight:** 4.
 
 ## Selection rule
 
@@ -61,6 +61,7 @@ BM/English, generic RTL-layout and accessibility baseline explicit without
 adding Arabic text, fonts, data, sources or a publication path. `MOB-05` is
 complete as the deliberately bounded free-text reflection slice. Its original
 content-bound remainder is now `MOB-08`, which cannot begin until verified
-immutable-bundle dependencies exist. `MOB-06` is the next highest available
-unblocked task. Do not mark BE-01 complete or count its weight until the
+immutable-bundle dependencies exist. `MOB-06` is complete with local verification.
+`MOB-04` remains blocked by `DEL-01`; `PDX-04` needs owner support/hosting
+details. `MOB-07` is the next highest available unblocked task. Do not mark BE-01 complete or count its weight until the
 documented local migration, lint and pgTAP checks have actually passed.

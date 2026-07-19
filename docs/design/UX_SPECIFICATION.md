@@ -65,7 +65,7 @@ dedicated task, visual review and regression coverage.
 | Daily status detail | Unavailable status only | Static route, labelled back action and no item identifier. |
 | Teroka | Honest empty state | Plain-language empty state; no fabricated collection, category, search result or content reference. |
 | Simpanan | Bounded Android-only free-text reflection plus fail-closed saved-content state | A labelled private-note field permits only local reflection storage and individual deletion. Content bookmarks, viewed history and practice tracking remain unavailable without a verified immutable public-bundle reference; no synthetic content identifier is created. If private storage cannot open, input is hidden and only scoped recovery deletion may be offered. |
-| Tetapan | Device-local display controls | Language, theme, reduced motion and text size use the allowlisted preference store. |
+| Tetapan | Device-local display controls | Language, System/Light/Dark theme, reduced motion and 90–150% text size use the allowlisted preference store. Theme, motion and text-size groups retain localized semantics and visible labels; icons never carry their state alone. |
 | Admin shell | Backend-setup state only | Drawer/rail navigation and empty setup state; it does not claim authentication, role access, source records or approval capability. |
 
 ## Accessibility and interaction requirements
@@ -86,6 +86,9 @@ dedicated task, visual review and regression coverage.
 - The mobile preference multiplier composes with the platform text scaler; it
   must not flatten nonlinear OS scaling. The shell also respects OS reduced
   motion and the local reduced-motion preference.
+- Settings has localized semantic groups for theme, reduced motion and text
+  size. Its slider announces a localized percentage, and its System/Light/Dark
+  selection has visible text as well as icons.
 - All currently rendered status and empty states use text plus iconography, and
   their scrollable containers must remain usable at a 150% text scale in the
   supported mobile test surface.
@@ -101,13 +104,14 @@ dedicated task, visual review and regression coverage.
 The following tests protect this contract without adding a data fixture:
 
 - `packages/design_system/test/sunnah_theme_test.dart` covers palette/layout
-  tokens, Material 3 theme settings, shared content frame and component action
-  behaviour.
+  tokens, Material 3 theme settings, readable on-surface/scaffold contrast,
+  shared content frame and component action behaviour.
 - `apps/mobile/test/app_test.dart` covers the four-item navigation, semantic
   navigation label, semantic page headings, unavailable Daily flow, generic
   RTL return affordance, readable content frame, private-reflection save/delete
-  and failure states, confirmed all-delete, unavailable storage and a 150%
-  text-scale status action.
+  and failure states, confirmed all-delete, unavailable storage, System/Light/
+  Dark selection, local/OS reduced motion, nonlinear 90–150% text scaling,
+  localized Settings semantics and large-text settings reachability.
 - `apps/mobile/test/private_reflections_test.dart`,
   `android_privacy_config_test.dart` and `app_preferences_test.dart` cover
   bounded/envelope persistence, corrupt-value failure and recovery deletion,

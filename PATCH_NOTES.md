@@ -69,6 +69,12 @@
   mematikan backup serta mengecualikan domain aplikasi untuk peraturan legacy,
   cloud dan device-transfer. Ini bukan dakwaan secure erase atau deklarasi
   Play Data Safety lengkap.
+- MOB-06 menambah semantik dan key ujian stabil untuk kawalan tema, kurangkan
+  animasi dan saiz teks. Ujian widget kini mengesahkan pilihan Sistem/Cerah/
+  Gelap, simpanan setempat, gabungan reduced motion setempat dengan OS, skala
+  teks 90–150% tanpa meratakan lengkung OS, semantik BM/English dan capaian
+  kawalan pada teks besar. Tiada kandungan, sumber, akaun, permission,
+  rangkaian atau laluan penerbitan baharu.
 - Tiada kandungan agama telah diterbitkan atau diluluskan.
 
 ### English
@@ -134,6 +140,12 @@
   create fake content IDs. Android backup configuration now disables backup and
   excludes application domains in legacy, cloud and device-transfer rules. This
   is not a secure-erasure claim or a completed Play Data Safety declaration.
+- MOB-06 adds stable semantics and test keys for the theme, reduced-motion and
+  text-size controls. Widget tests now verify System/Light/Dark selection,
+  local persistence, combined local/OS reduced motion, 90–150% text scaling
+  without flattening the OS curve, BM/English semantics and control reachability
+  at large text. No content, source, account, permission, network or
+  publication path was added.
 - No religious content has been published or approved.
 
 ### Google Play

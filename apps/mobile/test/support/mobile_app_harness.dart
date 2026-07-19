@@ -15,6 +15,7 @@ typedef MobileContainerSetup =
 Future<ProviderContainer> pumpMobileApp(
   WidgetTester tester, {
   TestViewport viewport = SunnahTestViewports.mobile,
+  Brightness platformBrightness = Brightness.light,
   TextScaler textScaler = TextScaler.noScaling,
   TextDirection? textDirectionOverride,
   bool disableAnimations = false,
@@ -53,6 +54,7 @@ Future<ProviderContainer> pumpMobileApp(
       ),
     ),
     viewport: viewport,
+    platformBrightness: platformBrightness,
     textScaler: textScaler,
     disableAnimations: disableAnimations,
   );
