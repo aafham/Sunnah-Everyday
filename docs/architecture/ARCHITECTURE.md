@@ -50,9 +50,11 @@ Flutter runner executes each package in its own working directory because the
 monorepo root is not itself a Flutter package.
 
 `.github/workflows/quality.yml` enforces the repository's local quality parity
-on GitHub using read-only permissions. It runs contracts, Flutter quality and
-debug/web smoke jobs but cannot access secrets, publish artifacts, create a
-release, sign an AAB or contact Google Play.
+on GitHub using read-only permissions. Its contracts job includes a
+current-source mobile policy guard for manifest, direct network/signing and
+tracked credential regression patterns; it runs Flutter quality and debug/web
+smoke jobs but cannot access secrets, publish artifacts, create a release, sign
+an AAB or contact Google Play. The guard is not a runtime or release audit.
 
 `packages/content_models` and `content/` define draft-only metadata shapes for
 future import tooling. `scripts/validate_content.mjs` consumes a caller-supplied

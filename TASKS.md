@@ -38,7 +38,7 @@ blocked work never counts as complete.
 | DEL-03 | Delivery | Native Android Glance widget with bridge | P0 | 3 | NOT_STARTED | DEL-01 | Widget/resizing/theme/deep-link tests | — | M3 | |
 | DEL-04 | Delivery | Background refresh and secure deep-link delivery | P1 | 1 | NOT_STARTED | DEL-01, DEL-03 | Worker/deep-link tests | — | M3 | |
 | QLT-01 | Quality | Unit/widget test harness and test utilities | P0 | 2 | DONE | MOB-01 | Deterministic four-target `flutter analyze`/`flutter test` baseline | `458232b` | M0 | Private shared viewport/media/transition harness, app-local setup, fatal hit-test warnings and a root runner; no integration, content or release scope added |
-| QLT-02 | Quality | Integration, accessibility and security testing | P1 | 2 | NOT_STARTED | QLT-01 | Integration/a11y/secret tests | — | M4 | |
+| QLT-02 | Quality | Integration, accessibility and security testing | P1 | 2 | DONE | QLT-01 | Android emulator smoke, 150% accessibility/recovery semantics and source/credential policy tests | `2daac26` | M4 | `emulator-5554` safe-shell smoke, 150% BM/English accessibility regressions and a read-only mobile security policy guard passed. Quality run `29684226127` passed contracts, Flutter quality and debug/web smoke. The guard is a current-source baseline, not a release, Data Safety or comprehensive device-security audit. |
 | QLT-03 | Quality | SQL/content-gate tests and coverage reporting | P0 | 2 | NOT_STARTED | CNT-02, BE-03 | Gate/RLS test scripts | — | M2 | |
 | QLT-04 | Quality | Dependency, permission, privacy and performance audit | P1 | 2 | NOT_STARTED | MOB-01 | Audits documented and clean | — | M4 | |
 | REL-01 | Docs & release | GitHub CI/CD and safe release automation | P0 | 2 | DONE | MOB-01, QLT-01 | Local policy/syntax tests and GitHub Quality run all pass | `766e1fb` | M0 | Read-only three-job workflow with SHA-pinned actions, no secrets/upload/release/Play path; Quality run `29677407731` passed on 2026-07-19 |
@@ -46,7 +46,7 @@ blocked work never counts as complete.
 | REL-03 | Docs & release | Play readiness, signing and release handoff | P1 | 2 | NOT_STARTED | REL-01, REL-02 | Readiness checklist and signed build proof | — | M4 | Credentials required to upload |
 | REL-04 | Docs & release | Actual Play track upload and monitoring | P0 | 1 | BLOCKED | REL-03, owner Play access, content gate | Verified Console/API result only | — | M0–M5 | Never assume account access |
 
-**Total weight:** 100. **Completed weight:** 34. **Blocked weight:** 4.
+**Total weight:** 100. **Completed weight:** 36. **Blocked weight:** 4.
 
 ## Selection rule
 
@@ -63,7 +63,10 @@ complete as the deliberately bounded free-text reflection slice. Its original
 content-bound remainder is now `MOB-08`, which cannot begin until verified
 immutable-bundle dependencies exist. `MOB-06` is complete with local and remote
 Quality verification. `MOB-07` is complete with strict static deep-link routing
-and generic recovery surfaces; it does not accept content data. `MOB-04` remains
-blocked by `DEL-01`; `PDX-04` needs owner support/hosting details. `QLT-02` is
-the next highest available unblocked task by ledger order. Do not mark BE-01 complete or count its weight until the
+and generic recovery surfaces; it does not accept content data. `QLT-02` is
+complete with bounded device-local smoke, accessibility and source-policy
+regression coverage; it does not add content, release authority or a Data
+Safety declaration. `MOB-04` remains blocked by `DEL-01`; `PDX-04` needs owner
+support/hosting details. `QLT-04` is the next highest available unblocked task
+by ledger order. Do not mark BE-01 complete or count its weight until the
 documented local migration, lint and pgTAP checks have actually passed.

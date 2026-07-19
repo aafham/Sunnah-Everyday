@@ -17,14 +17,17 @@
 - Pushed private-reflection commit: `86f80bafb97348e91417a675c1550fdf89023874`
 - Pushed display-settings accessibility commit: `0f4e79bec87f4c0ed9fd62f3562d3e64d7d1e362`
 - Pushed safe-deep-link commit: `0437704676d4f471cf3e6aa7f27f5f598436a8ff`
+- Pushed mobile quality regression commit: `2daac26c30d84db6d3ba177d01c1322fa4a38a4e`
 - Pushed CI workflow/hardening commits: `1c2463d`, `4ceff86` and
   `766e1fbb4ccb78ded664216a4819c42c0246bdbc`
 - Push: successful through configured git credentials on 2026-07-19.
 - GitHub CLI authentication: unavailable (`gh auth status` has no logged-in
   account), so no pull request has been created or updated. No browser session
   was available as an authenticated fallback.
-- CI: Quality run [29683674702](https://github.com/aafham/Sunnah-Everyday/actions/runs/29683674702)
-  passed contracts, Flutter quality and debug/web smoke for `0437704`.
+- CI: Quality run [29684226127](https://github.com/aafham/Sunnah-Everyday/actions/runs/29684226127)
+  passed contracts, Flutter quality and debug/web smoke for `2daac26`.
+  The contracts job includes the current-source mobile policy guard; it is not
+  a signed-release, device-security or Data Safety audit.
   GitHub's public branch API query reported zero open PRs after the push.
 
 ## Owner action
@@ -81,6 +84,10 @@ Suggested PR body:
   recovery. External URI input is reduced to static safe routes before
   onboarding/path matching, with no opaque token, content lookup, network or
   publication path.
+- Adds a bounded Android emulator safe-shell smoke, 150% accessibility
+  regressions and a read-only current-source mobile policy guard. The emulator
+  check uses no content fixture and the source guard is not a release, runtime
+  security or Data Safety declaration.
 - Validation: format, analyzer and tests passed for all Flutter packages;
   content Dart/schema tests, schema static guard and isolated PostgreSQL
   structural execution passed.

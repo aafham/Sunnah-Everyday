@@ -81,6 +81,13 @@
   ditapis sebelum laluan onboarding; token legap tidak dipaparkan, disimpan,
   dihantar ke rangkaian atau dilog. Tiada kandungan, App Link/HTTPS,
   permission, akaun atau release path baharu ditambah.
+- QLT-02 menambah smoke test Android setempat pada `emulator-5554` untuk
+  onboarding, state kandungan selamat, navigasi dan Tetapan tanpa fixture
+  kandungan. Regresi 150% BM/English menguji semantik, fokus, keyboard recovery
+  dan token legap tidak didedahkan. `npm run test:mobile-security` pula
+  memeriksa manifest sumber, pola rangkaian/SDK produksi, konfigurasi signing
+  release dan calon credential yang ditrack secara read-only. Ini bukan audit
+  release, Data Safety atau keselamatan peranti menyeluruh.
 - Tiada kandungan agama telah diterbitkan atau diluluskan.
 
 ### English
@@ -158,6 +165,13 @@
   onboarding route; opaque tokens are not rendered, stored, sent over a
   network or logged. No content, HTTPS App Link, permission, account or
   release path was added.
+- QLT-02 adds a device-local Android smoke on `emulator-5554` for onboarding,
+  safe content states, navigation and Settings without a content fixture.
+  150% BM/English regressions cover semantics, focus, keyboard recovery and
+  opaque-token non-disclosure. `npm run test:mobile-security` read-only checks
+  source manifests, production networking/SDK patterns, release-signing
+  configuration and tracked credential candidates. This is not a release,
+  Data Safety or comprehensive device-security audit.
 - No religious content has been published or approved.
 
 ### Google Play
@@ -170,8 +184,8 @@
 
 ### GitHub
 
-- Branch `codex/sunnah-everyday-build` has the safe-deep-link feature commit
-  `0437704` pushed. Its Quality run `29683674702` passed
+- Branch `codex/sunnah-everyday-build` has the mobile quality regression commit
+  `2daac26` pushed. Its Quality run `29684226127` passed
   contracts, Flutter quality and debug/web smoke. No release, AAB or Play
   operation exists in the workflow.
 - No pull request exists: GitHub's public API reports none for the branch, and

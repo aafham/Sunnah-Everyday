@@ -14,7 +14,7 @@ persisted credentials. The workflow has three jobs:
 
 | Job | Purpose | Output boundary |
 | --- | --- | --- |
-| `contracts` | CI policy, runner, content-contract/content-validation and structural Supabase checks | No database runtime or remote connection |
+| `contracts` | CI policy, current-source mobile security policy, runner, content-contract/content-validation and structural Supabase checks | No database runtime or remote connection |
 | `flutter-quality` | Locked dependencies, Dart format, Flutter analysis/tests and content-model checks | No Android release build or publishing |
 | `build-smoke` | Android debug APK and admin web build after both quality jobs pass | Ephemeral runner output only; no upload or release artifact |
 
@@ -32,6 +32,7 @@ Run this sequence from the repository root before relying on CI:
 npm ci --ignore-scripts
 npm run verify:ci-workflow
 npm run test:ci-workflow
+npm run test:mobile-security
 npm run test:flutter-runner
 npm run test:content-contract
 npm run test:content-validation
@@ -70,6 +71,13 @@ required commands, secret references and release/Play/upload operations. Its
 unit tests also mutate the real workflow source to exercise those fail-closed
 checks.
 
+The mobile-security command is a separate read-only current-source regression
+guard. It checks the release-source Android manifest, debug/profile tooling
+permission allowlist, release-signing fail-closed configuration, direct mobile
+network/telemetry patterns and tracked credential-shaped files without printing
+values. It does not prove a signed artifact, resolved transitive dependency
+audit, runtime traffic posture, Play Data Safety response or release readiness.
+
 `packages/design_system` is a library package with its lockfile intentionally
 ignored by its own `.gitignore`; its dependency resolution therefore does not
 use `--enforce-lockfile`. Application and private test-support lockfiles remain
@@ -88,12 +96,17 @@ privacy, owner-access and release-gate evidence before they can proceed.
 
 ## Verified run
 
-- Latest verified commit: `0437704676d4f471cf3e6aa7f27f5f598436a8ff`
-- Quality run: [29683674702](https://github.com/aafham/Sunnah-Everyday/actions/runs/29683674702)
+- Latest verified commit: `2daac26c30d84db6d3ba177d01c1322fa4a38a4e`
+- Quality run: [29684226127](https://github.com/aafham/Sunnah-Everyday/actions/runs/29684226127)
 - Result: all three jobs passed on 2026-07-19: contracts, Flutter quality, and
   debug/web smoke checks.
 - The GitHub runner emitted Node 20 deprecation warnings while forcing the
   pinned actions to Node 24; no workflow job failed.
+- The contracts result includes the current-source mobile policy guard. It is
+  not an Android-device, signed-release, privacy-form or Data Safety audit.
+- Prior safe-deep-link commit:
+  `0437704676d4f471cf3e6aa7f27f5f598436a8ff` with successful Quality run
+  [29683674702](https://github.com/aafham/Sunnah-Everyday/actions/runs/29683674702).
 - Prior display-settings accessibility commit:
   `0f4e79bec87f4c0ed9fd62f3562d3e64d7d1e362` with successful Quality run
   [29682938797](https://github.com/aafham/Sunnah-Everyday/actions/runs/29682938797).

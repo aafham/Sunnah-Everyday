@@ -128,10 +128,16 @@ The following tests protect this contract without adding a data fixture:
   `android_deep_link_config_test.dart` cover strict Android custom-scheme host
   registration, cold/runtime URI handling, malformed/host/path collisions,
   onboarding precedence, localized recovery and opaque-token non-disclosure.
+- `apps/mobile/test/accessibility_regression_test.dart` covers BM/English
+  semantic headings, focusable/tappable recovery controls and keyboard
+  activation at a 150% text scale. The Android-only
+  `integration_test/safe_shell_smoke_test.dart` independently exercises the
+  first-launch safe shell on a local emulator without a content fixture.
 - `apps/admin/test/app_test.dart` covers the exact 959/960 drawer-to-rail
   boundary, named admin navigation semantics, selected rail destination, rail
   width and maximum content width.
 
 Run `npm run check:flutter` from the repository root after changes to this
-contract. Full RTL visual/keyboard coverage, Arabic presentation, integration,
-screen-reader and security testing remain separately scheduled work.
+contract. Full RTL visual/keyboard coverage, Arabic presentation, broader
+screen-reader, dependency/privacy/performance and release-security audits
+remain separately scheduled work.

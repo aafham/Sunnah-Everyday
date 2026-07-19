@@ -64,6 +64,14 @@ versioning with Android build numbers.
   Opaque link tokens never enter route parameters, UI, storage, network or
   logs; no content record, App Link domain, permission, account or release
   path was added.
+- QLT-02 regression baseline: an Android emulator smoke covers first-launch
+  onboarding, static approved-content states, navigation and Settings without
+  a content fixture; 150% BM/English semantic, focus, keyboard-recovery and
+  opaque-token non-disclosure regressions protect the safe shell. A read-only
+  CI source-policy test fails closed for release-manifest weakening, unreviewed
+  production network SDK/source patterns, release signing material and tracked
+  credential-shaped files. It is not a release, Data Safety or comprehensive
+  device-security audit.
 - Versioned BM/English ARB source and generated localizations now cover the
   existing mobile shell copy. They add no religious-content records or claims.
 - Flutter web admin shell with responsive navigation and explicit backend setup
@@ -143,12 +151,13 @@ versioning with Android build numbers.
   `4913b54`, fail-closed-daily commit: `c8ddbeb`, responsive-UX commit:
   `56daf54`, generic-RTL feature commit: `3031af2`, private-reflection feature
   commit: `86f80ba`, and display-settings accessibility feature commit:
-  `0f4e79b`, and safe-deep-link feature commit: `0437704`, pushed to
+  `0f4e79b`, safe-deep-link feature commit: `0437704`, and mobile quality
+  regression commit: `2daac26`, pushed to
   `codex/sunnah-everyday-build`; CI workflow/hardening commits: `1c2463d`,
   `4ceff86` and `766e1fb`, pushed to the same branch.
 - Pull request: not created; `gh auth login` or a scoped `GH_TOKEN` is needed.
-- CI status: Quality run `29683674702` passed contracts, Flutter quality and
-  debug/web smoke for `0437704`. The runner emitted Node 20 deprecation
+- CI status: Quality run `29684226127` passed contracts, Flutter quality and
+  debug/web smoke for `2daac26`. The runner emitted Node 20 deprecation
   warnings while forcing actions to Node 24; this was not a test/build failure.
 
 ### Tests
@@ -194,6 +203,14 @@ versioning with Android build numbers.
   content-validation 14, static Supabase guard and content-model analysis/tests
   (13). Android debug APK and admin web smoke builds passed; no release AAB
   was built.
+- QLT-02 passed root format (56 files, 0 changes), mobile analysis and 53
+  widget/unit tests, `npm run check:flutter` (testing_utils 1, design system
+  7, mobile 53 and admin 5), Flutter-runner 3, CI-workflow 8, mobile-security
+  6, content-contract 5, content-validation 14, the static Supabase guard and
+  content-model analysis/tests (13). The Android debug APK and admin-web smoke
+  builds passed. On a connected `emulator-5554`, `flutter test
+  integration_test/safe_shell_smoke_test.dart -d emulator-5554 -r expanded`
+  passed. No release AAB was built.
 - `npm run test:ci-workflow` passed (7 policy tests); `npm audit` reported 0
   vulnerabilities. Local debug APK and admin-web smoke builds passed.
 - GitHub Quality run `29677407731` passed contracts, Flutter quality and
@@ -212,6 +229,8 @@ versioning with Android build numbers.
   debug/web smoke checks on `0f4e79b`.
 - GitHub Quality run `29683674702` passed contracts, Flutter quality and
   debug/web smoke checks on `0437704`.
+- GitHub Quality run `29684226127` passed contracts, Flutter quality and
+  debug/web smoke checks on `2daac26`.
 - `node scripts/verify_supabase_baseline.mjs` passed; all four migrations also
   applied in an isolated PostgreSQL/PGlite structural harness.
 - `dart analyze` and `dart test` passed for `packages/content_models`.
