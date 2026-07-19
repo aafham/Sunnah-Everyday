@@ -57,12 +57,12 @@ and native Kotlin/Glance widget support remain planned.
 | Area | Status |
 | --- | --- |
 | Version / milestone | `0.1.0+1` development baseline / M0 closeout with M1 core experience started |
-| Completion | 24.0% weighted; PDX-01, MOB-01, MOB-02, MOB-03, CNT-01, CNT-02, QLT-01 and REL-01 complete |
-| App / admin / migrations | The mobile shell now has a local first-launch onboarding gate, BM/English UI selection, allowlisted device UI preferences and fail-closed Daily/status/detail views; those views expose only an unavailable state until a verified public bundle exists. The web-admin shell, shared deterministic Flutter test harness, read-only GitHub Quality workflow and fail-closed structural Supabase baseline remain implemented; local Supabase runtime validation is pending Docker |
+| Completion | 26.0% weighted; PDX-01, PDX-02, MOB-01, MOB-02, MOB-03, CNT-01, CNT-02, QLT-01 and REL-01 complete |
+| App / admin / migrations | The mobile shell now has a local first-launch onboarding gate, BM/English UI selection, allowlisted device UI preferences and fail-closed Daily/status/detail views; those views expose only an unavailable state until a verified public bundle exists. Shared layout tokens now enforce a 560 logical-pixel mobile content cap, 960 admin drawer/rail breakpoint and 1040 admin content cap. The web-admin shell, shared deterministic Flutter test harness, read-only GitHub Quality workflow and fail-closed structural Supabase baseline remain implemented; local Supabase runtime validation is pending Docker |
 | Content intake | Draft-only models, schemas, header-only templates and a read-only CSV validation preview implemented; 0 imported/approved/public items |
 | Approved content | 0 items; no reviewer or source-rights records |
-| GitHub | `c8ddbeb` pushed on feature branch `codex/sunnah-everyday-build`; public API reports no open PR, and creation or update is blocked by unavailable GitHub authentication/session |
-| CI | Read-only Quality run [`29678798552`](https://github.com/aafham/Sunnah-Everyday/actions/runs/29678798552) passed contracts, Flutter quality and debug/web smoke checks for `c8ddbeb`; it cannot release or upload |
+| GitHub | `56daf54` pushed on feature branch `codex/sunnah-everyday-build`; the public GitHub view shows 0 open pull requests, and creation or update is blocked by unavailable GitHub authentication/session |
+| CI | Read-only Quality run [`29679773365`](https://github.com/aafham/Sunnah-Everyday/actions/runs/29679773365) passed contracts, Flutter quality and debug/web smoke checks for `56daf54`; it cannot release or upload |
 | Google Play | No app/AAB/upload/submission/availability |
 
 Full work tracking is in [TASKS.md](TASKS.md), [PROGRESS.md](PROGRESS.md),

@@ -45,6 +45,12 @@
   Pembaca terbina tidak menyimpan atau memaparkan ID, tajuk, sumber, dalil,
   gred atau teks kandungan, dan tidak membaca CSV draft, staging, approved atau
   rangkaian.
+- Kontrak UX mobile/admin kini boleh dikesan dalam token dan ujian sebenar:
+  kandungan shell mobile dihadkan kepada 560 logical pixels pada paparan luas,
+  admin menggunakan drawer di bawah 960 dan navigation rail pada atau melebihi
+  960, serta kandungan admin dihadkan kepada 1040. Ia hanya memperkemas susun
+  atur, semantik dan state selamat; tiada kandungan, sumber atau akses backend
+  baharu ditambah.
 - Tiada kandungan agama telah diterbitkan atau diluluskan.
 
 ### English
@@ -89,6 +95,11 @@
   bundle exists, they show only that approved content is unavailable. The
   built-in reader has no ID, title, source, evidence, grade or body fields and
   reads no draft CSV, staging, approved directory or network source.
+- The mobile/admin UX contract is now backed by shared tokens and widget tests:
+  mobile shell content is capped at 560 logical pixels on wider displays, admin
+  uses a drawer below 960 and a navigation rail at or above 960, and admin
+  content is capped at 1040. This changes layout, semantics and safe states
+  only; it adds no content, source or backend access.
 - No religious content has been published or approved.
 
 ### Google Play
@@ -101,8 +112,8 @@
 
 ### GitHub
 
-- Branch `codex/sunnah-everyday-build` has the fail-closed-daily feature commit
-  `c8ddbeb` pushed. Its Quality run `29678798552` passed all three jobs; no
+- Branch `codex/sunnah-everyday-build` has the responsive-UX feature commit
+  `56daf54` pushed. Its Quality run `29679773365` passed all three jobs; no
   release, AAB or Play operation exists in the workflow.
 - No pull request exists: GitHub's public API reports none for the branch, and
   no authenticated GitHub CLI or browser session is available in this environment.

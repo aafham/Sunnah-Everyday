@@ -25,6 +25,12 @@ versioning with Android build numbers.
   `NoApprovedDailyContent`. The reader carries no identifier, title, source,
   evidence, grade or body fields, and does not read draft CSV, staging,
   approved directories or a network source.
+- PDX-02 executable mobile/admin UX contract: shared `SunnahLayout` tokens
+  now own the current spacing, control radius, mobile readable width and admin
+  breakpoint/content dimensions. `SunnahContentFrame` caps shell content at
+  560 logical pixels; admin switches drawer/rail at 960 and caps content at
+  1040. The specification records component, responsive, semantic and
+  fail-closed state rules without adding any content or backend path.
 - Versioned BM/English ARB source and generated localizations now cover the
   existing mobile shell copy. They add no religious-content records or claims.
 - Flutter web admin shell with responsive navigation and explicit backend setup
@@ -98,11 +104,12 @@ versioning with Android build numbers.
   delivery-record commit: `ece499c`, schema-baseline commit: `3680dc1`,
   content-contract commit: `64ea492`, and content-validation commit:
   `e0aeb6f`; Flutter-test-harness commit: `458232b`, mobile-onboarding commit:
-  `4913b54`, and fail-closed-daily commit: `c8ddbeb`, pushed to
+  `4913b54`, fail-closed-daily commit: `c8ddbeb`, and responsive-UX commit:
+  `56daf54`, pushed to
   `codex/sunnah-everyday-build`; CI workflow/hardening commits: `1c2463d`,
   `4ceff86` and `766e1fb`, pushed to the same branch.
 - Pull request: not created; `gh auth login` or a scoped `GH_TOKEN` is needed.
-- CI status: Quality run `29678798552` passed all three jobs for `c8ddbeb`.
+- CI status: Quality run `29679773365` passed all three jobs for `56daf54`.
 
 ### Tests
 
@@ -118,6 +125,11 @@ versioning with Android build numbers.
   for mobile (15 tests). The checks cover unavailable Daily state, its static
   detail route, onboarding gating, localized status copy and semantic back
   navigation; the debug APK smoke build passed. No content record was used.
+- PDX-02 formatting passed for design system (7 files), mobile (21) and admin
+  (8), with zero changes. Analyzer and widget tests passed: 6 design-system,
+  16 mobile and 5 admin tests; the root Flutter runner passed (3), and the
+  root quality check included 1 `testing_utils` test. Mobile debug APK and
+  admin-web builds both passed locally. No release AAB was built.
 - `npm run test:ci-workflow` passed (7 policy tests); `npm audit` reported 0
   vulnerabilities. Local debug APK and admin-web smoke builds passed.
 - GitHub Quality run `29677407731` passed contracts, Flutter quality and
@@ -126,6 +138,8 @@ versioning with Android build numbers.
   debug/web smoke checks on `4913b54`.
 - GitHub Quality run `29678798552` passed contracts, Flutter quality and
   debug/web smoke checks on `c8ddbeb`.
+- GitHub Quality run `29679773365` passed contracts, Flutter quality and
+  debug/web smoke checks on `56daf54`.
 - `node scripts/verify_supabase_baseline.mjs` passed; all four migrations also
   applied in an isolated PostgreSQL/PGlite structural harness.
 - `dart analyze` and `dart test` passed for `packages/content_models`.
