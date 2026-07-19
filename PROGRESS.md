@@ -25,10 +25,10 @@ _Last updated: 2026-07-19 (CNT-01 complete; BE-01 runtime verification pending; 
 | Target version | 0.1.0+1 |
 | Current task | CNT-02 — build the draft-import validation CLI; BE-01 Docker-backed migration, lint and pgTAP verification remains pending |
 | Branch | `codex/sunnah-everyday-build` |
-| Last recorded task commit | `3680dc1` (`feat(database): add fail-closed Supabase schema baseline`) |
+| Last recorded task commit | `64ea492` (`feat(content): add draft-only intake contract`) |
 | Local checks | Dart format/analyze/tests passed for `content_models`; header-only JSON Schema/Ajv contract tests, Supabase static guard, and prior Flutter checks passed. All four migrations also applied in an isolated PostgreSQL/PGlite structural harness. `supabase db reset --local --no-seed` could not start because no Docker engine is available, so local Supabase lint and pgTAP have not run. |
-| GitHub CI | No workflow configured; GitHub API reported 0 runs for this branch after `5874f66` was pushed |
-| GitHub push / PR | `5874f66` pushed successfully; public API reported no open PR and creation is blocked because `gh auth status` has no logged-in host and no authenticated browser session is available |
+| GitHub CI | No workflow configured; GitHub API reported 0 runs for this branch after `64ea492` was pushed |
+| GitHub push / PR | `64ea492` pushed successfully; public API reported no open PR and creation is blocked because `gh auth status` has no logged-in host and no authenticated browser session is available |
 | Google Play | No app, signed AAB, Console/API credential, track check, or upload |
 | Release status | No signed release AAB generated, uploaded, or submitted; local debug APK only |
 

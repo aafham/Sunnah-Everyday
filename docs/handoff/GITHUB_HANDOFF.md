@@ -7,12 +7,13 @@
 - Pushed governance commit: `c1b089bf197431638d06edf3c7693f357b32da31`
 - Pushed application-shell commit: `ae1cde4201686db56f072df4fd31aead04389a17`
 - Pushed schema-baseline commit: `3680dc15f325ccb4f98c0f51997ae1c5d93e2ee5`
+- Pushed content-contract commit: `64ea49206bdbc87ebe3cdc796ca354872735de0f`
 - Push: successful through configured git credentials on 2026-07-19.
 - GitHub CLI/API authentication: unavailable (`gh auth status` has no logged-in
   account), so no pull request has been created or updated. No browser session
   was available as an authenticated fallback.
 - CI: no workflow exists; GitHub's public API reported zero workflow runs and
-  zero open PRs for the branch after the schema-baseline push.
+  zero open PRs for the branch after the content-contract push.
 
 ## Owner action
 
@@ -35,8 +36,11 @@ Suggested PR body:
   design system, safe no-content states and local display controls.
 - Adds a no-seed, fail-closed Supabase structural baseline with forced RLS,
   revoked client table access, migration constraints and pgTAP test coverage.
+- Adds a draft-only content intake contract with header-only templates, JSON
+  Schemas, pure-Dart models, guarded empty boundaries and no content data.
 - Validation: format, analyzer and tests passed for all Flutter packages;
-  schema static guard and isolated PostgreSQL structural execution passed.
+  content Dart/schema tests, schema static guard and isolated PostgreSQL
+  structural execution passed.
   Docker-backed local Supabase reset, lint and pgTAP remain pending because the
   Docker engine is unavailable; release AAB correctly fails closed.
 - Release impact: no signed AAB, Play upload or public religious content;
