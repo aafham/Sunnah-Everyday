@@ -25,10 +25,10 @@ _Last updated: 2026-07-19 (MOB-01 complete; BE-01 selected next)_
 | Target version | 0.1.0+1 |
 | Current task | BE-01 — add initial Supabase schema and migrations |
 | Branch | `codex/sunnah-everyday-build` |
-| Last recorded task commit | `c1b089b` (`docs: establish governance and release controls`) |
+| Last recorded task commit | `ae1cde4` (`feat: establish Flutter application shells`) |
 | Local checks | Format passed; analyze and tests passed for mobile, admin and design system; Android debug APK and admin web build generated |
 | GitHub CI | No workflow configured; GitHub API reports 0 runs for this branch |
-| GitHub push / PR | `c1b089b` pushed successfully; PR creation blocked because GitHub CLI is unauthenticated |
+| GitHub push / PR | `ae1cde4` pushed successfully; public API reports no open PR and creation is blocked because no authenticated GitHub CLI/browser session is available |
 | Google Play | No app, signed AAB, Console/API credential, track check, or upload |
 | Release status | No signed release AAB generated, uploaded, or submitted; local debug APK only |
 

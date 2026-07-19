@@ -33,12 +33,13 @@ versioning with Android build numbers.
 - Supabase schema/RLS, content models, import validation, approved data,
   notifications, offline cache, widget, CI, Play assets and release pipeline
   are not yet implemented.
-- GitHub CLI is unauthenticated; the governance commit was pushed through git,
-  but no pull request has been created or updated.
+- GitHub CLI is unauthenticated; governance and application-shell commits were
+  pushed through git, but no pull request has been created or updated.
 
 ### GitHub
 
-- Governance commit: `c1b089b` pushed to `codex/sunnah-everyday-build`.
+- Governance commit: `c1b089b` and application-shell commit: `ae1cde4` pushed
+  to `codex/sunnah-everyday-build`.
 - Pull request: not created; `gh auth login` or a scoped `GH_TOKEN` is needed.
 - CI status: no workflows/runs exist yet.
 

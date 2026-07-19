@@ -10,7 +10,7 @@ blocked work never counts as complete.
 | PDX-02 | Product & UX | Design system and mobile/admin UX specification | P1 | 2 | NOT_STARTED | PDX-01 | Tokens, components, responsive/a11y requirements documented and tested in UI | — | M0 | |
 | PDX-03 | Product & UX | Localisation, RTL and accessibility baseline | P1 | 2 | NOT_STARTED | MOB-01 | BM/EN ARB, semantic/scale/RTL tests | — | M1 | |
 | PDX-04 | Product & UX | Public privacy/support site, terms and legal copy | P1 | 3 | NOT_STARTED | PDX-01 | Static pages and hosting handoff; no invented contact details | — | M4 | Owner support email/hosting needed to deploy |
-| MOB-01 | Flutter core | Flutter workspace, application architecture, app/admin shell | P0 | 4 | DONE | PDX-01 | `flutter analyze`, shell tests, Android debug and web build | pending delivery commit | M0 | Material 3 mobile/admin shells, shared design system, safe empty states and fail-closed release guard implemented |
+| MOB-01 | Flutter core | Flutter workspace, application architecture, app/admin shell | P0 | 4 | DONE | PDX-01 | `flutter analyze`, shell tests, Android debug and web build | `ae1cde4` | M0 | Material 3 mobile/admin shells, shared design system, safe empty states and fail-closed release guard implemented |
 | MOB-02 | Flutter core | Onboarding, local preferences and language selection | P0 | 3 | NOT_STARTED | MOB-01 | Widget tests for persistence/locales | — | M1 | |
 | MOB-03 | Flutter core | Today, daily-card and safe detail views | P0 | 4 | NOT_STARTED | MOB-01, CNT-01 | UI/state tests; only staging-safe data | — | M1 | |
 | MOB-04 | Flutter core | Explore, categories, situation mode and offline search | P1 | 3 | NOT_STARTED | MOB-03, DEL-01 | BM/EN search and empty-state tests | — | M1 | |
