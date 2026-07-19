@@ -74,7 +74,7 @@ test('workflow verifier rejects malformed YAML and secret references', () => {
 test('workflow verifier rejects job permission overrides and extra jobs', () => {
   const permissionOverride = validateCiWorkflowText(
     workflowSource.replace(
-      '  contracts:\n    name:',
+      /  contracts:\r?\n    name:/,
       '  contracts:\n    permissions:\n      contents: write\n    name:',
     ),
   );
