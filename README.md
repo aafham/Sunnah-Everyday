@@ -61,7 +61,7 @@ Kotlin/Glance widget support, and ARB localisation are planned.
 | Content intake | Draft-only models, schemas, header-only templates and a read-only CSV validation preview implemented; 0 imported/approved/public items |
 | Approved content | 0 items; no reviewer or source-rights records |
 | GitHub | `458232b` pushed on feature branch `codex/sunnah-everyday-build`; public API reports no open PR, and creation or update is blocked by unavailable GitHub authentication/session |
-| CI | Not configured; GitHub reports no workflow runs for this branch |
+| CI | REL-01 quality workflow is being added; no actual workflow run is recorded yet |
 | Google Play | No app/AAB/upload/submission/availability |
 
 Full work tracking is in [TASKS.md](TASKS.md), [PROGRESS.md](PROGRESS.md),
@@ -91,6 +91,11 @@ root itself is not a Flutter package. See
 [the Flutter testing guide](docs/testing/TESTING_GUIDE.md). The mobile Android
 application ID is
 `com.aafha.sunnaheveryday`; a debug APK was generated and inspected locally.
+
+The read-only GitHub Actions quality workflow and exact local parity commands
+are documented in [the CI workflow guide](docs/release/GITHUB_ACTIONS.md). It
+does not create a release artifact, sign an AAB, use secrets, upload artifacts,
+or contact Google Play.
 
 The structural Supabase baseline has no seed data, public API access or content.
 Run `node scripts/verify_supabase_baseline.mjs` without Docker. The local

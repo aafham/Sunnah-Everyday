@@ -1,0 +1,109 @@
+name: Quality
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+# This workflow reads repository code only. It has no deployment, release,
+# package-publishing, Play Console or secret-consuming capability.
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contracts:
+    name: Contracts and repository guards
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.14.1
+      - name: Install locked Node tooling
+        run: npm ci --ignore-scripts
+      - name: Verify CI workflow policy
+        run: npm run test:ci-workflow
+      - name: Verify Flutter runner policy
+        run: npm run test:flutter-runner
+      - name: Verify content contract
+        run: npm run test:content-contract
+      - name: Verify content validation
+        run: npm run test:content-validation
+      - name: Verify Supabase structural baseline
+        run: node scripts/verify_supabase_baseline.mjs
+
+  flutter-quality:
+    name: Flutter format, analysis and tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.14.1
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2
+        with:
+          flutter-version: 3.44.6
+          cache: false
+      - name: Install locked Node tooling
+        run: npm ci --ignore-scripts
+      - name: Resolve Flutter test support
+        working-directory: packages/testing_utils
+        run: flutter pub get --enforce-lockfile
+      - name: Resolve design-system dependencies
+        working-directory: packages/design_system
+        run: flutter pub get --enforce-lockfile
+      - name: Resolve mobile dependencies
+        working-directory: apps/mobile
+        run: flutter pub get --enforce-lockfile
+      - name: Resolve admin dependencies
+        working-directory: apps/admin
+        run: flutter pub get --enforce-lockfile
+      - name: Verify Dart formatting
+        run: dart format --set-exit-if-changed .
+      - name: Analyze and test Flutter workspaces
+        run: npm run check:flutter
+      - name: Resolve content-model dependencies
+        working-directory: packages/content_models
+        run: dart pub get --enforce-lockfile
+      - name: Analyze content models
+        working-directory: packages/content_models
+        run: dart analyze
+      - name: Test content models
+        working-directory: packages/content_models
+        run: dart test
+
+  build-smoke:
+    name: Debug and web build smoke checks
+    needs: [contracts, flutter-quality]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          persist-credentials: false
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2
+        with:
+          flutter-version: 3.44.6
+          cache: false
+      - name: Resolve mobile dependencies
+        working-directory: apps/mobile
+        run: flutter pub get --enforce-lockfile
+      - name: Build Android debug APK
+        working-directory: apps/mobile
+        run: flutter build apk --debug
+      - name: Resolve admin dependencies
+        working-directory: apps/admin
+        run: flutter pub get --enforce-lockfile
+      - name: Build admin web smoke output
+        working-directory: apps/admin
+        run: flutter build web --release

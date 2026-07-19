@@ -9,10 +9,13 @@
     "import:content": "node scripts/import_content.mjs",
     "test:flutter": "node scripts/run_flutter_tests.mjs",
     "check:flutter": "node scripts/run_flutter_tests.mjs --check",
-    "test:flutter-runner": "node --test scripts/run_flutter_tests.test.mjs"
+    "test:flutter-runner": "node --test scripts/run_flutter_tests.test.mjs",
+    "verify:ci-workflow": "node scripts/verify_ci_workflow.mjs",
+    "test:ci-workflow": "node --test scripts/verify_ci_workflow.test.mjs"
   },
   "devDependencies": {
     "ajv": "8.20.0",
-    "ajv-formats": "3.0.1"
+    "ajv-formats": "3.0.1",
+    "yaml": "2.9.0"
   }
 }

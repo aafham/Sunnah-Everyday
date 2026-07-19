@@ -33,6 +33,11 @@ Before a release-ready milestone:
 - Store assets show no placeholder, fake reviewer/source, personal data,
   unverified claim, debug UI, or broken layout.
 
+The REL-01 GitHub Actions workflow is a read-only quality gate, not a release
+pipeline. It may build a debug APK and admin web smoke output on an ephemeral
+runner, but cannot sign or upload an AAB, create a release, contact Google Play
+or supply release evidence by itself. See [GitHub Actions Quality Workflow](GITHUB_ACTIONS.md).
+
 ## Content gate
 
 Public content must be immutable, approved, rights-cleared, traceable, and
