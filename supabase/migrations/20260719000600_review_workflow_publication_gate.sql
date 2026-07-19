@@ -337,7 +337,7 @@ security definer
 set search_path = ''
 as $$
 declare
-  reviewer_id uuid;
+  current_reviewer_id uuid;
   required_role public.admin_role_code;
 begin
   if (
@@ -356,7 +356,7 @@ begin
   perform private.assert_active_admin_role(required_role, 'record a review');
 
   select reviewer_row.id
-  into reviewer_id
+  into current_reviewer_id
   from public.reviewers as reviewer_row
   where reviewer_row.admin_profile_id = (select auth.uid())
     and private.is_eligible_reviewer(
@@ -366,13 +366,13 @@ begin
       p_locale
     );
 
-  if reviewer_id is null then
+  if current_reviewer_id is null then
     raise exception using
       errcode = '42501',
       message = 'The current account has no active qualified reviewer scope.';
   end if;
 
-  return reviewer_id;
+  return current_reviewer_id;
 end;
 $$;
 
@@ -1675,7 +1675,7 @@ set search_path = ''
 as $$
 declare
   version_row public.sunnah_versions%rowtype;
-  reviewer_id uuid;
+  current_reviewer_id uuid;
   prior_review_id uuid;
   review_id uuid;
   actor_id uuid;
@@ -1687,7 +1687,7 @@ begin
   end if;
 
   actor_id := (select auth.uid());
-  reviewer_id := private.current_reviewer_for_scope(p_scope, p_reviewed_locale);
+  current_reviewer_id := private.current_reviewer_for_scope(p_scope, p_reviewed_locale);
 
   select *
   into version_row
@@ -1731,7 +1731,7 @@ begin
   into prior_review_id
   from public.content_reviews as review_row
   where review_row.version_id = p_version_id
-    and review_row.reviewer_id = reviewer_id
+    and review_row.reviewer_id = current_reviewer_id
     and review_row.review_scope = p_scope
     and review_row.reviewed_locale is not distinct from p_reviewed_locale
   order by review_row.reviewed_at desc, review_row.id desc
@@ -1749,7 +1749,7 @@ begin
   )
   values (
     p_scope,
-    reviewer_id,
+    current_reviewer_id,
     p_version_id,
     p_decision,
     p_notes,
@@ -1814,7 +1814,7 @@ set search_path = ''
 as $$
 declare
   version_row public.sunnah_versions%rowtype;
-  reviewer_id uuid;
+  final_reviewer_id uuid;
   prior_approval_id uuid;
   approval_id uuid;
   actor_id uuid;
@@ -1826,7 +1826,7 @@ begin
   end if;
 
   actor_id := (select auth.uid());
-  reviewer_id := private.current_final_approver();
+  final_reviewer_id := private.current_final_approver();
 
   select *
   into version_row
@@ -1886,7 +1886,7 @@ begin
   into prior_approval_id
   from public.content_approvals as approval_row
   where approval_row.version_id = p_version_id
-    and approval_row.reviewer_id = reviewer_id
+    and approval_row.reviewer_id = final_reviewer_id
     and approval_row.approval_type = 'FINAL_PUBLICATION'
   order by approval_row.approved_at desc, approval_row.id desc
   limit 1;
@@ -1902,7 +1902,7 @@ begin
   )
   values (
     p_version_id,
-    reviewer_id,
+    final_reviewer_id,
     'FINAL_PUBLICATION',
     p_decision,
     p_notes,
