@@ -59,7 +59,7 @@
     "source_permission_revision": { "type": "integer", "minimum": 1 },
     "evidence_type": { "type": "string", "minLength": 1, "maxLength": 120 },
     "source_locator": { "type": "string", "minLength": 1, "maxLength": 1000 },
-    "source_url": { "type": ["string", "null"], "pattern": "^https?://" },
+    "source_url": { "type": ["string", "null"], "pattern": "^https?://[^/?#\\s]+", "format": "uri" },
     "collection_name": { "type": ["string", "null"], "maxLength": 500 },
     "book_name": { "type": ["string", "null"], "maxLength": 500 },
     "chapter_name": { "type": ["string", "null"], "maxLength": 500 },

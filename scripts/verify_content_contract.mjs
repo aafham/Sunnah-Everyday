@@ -181,7 +181,7 @@ async function assertAppAssetsExcludeContent() {
   }
 }
 
-export async function verifyContentContract() {
+export async function verifyContentContract({ assertBoundaryDirectories = true } = {}) {
   const migrationSql = await readFile(typesMigration, 'utf8');
   const schemas = [];
 
@@ -206,11 +206,14 @@ export async function verifyContentContract() {
   }
 
   assertContentSafetySchema(schemas[0]);
-  await Promise.all([
-    assertBoundaryDirectory('staging'),
-    assertBoundaryDirectory('approved'),
-    assertAppAssetsExcludeContent(),
-  ]);
+  const boundaryChecks = [assertAppAssetsExcludeContent()];
+  if (assertBoundaryDirectories) {
+    boundaryChecks.push(
+      assertBoundaryDirectory('staging'),
+      assertBoundaryDirectory('approved'),
+    );
+  }
+  await Promise.all(boundaryChecks);
 
   return {
     schemaCount: schemas.length,

@@ -18,7 +18,7 @@ blocked work never counts as complete.
 | MOB-06 | Flutter core | Settings, dark mode, scaling and reduce motion | P1 | 3 | NOT_STARTED | MOB-01 | Theme/a11y widget tests | — | M1 | |
 | MOB-07 | Flutter core | Friendly error states and deep-link app routing | P1 | 2 | NOT_STARTED | MOB-01 | Router/error tests | — | M1 | |
 | CNT-01 | Content/evidence | Content models, schemas, import templates and staging boundary | P0 | 3 | DONE | PDX-01 | Dart model tests plus JSON Schema/Ajv template-contract tests pass; no claim-bearing demo data | `64ea492` | M0 | Header-only templates, empty guarded staging/approved boundaries, and no imported records |
-| CNT-02 | Content/evidence | Content validation CLI with rights/translation/duplicate checks | P0 | 3 | NOT_STARTED | CNT-01 | Valid/invalid fixture tests | — | M2 | |
+| CNT-02 | Content/evidence | Content validation CLI with rights/translation/duplicate checks | P0 | 3 | DONE | CNT-01 | Valid/invalid fixture tests | pending feature commit | M2 | Read-only RFC 4180 CSV preview validates schemas, trim-aware metadata/locales, duplicate/reference/link/rights/date consistency and safe reports; no DB/network/write/import/approval/publication path |
 | CNT-03 | Content/evidence | Public bundle validation and release gate | P0 | 3 | NOT_STARTED | CNT-02, BE-03 | Prohibited grade/placeholder/rights tests | — | M2 | |
 | CNT-04 | Content/evidence | Evidence, source, reviewer and methodology experiences | P1 | 3 | NOT_STARTED | MOB-03, BE-01 | UI/data tests | — | M2 | |
 | CNT-05 | Content/evidence | Reports, corrections and withdrawal presentation | P1 | 3 | NOT_STARTED | BE-03, MOB-03 | Report and withdrawal tests | — | M2 | |
@@ -45,12 +45,13 @@ blocked work never counts as complete.
 | REL-03 | Docs & release | Play readiness, signing and release handoff | P1 | 2 | NOT_STARTED | REL-01, REL-02 | Readiness checklist and signed build proof | — | M4 | Credentials required to upload |
 | REL-04 | Docs & release | Actual Play track upload and monitoring | P0 | 1 | BLOCKED | REL-03, owner Play access, content gate | Verified Console/API result only | — | M0–M5 | Never assume account access |
 
-**Total weight:** 100. **Completed weight:** 7. **Blocked weight:** 4.
+**Total weight:** 100. **Completed weight:** 13. **Blocked weight:** 4.
 
 ## Selection rule
 
 `BE-01` is implemented and in review: its local Supabase runtime validation is
-pending a Docker engine. `CNT-01` is complete. `CNT-02` is selected next as the
-next P0 content-safety dependency; do not mark BE-01 complete or count its
+pending a Docker engine. `CNT-02` is complete as a read-only draft validation
+preview; it does not import or publish any content. `QLT-01` is selected next
+as the available P0 M0 dependency. Do not mark BE-01 complete or count its
 weight until the documented local migration, lint and pgTAP checks have
 actually passed.

@@ -1,0 +1,2 @@
+schema_version,import_mode,non_publication_notice,evidence_key,source_stable_key,source_permission_revision,evidence_type,source_locator,source_url,collection_name,book_name,chapter_name,reference_number,narrator,hadith_grade,grader_reference,arabic_display_status,translation_status,verification_date,verification_note,rights_status,display_mode
+1,STAGING,KANDUNGAN DEMO — TIDAK UNTUK PENERBITAN,structural-test-evidence,structural-test-source,1,STRUCTURAL_TEST,STRUCTURAL_TEST,,,,,,,NOT_APPLICABLE,STRUCTURAL_TEST,NOT_INCLUDED,NOT_INCLUDED,,,LINK_ONLY,LINK_ONLY

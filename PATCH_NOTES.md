@@ -14,6 +14,12 @@
   CSV header-only, schema JSON dan boundary staging/approved yang kosong serta
   diabaikan secara lalai. Tiada sumber, reviewer, dalil atau kandungan agama
   diimport atau diterbitkan.
+- CLI validasi CSV draft-only kini menyemak header, schema, metadata sumber,
+  duplicate, rujukan silang, hak/display, tarikh izin dan keadaan terjemahan
+  BM/English secara read-only. Laporan hanya memaparkan kod koleksi/baris/path;
+  ia tidak menulis data, mengimport rekod atau mengisytiharkan kelayakan
+  penerbitan. Skrip import sengaja menolak semua penulisan sehingga gate
+  workflow server BE-03 tersedia.
 - Penjenamaan Flutter lalai telah dibuang daripada shell; aset store raster
   masih menunggu task aset release dan bukan sebahagian daripada mana-mana upload.
 - Tiada kandungan agama telah diterbitkan atau diluluskan.
@@ -30,6 +36,12 @@
   header-only CSV templates, JSON Schemas and guarded empty staging/approved
   boundaries. No source, reviewer, evidence or religious content has been
   imported or published.
+- A draft-only CSV validation CLI now checks headers, schemas, source metadata,
+  duplicates, cross-references, rights/display, permission dates and BM/English
+  locale states in read-only preview mode. Its reports expose only
+  collection/row/path codes; it writes no data, imports no record and never
+  declares publication eligibility. The import executable intentionally refuses
+  all writes until the BE-03 server workflow exists.
 - Default Flutter branding has been removed; reviewed raster store assets remain
   a later release task and are not part of any upload.
 - No religious content has been published or approved.

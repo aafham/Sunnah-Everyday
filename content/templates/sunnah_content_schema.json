@@ -269,6 +269,7 @@
           "if": { "properties": { "availability": { "const": "COMPLETE" } } },
           "then": {
             "properties": {
+              "unavailable_rationale": { "type": "null" },
               "title": { "type": "string", "minLength": 1 },
               "summary": { "type": "string", "minLength": 1 },
               "practical_steps": { "type": "string", "minLength": 1 },
@@ -283,7 +284,16 @@
           "if": { "properties": { "availability": { "const": "UNAVAILABLE" } } },
           "then": {
             "required": ["unavailable_rationale"],
-            "properties": { "unavailable_rationale": { "type": "string", "minLength": 1 } }
+            "properties": {
+              "unavailable_rationale": { "type": "string", "minLength": 1 },
+              "title": { "type": "null" },
+              "summary": { "type": "null" },
+              "practical_steps": { "type": "null" },
+              "when_to_practise": { "type": "null" },
+              "context_note": { "type": "null" },
+              "misunderstanding_note": { "type": "null" },
+              "legal_classification_note": { "type": "null" }
+            }
           }
         }
       ]

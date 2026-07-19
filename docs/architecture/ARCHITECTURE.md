@@ -29,8 +29,13 @@ accessible shared primitives. It contains no licensed imagery/fonts, religious
 text or content data.
 
 `packages/content_models` and `content/` define draft-only metadata shapes for
-future import tooling. They contain no source/reviewer/content record, do not
-ship as Flutter assets, and cannot schedule, approve, publish or make a bundle.
+future import tooling. `scripts/validate_content.mjs` consumes a caller-supplied
+five-file CSV batch with exact headers, schema mapping and relational checks;
+it is read-only, makes no network/database request and produces only safe
+row/path codes. `scripts/import_content.mjs` validates then refuses all writes
+until BE-03 exists. These areas contain no source/reviewer/content record, do
+not ship as Flutter assets, and cannot schedule, approve, publish or make a
+bundle.
 
 ## Planned trust boundary
 
@@ -41,10 +46,13 @@ baseline. BE-02 through BE-05 must add audited admin access, publication and
 bundle controls; Flutter UI is never the sole enforcement point. Private
 reflections/bookmarks remain local on the public device.
 
-CNT-01 is an additional non-runtime boundary: it accepts only `STAGING` input,
-starts content candidates in `DRAFT`, rejects publication-shaped fields and
-requires the non-publication marker. CNT-02 and BE-03 must still validate real
-data and enforce the workflow on the server.
+CNT-01/CNT-02 form an additional non-runtime boundary: they accept only
+`STAGING` input, start content candidates in `DRAFT`, reject
+publication-shaped fields, require the non-publication marker, and validate
+schema, duplicate, reference, rights and locale consistency before any future
+server handoff. CNT-02 never creates data and always reports that publication
+eligibility is not evaluated. BE-03 must still enforce the workflow on the
+server.
 
 ## Dependency direction
 

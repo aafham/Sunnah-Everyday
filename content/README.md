@@ -15,10 +15,30 @@ items.
   the relevant release gate are required before any record can enter it.
 
 The templates identify logical keys only; they do not create Supabase rows.
-Future import tooling must create `DRAFT` records only. It cannot schedule,
-approve, publish, make an immutable version, generate a bundle, or decide
-religious accuracy. See [the content import guide](../docs/content/CONTENT_IMPORT_GUIDE.md)
+`scripts/validate_content.mjs` now reads a caller-supplied five-file CSV batch
+in preview mode, verifies the draft contract and cross-record consistency, and
+reports only controlled row/path codes. It never writes a file, database row or
+network request, and it always reports `importedRecords: 0` and
+`publicationEligible: false`. `scripts/import_content.mjs` deliberately
+refuses every write until BE-03 has the server-side role, audit and publication
+gates. Neither script can schedule, approve, publish, make an immutable
+version, generate a bundle, authenticate a narration, or decide religious
+accuracy. See [the content import guide](../docs/content/CONTENT_IMPORT_GUIDE.md)
 and [the content models package](../packages/content_models/README.md).
+
+Use a local, non-public batch directory outside this repository for a real
+candidate batch. `content/staging/` remains an ignored, non-public boundary for
+development placeholders, but the source-contract test deliberately requires
+its committed contents to remain only the boundary controls:
+
+```powershell
+npm run validate:content -- --input <csv-batch-directory> --as-of 2026-07-19
+```
+
+The canonical filenames are `sunnah_content.csv`, `source_register.csv`,
+`reviewer.csv`, `evidence.csv` and `content_evidence.csv`. The CLI accepts real
+quoted CSV fields, requires the exact template headers, maps the existing
+canonical schema contract, and does not print cell values.
 
 ## Database mapping
 

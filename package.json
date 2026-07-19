@@ -3,7 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test:content-contract": "node --test scripts/verify_content_contract.test.mjs"
+    "test:content-contract": "node --test scripts/verify_content_contract.test.mjs",
+    "test:content-validation": "node --test scripts/validate_content.test.mjs",
+    "validate:content": "node scripts/validate_content.mjs",
+    "import:content": "node scripts/import_content.mjs"
   },
   "devDependencies": {
     "ajv": "8.20.0",

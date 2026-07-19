@@ -3,8 +3,8 @@
 ## M0 — Repository and Governance (`0.1.0+1`)
 
 Repository controls, content policies, Flutter workspace and shells, first
-migrations, a draft-only content model/template contract, CI, documentation,
-and weighted progress tracking. No public
+migrations, a draft-only content model/template contract, read-only CSV
+validation preview, CI, documentation, and weighted progress tracking. No public
 religious content and no Play upload until an app can open safely.
 
 ## M1 — Core Experience (`0.2.0+2`)

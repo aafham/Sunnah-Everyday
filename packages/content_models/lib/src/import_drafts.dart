@@ -72,8 +72,17 @@ void _requireUniqueSlugs(List<String> values, String fieldName) {
 }
 
 void _requireHttpUri(Uri? value, String fieldName) {
-  if (value != null && value.scheme != 'http' && value.scheme != 'https') {
-    throw ArgumentError.value(value, fieldName, 'Must use HTTP or HTTPS.');
+  if (value != null &&
+      (!value.hasScheme ||
+          (value.scheme != 'http' && value.scheme != 'https') ||
+          !value.hasAuthority ||
+          value.host.isEmpty ||
+          value.userInfo.isNotEmpty)) {
+    throw ArgumentError.value(
+      value,
+      fieldName,
+      'Must use an absolute HTTP or HTTPS URL with a host.',
+    );
   }
 }
 
@@ -101,7 +110,32 @@ final class LocaleDraft {
         );
       }
       _requireBoundedText(unavailableRationale!, 'unavailableRationale', 500);
+      for (final field in <({String? value, String name})>[
+        (value: title, name: 'title'),
+        (value: summary, name: 'summary'),
+        (value: practicalSteps, name: 'practicalSteps'),
+        (value: whenToPractise, name: 'whenToPractise'),
+        (value: contextNote, name: 'contextNote'),
+        (value: misunderstandingNote, name: 'misunderstandingNote'),
+        (value: legalClassificationNote, name: 'legalClassificationNote'),
+      ]) {
+        if (field.value != null) {
+          throw ArgumentError.value(
+            field.value,
+            field.name,
+            'An unavailable locale cannot carry draft text.',
+          );
+        }
+      }
       return;
+    }
+
+    if (unavailableRationale != null) {
+      throw ArgumentError.value(
+        unavailableRationale,
+        'unavailableRationale',
+        'A complete locale cannot carry an unavailable rationale.',
+      );
     }
 
     for (final field in <({String? value, String name, int maximum})>[

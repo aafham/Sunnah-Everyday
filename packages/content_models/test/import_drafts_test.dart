@@ -58,11 +58,85 @@ void main() {
     );
   });
 
+  test('an unavailable locale cannot carry unreviewed draft text', () {
+    expect(
+      () => LocaleDraft(
+        availability: TranslationAvailability.unavailable,
+        unavailableRationale: stagingNonPublicationNotice,
+        title: 'STRUCTURAL_TEST',
+      ),
+      throwsArgumentError,
+    );
+  });
+
+  test('a complete locale cannot carry an unavailable rationale', () {
+    expect(
+      () => LocaleDraft(
+        availability: TranslationAvailability.complete,
+        unavailableRationale: stagingNonPublicationNotice,
+        title: 'STRUCTURAL_TEST',
+        summary: 'STRUCTURAL_TEST',
+        practicalSteps: 'STRUCTURAL_TEST',
+        whenToPractise: 'STRUCTURAL_TEST',
+        contextNote: 'STRUCTURAL_TEST',
+        misunderstandingNote: 'STRUCTURAL_TEST',
+        legalClassificationNote: 'STRUCTURAL_TEST',
+      ),
+      throwsArgumentError,
+    );
+  });
+
   test('licensed display cannot be created without recorded usable rights', () {
     expect(
       () => _draft(
         rightsStatus: SourcePermissionStatus.requested,
         displayMode: SourceDisplayMode.licensedContent,
+      ),
+      throwsArgumentError,
+    );
+  });
+
+  test('draft metadata URLs require an absolute HTTP(S) host', () {
+    expect(
+      () => EvidenceDraft(
+        staging: StagingEnvelope(
+          nonPublicationNotice: stagingNonPublicationNotice,
+        ),
+        evidenceKey: 'structural-test-evidence',
+        sourceStableKey: 'structural-test-source',
+        sourcePermissionRevision: 1,
+        evidenceType: 'STRUCTURAL_TEST',
+        sourceLocator: 'STRUCTURAL_TEST',
+        hadithGrade: HadithGrade.notApplicable,
+        graderReference: 'STRUCTURAL_TEST',
+        arabicDisplayStatus: EvidenceTextStatus.notIncluded,
+        translationStatus: EvidenceTextStatus.notIncluded,
+        rightsStatus: SourcePermissionStatus.linkOnly,
+        displayMode: SourceDisplayMode.linkOnly,
+        sourceUrl: Uri(scheme: 'https'),
+      ),
+      throwsArgumentError,
+    );
+  });
+
+  test('draft metadata URLs reject embedded credentials', () {
+    expect(
+      () => EvidenceDraft(
+        staging: StagingEnvelope(
+          nonPublicationNotice: stagingNonPublicationNotice,
+        ),
+        evidenceKey: 'structural-test-evidence',
+        sourceStableKey: 'structural-test-source',
+        sourcePermissionRevision: 1,
+        evidenceType: 'STRUCTURAL_TEST',
+        sourceLocator: 'STRUCTURAL_TEST',
+        hadithGrade: HadithGrade.notApplicable,
+        graderReference: 'STRUCTURAL_TEST',
+        arabicDisplayStatus: EvidenceTextStatus.notIncluded,
+        translationStatus: EvidenceTextStatus.notIncluded,
+        rightsStatus: SourcePermissionStatus.linkOnly,
+        displayMode: SourceDisplayMode.linkOnly,
+        sourceUrl: Uri.parse('https://structural:fixture@example.invalid'),
       ),
       throwsArgumentError,
     );

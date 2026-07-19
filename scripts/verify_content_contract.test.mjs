@@ -142,6 +142,13 @@ test('content templates remain draft-only and aligned with BE-01 enums', async (
   assert.equal(result.schemaCount, 5);
 });
 
+test('the runtime validator can verify schemas without inspecting a local ignored batch', async () => {
+  const result = await verifyContentContract({ assertBoundaryDirectories: false });
+
+  assert.equal(result.templateCount, 5);
+  assert.equal(result.schemaCount, 5);
+});
+
 test('schemas accept only non-claiming structural draft records', async () => {
   for (const [filename, record] of Object.entries(validRecords)) {
     const validate = validator(await schema(filename));
@@ -185,4 +192,9 @@ test('source and evidence schemas require traceability and display metadata', as
   const missingTranslationStatus = structuredClone(validRecords['evidence_schema.json']);
   delete missingTranslationStatus.translation_status;
   assert.equal(validateEvidence(missingTranslationStatus), false);
+
+  const unusableSourceUrl = structuredClone(validRecords['source_register_schema.json']);
+  unusableSourceUrl.source_url = 'https://';
+  assert.equal(validateSource(unusableSourceUrl), false);
+
 });

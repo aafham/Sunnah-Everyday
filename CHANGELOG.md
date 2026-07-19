@@ -38,6 +38,17 @@ versioning with Android build numbers.
   structural records and reject publication-shaped, unreviewed, untraceable or
   missing-translation-status records. No source, reviewer, evidence or
   religious-content record was imported.
+- Read-only CNT-02 CSV validation preview: an RFC 4180-capable parser for the
+  five canonical draft files, schema mapping/Ajv checks, trim-aware metadata
+  and locale checks, duplicate/reference/link coverage checks, permission
+  revision/rights/date checks and safe structured reports. It performs no
+  database, network or filesystem write and always reports zero imports and no
+  publication eligibility.
+- A fail-closed `import_content.mjs` executable validates a batch then refuses
+  every write until BE-03 supplies authenticated server workflow and audit
+  gates. Structural valid/invalid fixtures contain no religious content.
+- Locale schemas and Dart draft models now reject text alongside an unavailable
+  locale and reject an unavailable rationale alongside a complete locale.
 
 ### Religious Content
 
@@ -47,8 +58,8 @@ versioning with Android build numbers.
 
 - Local Supabase reset, lint and pgTAP verification await a Docker engine.
   The structural baseline is present, but BE-02 through BE-05 (admin access,
-  workflow/publication gates, public bundles and audit automation), the CNT-02
-  import validation CLI, approved data, notifications, offline cache,
+  workflow/publication gates, public bundles and audit automation), CNT-03
+  publication-bundle validation, approved data, notifications, offline cache,
   widget, CI, Play assets and release pipeline remain incomplete.
 - GitHub CLI is unauthenticated; governance and application-shell commits were
   pushed through git, but no pull request has been created or updated.
@@ -71,6 +82,8 @@ versioning with Android build numbers.
 - `dart analyze` and `dart test` passed for `packages/content_models`.
 - `npm run test:content-contract` passed: five JSON Schemas accepted only
   non-claiming structural staging records and rejected invalid boundary cases.
+- `npm run test:content-validation` passed: 14 CSV/parser/schema/duplicate,
+  reference, rights, translation, safe-report and fail-closed-import tests.
 - `npm audit` reported 0 vulnerabilities for the content-contract dev tooling.
 - `supabase db reset --local --no-seed` did not run because Docker Desktop/the
   local Docker engine is unavailable; local Supabase lint and pgTAP are not

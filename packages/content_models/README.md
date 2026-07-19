@@ -7,7 +7,9 @@ bundle, publication, or scheduling dependency.
 The types preserve policy-defined metadata and enforce only safe intake
 boundaries: every record carries a `STAGING` envelope; a content candidate also
 starts in `DRAFT`; its notice is `KANDUNGAN DEMO — TIDAK UNTUK PENERBITAN`; and
-server-managed publication fields are rejected. They do not authenticate a
+server-managed publication fields are rejected. A locale is either complete
+with all required non-blank draft fields and no unavailable rationale, or is
+explicitly unavailable with a rationale and no draft text. They do not authenticate a
 narration, decide a classification, approve a reviewer, grant rights, or make
 any record public.
 

@@ -55,9 +55,9 @@ Kotlin/Glance widget support, and ARB localisation are planned.
 | Area | Status |
 | --- | --- |
 | Version / milestone | `0.1.0+1` / M0 bootstrap |
-| Completion | 10.0% weighted; PDX-01, MOB-01 and CNT-01 complete |
+| Completion | 13.0% weighted; PDX-01, MOB-01, CNT-01 and CNT-02 complete |
 | App / admin / migrations | Mobile and web-admin shells plus a fail-closed structural Supabase baseline are implemented; local Supabase runtime validation is pending Docker |
-| Content intake | Draft-only models, schemas and header-only templates implemented; 0 imported/approved/public items |
+| Content intake | Draft-only models, schemas, header-only templates and a read-only CSV validation preview implemented; 0 imported/approved/public items |
 | Approved content | 0 items; no reviewer or source-rights records |
 | GitHub | `64ea492` pushed on feature branch `codex/sunnah-everyday-build`; public API reports no open PR, and creation is blocked by unavailable GitHub authentication/session |
 | CI | Not configured; GitHub reports no workflow runs for this branch |
@@ -93,10 +93,22 @@ Supabase migration, lint and pgTAP commands require Docker and are documented
 in [supabase/README.md](supabase/README.md); never point them at a linked or
 production project without explicit owner authority.
 
-The content contract is similarly non-public: run `npm ci --ignore-scripts`
-then `npm run test:content-contract`; in `packages/content_models`, run
-`dart pub get`, `dart analyze`, and `dart test`. It contains only structural
-test records, never religious data. See [content/README.md](content/README.md).
+The content contract is similarly non-public: run `npm ci --ignore-scripts`,
+`npm run test:content-contract`, and `npm run test:content-validation`. To
+preview a local five-file CSV batch without writing anything, run:
+
+```powershell
+npm run validate:content -- --input <csv-batch-directory> --as-of 2026-07-19
+```
+
+The preview supports quoted CSV fields, checks schemas, duplicate/reference/
+rights/translation constraints and reports safe row/path codes only. A passing
+draft preview never means approval or publication: it always reports zero
+imports and `publicationEligible: false`; `scripts/import_content.mjs` refuses
+writes until the future server workflow exists. In `packages/content_models`,
+run `dart pub get`, `dart analyze`, and `dart test`. It contains only
+structural test records, never religious data. See
+[content/README.md](content/README.md).
 
 ## Releases and Google Play
 

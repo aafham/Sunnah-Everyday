@@ -73,7 +73,7 @@
         "EDITORIAL_SUMMARY"
       ]
     },
-    "source_url": { "type": ["string", "null"], "pattern": "^https?://" },
+    "source_url": { "type": ["string", "null"], "pattern": "^https?://[^/?#\\s]+", "format": "uri" },
     "bibliographic_locator": { "type": "string", "minLength": 1, "maxLength": 1000 },
     "edition": { "type": "string", "minLength": 1, "maxLength": 500 },
     "language_code": { "type": "string", "minLength": 1, "maxLength": 32 },
