@@ -1,9 +1,10 @@
-# GitHub Pull Request Handoff
+# GitHub Main-Branch Delivery Record
 
 ## Verified state
 
 - Repository: `aafham/Sunnah-Everyday`
-- Branch: `codex/sunnah-everyday-build`
+- Main branch: `main`
+- Retained feature branch: `codex/sunnah-everyday-build`
 - Pushed governance commit: `c1b089bf197431638d06edf3c7693f357b32da31`
 - Pushed application-shell commit: `ae1cde4201686db56f072df4fd31aead04389a17`
 - Pushed schema-baseline commit: `3680dc15f325ccb4f98c0f51997ae1c5d93e2ee5`
@@ -21,87 +22,21 @@
 - Pushed source-audit commit: `1aa0c83c7e92743f8b5aa6a0090faae44c5bba0a`
 - Pushed CI workflow/hardening commits: `1c2463d`, `4ceff86` and
   `766e1fbb4ccb78ded664216a4819c42c0246bdbc`
-- Push: successful through configured git credentials on 2026-07-19.
+- Main promotion: on explicit owner instruction, `main` was fast-forwarded from
+  `137521e24133ee93605c9653e8175ea4519530fb` to
+  `69273cbb15ef93cb32e803670d0b01716cfa7a44` and pushed successfully on
+  2026-07-19. The retained feature branch remains at that promoted commit.
 - GitHub CLI authentication: unavailable (`gh auth status` has no logged-in
-  account), so no pull request has been created or updated. No browser session
-  was available as an authenticated fallback.
+  account), so protected repository settings cannot be inspected. No browser
+  session was available as an authenticated fallback.
 - CI: Quality run [29685451382](https://github.com/aafham/Sunnah-Everyday/actions/runs/29685451382)
   passed contracts, Flutter quality and debug/web smoke for `1aa0c83`.
   The contracts job includes current-source mobile-security and QLT-04 source
   audit guards; they are not signed-release, transitive-SDK, runtime,
   performance, device-security or Data Safety audits.
-  GitHub's public branch API query reported zero open PRs after the push.
+  No pull request was used for the owner-authorised main promotion.
 
-## Owner action
+## Remaining GitHub control
 
-Authenticate the GitHub CLI using an account with repository write/PR access:
-
-```powershell
-gh auth login
-```
-
-Then create the PR without changing history:
-
-```powershell
-gh pr create --repo aafham/Sunnah-Everyday --base main --head codex/sunnah-everyday-build --title "feat: establish Sunnah Everyday foundations"
-```
-
-Suggested PR body:
-
-- Establishes governance, content/release policies and the weighted task ledger.
-- Adds Android Flutter and responsive web-admin shells, a shared Material 3
-  design system, safe no-content states and local display controls.
-- Adds a no-seed, fail-closed Supabase structural baseline with forced RLS,
-  revoked client table access, migration constraints and pgTAP test coverage.
-- Adds a draft-only content intake contract with header-only templates, JSON
-  Schemas, pure-Dart models, guarded empty boundaries and no content data.
-- Adds a read-only RFC 4180 CSV validation preview with schema, duplicate,
-  reference, rights, date and translation checks; no source/reviewer/evidence
-  data was imported, and the import executable refuses all writes pending
-  BE-03 server workflow gates.
-- Adds a private shared Flutter widget-test harness, deterministic responsive
-  viewports and MediaQuery preferences, app-local router/provider harnesses,
-  fatal hit-test warnings, and a root runner that tests every Flutter package.
-- Adds read-only GitHub Quality CI with SHA-pinned actions and no secret,
-  artifact, release or Play path. It verifies contracts, Flutter quality and
-  debug/web smoke builds; release signing and upload remain deferred.
-- Adds a local first-launch onboarding gate, allowlisted on-device UI
-  preferences, and BM/English shell localization. It contains no approved,
-  draft or generated religious-content record.
-- Adds a fail-closed Daily status card and static detail route. Until the
-  authoritative public-bundle gate exists, their reader exposes no content
-  identifiers or claim-bearing fields and reads no staging/draft source.
-- Adds a documented, tested mobile/admin UX contract: shared layout tokens,
-  560 mobile readable width, 960 admin navigation breakpoint, 1040 admin
-  content cap, semantic navigation grouping and responsive widget coverage.
-- Adds the narrow generic RTL-layout baseline: directional mobile page insets,
-  a direction-aware return affordance, semantic app-bar headings and tests.
-  The installed shell remains exactly BM/English; no Arabic locale/text/font,
-  religious-content data, source record, backend or publication path is added.
-- Strengthens the display-settings accessibility contract with grouped localized
-  semantics and widget coverage for theme selection, text scale and composed
-  local/OS reduced motion. It adds no content, source, permission, account or
-  network path.
-- Adds strict Android custom-scheme routing and generic localized route
-  recovery. External URI input is reduced to static safe routes before
-  onboarding/path matching, with no opaque token, content lookup, network or
-  publication path.
-- Adds a bounded Android emulator safe-shell smoke, 150% accessibility
-  regressions and a read-only current-source mobile policy guard. The emulator
-  check uses no content fixture and the source guard is not a release, runtime
-  security or Data Safety declaration.
-- Adds a read-only QLT-04 source-audit baseline over direct dependency
-  manifests, static Dart network APIs in the audited roots and structural payload
-  boundaries. It records main-source and debug-artifact observations only;
-  transitive/runtime/performance/signed-release/privacy/Data Safety work remains
-  separate.
-- Validation: format, analyzer and tests passed for all Flutter packages;
-  content Dart/schema tests, schema static guard and isolated PostgreSQL
-  structural execution passed.
-  Docker-backed local Supabase reset, lint and pgTAP remain pending because the
-  Docker engine is unavailable; release AAB correctly fails closed.
-- Release impact: no signed AAB, Play upload or public religious content;
-  production remains blocked by content review, source rights and release access.
-
-After authentication, inspect branch protection and CI on the actual branch.
-Do not force-push or merge around checks.
+After authentication, inspect branch protection and CI on `main`. Do not
+force-push or bypass checks for later deliveries.

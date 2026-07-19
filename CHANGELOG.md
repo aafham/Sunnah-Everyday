@@ -163,10 +163,12 @@ versioning with Android build numbers.
   `56daf54`, generic-RTL feature commit: `3031af2`, private-reflection feature
   commit: `86f80ba`, and display-settings accessibility feature commit:
   `0f4e79b`, safe-deep-link feature commit: `0437704`, mobile quality
-  regression commit: `2daac26`, and source-audit commit: `1aa0c83`, pushed to
-  `codex/sunnah-everyday-build`; CI workflow/hardening commits: `1c2463d`,
-  `4ceff86` and `766e1fb`, pushed to the same branch.
-- Pull request: not created; `gh auth login` or a scoped `GH_TOKEN` is needed.
+  regression commit: `2daac26`, and source-audit commit: `1aa0c83`, all now
+  contained by `main` after the owner-authorised fast-forward to `69273cb`;
+  `codex/sunnah-everyday-build` remains at the same commit. CI workflow/hardening
+  commits: `1c2463d`, `4ceff86` and `766e1fb` are in that history.
+- Pull request: none was used for the owner-authorised main-branch promotion.
+  GitHub CLI remains unauthenticated, so protected settings cannot be inspected.
 - CI status: Quality run `29685451382` passed contracts, Flutter quality and
   debug/web smoke for `1aa0c83`. The runner emitted Node 20 deprecation
   warnings while forcing actions to Node 24; this was not a test/build failure.

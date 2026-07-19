@@ -200,8 +200,9 @@
 
 ### GitHub
 
-- Branch `codex/sunnah-everyday-build` has the source-audit commit `1aa0c83`
-  pushed. Its Quality run `29685451382` passed
+- Main now contains the source-audit/documentation history through `69273cb`
+  after an owner-authorised fast-forward; the feature branch remains at the same
+  commit. Quality run `29685451382` for source-audit commit `1aa0c83` passed
   contracts, Flutter quality and debug/web smoke. No release, AAB or Play
   operation exists in the workflow.
 - No pull request exists: GitHub's public API reports none for the branch, and
