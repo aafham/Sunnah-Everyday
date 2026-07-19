@@ -173,12 +173,26 @@ test('workflow verifier requires failure-safe Supabase cleanup', () => {
   );
 });
 
+test('workflow verifier requires ordered local Supabase validation', () => {
+  const result = validateCiWorkflowText(
+    workflowSource.replace(
+      'npx --yes supabase@2.109.1 start --yes --exclude analytics,edge-runtime,functions,imgproxy,inbucket,kong,meta,realtime,rest,storage,studio,vector',
+      'npx --yes supabase@2.109.1 db reset --local --no-seed',
+    ),
+  );
+
+  assert.equal(result.valid, false);
+  assert.ok(
+    result.findings.some(({ code }) => code === 'CI_SUPABASE_RUNTIME_ORDER'),
+  );
+});
+
 test('workflow verifier rejects early or duplicate Supabase cleanup', () => {
   const result = validateCiWorkflowText(
     workflowSource
       .replace(
-        '      - name: Verify local Supabase migrations and database guards',
-        "      - name: Remove local Supabase database stack early\n        if: always()\n        run: npx --yes supabase@2.109.1 stop --yes --no-backup\n      - name: Verify local Supabase migrations and database guards",
+        '      - name: Start isolated local Supabase database',
+        "      - name: Remove local Supabase database stack early\n        if: always()\n        run: npx --yes supabase@2.109.1 stop --yes --no-backup\n      - name: Start isolated local Supabase database",
       )
       .replace('if: always()', 'if: success()'),
   );

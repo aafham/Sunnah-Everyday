@@ -286,25 +286,44 @@ function validateSupabaseRuntimeSafety(workflow, findings) {
     }
   }
 
-  const runtimeValidationStepIndex = contractsSteps.findIndex((step) => {
-    const runLines = new Set(jobRunLines({ steps: [step] }));
-    return [
-      localSupabaseCommands.start,
-      localSupabaseCommands.reset,
-      localSupabaseCommands.lint,
-      localSupabaseCommands.test,
-    ].every((command) => runLines.has(command));
-  });
-  const stopSteps = contractsSteps
-    .map((step, index) => ({ step, index }))
-    .filter(({ step }) => step?.run === localSupabaseCommands.stop);
-  const stopStep = stopSteps[0];
+  const stepIndexesForCommand = (command) =>
+    contractsSteps.flatMap((step, index) =>
+      step?.run === command ? [index] : [],
+    );
+  const [startIndexes, resetIndexes, lintIndexes, testIndexes] = [
+    localSupabaseCommands.start,
+    localSupabaseCommands.reset,
+    localSupabaseCommands.lint,
+    localSupabaseCommands.test,
+  ].map(stepIndexesForCommand);
+  const [startIndex] = startIndexes;
+  const [resetIndex] = resetIndexes;
+  const [lintIndex] = lintIndexes;
+  const [testIndex] = testIndexes;
+  const runtimeCommandsAreOrdered =
+    startIndex < resetIndex && resetIndex < lintIndex && lintIndex < testIndex;
   if (
-    runtimeValidationStepIndex < 0 ||
-    stopSteps.length !== 1 ||
+    [startIndexes, resetIndexes, lintIndexes, testIndexes].some(
+      (indexes) => indexes.length !== 1,
+    ) ||
+    !runtimeCommandsAreOrdered
+  ) {
+    addFinding(
+      findings,
+      'CI_SUPABASE_RUNTIME_ORDER',
+      'Local Supabase start, reset, lint and pgTAP commands must run once in order.',
+    );
+  }
+
+  const stopIndexes = stepIndexesForCommand(localSupabaseCommands.stop);
+  const [stopIndex] = stopIndexes;
+  const stopStep =
+    stopIndex == null ? undefined : contractsSteps[stopIndex];
+  if (
+    stopIndexes.length !== 1 ||
     stopStep == null ||
-    stopStep.index <= runtimeValidationStepIndex ||
-    stopStep.step.if !== 'always()'
+    stopIndex <= testIndex ||
+    stopStep.if !== 'always()'
   ) {
     addFinding(
       findings,

@@ -44,12 +44,14 @@ jobs:
         run: npm run test:content-validation
       - name: Verify Supabase structural baseline
         run: node scripts/verify_supabase_baseline.mjs
-      - name: Verify local Supabase migrations and database guards
-        run: |
-          npx --yes supabase@2.109.1 start --yes --exclude analytics,edge-runtime,functions,imgproxy,inbucket,kong,meta,realtime,rest,storage,studio,vector
-          npx --yes supabase@2.109.1 db reset --local --no-seed
-          npx --yes supabase@2.109.1 db lint --local --schema public --level warning --fail-on warning
-          npx --yes supabase@2.109.1 test db --local supabase/tests
+      - name: Start isolated local Supabase database
+        run: npx --yes supabase@2.109.1 start --yes --exclude analytics,edge-runtime,functions,imgproxy,inbucket,kong,meta,realtime,rest,storage,studio,vector
+      - name: Reset local Supabase database without seed data
+        run: npx --yes supabase@2.109.1 db reset --local --no-seed
+      - name: Lint local Supabase database
+        run: npx --yes supabase@2.109.1 db lint --local --schema public --level warning --fail-on warning
+      - name: Run local Supabase pgTAP tests
+        run: npx --yes supabase@2.109.1 test db --local supabase/tests
       - name: Remove local Supabase database stack
         if: always()
         run: npx --yes supabase@2.109.1 stop --yes --no-backup
