@@ -31,6 +31,13 @@ versioning with Android build numbers.
   application table; `PUBLIC`, `anon` and `authenticated` have no table grants
   and no policies exist until BE-02 supplies audited least-privilege access.
 - A no-dependency schema guard and pgTAP migration/constraint test foundation.
+- Draft-only content intake foundation: a pure-Dart `content_models` package,
+  five header-only CSV templates, five JSON Schemas, explicit CSV-to-JSON
+  mapping, and guarded empty staging/approved directories.
+- Content contract tests compile the Draft 2020-12 schemas against non-claiming
+  structural records and reject publication-shaped, unreviewed, untraceable or
+  missing-translation-status records. No source, reviewer, evidence or
+  religious-content record was imported.
 
 ### Religious Content
 
@@ -40,8 +47,8 @@ versioning with Android build numbers.
 
 - Local Supabase reset, lint and pgTAP verification await a Docker engine.
   The structural baseline is present, but BE-02 through BE-05 (admin access,
-  workflow/publication gates, public bundles and audit automation), content
-  models, import validation, approved data, notifications, offline cache,
+  workflow/publication gates, public bundles and audit automation), the CNT-02
+  import validation CLI, approved data, notifications, offline cache,
   widget, CI, Play assets and release pipeline remain incomplete.
 - GitHub CLI is unauthenticated; governance and application-shell commits were
   pushed through git, but no pull request has been created or updated.
@@ -60,6 +67,10 @@ versioning with Android build numbers.
 - `flutter analyze` and `flutter test` passed for design system, mobile and admin.
 - `node scripts/verify_supabase_baseline.mjs` passed; all four migrations also
   applied in an isolated PostgreSQL/PGlite structural harness.
+- `dart analyze` and `dart test` passed for `packages/content_models`.
+- `npm run test:content-contract` passed: five JSON Schemas accepted only
+  non-claiming structural staging records and rejected invalid boundary cases.
+- `npm audit` reported 0 vulnerabilities for the content-contract dev tooling.
 - `supabase db reset --local --no-seed` did not run because Docker Desktop/the
   local Docker engine is unavailable; local Supabase lint and pgTAP are not
   reported as passed.

@@ -45,8 +45,8 @@ user account, continuous location, contacts, or unneeded device permissions.
 ## Architecture
 
 The target monorepo contains Flutter mobile/admin apps and shared packages,
-Supabase migrations/functions/tests, content templates/validation, Android
-release materials, documentation, and GitHub Actions. Flutter stable, Dart,
+Supabase migrations/functions/tests, a draft-only content intake contract,
+Android release materials, documentation, and GitHub Actions. Flutter stable, Dart,
 Material 3, Riverpod, go_router, Drift, Supabase, local notifications, native
 Kotlin/Glance widget support, and ARB localisation are planned.
 
@@ -55,10 +55,11 @@ Kotlin/Glance widget support, and ARB localisation are planned.
 | Area | Status |
 | --- | --- |
 | Version / milestone | `0.1.0+1` / M0 bootstrap |
-| Completion | 7.0% weighted; PDX-01 and MOB-01 complete |
+| Completion | 10.0% weighted; PDX-01, MOB-01 and CNT-01 complete |
 | App / admin / migrations | Mobile and web-admin shells plus a fail-closed structural Supabase baseline are implemented; local Supabase runtime validation is pending Docker |
+| Content intake | Draft-only models, schemas and header-only templates implemented; 0 imported/approved/public items |
 | Approved content | 0 items; no reviewer or source-rights records |
-| GitHub | `3680dc1` pushed on feature branch `codex/sunnah-everyday-build`; public API reports no open PR, and creation is blocked by unavailable GitHub authentication/session |
+| GitHub | `5874f66` pushed on feature branch `codex/sunnah-everyday-build`; public API reports no open PR, and creation is blocked by unavailable GitHub authentication/session |
 | CI | Not configured; GitHub reports no workflow runs for this branch |
 | Google Play | No app/AAB/upload/submission/availability |
 
@@ -91,6 +92,11 @@ Run `node scripts/verify_supabase_baseline.mjs` without Docker. The local
 Supabase migration, lint and pgTAP commands require Docker and are documented
 in [supabase/README.md](supabase/README.md); never point them at a linked or
 production project without explicit owner authority.
+
+The content contract is similarly non-public: run `npm ci --ignore-scripts`
+then `npm run test:content-contract`; in `packages/content_models`, run
+`dart pub get`, `dart analyze`, and `dart test`. It contains only structural
+test records, never religious data. See [content/README.md](content/README.md).
 
 ## Releases and Google Play
 

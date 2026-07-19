@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sunnaheveryday.invalid/schema/reviewer-draft-v1.json",
+  "title": "Sunnah Everyday reviewer metadata draft",
+  "description": "Draft reviewer metadata only. It does not verify, activate or approve a person.",
+  "type": "object",
+  "additionalProperties": false,
+  "x-csv-columns": [
+    "schema_version",
+    "import_mode",
+    "non_publication_notice",
+    "reviewer_code",
+    "public_display_name",
+    "restricted_profile_reference",
+    "qualification_type",
+    "specialism",
+    "qualification_evidence_reference",
+    "review_scope",
+    "locale_code",
+    "verified_at",
+    "is_active"
+  ],
+  "x-enum-contract": {
+    "review_scope": "review_scope"
+  },
+  "required": [
+    "schema_version",
+    "import_mode",
+    "non_publication_notice",
+    "reviewer_code",
+    "public_display_name",
+    "restricted_profile_reference",
+    "qualification_type",
+    "specialism",
+    "qualification_evidence_reference",
+    "review_scope",
+    "is_active"
+  ],
+  "properties": {
+    "schema_version": { "const": "1" },
+    "import_mode": { "const": "STAGING" },
+    "non_publication_notice": { "const": "KANDUNGAN DEMO — TIDAK UNTUK PENERBITAN" },
+    "reviewer_code": { "$ref": "#/$defs/slug" },
+    "public_display_name": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "restricted_profile_reference": { "type": "string", "minLength": 1, "maxLength": 500 },
+    "qualification_type": { "type": "string", "minLength": 1, "maxLength": 500 },
+    "specialism": { "type": "string", "minLength": 1, "maxLength": 500 },
+    "qualification_evidence_reference": { "type": "string", "minLength": 1, "maxLength": 500 },
+    "review_scope": { "type": "string", "enum": ["SOURCE_HADITH", "FIQH_CONTEXT", "LANGUAGE"] },
+    "locale_code": { "type": ["string", "null"], "pattern": "^[a-z]{2}(?:-[A-Z]{2})?$" },
+    "verified_at": { "type": ["string", "null"], "format": "date-time" },
+    "is_active": { "const": false }
+  },
+  "$defs": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "maxLength": 120
+    }
+  }
+}

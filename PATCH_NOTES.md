@@ -10,6 +10,10 @@
 - Baseline struktur Supabase kini merangkumi jadual operasi, enum, kekangan
   pemilikan dan RLS fail-closed tanpa seed data atau kandungan agama. Reset,
   lint dan pgTAP Supabase tempatan masih menunggu Docker.
+- Kontrak intake kandungan draft-only kini tersedia: model Dart, lima template
+  CSV header-only, schema JSON dan boundary staging/approved yang kosong serta
+  diabaikan secara lalai. Tiada sumber, reviewer, dalil atau kandungan agama
+  diimport atau diterbitkan.
 - Penjenamaan Flutter lalai telah dibuang daripada shell; aset store raster
   masih menunggu task aset release dan bukan sebahagian daripada mana-mana upload.
 - Tiada kandungan agama telah diterbitkan atau diluluskan.
@@ -22,6 +26,10 @@
 - A fail-closed Supabase structural baseline now covers operational tables,
   enums, ownership constraints and RLS, with no seed data or religious content.
   Local Supabase reset, lint and pgTAP still await Docker.
+- A draft-only content intake contract now provides Dart models, five
+  header-only CSV templates, JSON Schemas and guarded empty staging/approved
+  boundaries. No source, reviewer, evidence or religious content has been
+  imported or published.
 - Default Flutter branding has been removed; reviewed raster store assets remain
   a later release task and are not part of any upload.
 - No religious content has been published or approved.

@@ -12,8 +12,26 @@ review.
 - `content/templates/sunnah_content_schema.json`
 - `content/templates/source_register_template.csv`
 - `content/templates/reviewer_template.csv`
+- `content/templates/evidence_template.csv`
+- `content/templates/content_evidence_template.csv`
+- `content/templates/source_register_schema.json`
+- `content/templates/reviewer_schema.json`
+- `content/templates/evidence_schema.json`
+- `content/templates/content_evidence_schema.json`
+- `packages/content_models/` for the shared draft-only model contract
 - `content/staging/` for explicitly non-publication data only
 - `content/approved/` only after verified approvals and rights records
+
+The CSV files are header-only. `sunnah_content_schema.json` includes an
+explicit mapping from flattened CSV columns to its canonical nested JSON form.
+All schema/template checks use structural, non-claiming records only.
+
+## Current implementation boundary
+
+CNT-01 provides the draft-only models, templates, schemas and staging/approved
+directory controls. It has not imported any source, reviewer, evidence or
+religious-content record. CNT-02 will add the actual validation CLI and its
+duplicate/translation/rights reports; BE-03 owns publication enforcement.
 
 ## Import flow
 
@@ -30,7 +48,9 @@ review.
 
 Staging fixtures must be non-claiming and clearly include `KANDUNGAN DEMO —
 TIDAK UNTUK PENERBITAN`. They must never be copied into `content/approved/`,
-a public bundle, Open Testing, or Production.
+a public bundle, Open Testing, or Production. `content/staging/` and
+`content/approved/` are currently empty and ignore candidate data by default;
+an explicit reviewed change is required before material can be committed.
 
 ## Validation failures
 

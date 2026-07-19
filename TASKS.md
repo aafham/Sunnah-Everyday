@@ -17,7 +17,7 @@ blocked work never counts as complete.
 | MOB-05 | Flutter core | Local bookmarks, history and private reflections | P1 | 3 | NOT_STARTED | MOB-01 | Persistence/privacy/deletion tests | — | M1 | |
 | MOB-06 | Flutter core | Settings, dark mode, scaling and reduce motion | P1 | 3 | NOT_STARTED | MOB-01 | Theme/a11y widget tests | — | M1 | |
 | MOB-07 | Flutter core | Friendly error states and deep-link app routing | P1 | 2 | NOT_STARTED | MOB-01 | Router/error tests | — | M1 | |
-| CNT-01 | Content/evidence | Content models, schemas, import templates and staging boundary | P0 | 3 | NOT_STARTED | PDX-01 | Schema/template tests; no claim-bearing demo data | — | M0 | |
+| CNT-01 | Content/evidence | Content models, schemas, import templates and staging boundary | P0 | 3 | DONE | PDX-01 | Dart model tests plus JSON Schema/Ajv template-contract tests pass; no claim-bearing demo data | — | M0 | Header-only templates, empty guarded staging/approved boundaries, and no imported records |
 | CNT-02 | Content/evidence | Content validation CLI with rights/translation/duplicate checks | P0 | 3 | NOT_STARTED | CNT-01 | Valid/invalid fixture tests | — | M2 | |
 | CNT-03 | Content/evidence | Public bundle validation and release gate | P0 | 3 | NOT_STARTED | CNT-02, BE-03 | Prohibited grade/placeholder/rights tests | — | M2 | |
 | CNT-04 | Content/evidence | Evidence, source, reviewer and methodology experiences | P1 | 3 | NOT_STARTED | MOB-03, BE-01 | UI/data tests | — | M2 | |
@@ -50,6 +50,7 @@ blocked work never counts as complete.
 ## Selection rule
 
 `BE-01` is implemented and in review: its local Supabase runtime validation is
-pending a Docker engine. The next implementation candidates are `CNT-01`,
-`QLT-01`, and `REL-01`; do not mark BE-01 complete or count its weight until
-the documented local migration, lint and pgTAP checks have actually passed.
+pending a Docker engine. `CNT-01` is complete. `CNT-02` is selected next as the
+next P0 content-safety dependency; do not mark BE-01 complete or count its
+weight until the documented local migration, lint and pgTAP checks have
+actually passed.

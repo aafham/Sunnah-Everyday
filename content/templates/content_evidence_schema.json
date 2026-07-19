@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sunnaheveryday.invalid/schema/content-evidence-draft-v1.json",
+  "title": "Sunnah Everyday staged content-evidence link",
+  "description": "A draft-only logical link. It does not establish publication eligibility.",
+  "type": "object",
+  "additionalProperties": false,
+  "x-csv-columns": [
+    "schema_version",
+    "import_mode",
+    "non_publication_notice",
+    "item_slug",
+    "version_number",
+    "evidence_key",
+    "display_order",
+    "is_primary"
+  ],
+  "required": [
+    "schema_version",
+    "import_mode",
+    "non_publication_notice",
+    "item_slug",
+    "version_number",
+    "evidence_key",
+    "display_order",
+    "is_primary"
+  ],
+  "properties": {
+    "schema_version": { "const": "1" },
+    "import_mode": { "const": "STAGING" },
+    "non_publication_notice": { "const": "KANDUNGAN DEMO — TIDAK UNTUK PENERBITAN" },
+    "item_slug": { "$ref": "#/$defs/slug" },
+    "version_number": { "type": "integer", "minimum": 1 },
+    "evidence_key": { "$ref": "#/$defs/slug" },
+    "display_order": { "type": "integer", "minimum": 0 },
+    "is_primary": { "type": "boolean" }
+  },
+  "$defs": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "maxLength": 120
+    }
+  }
+}

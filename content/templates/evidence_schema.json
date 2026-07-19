@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sunnaheveryday.invalid/schema/evidence-draft-v1.json",
+  "title": "Sunnah Everyday evidence metadata draft",
+  "description": "Reference metadata only. It records Arabic and translation display status without storing protected text.",
+  "type": "object",
+  "additionalProperties": false,
+  "x-csv-columns": [
+    "schema_version",
+    "import_mode",
+    "non_publication_notice",
+    "evidence_key",
+    "source_stable_key",
+    "source_permission_revision",
+    "evidence_type",
+    "source_locator",
+    "source_url",
+    "collection_name",
+    "book_name",
+    "chapter_name",
+    "reference_number",
+    "narrator",
+    "hadith_grade",
+    "grader_reference",
+    "arabic_display_status",
+    "translation_status",
+    "verification_date",
+    "verification_note",
+    "rights_status",
+    "display_mode"
+  ],
+  "x-enum-contract": {
+    "hadith_grade": "hadith_grade",
+    "rights_status": "source_permission_status",
+    "display_mode": "source_display_mode"
+  },
+  "required": [
+    "schema_version",
+    "import_mode",
+    "non_publication_notice",
+    "evidence_key",
+    "source_stable_key",
+    "source_permission_revision",
+    "evidence_type",
+    "source_locator",
+    "hadith_grade",
+    "grader_reference",
+    "arabic_display_status",
+    "translation_status",
+    "rights_status",
+    "display_mode"
+  ],
+  "properties": {
+    "schema_version": { "const": "1" },
+    "import_mode": { "const": "STAGING" },
+    "non_publication_notice": { "const": "KANDUNGAN DEMO — TIDAK UNTUK PENERBITAN" },
+    "evidence_key": { "$ref": "#/$defs/slug" },
+    "source_stable_key": { "$ref": "#/$defs/slug" },
+    "source_permission_revision": { "type": "integer", "minimum": 1 },
+    "evidence_type": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "source_locator": { "type": "string", "minLength": 1, "maxLength": 1000 },
+    "source_url": { "type": ["string", "null"], "pattern": "^https?://" },
+    "collection_name": { "type": ["string", "null"], "maxLength": 500 },
+    "book_name": { "type": ["string", "null"], "maxLength": 500 },
+    "chapter_name": { "type": ["string", "null"], "maxLength": 500 },
+    "reference_number": { "type": ["string", "null"], "maxLength": 500 },
+    "narrator": { "type": ["string", "null"], "maxLength": 500 },
+    "hadith_grade": {
+      "type": "string",
+      "enum": [
+        "SAHIH",
+        "HASAN",
+        "DAIF",
+        "VERY_WEAK",
+        "FABRICATED",
+        "DISPUTED",
+        "UNGRADED",
+        "NOT_APPLICABLE"
+      ]
+    },
+    "grader_reference": { "type": "string", "minLength": 1, "maxLength": 500 },
+    "arabic_display_status": {
+      "type": "string",
+      "enum": ["NOT_INCLUDED", "RIGHTS_REVIEW_REQUIRED", "DISPLAY_RIGHTS_RECORDED"]
+    },
+    "translation_status": {
+      "type": "string",
+      "enum": ["NOT_INCLUDED", "RIGHTS_REVIEW_REQUIRED", "DISPLAY_RIGHTS_RECORDED"]
+    },
+    "verification_date": { "type": ["string", "null"], "format": "date" },
+    "verification_note": { "type": ["string", "null"], "maxLength": 2000 },
+    "rights_status": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "REQUESTED",
+        "GRANTED",
+        "PUBLIC_LICENSE",
+        "LINK_ONLY",
+        "RESTRICTED",
+        "EXPIRED",
+        "REJECTED"
+      ]
+    },
+    "display_mode": { "type": "string", "enum": ["LINK_ONLY", "LICENSED_CONTENT"] }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "display_mode": { "const": "LICENSED_CONTENT" } } },
+      "then": {
+        "properties": {
+          "rights_status": { "enum": ["GRANTED", "PUBLIC_LICENSE"] }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "maxLength": 120
+    }
+  }
+}

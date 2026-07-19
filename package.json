@@ -1,0 +1,12 @@
+{
+  "name": "sunnah-everyday-tools",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:content-contract": "node --test scripts/verify_content_contract.test.mjs"
+  },
+  "devDependencies": {
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1"
+  }
+}

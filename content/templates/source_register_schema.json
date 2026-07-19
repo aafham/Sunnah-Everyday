@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sunnaheveryday.invalid/schema/source-register-draft-v1.json",
+  "title": "Sunnah Everyday source register draft",
+  "description": "Draft-only source and permission metadata. Permission documents stay outside this repository.",
+  "type": "object",
+  "additionalProperties": false,
+  "x-csv-columns": [
+    "schema_version",
+    "import_mode",
+    "non_publication_notice",
+    "source_stable_key",
+    "source_name",
+    "owner_name",
+    "source_type",
+    "source_url",
+    "bibliographic_locator",
+    "edition",
+    "language_code",
+    "accessed_at",
+    "reviewed_at",
+    "permission_revision",
+    "permission_status",
+    "display_mode",
+    "rights_basis",
+    "licence",
+    "permission_scope",
+    "document_reference",
+    "usage_notes",
+    "attribution_text",
+    "permission_expires_at",
+    "reviewed_by_reference"
+  ],
+  "x-enum-contract": {
+    "source_type": "source_type",
+    "permission_status": "source_permission_status",
+    "display_mode": "source_display_mode"
+  },
+  "required": [
+    "schema_version",
+    "import_mode",
+    "non_publication_notice",
+    "source_stable_key",
+    "source_name",
+    "owner_name",
+    "source_type",
+    "bibliographic_locator",
+    "edition",
+    "language_code",
+    "accessed_at",
+    "reviewed_at",
+    "permission_revision",
+    "permission_status",
+    "display_mode",
+    "rights_basis",
+    "permission_scope",
+    "usage_notes",
+    "reviewed_by_reference"
+  ],
+  "properties": {
+    "schema_version": { "const": "1" },
+    "import_mode": { "const": "STAGING" },
+    "non_publication_notice": { "const": "KANDUNGAN DEMO — TIDAK UNTUK PENERBITAN" },
+    "source_stable_key": { "$ref": "#/$defs/slug" },
+    "source_name": { "type": "string", "minLength": 1, "maxLength": 500 },
+    "owner_name": { "type": "string", "minLength": 1, "maxLength": 500 },
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "PRIMARY_TEXT",
+        "NARRATION_ASSESSMENT",
+        "AUTHORITATIVE_EXPLANATION",
+        "EDITORIAL_SUMMARY"
+      ]
+    },
+    "source_url": { "type": ["string", "null"], "pattern": "^https?://" },
+    "bibliographic_locator": { "type": "string", "minLength": 1, "maxLength": 1000 },
+    "edition": { "type": "string", "minLength": 1, "maxLength": 500 },
+    "language_code": { "type": "string", "minLength": 1, "maxLength": 32 },
+    "accessed_at": { "type": "string", "format": "date" },
+    "reviewed_at": { "type": "string", "format": "date" },
+    "permission_revision": { "type": "integer", "minimum": 1 },
+    "permission_status": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "REQUESTED",
+        "GRANTED",
+        "PUBLIC_LICENSE",
+        "LINK_ONLY",
+        "RESTRICTED",
+        "EXPIRED",
+        "REJECTED"
+      ]
+    },
+    "display_mode": { "type": "string", "enum": ["LINK_ONLY", "LICENSED_CONTENT"] },
+    "rights_basis": { "type": "string", "minLength": 1, "maxLength": 1000 },
+    "licence": { "type": ["string", "null"], "maxLength": 1000 },
+    "permission_scope": { "type": "string", "minLength": 1, "maxLength": 2000 },
+    "document_reference": { "type": ["string", "null"], "maxLength": 500 },
+    "usage_notes": { "type": "string", "minLength": 1, "maxLength": 4000 },
+    "attribution_text": { "type": ["string", "null"], "maxLength": 2000 },
+    "permission_expires_at": { "type": ["string", "null"], "format": "date" },
+    "reviewed_by_reference": { "$ref": "#/$defs/slug" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "display_mode": { "const": "LICENSED_CONTENT" } } },
+      "then": {
+        "properties": {
+          "permission_status": { "enum": ["GRANTED", "PUBLIC_LICENSE"] }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "maxLength": 120
+    }
+  }
+}

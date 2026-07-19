@@ -1,0 +1,292 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sunnaheveryday.invalid/schema/sunnah-content-draft-v1.json",
+  "title": "Sunnah Everyday staged content draft",
+  "description": "A non-public, draft-only intake record. It is not a publication contract.",
+  "type": "object",
+  "additionalProperties": false,
+  "x-csv-columns": [
+    "schema_version",
+    "import_mode",
+    "non_publication_notice",
+    "workflow_status",
+    "item_slug",
+    "version_number",
+    "content_type",
+    "category_slug",
+    "tag_slugs",
+    "classification",
+    "prophetic_form",
+    "audience_scopes",
+    "situation_scopes",
+    "difficulty_level",
+    "frequency_label",
+    "has_scholarly_difference",
+    "is_prophet_specific",
+    "requires_medical_note",
+    "ms_availability",
+    "ms_unavailable_rationale",
+    "title_ms",
+    "summary_ms",
+    "practical_steps_ms",
+    "when_to_practise_ms",
+    "context_note_ms",
+    "misunderstanding_note_ms",
+    "legal_classification_note_ms",
+    "en_availability",
+    "en_unavailable_rationale",
+    "title_en",
+    "summary_en",
+    "practical_steps_en",
+    "when_to_practise_en",
+    "context_note_en",
+    "misunderstanding_note_en",
+    "legal_classification_note_en",
+    "source_rights_status",
+    "display_mode",
+    "source_stable_keys",
+    "evidence_keys",
+    "reviewer_reference_keys"
+  ],
+  "x-csv-to-json": {
+    "schema_version": "schema_version",
+    "import_mode": "import_mode",
+    "non_publication_notice": "non_publication_notice",
+    "workflow_status": "workflow_status",
+    "item_slug": "item_slug",
+    "version_number": "version_number",
+    "content_type": "content_type",
+    "category_slug": "category_slug",
+    "tag_slugs": "tag_slugs",
+    "classification": "classification",
+    "prophetic_form": "prophetic_form",
+    "audience_scopes": "audience_scopes",
+    "situation_scopes": "situation_scopes",
+    "difficulty_level": "difficulty_level",
+    "frequency_label": "frequency_label",
+    "has_scholarly_difference": "has_scholarly_difference",
+    "is_prophet_specific": "is_prophet_specific",
+    "requires_medical_note": "requires_medical_note",
+    "ms_availability": "locales.ms.availability",
+    "ms_unavailable_rationale": "locales.ms.unavailable_rationale",
+    "title_ms": "locales.ms.title",
+    "summary_ms": "locales.ms.summary",
+    "practical_steps_ms": "locales.ms.practical_steps",
+    "when_to_practise_ms": "locales.ms.when_to_practise",
+    "context_note_ms": "locales.ms.context_note",
+    "misunderstanding_note_ms": "locales.ms.misunderstanding_note",
+    "legal_classification_note_ms": "locales.ms.legal_classification_note",
+    "en_availability": "locales.en.availability",
+    "en_unavailable_rationale": "locales.en.unavailable_rationale",
+    "title_en": "locales.en.title",
+    "summary_en": "locales.en.summary",
+    "practical_steps_en": "locales.en.practical_steps",
+    "when_to_practise_en": "locales.en.when_to_practise",
+    "context_note_en": "locales.en.context_note",
+    "misunderstanding_note_en": "locales.en.misunderstanding_note",
+    "legal_classification_note_en": "locales.en.legal_classification_note",
+    "source_rights_status": "source_rights_status",
+    "display_mode": "display_mode",
+    "source_stable_keys": "source_stable_keys",
+    "evidence_keys": "evidence_keys",
+    "reviewer_reference_keys": "reviewer_reference_keys"
+  },
+  "x-enum-contract": {
+    "classification": "practice_classification",
+    "prophetic_form": "prophetic_form",
+    "source_rights_status": "source_permission_status",
+    "display_mode": "source_display_mode"
+  },
+  "x-forbidden-server-fields": [
+    "content_checksum",
+    "immutable_after_publish",
+    "published_at",
+    "scheduled_at",
+    "daily_schedule",
+    "public_bundle_id",
+    "publication_event_id",
+    "approval_id"
+  ],
+  "required": [
+    "schema_version",
+    "import_mode",
+    "non_publication_notice",
+    "workflow_status",
+    "item_slug",
+    "version_number",
+    "content_type",
+    "category_slug",
+    "tag_slugs",
+    "classification",
+    "prophetic_form",
+    "audience_scopes",
+    "situation_scopes",
+    "difficulty_level",
+    "has_scholarly_difference",
+    "is_prophet_specific",
+    "requires_medical_note",
+    "locales",
+    "source_rights_status",
+    "display_mode",
+    "source_stable_keys",
+    "evidence_keys",
+    "reviewer_reference_keys"
+  ],
+  "properties": {
+    "schema_version": { "const": "1" },
+    "import_mode": { "const": "STAGING" },
+    "non_publication_notice": { "const": "KANDUNGAN DEMO — TIDAK UNTUK PENERBITAN" },
+    "workflow_status": { "const": "DRAFT" },
+    "item_slug": { "$ref": "#/$defs/slug" },
+    "version_number": { "type": "integer", "minimum": 1 },
+    "content_type": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "category_slug": { "$ref": "#/$defs/slug" },
+    "tag_slugs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/slug" },
+      "uniqueItems": true
+    },
+    "classification": {
+      "type": "string",
+      "enum": [
+        "SUNNAH_RECOMMENDED",
+        "ADAB",
+        "AKHLAQ",
+        "OBLIGATORY",
+        "PERMISSIBLE",
+        "PROPHETIC_HABIT",
+        "PROPHET_SPECIFIC",
+        "CONTEXT_SPECIFIC",
+        "DISPUTED",
+        "HISTORICAL_INFORMATION",
+        "DUA",
+        "DHIKR"
+      ]
+    },
+    "prophetic_form": {
+      "type": "string",
+      "enum": ["QAWLIYYAH", "FI_LIYYAH", "TAQRIRIYYAH", "MIXED", "NOT_APPLICABLE"]
+    },
+    "audience_scopes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/scopeLabel" },
+      "uniqueItems": true
+    },
+    "situation_scopes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/scopeLabel" },
+      "uniqueItems": true
+    },
+    "difficulty_level": { "type": "integer", "minimum": 1, "maximum": 5 },
+    "frequency_label": { "type": ["string", "null"], "maxLength": 120 },
+    "has_scholarly_difference": { "type": "boolean" },
+    "is_prophet_specific": { "type": "boolean" },
+    "requires_medical_note": { "type": "boolean" },
+    "locales": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ms", "en"],
+      "properties": {
+        "ms": { "$ref": "#/$defs/localeDraft" },
+        "en": { "$ref": "#/$defs/localeDraft" }
+      }
+    },
+    "source_rights_status": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "REQUESTED",
+        "GRANTED",
+        "PUBLIC_LICENSE",
+        "LINK_ONLY",
+        "RESTRICTED",
+        "EXPIRED",
+        "REJECTED"
+      ]
+    },
+    "display_mode": { "type": "string", "enum": ["LINK_ONLY", "LICENSED_CONTENT"] },
+    "source_stable_keys": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/slug" },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "evidence_keys": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/slug" },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "reviewer_reference_keys": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/slug" },
+      "uniqueItems": true
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "display_mode": { "const": "LICENSED_CONTENT" } } },
+      "then": {
+        "properties": {
+          "source_rights_status": { "enum": ["GRANTED", "PUBLIC_LICENSE"] }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "maxLength": 120
+    },
+    "scopeLabel": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "localeDraft": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "availability",
+        "title",
+        "summary",
+        "practical_steps",
+        "when_to_practise",
+        "context_note",
+        "misunderstanding_note",
+        "legal_classification_note"
+      ],
+      "properties": {
+        "availability": { "type": "string", "enum": ["COMPLETE", "UNAVAILABLE"] },
+        "unavailable_rationale": { "type": ["string", "null"], "maxLength": 500 },
+        "title": { "type": ["string", "null"], "maxLength": 500 },
+        "summary": { "type": ["string", "null"], "maxLength": 4000 },
+        "practical_steps": { "type": ["string", "null"], "maxLength": 8000 },
+        "when_to_practise": { "type": ["string", "null"], "maxLength": 2000 },
+        "context_note": { "type": ["string", "null"], "maxLength": 4000 },
+        "misunderstanding_note": { "type": ["string", "null"], "maxLength": 4000 },
+        "legal_classification_note": { "type": ["string", "null"], "maxLength": 4000 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "availability": { "const": "COMPLETE" } } },
+          "then": {
+            "properties": {
+              "title": { "type": "string", "minLength": 1 },
+              "summary": { "type": "string", "minLength": 1 },
+              "practical_steps": { "type": "string", "minLength": 1 },
+              "when_to_practise": { "type": "string", "minLength": 1 },
+              "context_note": { "type": "string", "minLength": 1 },
+              "misunderstanding_note": { "type": "string", "minLength": 1 },
+              "legal_classification_note": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "availability": { "const": "UNAVAILABLE" } } },
+          "then": {
+            "required": ["unavailable_rationale"],
+            "properties": { "unavailable_rationale": { "type": "string", "minLength": 1 } }
+          }
+        }
+      ]
+    }
+  }
+}

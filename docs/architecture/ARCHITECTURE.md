@@ -8,8 +8,9 @@ apps/
   admin/           Flutter web admin shell
 packages/
   design_system/   Shared Material 3 tokens, themes and small primitives
+  content_models/  Pure-Dart draft-only content intake contract
 supabase/          Config, four structural baseline migrations and SQL tests
-content/           Planned templates, staging and approved-data boundaries
+content/           Header-only templates, JSON Schemas and guarded intake boundaries
 ```
 
 `apps/mobile` is currently an Android Flutter project with application ID
@@ -27,6 +28,10 @@ present, but BE-02 auth/RLS policies and BE-03 content workflow remain pending.
 accessible shared primitives. It contains no licensed imagery/fonts, religious
 text or content data.
 
+`packages/content_models` and `content/` define draft-only metadata shapes for
+future import tooling. They contain no source/reviewer/content record, do not
+ship as Flutter assets, and cannot schedule, approve, publish or make a bundle.
+
 ## Planned trust boundary
 
 The public app will ultimately read immutable, approved public bundles only.
@@ -36,10 +41,15 @@ baseline. BE-02 through BE-05 must add audited admin access, publication and
 bundle controls; Flutter UI is never the sole enforcement point. Private
 reflections/bookmarks remain local on the public device.
 
+CNT-01 is an additional non-runtime boundary: it accepts only `STAGING` input,
+starts content candidates in `DRAFT`, rejects publication-shaped fields and
+requires the non-publication marker. CNT-02 and BE-03 must still validate real
+data and enforce the workflow on the server.
+
 ## Dependency direction
 
 ```text
-mobile/admin UI → design_system + future domain/data packages
+mobile/admin UI → design_system + content_models + future domain/data packages
 future data package → Drift local cache + approved public bundle contract
 Supabase baseline migrations → future workflow, rights, RLS and publication gates
 ```
