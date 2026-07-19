@@ -101,6 +101,14 @@ privacy, owner-access and release-gate evidence before they can proceed.
 - Prior workflow-hardening commit: `766e1fbb4ccb78ded664216a4819c42c0246bdbc`
   with successful Quality run [29677407731](https://github.com/aafham/Sunnah-Everyday/actions/runs/29677407731).
 
+## Current run
+
+- Current commit: `86f80bafb97348e91417a675c1550fdf89023874`
+- Quality run: [29682293929](https://github.com/aafham/Sunnah-Everyday/actions/runs/29682293929)
+- Status at documentation update: in progress. Contracts and Flutter quality
+  have passed; debug/web smoke remains in progress. This is not a verified
+  successful run and does not create a release, AAB or Play operation.
+
 The first workflow run on `4ceff86` failed at design-system dependency
 resolution because that library intentionally does not commit a lockfile. The
 follow-up `766e1fb` uses normal `flutter pub get` only for that library and was
