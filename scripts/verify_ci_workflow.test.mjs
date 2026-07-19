@@ -70,3 +70,36 @@ test('workflow verifier rejects malformed YAML and secret references', () => {
     ),
   );
 });
+
+test('workflow verifier rejects job permission overrides and extra jobs', () => {
+  const permissionOverride = validateCiWorkflowText(
+    workflowSource.replace(
+      '  contracts:\n    name:',
+      '  contracts:\n    permissions:\n      contents: write\n    name:',
+    ),
+  );
+  const extraJob = validateCiWorkflowText(
+    `${workflowSource}\n  unreviewed:\n    runs-on: ubuntu-24.04\n    steps: []\n`,
+  );
+
+  assert.equal(permissionOverride.valid, false);
+  assert.ok(
+    permissionOverride.findings.some(
+      ({ code }) => code === 'CI_JOB_PERMISSIONS',
+    ),
+  );
+  assert.equal(extraJob.valid, false);
+  assert.ok(extraJob.findings.some(({ code }) => code === 'CI_JOB_ALLOWLIST'));
+});
+
+test('workflow verifier requires executable command lines', () => {
+  const result = validateCiWorkflowText(
+    workflowSource.replace(
+      'run: npm run check:flutter',
+      'run: echo npm run check:flutter',
+    ),
+  );
+
+  assert.equal(result.valid, false);
+  assert.ok(result.findings.some(({ code }) => code === 'CI_PARITY_COMMAND'));
+});

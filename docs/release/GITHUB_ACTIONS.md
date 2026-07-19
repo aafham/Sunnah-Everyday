@@ -57,9 +57,10 @@ Pop-Location
 ```
 
 The local workflow-policy verifier parses YAML and rejects changed triggers,
-permissions, action pins, required commands, secret references and release/
-Play/upload operations. Its unit tests also mutate the real workflow source to
-exercise those fail-closed checks.
+workflow or job-level permissions, unreviewed jobs, action pins, non-executable
+required commands, secret references and release/Play/upload operations. Its
+unit tests also mutate the real workflow source to exercise those fail-closed
+checks.
 
 ## Operating rules
 

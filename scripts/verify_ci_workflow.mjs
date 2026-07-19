@@ -63,11 +63,12 @@ function workflowSteps(workflow) {
   );
 }
 
-function workflowRunText(workflow) {
+function workflowRunLines(workflow) {
   return workflowSteps(workflow)
     .map((step) => (typeof step?.run === 'string' ? step.run : ''))
-    .filter(Boolean)
-    .join('\n');
+    .flatMap((run) => run.split('\n'))
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0 && !line.startsWith('#'));
 }
 
 function validateJobShape(workflow, findings) {
@@ -77,12 +78,38 @@ function validateJobShape(workflow, findings) {
     addFinding(findings, 'CI_JOBS_MISSING', 'Workflow must define its jobs.');
     return;
   }
+  const jobNames = Object.keys(jobs);
+  if (
+    jobNames.length !== requiredJobNames.length ||
+    jobNames.some((jobName) => !requiredJobNames.includes(jobName))
+  ) {
+    addFinding(
+      findings,
+      'CI_JOB_ALLOWLIST',
+      'Workflow must define only the reviewed quality jobs.',
+    );
+  }
 
   for (const jobName of requiredJobNames) {
     const job = jobs[jobName];
     if (job == null) {
       addFinding(findings, 'CI_JOB_MISSING', `Missing ${jobName} job.`);
       continue;
+    }
+    if (typeof job !== 'object' || Array.isArray(job)) {
+      addFinding(
+        findings,
+        'CI_JOB_SHAPE',
+        `${jobName} must be a mapping.`,
+      );
+      continue;
+    }
+    if (Object.hasOwn(job, 'permissions')) {
+      addFinding(
+        findings,
+        'CI_JOB_PERMISSIONS',
+        `${jobName} must not override the read-only workflow permissions.`,
+      );
     }
     if (job['runs-on'] !== 'ubuntu-24.04') {
       addFinding(
@@ -250,9 +277,9 @@ export function validateCiWorkflowText(source) {
   validateJobShape(workflow, findings);
   validateActionSafety(workflow, findings);
 
-  const runText = workflowRunText(workflow);
+  const runLines = new Set(workflowRunLines(workflow));
   for (const command of requiredCommands) {
-    if (!runText.includes(command)) {
+    if (!runLines.has(command)) {
       addFinding(
         findings,
         'CI_PARITY_COMMAND',
