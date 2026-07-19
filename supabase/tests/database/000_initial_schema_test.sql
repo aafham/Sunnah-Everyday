@@ -296,39 +296,9 @@ select throws_ok(
   'a correction cannot reference a report from another content item'
 );
 
-insert into public.supported_locales (code, native_name, english_name)
-values ('zz', 'Schema Test', 'Schema Test');
-
-insert into public.daily_schedule (
-  local_date,
-  timezone_scope,
-  version_id,
-  locale,
-  schedule_status
-)
-select date '2099-01-01', 'Etc/UTC', version_row.id, 'zz', 'STRUCTURAL_TEST'
-from public.sunnah_versions version_row
-join public.sunnah_items item_row on item_row.id = version_row.sunnah_item_id
-where item_row.slug = 'schema-constraint-test';
-
-select throws_ok(
-  $$
-    insert into public.daily_schedule (
-      local_date,
-      timezone_scope,
-      version_id,
-      locale,
-      schedule_status
-    )
-    select date '2099-01-01', 'Etc/UTC', version_row.id, 'zz', 'STRUCTURAL_TEST'
-    from public.sunnah_versions version_row
-    join public.sunnah_items item_row on item_row.id = version_row.sunnah_item_id
-    where item_row.slug = 'schema-constraint-test'
-  $$,
-  '23505',
-  null,
-  'duplicate daily schedule slots are rejected'
-);
+-- BE-03 moves schedule creation behind the authenticated publication gate.
+-- Valid schedule uniqueness is exercised with a fully reviewed structural
+-- fixture in 020_review_workflow_publication_gate_test.sql.
 
 select throws_ok(
   $$select 'NOT_A_GRADE'::public.hadith_grade$$,
