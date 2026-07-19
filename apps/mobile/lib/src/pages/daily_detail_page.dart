@@ -29,7 +29,7 @@ class DailyDetailPage extends ConsumerWidget {
               key: const ValueKey('daily-detail-back'),
               tooltip: localizations.backToToday,
               onPressed: () => context.go(MobilePath.today),
-              icon: const Icon(Icons.arrow_back),
+              icon: const BackButtonIcon(),
             ),
           ),
           title: Text(localizations.dailyDetailTitle),

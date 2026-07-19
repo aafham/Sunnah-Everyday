@@ -191,6 +191,62 @@ void main() {
     expect(find.text('Belum ada kandungan yang diluluskan'), findsOneWidget);
   });
 
+  testWidgets('safe app-bar titles expose semantic headers', (tester) async {
+    await pumpMobileApp(tester);
+    final semantics = tester.ensureSemantics();
+
+    Future<void> navigateAndExpectHeader(String label, String title) async {
+      await tester.tap(
+        find.descendant(
+          of: find.byType(NavigationBar),
+          matching: find.text(label),
+        ),
+      );
+      await settleSunnahTestWidget(tester);
+
+      final appBarTitle = find.descendant(
+        of: find.byType(AppBar),
+        matching: find.text(title),
+      );
+      expect(appBarTitle, findsOneWidget);
+      expect(
+        tester.getSemantics(appBarTitle),
+        matchesSemantics(isHeader: true),
+      );
+    }
+
+    try {
+      await navigateAndExpectHeader('Teroka', 'Teroka');
+      await navigateAndExpectHeader('Simpanan', 'Simpanan');
+      await navigateAndExpectHeader('Tetapan', 'Tetapan');
+    } finally {
+      semantics.dispose();
+    }
+  });
+
+  testWidgets(
+    'generic RTL layout preserves safe navigation and mirrors return affordance',
+    (tester) async {
+      await pumpMobileApp(
+        tester,
+        initialLocation: MobilePath.dailyDetail,
+        textDirectionOverride: TextDirection.rtl,
+      );
+
+      final back = find.byKey(const ValueKey('daily-detail-back'));
+      expect(back, findsOneWidget);
+      expect(Directionality.of(tester.element(back)), TextDirection.rtl);
+      expect(find.bySemanticsLabel('Kembali ke Hari Ini'), findsOneWidget);
+      expect(find.byType(BackButtonIcon), findsOneWidget);
+
+      final icon = find.descendant(of: back, matching: find.byType(Icon));
+      expect(icon, findsOneWidget);
+      final iconData = tester.widget<Icon>(icon).icon;
+      expect(iconData, isNotNull);
+      expect(iconData!.matchTextDirection, isTrue);
+    },
+  );
+
   testWidgets(
     'large text keeps the daily status action and primary navigation usable',
     (tester) async {

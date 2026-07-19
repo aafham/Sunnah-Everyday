@@ -11,7 +11,9 @@ class SavedPage extends StatelessWidget {
     final localizations = AppLocalizations.of(context);
 
     return Scaffold(
-      appBar: AppBar(title: Text(localizations.savedTitle)),
+      appBar: AppBar(
+        title: Semantics(header: true, child: Text(localizations.savedTitle)),
+      ),
       body: SunnahContentFrame(
         child: SunnahEmptyState(
           icon: Icons.bookmark_outline,

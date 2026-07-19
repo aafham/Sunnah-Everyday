@@ -21,7 +21,9 @@ tanpa kebenaran bertulis.
 
 - Today, evidence-led detail, situation discovery, categories and offline search.
 - Private local bookmarks/reflections, preferences, reminders and Android widget.
-- BM/English, dark mode, text scaling, reduced motion and RTL-aware Arabic.
+- BM/English, dark mode, text scaling, reduced motion and a generic RTL-layout
+  baseline; Arabic locale, font and content remain deferred pending rights and
+  human review.
 - Source, reviewer, methodology, correction, report, privacy and terms pages.
 - Flutter web admin CMS, Supabase workflow/RLS, immutable content versions and
   publication validation.

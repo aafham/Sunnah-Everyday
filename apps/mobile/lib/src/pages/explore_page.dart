@@ -11,7 +11,9 @@ class ExplorePage extends StatelessWidget {
     final localizations = AppLocalizations.of(context);
 
     return Scaffold(
-      appBar: AppBar(title: Text(localizations.exploreTitle)),
+      appBar: AppBar(
+        title: Semantics(header: true, child: Text(localizations.exploreTitle)),
+      ),
       body: SunnahContentFrame(
         child: SunnahEmptyState(
           icon: Icons.explore_outlined,

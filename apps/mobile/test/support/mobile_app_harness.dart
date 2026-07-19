@@ -15,6 +15,7 @@ Future<ProviderContainer> pumpMobileApp(
   WidgetTester tester, {
   TestViewport viewport = SunnahTestViewports.mobile,
   TextScaler textScaler = TextScaler.noScaling,
+  TextDirection? textDirectionOverride,
   bool disableAnimations = false,
   AppPreferencesStore? preferencesStore,
   bool onboardingCompleted = true,
@@ -41,7 +42,10 @@ Future<ProviderContainer> pumpMobileApp(
     tester,
     UncontrolledProviderScope(
       container: container,
-      child: SunnahEverydayApp(initialLocation: initialLocation),
+      child: SunnahEverydayApp(
+        initialLocation: initialLocation,
+        testTextDirectionOverride: textDirectionOverride,
+      ),
     ),
     viewport: viewport,
     textScaler: textScaler,

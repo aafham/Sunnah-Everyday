@@ -8,11 +8,22 @@ import 'src/app_preferences.dart';
 import 'src/app_router.dart';
 
 class SunnahEverydayApp extends ConsumerStatefulWidget {
-  const SunnahEverydayApp({super.key, this.initialLocation});
+  const SunnahEverydayApp({
+    super.key,
+    this.initialLocation,
+    this.testTextDirectionOverride,
+  });
 
   /// Enables deterministic route coverage without changing the installed
   /// application's normal first destination.
   final String? initialLocation;
+
+  /// Lets widget tests exercise generic RTL layout without adding an RTL
+  /// locale, Arabic text, font, or content to the installed application.
+  ///
+  /// Production construction leaves this null so [MaterialApp] continues to
+  /// derive directionality from the supported BM/English locale.
+  final TextDirection? testTextDirectionOverride;
 
   @override
   ConsumerState<SunnahEverydayApp> createState() => _SunnahEverydayAppState();
@@ -63,6 +74,7 @@ class _SunnahEverydayAppState extends ConsumerState<SunnahEverydayApp> {
       routerConfig: _router,
       builder: (context, child) {
         final mediaQuery = MediaQuery.of(context);
+        final routerChild = child ?? const SizedBox.shrink();
         return MediaQuery(
           data: mediaQuery.copyWith(
             textScaler: _PreferenceTextScaler(
@@ -72,7 +84,13 @@ class _SunnahEverydayAppState extends ConsumerState<SunnahEverydayApp> {
             disableAnimations:
                 mediaQuery.disableAnimations || preferences.reduceMotion,
           ),
-          child: child ?? const SizedBox.shrink(),
+          child: switch (widget.testTextDirectionOverride) {
+            final textDirection? => Directionality(
+              textDirection: textDirection,
+              child: routerChild,
+            ),
+            null => routerChild,
+          },
         );
       },
     );

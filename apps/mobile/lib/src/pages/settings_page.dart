@@ -17,7 +17,12 @@ class SettingsPage extends ConsumerWidget {
     final controller = ref.read(appPreferencesProvider.notifier);
 
     return Scaffold(
-      appBar: AppBar(title: Text(localizations.settingsTitle)),
+      appBar: AppBar(
+        title: Semantics(
+          header: true,
+          child: Text(localizations.settingsTitle),
+        ),
+      ),
       body: SunnahContentFrame(
         child: ListView(
           padding: SunnahLayout.compactPagePadding,

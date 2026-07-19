@@ -43,6 +43,9 @@ English and Arabic correctly.
   navigation rail and drawer at the documented 960 logical-pixel breakpoint.
 - Mobile shell surfaces use a 560 logical-pixel readable-content cap on larger
   displays while retaining their four-item bottom navigation.
-- Information may not be conveyed by colour alone; future content screens must
-  preserve RTL, screen-reader, keyboard and large-text support. Full RTL and
-  broader localisation accessibility coverage remain PDX-03 work.
+- Information may not be conveyed by colour alone. The current mobile shell
+  uses directional page padding and a direction-aware return affordance, with
+  generic RTL layout tested only through a test-only override. Future content
+  screens must preserve RTL, screen-reader, keyboard and large-text support.
+  Arabic locale/text/font delivery and broader localisation/accessibility
+  coverage remain deferred.

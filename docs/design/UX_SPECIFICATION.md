@@ -29,6 +29,7 @@ The implementation source of truth is `packages/design_system`.
 | Control radius | 16 logical pixels for input and floating snackbar shapes | `SunnahLayout.controlRadius` |
 | Mobile navigation | 72 logical pixels high | `SunnahLayout.navigationBarHeight` |
 | Mobile readable width | 560 logical pixels maximum for shell content | `SunnahContentFrame` |
+| Mobile page insets | 20 start/end, 24 top and 32 bottom logical pixels; start/end are directional | `SunnahLayout.mobilePagePadding` |
 | Section rhythm | 20 logical-pixel card padding | `SunnahLayout.sectionCardPadding` |
 | Empty-state rhythm | 32 logical-pixel padding | `SunnahLayout.emptyStatePadding` |
 | Admin content width | 1040 logical pixels maximum | `SunnahLayout.adminContentMaxWidth` |
@@ -72,8 +73,9 @@ dedicated task, visual review and regression coverage.
   complement text rather than replacing it.
 - Each page-level heading is marked as a semantic header. Mobile primary
   navigation has the localized semantic label. The Daily back action has a
-  localized button label. Admin drawer and rail navigation are grouped under
-  the `Navigasi admin` semantic label.
+  localized button label and uses Material's direction-aware `BackButtonIcon`.
+  Admin drawer and rail navigation are grouped under the `Navigasi admin`
+  semantic label.
 - Material controls retain their platform focus, keyboard and assistive
   technology behaviour. No custom focus trap or gesture-only action is added.
 - The mobile preference multiplier composes with the platform text scaler; it
@@ -82,10 +84,12 @@ dedicated task, visual review and regression coverage.
 - All currently rendered status and empty states use text plus iconography, and
   their scrollable containers must remain usable at a 150% text scale in the
   supported mobile test surface.
-- Mobile shell UI is currently BM/English. Full RTL behaviour, Arabic text
-  presentation, broader keyboard traversal and assistive-technology audits are
-  deferred to PDX-03 and QLT-02; this specification must not be read as a
-  claim that they are complete.
+- The installed mobile shell supports exactly BM/English. Generic RTL-layout
+  coverage is test-only: mobile page insets are directional and the Daily
+  return affordance is direction-aware. It does not enable an RTL locale or
+  add Arabic text, font, content, data, source records or a publication path.
+  Arabic presentation and broader keyboard/screen-reader audits remain
+  deferred to future work and their documented rights/human-review gates.
 
 ## Regression evidence
 
@@ -95,12 +99,16 @@ The following tests protect this contract without adding a data fixture:
   tokens, Material 3 theme settings, shared content frame and component action
   behaviour.
 - `apps/mobile/test/app_test.dart` covers the four-item navigation, semantic
-  navigation label, unavailable Daily flow, readable content frame and a 150%
-  text-scale status action.
+  navigation label, semantic page headings, unavailable Daily flow, generic
+  RTL return affordance, readable content frame and a 150% text-scale status
+  action.
+- `apps/mobile/test/app_localizations_test.dart` proves the generated app
+  delegate supports exactly BM/English and supplies localized semantic labels
+  and text-scale formatting.
 - `apps/admin/test/app_test.dart` covers the exact 959/960 drawer-to-rail
   boundary, named admin navigation semantics, selected rail destination, rail
   width and maximum content width.
 
 Run `npm run check:flutter` from the repository root after changes to this
-contract. Broader localization, RTL, integration, screen-reader and security
-testing remain separately scheduled work.
+contract. Full RTL visual/keyboard coverage, Arabic presentation, integration,
+screen-reader and security testing remain separately scheduled work.

@@ -10,7 +10,12 @@ abstract final class SunnahLayout {
 
   static const sectionCardPadding = EdgeInsets.all(20);
   static const emptyStatePadding = EdgeInsets.all(32);
-  static const mobilePagePadding = EdgeInsets.fromLTRB(20, 24, 20, 32);
+  static const mobilePagePadding = EdgeInsetsDirectional.fromSTEB(
+    20,
+    24,
+    20,
+    32,
+  );
   static const compactPagePadding = EdgeInsets.all(20);
   static const onboardingPagePadding = EdgeInsets.all(24);
 

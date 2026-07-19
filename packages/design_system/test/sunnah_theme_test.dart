@@ -23,6 +23,10 @@ void main() {
     expect(SunnahLayout.navigationBarHeight, 72);
     expect(SunnahLayout.controlRadius, 16);
     expect(SunnahLayout.mobileContentMaxWidth, 560);
+    expect(
+      SunnahLayout.mobilePagePadding,
+      const EdgeInsetsDirectional.fromSTEB(20, 24, 20, 32),
+    );
     expect(SunnahLayout.adminNavigationBreakpoint, 960);
     expect(SunnahLayout.adminContentMaxWidth, 1040);
   });
