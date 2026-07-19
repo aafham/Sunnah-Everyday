@@ -1,19 +1,19 @@
 # Progress
 
-_Last updated: 2026-07-19 (REL-01 complete with green GitHub Quality CI; BE-01 runtime verification pending; MOB-02 selected)_
+_Last updated: 2026-07-19 (MOB-02 complete with green GitHub Quality CI; BE-01 runtime verification pending; MOB-03 selected)_
 
 ## Weighted status
 
 | Measure | Value | Calculation / meaning |
 | --- | ---: | --- |
-| Overall completion | 17.0% | `DONE task weight / 100` |
-| Completed weight | 17 / 100 | PDX-01, MOB-01, CNT-01, CNT-02, QLT-01 and REL-01 are complete |
-| Remaining weight | 83 / 100 | Includes blocked work |
+| Overall completion | 20.0% | `DONE task weight / 100` |
+| Completed weight | 20 / 100 | PDX-01, MOB-01, MOB-02, CNT-01, CNT-02, QLT-01 and REL-01 are complete |
+| Remaining weight | 80 / 100 | Includes blocked work |
 | Blocked weight | 4 / 100 | CNT-06 and REL-04 |
-| Tasks completed | 6 / 38 | Ledger task count |
-| Tasks remaining | 32 / 38 | Unfinished tasks |
+| Tasks completed | 7 / 38 | Ledger task count |
+| Tasks remaining | 31 / 38 | Unfinished tasks |
 | Tasks blocked | 2 / 38 | Owner inputs/access required |
-| Software completion | 14.5% | `12 completed implementation weight / 83 implementation weight` |
+| Software completion | 18.1% | `15 completed implementation weight / 83 implementation weight` |
 | Approved religious content readiness | 0 / 120 | No approved dataset or reviewer evidence supplied |
 | Production readiness | 0.0% | Production gates are not met |
 
@@ -21,14 +21,14 @@ _Last updated: 2026-07-19 (REL-01 complete with green GitHub Quality CI; BE-01 r
 
 | Field | Status |
 | --- | --- |
-| Current milestone | M0 — Repository, shells, structural schema, draft validation and local/remote quality baseline |
-| Target version | 0.1.0+1 |
-| Current task | MOB-02 — implement onboarding, persistent local preferences and BM/English language selection; BE-01 Docker-backed migration, lint and pgTAP verification remains pending |
+| Current milestone | M0 closeout / M1 — Core Experience started; BE-01 runtime verification remains in review |
+| Target version | `0.1.0+1` development baseline; M1 target remains `0.2.0+2` |
+| Current task | MOB-03 — implement fail-closed Today, daily-card and detail surfaces with staging-safe state only; BE-01 Docker-backed migration, lint and pgTAP verification remains pending |
 | Branch | `codex/sunnah-everyday-build` |
-| Last recorded task commit | `766e1fb` (`fix(ci): resolve library dependencies without lockfile`), following `1c2463d` and `4ceff86` for REL-01 |
-| Local checks | REL-01: root Dart format passed (37 files, 0 changes); CI policy verifier/tests passed (7); Flutter runner tests passed (3); `npm run check:flutter` passed for all four targets: analyze plus 1 `testing_utils`, 3 design-system, 4 mobile and 4 admin tests; content-contract tests passed (5); content-validation tests passed (14); Supabase static guard passed; `content_models` analyze/test passed (13); `npm audit` reported 0 vulnerabilities; debug APK and admin web smoke builds passed locally. CNT-02 CSV validation and prior structural checks remain passed. All four migrations also applied in an isolated PostgreSQL/PGlite structural harness. `supabase db reset --local --no-seed` could not start because no Docker engine is available, so local Supabase lint and pgTAP have not run. |
-| GitHub CI | Quality run [`29677407731`](https://github.com/aafham/Sunnah-Everyday/actions/runs/29677407731) passed all contracts, Flutter quality and debug/web smoke jobs for `766e1fb` on 2026-07-19; it has no release/upload/Play path |
-| GitHub push / PR | `766e1fb` pushed successfully; public API reported no open PR. `gh auth status` has no logged-in host and no authenticated browser session is available, so a PR cannot be created or edited from this environment |
+| Last recorded task commit | `4913b54` (`feat(mobile): add local onboarding preferences`) |
+| Local checks | MOB-02: root Dart format passed (42 files, 0 changes); `flutter analyze`/`flutter test` passed for mobile (9 tests); `npm ci --ignore-scripts` reported 0 vulnerabilities; CI policy verifier/tests passed (7); Flutter runner tests passed (3); `npm run check:flutter` passed for all four targets: 1 `testing_utils`, 3 design-system, 9 mobile and 4 admin tests; content-contract tests passed (5); content-validation tests passed (14); Supabase static guard passed; `content_models` analyze/test passed (13); mobile debug APK and admin web smoke builds passed locally. CNT-02 and prior structural checks remain passed. All four migrations also applied in an isolated PostgreSQL/PGlite structural harness. `supabase db reset --local --no-seed` could not start because no Docker engine is available, so local Supabase lint and pgTAP have not run. |
+| GitHub CI | Quality run [`29678240092`](https://github.com/aafham/Sunnah-Everyday/actions/runs/29678240092) passed contracts, Flutter quality and debug/web smoke jobs for `4913b54` on 2026-07-19; it has no release/upload/Play path |
+| GitHub push / PR | `4913b54` pushed successfully; public API reported no open PR. `gh auth status` has no logged-in host and no authenticated browser session is available, so a PR cannot be created or edited from this environment |
 | Google Play | No app, signed AAB, Console/API credential, track check, or upload |
 | Release status | No signed release AAB generated, uploaded, or submitted; local debug APK only |
 
@@ -46,10 +46,10 @@ repository settings. See `docs/handoff/GITHUB_HANDOFF.md`.
 
 ## Next five tasks
 
-1. MOB-02: add onboarding, local preferences and language selection.
-2. MOB-03: add safe Today/detail views after CNT-01, using staging-safe state only.
-3. BE-01: run the local Supabase migration, lint and pgTAP suite once Docker is available.
-4. PDX-02: document and verify the design-system/mobile/admin UX specification.
+1. MOB-03: add fail-closed Today, daily-card and detail views using staging-safe state only.
+2. BE-01: run the local Supabase migration, lint and pgTAP suite once Docker is available.
+3. PDX-02: document and verify the design-system/mobile/admin UX specification.
+4. PDX-03: extend localisation, RTL and accessibility baseline beyond MOB-02 shell coverage.
 5. MOB-05: add local bookmarks, history and private reflections.
 
 ## Update protocol

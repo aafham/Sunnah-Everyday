@@ -32,6 +32,14 @@
   build debug/web smoke. Ia tidak menggunakan secrets, cache, artifact, AAB
   release, Play Console atau deployment. Run `29677407731` lulus pada
   `766e1fb`.
+- Onboarding setempat kini muncul sebelum shell pada pelancaran pertama. Bahasa
+  Melayu ialah lalai dan English boleh dipilih semasa onboarding atau kemudian
+  di Tetapan. Hanya status onboarding, bahasa, tema, kurangkan animasi dan
+  skala teks disimpan pada peranti melalui allowlist; tiada kandungan agama,
+  sumber, rekod semakan, refleksi atau kelayakan disimpan.
+- Salinan shell mobile kini mempunyai sumber ARB BM/English dan localizations
+  Dart yang dijana serta gerbang laluan untuk menghalang deep link shell
+  sebelum onboarding lengkap. Tiada data atau dakwaan agama baharu ditambah.
 - Tiada kandungan agama telah diterbitkan atau diluluskan.
 
 ### English
@@ -64,6 +72,14 @@
   and debug/web build smoke checks. It uses no secrets, cache, artifacts,
   release AAB, Play Console, or deployment path. Run `29677407731` passed on
   `766e1fb`.
+- Local onboarding now appears before the shell on first launch. Malay is the
+  default and English can be selected during onboarding or later in Settings.
+  Only onboarding state, language, theme, reduced motion and text scale are
+  allowlisted for on-device storage; no religious content, source, review,
+  reflection or credential data is stored.
+- The mobile shell now has BM/English ARB sources, generated Dart
+  localizations and a route gate that prevents shell deep links before
+  onboarding completes. No religious data or claims were added.
 - No religious content has been published or approved.
 
 ### Google Play
@@ -76,7 +92,8 @@
 
 ### GitHub
 
-- Branch `codex/sunnah-everyday-build` has the CI workflow/hardening commits
-  through `766e1fb` pushed.
+- Branch `codex/sunnah-everyday-build` has the local-onboarding feature commit
+  `4913b54` pushed. Its Quality run `29678240092` passed all three jobs; no
+  release, AAB or Play operation exists in the workflow.
 - No pull request exists: GitHub's public API reports none for the branch, and
   no authenticated GitHub CLI or browser session is available in this environment.

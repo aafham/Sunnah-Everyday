@@ -28,9 +28,12 @@ English and Arabic correctly.
 
 - Semantic headings and labelled navigation are present in the initial shells.
 - Theme, text scale (90–150%) and reduced-motion controls supplement rather
-  than override inherited OS accessibility settings; preference persistence is
-  a later task.
+  than override inherited OS accessibility settings. The first-launch state,
+  BM/English choice and these UI controls persist only in an allowlisted
+  on-device preference store; it never stores content, sources, reviews,
+  reflections or credentials.
 - Layouts use responsive constraints and admin navigation switches between a
   navigation rail and drawer.
 - Information may not be conveyed by colour alone; future content screens must
-  preserve RTL, screen-reader, keyboard and large-text support.
+  preserve RTL, screen-reader, keyboard and large-text support. Full RTL and
+  broader localisation accessibility coverage remain PDX-03 work.

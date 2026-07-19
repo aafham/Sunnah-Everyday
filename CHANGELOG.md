@@ -15,6 +15,13 @@ versioning with Android build numbers.
   runbooks.
 - Android-first Flutter mobile shell with four-tab navigation, calm safe empty
   states, display preferences and accessibility controls.
+- MOB-02 local first-launch onboarding: BM is the default UI language, English
+  is selectable during onboarding and later in Settings, and a router gate
+  keeps shell/deep routes behind completion. Only allowlisted UI preferences
+  (onboarding state, locale, theme, reduced motion and text scale) persist on
+  device; no content, source, reviewer, reflection or credential data is stored.
+- Versioned BM/English ARB source and generated localizations now cover the
+  existing mobile shell copy. They add no religious-content records or claims.
 - Flutter web admin shell with responsive navigation and explicit backend setup
   states, without fake content or authentication claims.
 - Shared private design-system package with Material 3 tokens/themes and
@@ -74,7 +81,7 @@ versioning with Android build numbers.
   The structural baseline is present, but BE-02 through BE-05 (admin access,
   workflow/publication gates, public bundles and audit automation), CNT-03
   publication-bundle validation, approved data, notifications, offline cache,
-  widget, CI, Play assets and release pipeline remain incomplete.
+  widget, Play assets and release pipeline remain incomplete.
 - Protected repository settings and pull-request creation still cannot be
   inspected or changed because GitHub authentication is unavailable.
 - GitHub CLI is unauthenticated; governance and application-shell commits were
@@ -85,23 +92,29 @@ versioning with Android build numbers.
 - Governance commit: `c1b089b`, application-shell commit: `ae1cde4`, prior
   delivery-record commit: `ece499c`, schema-baseline commit: `3680dc1`,
   content-contract commit: `64ea492`, and content-validation commit:
-  `e0aeb6f`; Flutter-test-harness commit: `458232b`, pushed to
+  `e0aeb6f`; Flutter-test-harness commit: `458232b`, mobile-onboarding commit:
+  `4913b54`, pushed to
   `codex/sunnah-everyday-build`; CI workflow/hardening commits: `1c2463d`,
   `4ceff86` and `766e1fb`, pushed to the same branch.
 - Pull request: not created; `gh auth login` or a scoped `GH_TOKEN` is needed.
-- CI status: Quality run `29677407731` passed all three jobs for `766e1fb`.
+- CI status: Quality run `29678240092` passed all three jobs for `4913b54`.
 
 ### Tests
 
-- `dart format --set-exit-if-changed .` passed.
+- `dart format --set-exit-if-changed .` passed (42 files, 0 changes).
 - `flutter analyze` and `flutter test` passed for design system, mobile and admin.
 - `npm run test:flutter-runner` passed (3 tests), and `npm run check:flutter`
   passed analyzer plus widget/unit tests for `testing_utils` (1), design system
-  (3), mobile (4) and admin (4).
+  (3), mobile (9) and admin (4).
+- Mobile unit/widget checks cover corrupt-preference fallback, rehydration,
+  scale bounds, first-launch language selection, deep-route gating and runtime
+  locale changes; `flutter build apk --debug` passed. No release AAB was built.
 - `npm run test:ci-workflow` passed (7 policy tests); `npm audit` reported 0
   vulnerabilities. Local debug APK and admin-web smoke builds passed.
 - GitHub Quality run `29677407731` passed contracts, Flutter quality and
   debug/web smoke checks on `766e1fb`.
+- GitHub Quality run `29678240092` passed contracts, Flutter quality and
+  debug/web smoke checks on `4913b54`.
 - `node scripts/verify_supabase_baseline.mjs` passed; all four migrations also
   applied in an isolated PostgreSQL/PGlite structural harness.
 - `dart analyze` and `dart test` passed for `packages/content_models`.

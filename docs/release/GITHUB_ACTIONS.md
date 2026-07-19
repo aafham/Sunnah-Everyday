@@ -88,10 +88,12 @@ privacy, owner-access and release-gate evidence before they can proceed.
 
 ## Verified run
 
-- Commit: `766e1fbb4ccb78ded664216a4819c42c0246bdbc`
-- Quality run: [29677407731](https://github.com/aafham/Sunnah-Everyday/actions/runs/29677407731)
+- Latest verified commit: `4913b548d7afccd25b4bf364b60d47ec77df1ad1`
+- Quality run: [29678240092](https://github.com/aafham/Sunnah-Everyday/actions/runs/29678240092)
 - Result: all three jobs passed on 2026-07-19: contracts, Flutter quality, and
   debug/web smoke checks.
+- Prior workflow-hardening commit: `766e1fbb4ccb78ded664216a4819c42c0246bdbc`
+  with successful Quality run [29677407731](https://github.com/aafham/Sunnah-Everyday/actions/runs/29677407731).
 
 The first workflow run on `4ceff86` failed at design-system dependency
 resolution because that library intentionally does not commit a lockfile. The

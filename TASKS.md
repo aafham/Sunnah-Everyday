@@ -11,7 +11,7 @@ blocked work never counts as complete.
 | PDX-03 | Product & UX | Localisation, RTL and accessibility baseline | P1 | 2 | NOT_STARTED | MOB-01 | BM/EN ARB, semantic/scale/RTL tests | — | M1 | |
 | PDX-04 | Product & UX | Public privacy/support site, terms and legal copy | P1 | 3 | NOT_STARTED | PDX-01 | Static pages and hosting handoff; no invented contact details | — | M4 | Owner support email/hosting needed to deploy |
 | MOB-01 | Flutter core | Flutter workspace, application architecture, app/admin shell | P0 | 4 | DONE | PDX-01 | `flutter analyze`, shell tests, Android debug and web build | `ae1cde4` | M0 | Material 3 mobile/admin shells, shared design system, safe empty states and fail-closed release guard implemented |
-| MOB-02 | Flutter core | Onboarding, local preferences and language selection | P0 | 3 | NOT_STARTED | MOB-01 | Widget tests for persistence/locales | — | M1 | |
+| MOB-02 | Flutter core | Onboarding, local preferences and language selection | P0 | 3 | DONE | MOB-01 | Widget tests for persistence/locales | `4913b54` | M1 | First-launch gate, allowlisted on-device UI preferences and BM/English ARB shell; 9 mobile tests, debug APK and Quality run `29678240092` passed; no content data added |
 | MOB-03 | Flutter core | Today, daily-card and safe detail views | P0 | 4 | NOT_STARTED | MOB-01, CNT-01 | UI/state tests; only staging-safe data | — | M1 | |
 | MOB-04 | Flutter core | Explore, categories, situation mode and offline search | P1 | 3 | NOT_STARTED | MOB-03, DEL-01 | BM/EN search and empty-state tests | — | M1 | |
 | MOB-05 | Flutter core | Local bookmarks, history and private reflections | P1 | 3 | NOT_STARTED | MOB-01 | Persistence/privacy/deletion tests | — | M1 | |
@@ -45,14 +45,16 @@ blocked work never counts as complete.
 | REL-03 | Docs & release | Play readiness, signing and release handoff | P1 | 2 | NOT_STARTED | REL-01, REL-02 | Readiness checklist and signed build proof | — | M4 | Credentials required to upload |
 | REL-04 | Docs & release | Actual Play track upload and monitoring | P0 | 1 | BLOCKED | REL-03, owner Play access, content gate | Verified Console/API result only | — | M0–M5 | Never assume account access |
 
-**Total weight:** 100. **Completed weight:** 17. **Blocked weight:** 4.
+**Total weight:** 100. **Completed weight:** 20. **Blocked weight:** 4.
 
 ## Selection rule
 
 `BE-01` is implemented and in review: its local Supabase runtime validation is
 pending a Docker engine. `CNT-02` is complete as a read-only draft validation
-preview; it does not import or publish any content. `QLT-01` and `REL-01` are
-complete. `MOB-02` is selected next as the available P0 task: it depends only
-on the completed mobile shell. Do not mark BE-01 complete or count its weight
-until the documented local migration, lint and pgTAP checks have actually
-passed.
+preview; it does not import or publish any content. `QLT-01`, `REL-01` and
+`MOB-02` are complete. `MOB-03` is selected next as the available P0 task: it
+depends only on the completed mobile shell and draft-only content boundary.
+It must use a fail-closed, staging-safe UI state and cannot present generated
+or unapproved religious content. Do not mark BE-01 complete or count its
+weight until the documented local migration, lint and pgTAP checks have
+actually passed.
