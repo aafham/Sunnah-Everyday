@@ -45,6 +45,14 @@ dart analyze
 dart test
 Pop-Location
 
+Push-Location packages/testing_utils
+flutter pub get --enforce-lockfile
+Pop-Location
+
+Push-Location packages/design_system
+flutter pub get
+Pop-Location
+
 Push-Location apps/mobile
 flutter pub get --enforce-lockfile
 flutter build apk --debug
@@ -61,6 +69,11 @@ workflow or job-level permissions, unreviewed jobs, action pins, non-executable
 required commands, secret references and release/Play/upload operations. Its
 unit tests also mutate the real workflow source to exercise those fail-closed
 checks.
+
+`packages/design_system` is a library package with its lockfile intentionally
+ignored by its own `.gitignore`; its dependency resolution therefore does not
+use `--enforce-lockfile`. Application and private test-support lockfiles remain
+enforced where they are committed.
 
 ## Operating rules
 

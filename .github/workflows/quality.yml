@@ -61,7 +61,7 @@ jobs:
         run: flutter pub get --enforce-lockfile
       - name: Resolve design-system dependencies
         working-directory: packages/design_system
-        run: flutter pub get --enforce-lockfile
+        run: flutter pub get
       - name: Resolve mobile dependencies
         working-directory: apps/mobile
         run: flutter pub get --enforce-lockfile
