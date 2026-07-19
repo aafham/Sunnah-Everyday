@@ -25,10 +25,10 @@ _Last updated: 2026-07-19 (BE-01 structural baseline implemented; runtime verifi
 | Target version | 0.1.0+1 |
 | Current task | BE-01 — structural Supabase baseline implemented; Docker-backed local migration, lint and pgTAP verification pending |
 | Branch | `codex/sunnah-everyday-build` |
-| Last recorded task commit | `ae1cde4` (`feat: establish Flutter application shells`) |
+| Last recorded task commit | `3680dc1` (`feat(database): add fail-closed Supabase schema baseline`) |
 | Local checks | Dart format, Flutter analyze/tests, and the Supabase static guard passed; all four migrations applied in an isolated PostgreSQL/PGlite structural harness. `supabase db reset --local --no-seed` could not start because no Docker engine is available, so local Supabase lint and pgTAP have not run. |
-| GitHub CI | No workflow configured; GitHub API last reported 0 runs for this branch |
-| GitHub push / PR | `ece499c` pushed successfully; public API last reported no open PR and creation is blocked because no authenticated GitHub CLI/browser session is available |
+| GitHub CI | No workflow configured; GitHub API reported 0 runs for this branch after `3680dc1` was pushed |
+| GitHub push / PR | `3680dc1` pushed successfully; public API reported no open PR and creation is blocked because `gh auth status` has no logged-in host and no authenticated browser session is available |
 | Google Play | No app, signed AAB, Console/API credential, track check, or upload |
 | Release status | No signed release AAB generated, uploaded, or submitted; local debug APK only |
 

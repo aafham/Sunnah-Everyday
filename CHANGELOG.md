@@ -48,8 +48,9 @@ versioning with Android build numbers.
 
 ### GitHub
 
-- Governance commit: `c1b089b`, application-shell commit: `ae1cde4`, and
-  delivery-record commit: `ece499c` pushed to `codex/sunnah-everyday-build`.
+- Governance commit: `c1b089b`, application-shell commit: `ae1cde4`, prior
+  delivery-record commit: `ece499c`, and schema-baseline commit: `3680dc1`
+  pushed to `codex/sunnah-everyday-build`.
 - Pull request: not created; `gh auth login` or a scoped `GH_TOKEN` is needed.
 - CI status: no workflows/runs exist yet.
 

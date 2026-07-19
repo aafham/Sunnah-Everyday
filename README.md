@@ -58,7 +58,7 @@ Kotlin/Glance widget support, and ARB localisation are planned.
 | Completion | 7.0% weighted; PDX-01 and MOB-01 complete |
 | App / admin / migrations | Mobile and web-admin shells plus a fail-closed structural Supabase baseline are implemented; local Supabase runtime validation is pending Docker |
 | Approved content | 0 items; no reviewer or source-rights records |
-| GitHub | `ece499c` pushed on feature branch `codex/sunnah-everyday-build`; PR creation is blocked by unavailable GitHub authentication/session |
+| GitHub | `3680dc1` pushed on feature branch `codex/sunnah-everyday-build`; public API reports no open PR, and creation is blocked by unavailable GitHub authentication/session |
 | CI | Not configured; GitHub reports no workflow runs for this branch |
 | Google Play | No app/AAB/upload/submission/availability |
 
