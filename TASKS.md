@@ -8,7 +8,7 @@ blocked work never counts as complete.
 | --- | --- | --- | ---: | ---: | --- | --- | --- | --- | --- | --- |
 | PDX-01 | Product & UX | Governance, task ledger, progress, roadmap, decisions and operating rules | P0 | 3 | DONE | — | Required docs/policies/runbooks exist and are internally consistent | `c1b089b` | M0 | Documentation validation, format and analysis passed; branch push verified |
 | PDX-02 | Product & UX | Design system and mobile/admin UX specification | P1 | 2 | DONE | PDX-01 | Tokens, components, responsive/a11y requirements documented and tested in UI | `56daf54` | M0 | Shared layout tokens, 560/960/1040 responsive contract, semantic admin navigation and component/state specification; 6 design, 16 mobile and 5 admin tests plus Quality run `29679773365` passed; no content/backend path added |
-| PDX-03 | Product & UX | Localisation, RTL and accessibility baseline | P1 | 2 | NOT_STARTED | MOB-01 | BM/EN ARB, semantic/scale/RTL tests | — | M1 | |
+| PDX-03 | Product & UX | Localisation, RTL and accessibility baseline | P1 | 2 | DONE | MOB-01 | Exact BM/EN delegate plus semantic/scale/generic-RTL tests | `3031af2` | M1 | Directional mobile insets, direction-aware return affordance and semantic app-bar headings; test-only RTL override only. No Arabic locale/text/font, religious content/data/source, backend or publication path; Quality run `29680455827` passed |
 | PDX-04 | Product & UX | Public privacy/support site, terms and legal copy | P1 | 3 | NOT_STARTED | PDX-01 | Static pages and hosting handoff; no invented contact details | — | M4 | Owner support email/hosting needed to deploy |
 | MOB-01 | Flutter core | Flutter workspace, application architecture, app/admin shell | P0 | 4 | DONE | PDX-01 | `flutter analyze`, shell tests, Android debug and web build | `ae1cde4` | M0 | Material 3 mobile/admin shells, shared design system, safe empty states and fail-closed release guard implemented |
 | MOB-02 | Flutter core | Onboarding, local preferences and language selection | P0 | 3 | DONE | MOB-01 | Widget tests for persistence/locales | `4913b54` | M1 | First-launch gate, allowlisted on-device UI preferences and BM/English ARB shell; 9 mobile tests, debug APK and Quality run `29678240092` passed; no content data added |
@@ -45,19 +45,19 @@ blocked work never counts as complete.
 | REL-03 | Docs & release | Play readiness, signing and release handoff | P1 | 2 | NOT_STARTED | REL-01, REL-02 | Readiness checklist and signed build proof | — | M4 | Credentials required to upload |
 | REL-04 | Docs & release | Actual Play track upload and monitoring | P0 | 1 | BLOCKED | REL-03, owner Play access, content gate | Verified Console/API result only | — | M0–M5 | Never assume account access |
 
-**Total weight:** 100. **Completed weight:** 26. **Blocked weight:** 4.
+**Total weight:** 100. **Completed weight:** 28. **Blocked weight:** 4.
 
 ## Selection rule
 
 `BE-01` is implemented and in review: its local Supabase runtime validation is
 pending a Docker engine. `CNT-02` is complete as a read-only draft validation
 preview; it does not import or publish any content. `QLT-01`, `REL-01`,
-`MOB-02`, `MOB-03` and `PDX-02` are complete. `MOB-03` provides only a
+`MOB-02`, `MOB-03`, `PDX-02` and `PDX-03` are complete. `MOB-03` provides only a
 fail-closed, staging-safe UI state and does not present generated or unapproved
 religious content. `PDX-02` documented and tested the current shell contract
-without adding content, backend access or release scope. `PDX-03` is selected
-as the highest available unblocked task: it can make the BM/English, generic
-RTL-layout and accessibility baseline explicit without adding Arabic text,
-fonts, data, sources or a publication path. Do not mark BE-01 complete or
-count its weight until the documented local migration, lint and pgTAP checks
-have actually passed.
+without adding content, backend access or release scope. `PDX-03` made the
+BM/English, generic RTL-layout and accessibility baseline explicit without
+adding Arabic text, fonts, data, sources or a publication path. `MOB-05` is
+the next highest available unblocked task. Do not mark BE-01 complete or count
+its weight until the documented local migration, lint and pgTAP checks have
+actually passed.

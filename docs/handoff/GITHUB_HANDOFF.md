@@ -13,15 +13,16 @@
 - Pushed local-onboarding commit: `4913b548d7afccd25b4bf364b60d47ec77df1ad1`
 - Pushed fail-closed-daily commit: `c8ddbebd1831ffb847ffee876006529574f68b0b`
 - Pushed responsive-UX commit: `56daf54e3f7bd9c98ed92a5f0c778eba75479e7d`
+- Pushed generic-RTL commit: `3031af27220f4897abfe305b63a40e2ebd8ed62b`
 - Pushed CI workflow/hardening commits: `1c2463d`, `4ceff86` and
   `766e1fbb4ccb78ded664216a4819c42c0246bdbc`
 - Push: successful through configured git credentials on 2026-07-19.
-- GitHub CLI/API authentication: unavailable (`gh auth status` has no logged-in
+- GitHub CLI authentication: unavailable (`gh auth status` has no logged-in
   account), so no pull request has been created or updated. No browser session
   was available as an authenticated fallback.
-- CI: Quality run [29679773365](https://github.com/aafham/Sunnah-Everyday/actions/runs/29679773365)
-  passed contracts, Flutter quality and debug/web smoke checks for `56daf54`.
-  GitHub's public branch query reported zero open PRs after the CI push.
+- CI: Quality run [29680455827](https://github.com/aafham/Sunnah-Everyday/actions/runs/29680455827)
+  passed contracts, Flutter quality and debug/web smoke checks for `3031af2`.
+  GitHub's public branch API query reported zero open PRs after the CI push.
 
 ## Owner action
 
@@ -65,6 +66,10 @@ Suggested PR body:
 - Adds a documented, tested mobile/admin UX contract: shared layout tokens,
   560 mobile readable width, 960 admin navigation breakpoint, 1040 admin
   content cap, semantic navigation grouping and responsive widget coverage.
+- Adds the narrow generic RTL-layout baseline: directional mobile page insets,
+  a direction-aware return affordance, semantic app-bar headings and tests.
+  The installed shell remains exactly BM/English; no Arabic locale/text/font,
+  religious-content data, source record, backend or publication path is added.
 - Validation: format, analyzer and tests passed for all Flutter packages;
   content Dart/schema tests, schema static guard and isolated PostgreSQL
   structural execution passed.

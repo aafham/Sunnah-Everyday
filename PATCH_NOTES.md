@@ -51,6 +51,11 @@
   960, serta kandungan admin dihadkan kepada 1040. Ia hanya memperkemas susun
   atur, semantik dan state selamat; tiada kandungan, sumber atau akses backend
   baharu ditambah.
+- Baseline RTL dan aksesibiliti PDX-03 kini menggunakan padding halaman mobile
+  directional, `BackButtonIcon` yang peka arah, heading app bar semantik, serta
+  ujian delegate yang mengesahkan hanya BM/English disokong. Override RTL hanya
+  untuk ujian widget; ia tidak mengaktifkan locale RTL atau menambah teks/font
+  Arab, kandungan/data agama, sumber, akses backend atau laluan penerbitan.
 - Tiada kandungan agama telah diterbitkan atau diluluskan.
 
 ### English
@@ -100,6 +105,11 @@
   uses a drawer below 960 and a navigation rail at or above 960, and admin
   content is capped at 1040. This changes layout, semantics and safe states
   only; it adds no content, source or backend access.
+- The PDX-03 RTL/accessibility baseline now uses directional mobile page
+  padding, a direction-aware `BackButtonIcon`, semantic app-bar headings and a
+  delegate test proving exactly BM/English support. The RTL override is only
+  for widget tests; it does not enable an RTL locale or add Arabic text/font,
+  religious content/data, sources, backend access or a publication path.
 - No religious content has been published or approved.
 
 ### Google Play
@@ -112,8 +122,8 @@
 
 ### GitHub
 
-- Branch `codex/sunnah-everyday-build` has the responsive-UX feature commit
-  `56daf54` pushed. Its Quality run `29679773365` passed all three jobs; no
+- Branch `codex/sunnah-everyday-build` has the generic-RTL feature commit
+  `3031af2` pushed. Its Quality run `29680455827` passed all three jobs; no
   release, AAB or Play operation exists in the workflow.
 - No pull request exists: GitHub's public API reports none for the branch, and
   no authenticated GitHub CLI or browser session is available in this environment.

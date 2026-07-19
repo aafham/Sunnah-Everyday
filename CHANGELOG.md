@@ -31,6 +31,12 @@ versioning with Android build numbers.
   560 logical pixels; admin switches drawer/rail at 960 and caps content at
   1040. The specification records component, responsive, semantic and
   fail-closed state rules without adding any content or backend path.
+- PDX-03 generic RTL/accessibility baseline: installed UI locales remain
+  exactly BM/English; directional mobile page insets, Material's
+  direction-aware `BackButtonIcon` and semantic app-bar headings are covered
+  by widget tests. An internal test-only direction override exercises generic
+  layout; it adds no RTL locale, Arabic text/font, religious content/data,
+  source record, backend access or publication path.
 - Versioned BM/English ARB source and generated localizations now cover the
   existing mobile shell copy. They add no religious-content records or claims.
 - Flutter web admin shell with responsive navigation and explicit backend setup
@@ -104,12 +110,12 @@ versioning with Android build numbers.
   delivery-record commit: `ece499c`, schema-baseline commit: `3680dc1`,
   content-contract commit: `64ea492`, and content-validation commit:
   `e0aeb6f`; Flutter-test-harness commit: `458232b`, mobile-onboarding commit:
-  `4913b54`, fail-closed-daily commit: `c8ddbeb`, and responsive-UX commit:
-  `56daf54`, pushed to
+  `4913b54`, fail-closed-daily commit: `c8ddbeb`, responsive-UX commit:
+  `56daf54`, and generic-RTL feature commit: `3031af2`, pushed to
   `codex/sunnah-everyday-build`; CI workflow/hardening commits: `1c2463d`,
   `4ceff86` and `766e1fb`, pushed to the same branch.
 - Pull request: not created; `gh auth login` or a scoped `GH_TOKEN` is needed.
-- CI status: Quality run `29679773365` passed all three jobs for `56daf54`.
+- CI status: Quality run `29680455827` passed all three jobs for `3031af2`.
 
 ### Tests
 
@@ -130,6 +136,13 @@ versioning with Android build numbers.
   16 mobile and 5 admin tests; the root Flutter runner passed (3), and the
   root quality check included 1 `testing_utils` test. Mobile debug APK and
   admin-web builds both passed locally. No release AAB was built.
+- PDX-03 formatting passed with zero changes for design system (7 files) and
+  mobile (22). `flutter analyze` and `flutter test` passed for design system
+  (6 tests) and mobile (20 tests); the root quality check passed analyzers and
+  tests for `testing_utils` (1), design system (6), mobile (20) and admin (5).
+  The Flutter runner (3 tests) and CI-workflow policy suite (7 tests) passed.
+  Mobile debug APK and admin-web smoke builds passed locally; no release AAB
+  was built.
 - `npm run test:ci-workflow` passed (7 policy tests); `npm audit` reported 0
   vulnerabilities. Local debug APK and admin-web smoke builds passed.
 - GitHub Quality run `29677407731` passed contracts, Flutter quality and
@@ -140,6 +153,8 @@ versioning with Android build numbers.
   debug/web smoke checks on `c8ddbeb`.
 - GitHub Quality run `29679773365` passed contracts, Flutter quality and
   debug/web smoke checks on `56daf54`.
+- GitHub Quality run `29680455827` passed contracts, Flutter quality and
+  debug/web smoke checks on `3031af2`.
 - `node scripts/verify_supabase_baseline.mjs` passed; all four migrations also
   applied in an isolated PostgreSQL/PGlite structural harness.
 - `dart analyze` and `dart test` passed for `packages/content_models`.

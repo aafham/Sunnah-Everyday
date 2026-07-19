@@ -88,10 +88,12 @@ privacy, owner-access and release-gate evidence before they can proceed.
 
 ## Verified run
 
-- Latest verified commit: `56daf54e3f7bd9c98ed92a5f0c778eba75479e7d`
-- Quality run: [29679773365](https://github.com/aafham/Sunnah-Everyday/actions/runs/29679773365)
+- Latest verified commit: `3031af27220f4897abfe305b63a40e2ebd8ed62b`
+- Quality run: [29680455827](https://github.com/aafham/Sunnah-Everyday/actions/runs/29680455827)
 - Result: all three jobs passed on 2026-07-19: contracts, Flutter quality, and
   debug/web smoke checks.
+- Prior responsive-UX commit: `56daf54e3f7bd9c98ed92a5f0c778eba75479e7d`
+  with successful Quality run [29679773365](https://github.com/aafham/Sunnah-Everyday/actions/runs/29679773365).
 - Prior fail-closed-daily commit: `c8ddbebd1831ffb847ffee876006529574f68b0b`
   with successful Quality run [29678798552](https://github.com/aafham/Sunnah-Everyday/actions/runs/29678798552).
 - Prior mobile-onboarding commit: `4913b548d7afccd25b4bf364b60d47ec77df1ad1`

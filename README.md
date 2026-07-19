@@ -59,12 +59,12 @@ and native Kotlin/Glance widget support remain planned.
 | Area | Status |
 | --- | --- |
 | Version / milestone | `0.1.0+1` development baseline / M0 closeout with M1 core experience started |
-| Completion | 26.0% weighted; PDX-01, PDX-02, MOB-01, MOB-02, MOB-03, CNT-01, CNT-02, QLT-01 and REL-01 complete |
-| App / admin / migrations | The mobile shell now has a local first-launch onboarding gate, BM/English UI selection, allowlisted device UI preferences and fail-closed Daily/status/detail views; those views expose only an unavailable state until a verified public bundle exists. Shared layout tokens now enforce a 560 logical-pixel mobile content cap, 960 admin drawer/rail breakpoint and 1040 admin content cap. The web-admin shell, shared deterministic Flutter test harness, read-only GitHub Quality workflow and fail-closed structural Supabase baseline remain implemented; local Supabase runtime validation is pending Docker |
+| Completion | 28.0% weighted; PDX-01, PDX-02, PDX-03, MOB-01, MOB-02, MOB-03, CNT-01, CNT-02, QLT-01 and REL-01 complete |
+| App / admin / migrations | The mobile shell now has a local first-launch onboarding gate, exactly BM/English UI selection, allowlisted device UI preferences and fail-closed Daily/status/detail views; those views expose only an unavailable state until a verified public bundle exists. Shared layout tokens enforce a 560 logical-pixel mobile content cap, directional mobile page insets, a direction-aware return affordance, 960 admin drawer/rail breakpoint and 1040 admin content cap. Generic RTL layout is exercised only through a widget-test override; it does not enable an RTL locale or add Arabic text/font, religious content/data, source records, backend access or publication. The web-admin shell, shared deterministic Flutter test harness, read-only GitHub Quality workflow and fail-closed structural Supabase baseline remain implemented; local Supabase runtime validation is pending Docker |
 | Content intake | Draft-only models, schemas, header-only templates and a read-only CSV validation preview implemented; 0 imported/approved/public items |
 | Approved content | 0 items; no reviewer or source-rights records |
-| GitHub | `56daf54` pushed on feature branch `codex/sunnah-everyday-build`; the public GitHub view shows 0 open pull requests, and creation or update is blocked by unavailable GitHub authentication/session |
-| CI | Read-only Quality run [`29679773365`](https://github.com/aafham/Sunnah-Everyday/actions/runs/29679773365) passed contracts, Flutter quality and debug/web smoke checks for `56daf54`; it cannot release or upload |
+| GitHub | `3031af2` pushed on feature branch `codex/sunnah-everyday-build`; the public GitHub API reports 0 open pull requests for the branch, and creation or update is blocked by unavailable GitHub CLI authentication/session |
+| CI | Read-only Quality run [`29680455827`](https://github.com/aafham/Sunnah-Everyday/actions/runs/29680455827) passed contracts, Flutter quality and debug/web smoke checks for `3031af2`; it cannot release or upload |
 | Google Play | No app/AAB/upload/submission/availability |
 
 Full work tracking is in [TASKS.md](TASKS.md), [PROGRESS.md](PROGRESS.md),
