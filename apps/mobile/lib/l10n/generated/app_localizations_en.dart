@@ -48,6 +48,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get backToToday => 'Back to Today';
 
   @override
+  String get routeUnavailableTitle => 'This link is unavailable';
+
+  @override
+  String get routeUnavailableMessage =>
+      'This link cannot be opened safely. Return to Today to continue.';
+
+  @override
+  String get returnToToday => 'Return to Today';
+
+  @override
   String get contentStatusEyebrow => 'Content status';
 
   @override

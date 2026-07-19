@@ -49,6 +49,16 @@ class AppLocalizationsMs extends AppLocalizations {
   String get backToToday => 'Kembali ke Hari Ini';
 
   @override
+  String get routeUnavailableTitle => 'Pautan ini tidak tersedia';
+
+  @override
+  String get routeUnavailableMessage =>
+      'Pautan ini tidak dapat dibuka dengan selamat. Kembali ke Hari Ini untuk meneruskan.';
+
+  @override
+  String get returnToToday => 'Kembali ke Hari Ini';
+
+  @override
   String get contentStatusEyebrow => 'Status kandungan';
 
   @override

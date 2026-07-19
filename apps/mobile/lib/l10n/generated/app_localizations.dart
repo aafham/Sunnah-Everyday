@@ -176,6 +176,24 @@ abstract class AppLocalizations {
   /// **'Kembali ke Hari Ini'**
   String get backToToday;
 
+  /// Tajuk ralat selamat umum bagi laluan aplikasi yang tidak tersedia.
+  ///
+  /// In ms, this message translates to:
+  /// **'Pautan ini tidak tersedia'**
+  String get routeUnavailableTitle;
+
+  /// Penerangan ralat laluan umum yang tidak mendedahkan pengecam luaran atau ralat.
+  ///
+  /// In ms, this message translates to:
+  /// **'Pautan ini tidak dapat dibuka dengan selamat. Kembali ke Hari Ini untuk meneruskan.'**
+  String get routeUnavailableMessage;
+
+  /// Tindakan pulih daripada ralat laluan umum dengan kembali ke Hari Ini.
+  ///
+  /// In ms, this message translates to:
+  /// **'Kembali ke Hari Ini'**
+  String get returnToToday;
+
   /// Label status kandungan.
   ///
   /// In ms, this message translates to:
