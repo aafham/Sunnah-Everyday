@@ -35,18 +35,21 @@ The no-dependency static guard may run without a database:
 node scripts/verify_supabase_baseline.mjs
 ```
 
-Runtime migration, RLS and pgTAP validation requires Docker and the local
-Supabase stack. It must only target the local stack—not a linked or production
-project—unless the owner separately provides authorised non-production access.
+Runtime migration, RLS and pgTAP validation requires Docker and only the local
+Supabase PostgreSQL database. CI runs the same isolated sequence on an
+ephemeral runner; the developer workstation still has no Docker engine. It
+must only target the local database—not a linked or production project—unless
+the owner separately provides authorised non-production access.
 
 ```powershell
-npx --yes supabase@2.109.1 start
+npx --yes supabase@2.109.1 db start --yes
 npx --yes supabase@2.109.1 db reset --local --no-seed
 npx --yes supabase@2.109.1 db lint --local --schema public --level warning --fail-on warning
 npx --yes supabase@2.109.1 test db --local supabase/tests
-npx --yes supabase@2.109.1 stop
+npx --yes supabase@2.109.1 stop --yes --no-backup
 ```
 
 Do not use `--linked`, `--db-url`, `db push`, or a remote connection without
 explicit owner authority and a safe credential path. A static pass is not a
-claim that the migrations have executed against PostgreSQL.
+claim that the migrations have executed against PostgreSQL. CI cleanup must run
+even after a failed validation step.

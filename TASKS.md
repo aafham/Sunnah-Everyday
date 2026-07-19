@@ -24,7 +24,7 @@ blocked work never counts as complete.
 | CNT-04 | Content/evidence | Evidence, source, reviewer and methodology experiences | P1 | 3 | NOT_STARTED | MOB-03, BE-01 | UI/data tests | — | M2 | |
 | CNT-05 | Content/evidence | Reports, corrections and withdrawal presentation | P1 | 3 | NOT_STARTED | BE-03, MOB-03 | Report and withdrawal tests | — | M2 | |
 | CNT-06 | Content/evidence | Approved-content intake and human-review evidence | P0 | 3 | BLOCKED | Owner reviewers, source rights | 30/90/120 approved capacity only after human records | — | M4/M5 | No AI-generated religious data |
-| BE-01 | Backend/database | Initial Supabase schema and migrations | P0 | 4 | IN_REVIEW | PDX-01 | Static guard and isolated PostgreSQL structural execution passed; Docker-backed Supabase migration/lint/pgTAP remains pending | `3680dc1` | M0 | 27 required tables plus a junction table; no roles, reviewers, sources, permissions or religious content seeded |
+| BE-01 | Backend/database | Initial Supabase schema and migrations | P0 | 4 | DONE | PDX-01 | Static guard and isolated GitHub Actions Docker execution (`db start`, reset without seed, lint and pgTAP) passed | `54dfe58` | M0 | 27 required tables plus a junction table; no roles, reviewers, sources, permissions or religious content seeded. Quality run [29691642152](https://github.com/aafham/Sunnah-Everyday/actions/runs/29691642152) passed; no remote project, credential, seed or religious content was added |
 | BE-02 | Backend/database | Admin auth, roles and RLS | P0 | 3 | NOT_STARTED | BE-01 | SQL RLS tests | — | M2 | Supabase project required to deploy |
 | BE-03 | Backend/database | Review workflow, immutable versions and publication gate | P0 | 3 | NOT_STARTED | BE-01 | SQL publication/approval tests | — | M2 | |
 | BE-04 | Backend/database | Public bundles, scheduling and sync contract | P1 | 3 | NOT_STARTED | BE-03 | Bundle/checksum/scheduling tests | — | M3 | |
@@ -46,12 +46,13 @@ blocked work never counts as complete.
 | REL-03 | Docs & release | Play readiness, signing and release handoff | P1 | 2 | NOT_STARTED | REL-01, REL-02 | Readiness checklist and signed build proof | — | M4 | Credentials required to upload |
 | REL-04 | Docs & release | Actual Play track upload and monitoring | P0 | 1 | BLOCKED | REL-03, owner Play access, content gate | Verified Console/API result only | — | M0–M5 | Never assume account access |
 
-**Total weight:** 100. **Completed weight:** 38. **Blocked weight:** 7.
+**Total weight:** 100. **Completed weight:** 42. **Blocked weight:** 7.
 
 ## Selection rule
 
-`BE-01` is implemented and in review: its local Supabase runtime validation is
-pending a Docker engine. `CNT-02` is complete as a read-only draft validation
+`BE-01` is complete after its isolated GitHub Actions local-PostgreSQL runtime
+gate passed. The developer workstation still has no Docker engine, but that
+does not negate the verified runner result. `CNT-02` is complete as a read-only draft validation
 preview; it does not import or publish any content. `QLT-01`, `REL-01`,
 `MOB-02`, `MOB-03`, `PDX-02` and `PDX-03` are complete. `MOB-03` provides only a
 fail-closed, staging-safe UI state and does not present generated or unapproved
@@ -67,8 +68,7 @@ and generic recovery surfaces; it does not accept content data. `QLT-02` is
 complete with bounded device-local smoke, accessibility and source-policy
 regression coverage; it does not add content, release authority or a Data
 Safety declaration. `QLT-04` is complete as a source-scoped baseline only.
-No further ledger task is currently eligible under the recorded prerequisites:
-`PDX-04` needs owner support/hosting details, `BE-01` needs a Docker engine for
-runtime verification, and the remaining work is dependency-gated. Do not mark
-BE-01 complete or count its weight until the documented local migration, lint
-and pgTAP checks have actually passed.
+`BE-02` is now the highest-priority unblocked task by ledger order; `BE-03` and
+`BE-05` are also unblocked by BE-01 but follow the ordered P0 backend work.
+`PDX-04` remains blocked on owner support/hosting inputs, and deployment to a
+Supabase project remains separately blocked on authorised project access.

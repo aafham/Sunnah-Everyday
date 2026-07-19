@@ -8,8 +8,11 @@
 - Shell aplikasi Android dan admin web kini boleh dibina dengan navigasi dan
   tetapan paparan asas.
 - Baseline struktur Supabase kini merangkumi jadual operasi, enum, kekangan
-  pemilikan dan RLS fail-closed tanpa seed data atau kandungan agama. Reset,
-  lint dan pgTAP Supabase tempatan masih menunggu Docker.
+  pemilikan dan RLS fail-closed tanpa seed data atau kandungan agama. BE-01
+  kini disahkan pada runner GitHub Actions sementara melalui PostgreSQL tempatan
+  terasing: `db start`, reset tanpa seed, lint, pgTAP dan cleanup. Ia tidak
+  menggunakan projek Supabase jauh, `--linked`, `--db-url`, `db push`, secrets
+  atau laluan penerbitan; Docker masih tiada pada mesin pembangunan ini.
 - Kontrak intake kandungan draft-only kini tersedia: model Dart, lima template
   CSV header-only, schema JSON dan boundary staging/approved yang kosong serta
   diabaikan secara lalai. Tiada sumber, reviewer, dalil atau kandungan agama
@@ -32,6 +35,9 @@
   build debug/web smoke. Ia tidak menggunakan secrets, cache, artifact, AAB
   release, Play Console atau deployment. Run `29677407731` lulus pada
   `766e1fb`.
+- Run Quality `29691642152` untuk `54dfe58` turut lulus dengan kontrak
+  PostgreSQL lokal terasing: migrasi di-reset tanpa seed, lint dan 115 ujian
+  pgTAP lulus, kemudian stack dibersihkan.
 - Onboarding setempat kini muncul sebelum shell pada pelancaran pertama. Bahasa
   Melayu ialah lalai dan English boleh dipilih semasa onboarding atau kemudian
   di Tetapan. Hanya status onboarding, bahasa, tema, kurangkan animasi dan
@@ -105,7 +111,10 @@
   and display settings.
 - A fail-closed Supabase structural baseline now covers operational tables,
   enums, ownership constraints and RLS, with no seed data or religious content.
-  Local Supabase reset, lint and pgTAP still await Docker.
+  BE-01 is now verified on an ephemeral GitHub Actions runner through isolated
+  local PostgreSQL `db start`, reset without seed data, lint, pgTAP and cleanup.
+  It uses no remote Supabase project, `--linked`, `--db-url`, `db push`, secret
+  or publication path; the developer workstation still has no Docker engine.
 - A draft-only content intake contract now provides Dart models, five
   header-only CSV templates, JSON Schemas and guarded empty staging/approved
   boundaries. No source, reviewer, evidence or religious content has been
@@ -128,6 +137,9 @@
   and debug/web build smoke checks. It uses no secrets, cache, artifacts,
   release AAB, Play Console, or deployment path. Run `29677407731` passed on
   `766e1fb`.
+- Quality run `29691642152` for `54dfe58` also passed the isolated local
+  PostgreSQL contract: migrations reset without seed data, lint and 115 pgTAP
+  tests passed, then the stack was removed.
 - Local onboarding now appears before the shell on first launch. Malay is the
   default and English can be selected during onboarding or later in Settings.
   Only onboarding state, language, theme, reduced motion and text scale are
@@ -205,5 +217,8 @@
   commit. Quality run `29685451382` for source-audit commit `1aa0c83` passed
   contracts, Flutter quality and debug/web smoke. No release, AAB or Play
   operation exists in the workflow.
-- No pull request exists: GitHub's public API reports none for the branch, and
-  no authenticated GitHub CLI or browser session is available in this environment.
+- BE-01 runtime commit `54dfe58` is pushed on
+  `codex/be01-runtime-verification`. Quality run `29691642152` passed contracts,
+  Flutter quality and debug/web smoke; this branch is not recorded as integrated
+  into `main`. GitHub CLI is not authenticated, so a CLI-authenticated PR or
+  merge cannot be claimed from this environment.

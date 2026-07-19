@@ -100,6 +100,12 @@ versioning with Android build numbers.
 - Deny-by-default database posture: RLS is enabled and forced on every
   application table; `PUBLIC`, `anon` and `authenticated` have no table grants
   and no policies exist until BE-02 supplies audited least-privilege access.
+- BE-01 runtime CI gate: the read-only Quality contracts job now starts an
+  isolated local Supabase PostgreSQL database on the ephemeral GitHub runner,
+  resets migrations without seed data, fails lint warnings, runs pgTAP, and
+  always removes the stack. The policy verifier pins and orders those commands
+  and rejects remote/link/push flags. It uses no repository secret, remote
+  Supabase project, content, release or Play operation.
 - A no-dependency schema guard and pgTAP migration/constraint test foundation.
 - Draft-only content intake foundation: a pure-Dart `content_models` package,
   five header-only CSV templates, five JSON Schemas, explicit CSV-to-JSON
@@ -140,8 +146,9 @@ versioning with Android build numbers.
 
 ### Known Issues
 
-- Local Supabase reset, lint and pgTAP verification await a Docker engine.
-  The structural baseline is present, but BE-02 through BE-05 (admin access,
+- The CI database-runtime gate passed; the developer workstation still has no
+  Docker engine, so no local-workstation runtime result is claimed. BE-02
+  through BE-05 (admin access,
   workflow/publication gates, public bundles and audit automation), CNT-03
   publication-bundle validation, approved data, notifications, offline cache,
   widget, Play assets and release pipeline remain incomplete.
@@ -167,10 +174,17 @@ versioning with Android build numbers.
   contained by `main` after the owner-authorised fast-forward to `69273cb`;
   `codex/sunnah-everyday-build` remains at the same commit. CI workflow/hardening
   commits: `1c2463d`, `4ceff86` and `766e1fb` are in that history.
+- BE-01 runtime commit `54dfe58` is pushed on
+  `codex/be01-runtime-verification`; it is not recorded as merged into `main`.
+  Quality run [29691642152](https://github.com/aafham/Sunnah-Everyday/actions/runs/29691642152)
+  passed all three jobs for that commit.
 - Pull request: none was used for the owner-authorised main-branch promotion.
-  GitHub CLI remains unauthenticated, so protected settings cannot be inspected.
-- CI status: Quality run `29685451382` passed contracts, Flutter quality and
-  debug/web smoke for `1aa0c83`. The runner emitted Node 20 deprecation
+  GitHub CLI remains unauthenticated, so the required CLI-authenticated PR flow
+  and protected settings cannot be inspected.
+- CI status: Quality run `29691642152` passed contracts, Flutter quality and
+  debug/web smoke for `54dfe58`. Contracts started runner-local PostgreSQL,
+  reset all migrations without seed data, linted `public`, ran 115 pgTAP tests
+  and performed failure-safe cleanup. The runner emitted Node 20 deprecation
   warnings while forcing actions to Node 24; this was not a test/build failure.
 
 ### Tests
@@ -252,9 +266,10 @@ versioning with Android build numbers.
 - `npm run test:content-validation` passed: 14 CSV/parser/schema/duplicate,
   reference, rights, translation, safe-report and fail-closed-import tests.
 - `npm audit` reported 0 vulnerabilities for the content-contract dev tooling.
-- `supabase db reset --local --no-seed` did not run because Docker Desktop/the
-  local Docker engine is unavailable; local Supabase lint and pgTAP are not
-  reported as passed.
+- The developer workstation has no Docker engine, so no local-workstation
+  runtime result is claimed. In GitHub Actions run `29691642152`, the isolated
+  local PostgreSQL `db start`, reset without seed data, warning-fatal lint and
+  pgTAP sequence passed; pgTAP reported 115 tests and cleanup passed.
 - Android debug APK generated and verified with `aapt`; admin web output generated.
 - `flutter build appbundle --release` was intentionally rejected by the REL-03
   signing guard.

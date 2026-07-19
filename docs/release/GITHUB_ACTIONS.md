@@ -14,7 +14,7 @@ persisted credentials. The workflow has three jobs:
 
 | Job | Purpose | Output boundary |
 | --- | --- | --- |
-| `contracts` | CI policy, current-source mobile-security and quality-audit policies, runner, content-contract/content-validation and structural Supabase checks | No database runtime or remote connection |
+| `contracts` | CI policy, current-source mobile-security and quality-audit policies, runner, content-contract/content-validation and structural Supabase checks | Ephemeral Docker-backed local PostgreSQL runtime for migration reset/lint/pgTAP; no linked/remote Supabase project or deployment |
 | `flutter-quality` | Locked dependencies, Dart format, Flutter analysis/tests and content-model checks | No Android release build or publishing |
 | `build-smoke` | Android debug APK and admin web build after both quality jobs pass | Ephemeral runner output only; no upload or release artifact |
 
@@ -38,6 +38,11 @@ npm run test:flutter-runner
 npm run test:content-contract
 npm run test:content-validation
 node scripts/verify_supabase_baseline.mjs
+npx --yes supabase@2.109.1 db start --yes
+npx --yes supabase@2.109.1 db reset --local --no-seed
+npx --yes supabase@2.109.1 db lint --local --schema public --level warning --fail-on warning
+npx --yes supabase@2.109.1 test db --local supabase/tests
+npx --yes supabase@2.109.1 stop --yes --no-backup
 dart format --set-exit-if-changed .
 npm run check:flutter
 
@@ -68,9 +73,12 @@ Pop-Location
 
 The local workflow-policy verifier parses YAML and rejects changed triggers,
 workflow or job-level permissions, unreviewed jobs, action pins, non-executable
-required commands, secret references and release/Play/upload operations. Its
-unit tests also mutate the real workflow source to exercise those fail-closed
-checks.
+required commands, secret references and release/Play/upload operations. It
+also requires the exact local-only Supabase PostgreSQL start/reset/lint/pgTAP
+sequence once and in order, telemetry disabled, failure-safe cleanup, and no
+`--linked`, `--db-url`, `supabase link` or `db push` path. Its unit tests mutate
+the real workflow source to exercise those fail-closed checks. Docker is
+required for the local runtime commands; cleanup must still run after a failure.
 
 The mobile-security command is a separate read-only current-source regression
 guard. It checks the Android main source manifest, debug/profile tooling
@@ -108,10 +116,13 @@ privacy, owner-access and release-gate evidence before they can proceed.
 
 ## Verified run
 
-- Latest verified commit: `1aa0c83c7e92743f8b5aa6a0090faae44c5bba0a`
-- Quality run: [29685451382](https://github.com/aafham/Sunnah-Everyday/actions/runs/29685451382)
+- Latest verified commit: `54dfe58926751893911607e665ef2091497f04f8`
+- Quality run: [29691642152](https://github.com/aafham/Sunnah-Everyday/actions/runs/29691642152)
 - Result: all three jobs passed on 2026-07-19: contracts, Flutter quality, and
-  debug/web smoke checks.
+  debug/web smoke checks. Contracts ran isolated local PostgreSQL `db start`,
+  migration reset without seed data, warning-fatal lint, 115 pgTAP tests and
+  failure-safe cleanup; it used no remote project, credential, content or
+  release path.
 - The GitHub runner emitted Node 20 deprecation warnings while forcing the
   pinned actions to Node 24; no workflow job failed.
 - The contracts result includes the current-source mobile-security and QLT-04
