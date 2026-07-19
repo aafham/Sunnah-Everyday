@@ -38,6 +38,15 @@
 - Run Quality `29691642152` untuk `54dfe58` turut lulus dengan kontrak
   PostgreSQL lokal terasing: migrasi di-reset tanpa seed, lint dan 115 ujian
   pgTAP lulus, kemudian stack dibersihkan.
+- BE-02 kini menambah sembilan kod peranan teknikal sahaja, fungsi semakan
+  peranan `SECURITY DEFINER` dalam skema peribadi, RLS paksa dan grant kolum
+  paling minimum. Profil aktif hanya boleh melihat/mengubah nama paparan sendiri;
+  admin yang mempunyai peranan aktif hanya boleh melihat katalog peranan dan
+  kod peranan semasa sendiri. Metadata assignment, provisioning, perubahan
+  peranan sendiri dan data reviewer/sumber/kandungan kekal ditolak, termasuk
+  bagi assignment `SUPER_ADMIN`. Tiada identiti manusia, reviewer, sumber,
+  hak atau kandungan agama disemai. Run `29692641214` untuk `4df2dfa` lulus
+  semua job, lima migrasi dan 197 ujian pgTAP.
 - Onboarding setempat kini muncul sebelum shell pada pelancaran pertama. Bahasa
   Melayu ialah lalai dan English boleh dipilih semasa onboarding atau kemudian
   di Tetapan. Hanya status onboarding, bahasa, tema, kurangkan animasi dan
@@ -115,6 +124,15 @@
   local PostgreSQL `db start`, reset without seed data, lint, pgTAP and cleanup.
   It uses no remote Supabase project, `--linked`, `--db-url`, `db push`, secret
   or publication path; the developer workstation still has no Docker engine.
+- BE-02 now adds only nine technical role codes, private `SECURITY DEFINER`
+  role-check helpers, forced RLS and least-privilege column grants. An active
+  profile can read/update only its own display fields; an active assigned admin
+  can read only the role catalogue and its own current role codes. Assignment
+  metadata, provisioning, role self-escalation and reviewer/source/content
+  data remain denied, including for a `SUPER_ADMIN` assignment. No human
+  identity, reviewer, source, rights or religious-content record was seeded.
+  Quality run `29692641214` for `4df2dfa` passed all jobs, five migrations and
+  197 pgTAP tests.
 - A draft-only content intake contract now provides Dart models, five
   header-only CSV templates, JSON Schemas and guarded empty staging/approved
   boundaries. No source, reviewer, evidence or religious content has been
@@ -222,3 +240,8 @@
   Flutter quality and debug/web smoke; this branch is not recorded as integrated
   into `main`. GitHub CLI is not authenticated, so a CLI-authenticated PR or
   merge cannot be claimed from this environment.
+- BE-02 identity/RLS commit `4df2dfa` is pushed on
+  `codex/be02-admin-identity-rls`. Quality run `29692641214` passed contracts,
+  Flutter quality and debug/web smoke; this branch is not recorded as integrated
+  into `main`. GitHub CLI remains unauthenticated, so a CLI-authenticated PR or
+  merge cannot be claimed.

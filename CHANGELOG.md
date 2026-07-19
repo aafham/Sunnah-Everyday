@@ -97,15 +97,23 @@ versioning with Android build numbers.
   operational tables plus the content-tag junction, composite ownership
   constraints, timestamps and indexes. It includes no seed data or religious
   content.
-- Deny-by-default database posture: RLS is enabled and forced on every
-  application table; `PUBLIC`, `anon` and `authenticated` have no table grants
-  and no policies exist until BE-02 supplies audited least-privilege access.
+- BE-01 deny-by-default database posture: RLS is enabled and forced on every
+  application table; before BE-02, `PUBLIC`, `anon` and `authenticated` had no
+  table grants or policies.
 - BE-01 runtime CI gate: the read-only Quality contracts job now starts an
   isolated local Supabase PostgreSQL database on the ephemeral GitHub runner,
   resets migrations without seed data, fails lint warnings, runs pgTAP, and
   always removes the stack. The policy verifier pins and orders those commands
   and rejects remote/link/push flags. It uses no repository secret, remote
   Supabase project, content, release or Play operation.
+- BE-02 admin identity/RLS boundary: only the nine fixed technical role codes
+  are seeded. Private security-definer helpers, forced RLS and column-level
+  grants let an active profile read/update only its own display fields and let
+  an active assigned administrator read only role code/description plus its
+  own current role codes. Assignment metadata, reviewer/source/content tables,
+  direct provisioning and direct self-escalation (including `SUPER_ADMIN`) are
+  denied. No human account, reviewer, source, rights or religious-content
+  record was added.
 - A no-dependency schema guard and pgTAP migration/constraint test foundation.
 - Draft-only content intake foundation: a pure-Dart `content_models` package,
   five header-only CSV templates, five JSON Schemas, explicit CSV-to-JSON
@@ -147,9 +155,9 @@ versioning with Android build numbers.
 ### Known Issues
 
 - The CI database-runtime gate passed; the developer workstation still has no
-  Docker engine, so no local-workstation runtime result is claimed. BE-02
-  through BE-05 (admin access,
-  workflow/publication gates, public bundles and audit automation), CNT-03
+  Docker engine, so no local-workstation runtime result is claimed. BE-03
+  through BE-05 (workflow/publication gates, public bundles and audit
+  automation), CNT-03
   publication-bundle validation, approved data, notifications, offline cache,
   widget, Play assets and release pipeline remain incomplete.
 - Protected repository settings and pull-request creation still cannot be
@@ -178,6 +186,10 @@ versioning with Android build numbers.
   `codex/be01-runtime-verification`; it is not recorded as merged into `main`.
   Quality run [29691642152](https://github.com/aafham/Sunnah-Everyday/actions/runs/29691642152)
   passed all three jobs for that commit.
+- BE-02 identity/RLS commit `4df2dfa` is pushed on
+  `codex/be02-admin-identity-rls`; it is not recorded as merged into `main`.
+  Quality run [29692641214](https://github.com/aafham/Sunnah-Everyday/actions/runs/29692641214)
+  passed all three jobs, including five migrations and 197 pgTAP tests.
 - Pull request: none was used for the owner-authorised main-branch promotion.
   GitHub CLI remains unauthenticated, so the required CLI-authenticated PR flow
   and protected settings cannot be inspected.

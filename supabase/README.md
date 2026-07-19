@@ -2,8 +2,9 @@
 
 This directory contains versioned PostgreSQL migrations for the admin-only
 Supabase backend. It contains no project URL, API key, service-role key,
-source text, permission document, reviewer identity, religious content, or seed
-data.
+source text, permission document, reviewer identity or religious content.
+BE-02 seeds only the fixed technical role catalogue; it seeds no human profile,
+assignment, reviewer, source, rights or content data.
 
 ## BE-01 baseline
 
@@ -13,12 +14,28 @@ foreign keys, indexes and structural constraints. It also prevents a source
 from pointing at another source's permission and a content item from pointing
 at another item's version.
 
-Every application table has RLS enabled and forced, with explicit revokes for
-`PUBLIC`, `anon` and `authenticated` and zero policies. There is no public view
-or public bundle API. This is intentional: it fails closed until the following tasks add
-their audited controls.
+Every application table has RLS enabled and forced. The BE-01 baseline applied
+explicit revokes for `PUBLIC`, `anon` and `authenticated` with zero policies.
+There is no public view or public bundle API.
 
-- BE-02: admin auth/profile provisioning, role checks and least-privilege RLS.
+## BE-02 admin identity/RLS boundary
+
+BE-02 keeps the baseline fail-closed except for a narrow admin identity surface:
+
+- `public.roles` contains exactly the nine enum-defined technical role codes,
+  not people or reviewer records.
+- Private `SECURITY DEFINER` helpers use `auth.uid()` and current database
+  assignments, never JWT role metadata. They are not API-exposed.
+- An active profile can select/update only its own identifier and display-name
+  fields. An active assigned admin can select only role code/description and
+  its own unrevoked role codes.
+- There are no broad table grants, no assignment metadata/history access, and
+  no direct insert/update/delete path for profiles, roles or assignments,
+  including `SUPER_ADMIN`. Trusted database-owner provisioning remains outside
+  the client.
+- Reviewer, source, rights, draft-content, public-bundle and publication tables
+  remain inaccessible until their ordered controls are implemented.
+
 - BE-03: workflow transitions, approval separation, immutable published
   versions, rights checks and Daily Feed grade gate.
 - BE-04: validated public-bundle contract, sync and withdrawal propagation.

@@ -35,8 +35,9 @@ bundle and withdrawal contracts.
 
 `apps/admin` is a responsive Flutter web shell with route boundaries for a
 dashboard, drafts, reviews, sources and reports. It does not authenticate,
-query, fabricate or publish data yet. The structural Supabase baseline is
-present, but BE-02 auth/RLS policies and BE-03 content workflow remain pending.
+query, fabricate or publish data yet. The backend now has BE-02's narrow
+admin identity/RLS boundary, but ADM-01 client authentication/navigation and
+BE-03 content workflow remain pending.
 
 `packages/design_system` owns colour tokens, Material 3 light/dark themes and
 accessible shared primitives. It contains no licensed imagery/fonts, religious
@@ -70,10 +71,14 @@ bundle.
 ## Planned trust boundary
 
 The public app will ultimately read immutable, approved public bundles only.
-At BE-01, every application table has forced RLS, no `PUBLIC`/`anon`/
-`authenticated` table grants and no policy, so no client can read or write the
-baseline. BE-02 through BE-05 must add audited admin access, publication and
-bundle controls; Flutter UI is never the sole enforcement point. The current
+At BE-01, every application table had forced RLS, no `PUBLIC`/`anon`/
+`authenticated` table grants and no policy, so no client could read or write
+the baseline. BE-02 now adds only audited column-scoped admin identity access:
+active profiles see/update only their own display fields, while active assigned
+admins see the technical role catalogue and their own current role codes.
+Reviewer/source/content/bundle access remains closed. BE-03 through BE-05 must
+add audited publication and bundle controls; Flutter UI is never the sole
+enforcement point. The current
 private reflection envelope remains local on the public Android device.
 Content-bound bookmarks, viewed history and practice tracking cannot exist
 until a verified immutable bundle/reference contract supports them; the shell

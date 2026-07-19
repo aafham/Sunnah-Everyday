@@ -116,13 +116,13 @@ privacy, owner-access and release-gate evidence before they can proceed.
 
 ## Verified run
 
-- Latest verified commit: `54dfe58926751893911607e665ef2091497f04f8`
-- Quality run: [29691642152](https://github.com/aafham/Sunnah-Everyday/actions/runs/29691642152)
+- Latest verified commit: `4df2dfa1252b230f2a4b5170bca2b4b816c6e8ff`
+- Quality run: [29692641214](https://github.com/aafham/Sunnah-Everyday/actions/runs/29692641214)
 - Result: all three jobs passed on 2026-07-19: contracts, Flutter quality, and
   debug/web smoke checks. Contracts ran isolated local PostgreSQL `db start`,
-  migration reset without seed data, warning-fatal lint, 115 pgTAP tests and
-  failure-safe cleanup; it used no remote project, credential, content or
-  release path.
+  applied five migrations, reset without seed files, warning-fatal lint, two
+  pgTAP files / 197 tests and failure-safe cleanup; it used no remote project,
+  credential, content or release path.
 - The GitHub runner emitted Node 20 deprecation warnings while forcing the
   pinned actions to Node 24; no workflow job failed.
 - The contracts result includes the current-source mobile-security and QLT-04

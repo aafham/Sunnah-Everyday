@@ -62,12 +62,13 @@ Kotlin/Glance widget support remain planned.
 | Area | Status |
 | --- | --- |
 | Version / milestone | `0.1.0+1` development baseline / M0 closeout with M1 core experience started |
-| Completion | 42.0% weighted; PDX-01, PDX-02, PDX-03, MOB-01, MOB-02, MOB-03, MOB-05, MOB-06, MOB-07, CNT-01, CNT-02, BE-01, QLT-01, QLT-02, QLT-04 and REL-01 complete. MOB-05 is deliberately the bounded reflection slice; dependency-gated content-bound bookmarks/history/practice tracking are tracked separately as MOB-08 |
+| Completion | 45.0% weighted; PDX-01, PDX-02, PDX-03, MOB-01, MOB-02, MOB-03, MOB-05, MOB-06, MOB-07, CNT-01, CNT-02, BE-01, BE-02, QLT-01, QLT-02, QLT-04 and REL-01 complete. MOB-05 is deliberately the bounded reflection slice; dependency-gated content-bound bookmarks/history/practice tracking are tracked separately as MOB-08 |
 | App / admin / migrations | The mobile shell now has a local first-launch onboarding gate, exactly BM/English UI selection, allowlisted device UI preferences, bounded Android-only private reflections, verified System/Light/Dark settings, 90–150% text scaling and composed reduced motion, plus fail-closed Daily/status/detail views. Android accepts only the custom `sunnah://daily`, `sunnah://content` and `sunnah://correction` link hosts; every external URI is first reduced to a static safe status/error route, with no opaque identifier passed into UI, storage, network or logs. Reflections have no content reference or network/admin/analytics path; browser and unsupported platforms fail closed. Bookmarks, view history and practice tracking remain unavailable until a verified immutable public-bundle reference exists. Shared layout tokens enforce a 560 logical-pixel mobile content cap, directional mobile page insets, a direction-aware return affordance, 960 admin drawer/rail breakpoint and 1040 admin content cap. Generic RTL layout is exercised only through a widget-test override; it does not enable an RTL locale or add Arabic text/font, religious content/data, source records, backend access or publication. QLT-02 adds a device-local Android safe-shell smoke, 150% accessibility regressions and a read-only source-policy guard. QLT-04 adds a read-only direct-manifest, static Dart-network and structural-payload regression baseline; its main-source and debug-APK observations are not a signed-build, performance, privacy or Data Safety approval. The web-admin shell, shared deterministic Flutter test harness, read-only GitHub Quality workflow and fail-closed structural Supabase baseline remain implemented. An ephemeral GitHub runner now validates isolated local PostgreSQL start, migration reset without seed data, lint and pgTAP; the developer workstation still has no Docker engine |
 | Content intake | Draft-only models, schemas, header-only templates and a read-only CSV validation preview implemented; 0 imported/approved/public items |
 | Approved content | 0 items; no reviewer or source-rights records |
-| GitHub | Main was explicitly fast-forwarded to `69273cb` on 2026-07-19; `codex/sunnah-everyday-build` is retained at the same commit. BE-01 is pushed on `codex/be01-runtime-verification` at `54dfe58` and is not in `main` until a verified integration is recorded; GitHub CLI authentication remains unavailable for protected-settings inspection |
-| CI | Read-only Quality run [`29691642152`](https://github.com/aafham/Sunnah-Everyday/actions/runs/29691642152) passed contracts (including isolated local PostgreSQL reset/lint/pgTAP), Flutter quality and debug/web smoke for `54dfe58`; it cannot release or upload |
+| Admin identity/RLS | BE-02 seeds only nine technical role codes. Active assigned administrators can read the role catalogue and only their own current role codes; active profiles can read/update only their own display fields. Private security-definer helpers, forced RLS and column grants block assignment metadata, direct provisioning and self-escalation, including for a `SUPER_ADMIN` assignment. The web-admin shell still has no authentication or data client until ADM-01. No people, reviewer, source, rights or religious-content record was seeded |
+| GitHub | Main was explicitly fast-forwarded to `69273cb` on 2026-07-19; `codex/sunnah-everyday-build` is retained at the same commit. BE-02 is pushed on `codex/be02-admin-identity-rls` at `4df2dfa` and is not in `main` until a verified integration is recorded; GitHub CLI authentication remains unavailable for protected-settings inspection |
+| CI | Read-only Quality run [`29692641214`](https://github.com/aafham/Sunnah-Everyday/actions/runs/29692641214) passed contracts (including isolated local PostgreSQL reset/lint and 197 pgTAP tests), Flutter quality and debug/web smoke for `4df2dfa`; it cannot release or upload |
 | Google Play | No Console/API credential or track/app/upload state has been observed from this environment; this delivery generated no signed AAB and did not attempt an upload |
 
 Full work tracking is in [TASKS.md](TASKS.md), [PROGRESS.md](PROGRESS.md),
@@ -111,8 +112,11 @@ are documented in [the CI workflow guide](docs/release/GITHUB_ACTIONS.md). It
 does not create a release artifact, sign an AAB, use secrets, upload artifacts,
 or contact Google Play.
 
-The structural Supabase baseline has no seed data, public API access or content.
-Run `node scripts/verify_supabase_baseline.mjs` without Docker. The local
+The BE-01 structural baseline had no seed data; BE-02 adds only the fixed
+technical role catalogue plus restricted admin identity/RLS controls. There is
+still no public-content API, human identity, reviewer, source-rights or
+religious-content record. Run `node scripts/verify_supabase_baseline.mjs`
+without Docker. The local
 PostgreSQL migration, lint and pgTAP commands require Docker and are documented
 in [supabase/README.md](supabase/README.md); CI supplies an ephemeral local
 Docker database for the same sequence and never links or deploys a remote

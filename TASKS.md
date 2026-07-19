@@ -25,7 +25,7 @@ blocked work never counts as complete.
 | CNT-05 | Content/evidence | Reports, corrections and withdrawal presentation | P1 | 3 | NOT_STARTED | BE-03, MOB-03 | Report and withdrawal tests | — | M2 | |
 | CNT-06 | Content/evidence | Approved-content intake and human-review evidence | P0 | 3 | BLOCKED | Owner reviewers, source rights | 30/90/120 approved capacity only after human records | — | M4/M5 | No AI-generated religious data |
 | BE-01 | Backend/database | Initial Supabase schema and migrations | P0 | 4 | DONE | PDX-01 | Static guard and isolated GitHub Actions Docker execution (`db start`, reset without seed, lint and pgTAP) passed | `54dfe58` | M0 | 27 required tables plus a junction table; no roles, reviewers, sources, permissions or religious content seeded. Quality run [29691642152](https://github.com/aafham/Sunnah-Everyday/actions/runs/29691642152) passed; no remote project, credential, seed or religious content was added |
-| BE-02 | Backend/database | Admin auth, roles and RLS | P0 | 3 | NOT_STARTED | BE-01 | SQL RLS tests | — | M2 | Supabase project required to deploy |
+| BE-02 | Backend/database | Admin auth, roles and RLS | P0 | 3 | DONE | BE-01 | Isolated PostgreSQL migration/lint and 197 pgTAP RLS tests | `4df2dfa` | M2 | Seeds only nine technical role codes; private helpers, forced RLS and column-scoped grants expose only own allowed profile fields/current role codes. No human admin/reviewer/source/content record, remote project deployment or self-provisioning path was added |
 | BE-03 | Backend/database | Review workflow, immutable versions and publication gate | P0 | 3 | NOT_STARTED | BE-01 | SQL publication/approval tests | — | M2 | |
 | BE-04 | Backend/database | Public bundles, scheduling and sync contract | P1 | 3 | NOT_STARTED | BE-03 | Bundle/checksum/scheduling tests | — | M3 | |
 | BE-05 | Backend/database | Audit trail and server-side functions | P1 | 2 | NOT_STARTED | BE-01 | Audit/function tests | — | M2 | |
@@ -46,13 +46,16 @@ blocked work never counts as complete.
 | REL-03 | Docs & release | Play readiness, signing and release handoff | P1 | 2 | NOT_STARTED | REL-01, REL-02 | Readiness checklist and signed build proof | — | M4 | Credentials required to upload |
 | REL-04 | Docs & release | Actual Play track upload and monitoring | P0 | 1 | BLOCKED | REL-03, owner Play access, content gate | Verified Console/API result only | — | M0–M5 | Never assume account access |
 
-**Total weight:** 100. **Completed weight:** 42. **Blocked weight:** 7.
+**Total weight:** 100. **Completed weight:** 45. **Blocked weight:** 7.
 
 ## Selection rule
 
-`BE-01` is complete after its isolated GitHub Actions local-PostgreSQL runtime
-gate passed. The developer workstation still has no Docker engine, but that
-does not negate the verified runner result. `CNT-02` is complete as a read-only draft validation
+`BE-01` and `BE-02` are complete after their isolated GitHub Actions
+local-PostgreSQL runtime gates passed. The developer workstation still has no
+Docker engine, but that does not negate the verified runner results. `BE-02`
+adds only the nine technical role codes and narrowly audited private helpers,
+column grants and RLS policies; it does not deploy remotely, create a human
+identity, or expose reviewer/source/content data. `CNT-02` is complete as a read-only draft validation
 preview; it does not import or publish any content. `QLT-01`, `REL-01`,
 `MOB-02`, `MOB-03`, `PDX-02` and `PDX-03` are complete. `MOB-03` provides only a
 fail-closed, staging-safe UI state and does not present generated or unapproved
@@ -68,7 +71,8 @@ and generic recovery surfaces; it does not accept content data. `QLT-02` is
 complete with bounded device-local smoke, accessibility and source-policy
 regression coverage; it does not add content, release authority or a Data
 Safety declaration. `QLT-04` is complete as a source-scoped baseline only.
-`BE-02` is now the highest-priority unblocked task by ledger order; `BE-03` and
-`BE-05` are also unblocked by BE-01 but follow the ordered P0 backend work.
+`BE-03` is now the highest-priority unblocked task by ledger order; `BE-05`
+follows the ordered backend work. `ADM-01` is dependency-unblocked by BE-02,
+but remains after the publication-gate work in the ledger order.
 `PDX-04` remains blocked on owner support/hosting inputs, and deployment to a
 Supabase project remains separately blocked on authorised project access.
