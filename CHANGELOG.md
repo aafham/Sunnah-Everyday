@@ -56,6 +56,13 @@ versioning with Android build numbers.
   its own package directory.
 - A Flutter testing guide documents the repeatable local commands, test-data
   boundary and intentionally deferred integration/accessibility/security work.
+- REL-01 read-only GitHub Actions Quality workflow: SHA-pinned checkout, Node
+  and Flutter setup; contracts/content/schema guards; Flutter format/analyze/
+  test coverage; and debug APK/admin-web smoke builds. It has read-only
+  permissions, no secrets, caches, artifacts, Android release-AAB, Play or
+  deployment operation. The policy verifier fails closed for syntax, triggers, workflow or
+  job permissions, extra jobs, action pins, executable parity commands,
+  secret references and release/upload operations.
 
 ### Religious Content
 
@@ -68,7 +75,8 @@ versioning with Android build numbers.
   workflow/publication gates, public bundles and audit automation), CNT-03
   publication-bundle validation, approved data, notifications, offline cache,
   widget, CI, Play assets and release pipeline remain incomplete.
-- GitHub Actions are still not configured; REL-01 is the selected next task.
+- Protected repository settings and pull-request creation still cannot be
+  inspected or changed because GitHub authentication is unavailable.
 - GitHub CLI is unauthenticated; governance and application-shell commits were
   pushed through git, but no pull request has been created or updated.
 
@@ -78,9 +86,10 @@ versioning with Android build numbers.
   delivery-record commit: `ece499c`, schema-baseline commit: `3680dc1`,
   content-contract commit: `64ea492`, and content-validation commit:
   `e0aeb6f`; Flutter-test-harness commit: `458232b`, pushed to
-  `codex/sunnah-everyday-build`.
+  `codex/sunnah-everyday-build`; CI workflow/hardening commits: `1c2463d`,
+  `4ceff86` and `766e1fb`, pushed to the same branch.
 - Pull request: not created; `gh auth login` or a scoped `GH_TOKEN` is needed.
-- CI status: no workflows/runs exist yet.
+- CI status: Quality run `29677407731` passed all three jobs for `766e1fb`.
 
 ### Tests
 
@@ -89,6 +98,10 @@ versioning with Android build numbers.
 - `npm run test:flutter-runner` passed (3 tests), and `npm run check:flutter`
   passed analyzer plus widget/unit tests for `testing_utils` (1), design system
   (3), mobile (4) and admin (4).
+- `npm run test:ci-workflow` passed (7 policy tests); `npm audit` reported 0
+  vulnerabilities. Local debug APK and admin-web smoke builds passed.
+- GitHub Quality run `29677407731` passed contracts, Flutter quality and
+  debug/web smoke checks on `766e1fb`.
 - `node scripts/verify_supabase_baseline.mjs` passed; all four migrations also
   applied in an isolated PostgreSQL/PGlite structural harness.
 - `dart analyze` and `dart test` passed for `packages/content_models`.

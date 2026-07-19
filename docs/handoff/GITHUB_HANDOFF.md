@@ -10,12 +10,15 @@
 - Pushed content-contract commit: `64ea49206bdbc87ebe3cdc796ca354872735de0f`
 - Pushed content-validation commit: `e0aeb6f4a3836492e18217fb35a9e6e3487bb4b7`
 - Pushed Flutter-test-harness commit: `458232b992e5bae7db3806723b0c45c355d0419e`
+- Pushed CI workflow/hardening commits: `1c2463d`, `4ceff86` and
+  `766e1fbb4ccb78ded664216a4819c42c0246bdbc`
 - Push: successful through configured git credentials on 2026-07-19.
 - GitHub CLI/API authentication: unavailable (`gh auth status` has no logged-in
   account), so no pull request has been created or updated. No browser session
   was available as an authenticated fallback.
-- CI: no workflow exists; GitHub's public API reported zero workflow runs and
-  zero open PRs for the branch after the Flutter-test-harness push.
+- CI: Quality run [29677407731](https://github.com/aafham/Sunnah-Everyday/actions/runs/29677407731)
+  passed contracts, Flutter quality and debug/web smoke checks for `766e1fb`.
+  GitHub's public API reported zero open PRs for the branch after the CI push.
 
 ## Owner action
 
@@ -47,6 +50,9 @@ Suggested PR body:
 - Adds a private shared Flutter widget-test harness, deterministic responsive
   viewports and MediaQuery preferences, app-local router/provider harnesses,
   fatal hit-test warnings, and a root runner that tests every Flutter package.
+- Adds read-only GitHub Quality CI with SHA-pinned actions and no secret,
+  artifact, release or Play path. It verifies contracts, Flutter quality and
+  debug/web smoke builds; release signing and upload remain deferred.
 - Validation: format, analyzer and tests passed for all Flutter packages;
   content Dart/schema tests, schema static guard and isolated PostgreSQL
   structural execution passed.

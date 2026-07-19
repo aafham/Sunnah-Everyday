@@ -4,9 +4,9 @@
 
 Repository controls, content policies, Flutter workspace and shells, first
 migrations, a draft-only content model/template contract, read-only CSV
-validation preview, a repeatable local Flutter test baseline, CI, documentation,
-and weighted progress tracking. No public religious content and no Play upload
-until an app can open safely.
+validation preview, repeatable local Flutter tests, a read-only GitHub quality
+workflow, documentation, and weighted progress tracking. No public religious
+content and no Play upload until an app can open safely.
 
 ## M1 — Core Experience (`0.2.0+2`)
 

@@ -40,18 +40,19 @@ blocked work never counts as complete.
 | QLT-02 | Quality | Integration, accessibility and security testing | P1 | 2 | NOT_STARTED | QLT-01 | Integration/a11y/secret tests | — | M4 | |
 | QLT-03 | Quality | SQL/content-gate tests and coverage reporting | P0 | 2 | NOT_STARTED | CNT-02, BE-03 | Gate/RLS test scripts | — | M2 | |
 | QLT-04 | Quality | Dependency, permission, privacy and performance audit | P1 | 2 | NOT_STARTED | MOB-01 | Audits documented and clean | — | M4 | |
-| REL-01 | Docs & release | GitHub CI/CD and safe release automation | P0 | 2 | NOT_STARTED | MOB-01, QLT-01 | Workflow syntax, local parity docs | — | M0 | |
+| REL-01 | Docs & release | GitHub CI/CD and safe release automation | P0 | 2 | DONE | MOB-01, QLT-01 | Local policy/syntax tests and GitHub Quality run all pass | `766e1fb` | M0 | Read-only three-job workflow with SHA-pinned actions, no secrets/upload/release/Play path; Quality run `29677407731` passed on 2026-07-19 |
 | REL-02 | Docs & release | Store assets, metadata, release notes and privacy site | P1 | 2 | NOT_STARTED | PDX-04 | Asset/metadata validation | — | M4 | |
 | REL-03 | Docs & release | Play readiness, signing and release handoff | P1 | 2 | NOT_STARTED | REL-01, REL-02 | Readiness checklist and signed build proof | — | M4 | Credentials required to upload |
 | REL-04 | Docs & release | Actual Play track upload and monitoring | P0 | 1 | BLOCKED | REL-03, owner Play access, content gate | Verified Console/API result only | — | M0–M5 | Never assume account access |
 
-**Total weight:** 100. **Completed weight:** 15. **Blocked weight:** 4.
+**Total weight:** 100. **Completed weight:** 17. **Blocked weight:** 4.
 
 ## Selection rule
 
 `BE-01` is implemented and in review: its local Supabase runtime validation is
 pending a Docker engine. `CNT-02` is complete as a read-only draft validation
-preview; it does not import or publish any content. `QLT-01` is complete.
-`REL-01` is selected next as the available P0 M0 task now that its test-harness
-dependency has passed. Do not mark BE-01 complete or count its weight until the
-documented local migration, lint and pgTAP checks have actually passed.
+preview; it does not import or publish any content. `QLT-01` and `REL-01` are
+complete. `MOB-02` is selected next as the available P0 task: it depends only
+on the completed mobile shell. Do not mark BE-01 complete or count its weight
+until the documented local migration, lint and pgTAP checks have actually
+passed.

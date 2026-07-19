@@ -27,6 +27,11 @@
   dan admin mengasingkan setup router/provider; amaran hit-test adalah fatal.
   `npm run check:flutter` menjalankan analyze dan ujian bagi semua empat target
   Flutter dari direktori pakej yang betul.
+- Quality CI GitHub kini berjalan secara read-only dengan action dipin SHA,
+  permission `contents: read`, dan tiga job: kontrak, Flutter quality, serta
+  build debug/web smoke. Ia tidak menggunakan secrets, cache, artifact, AAB
+  release, Play Console atau deployment. Run `29677407731` lulus pada
+  `766e1fb`.
 - Tiada kandungan agama telah diterbitkan atau diluluskan.
 
 ### English
@@ -54,6 +59,11 @@
   harnesses isolate router/provider setup, hit-test warnings are fatal, and
   `npm run check:flutter` runs analysis and tests for all four Flutter targets
   from their package directories.
+- GitHub Quality CI now runs read-only with SHA-pinned actions,
+  `contents: read` permission, and three jobs for contracts, Flutter quality,
+  and debug/web build smoke checks. It uses no secrets, cache, artifacts,
+  release AAB, Play Console, or deployment path. Run `29677407731` passed on
+  `766e1fb`.
 - No religious content has been published or approved.
 
 ### Google Play
@@ -66,7 +76,7 @@
 
 ### GitHub
 
-- Branch `codex/sunnah-everyday-build` has the Flutter-test-harness commit
-  `458232b` pushed.
+- Branch `codex/sunnah-everyday-build` has the CI workflow/hardening commits
+  through `766e1fb` pushed.
 - No pull request exists: GitHub's public API reports none for the branch, and
   no authenticated GitHub CLI or browser session is available in this environment.

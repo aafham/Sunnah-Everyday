@@ -56,12 +56,12 @@ Kotlin/Glance widget support, and ARB localisation are planned.
 | Area | Status |
 | --- | --- |
 | Version / milestone | `0.1.0+1` / M0 bootstrap |
-| Completion | 15.0% weighted; PDX-01, MOB-01, CNT-01, CNT-02 and QLT-01 complete |
-| App / admin / migrations | Mobile and web-admin shells, a shared deterministic Flutter test harness, and a fail-closed structural Supabase baseline are implemented; local Supabase runtime validation is pending Docker |
+| Completion | 17.0% weighted; PDX-01, MOB-01, CNT-01, CNT-02, QLT-01 and REL-01 complete |
+| App / admin / migrations | Mobile and web-admin shells, a shared deterministic Flutter test harness, a read-only GitHub Quality workflow, and a fail-closed structural Supabase baseline are implemented; local Supabase runtime validation is pending Docker |
 | Content intake | Draft-only models, schemas, header-only templates and a read-only CSV validation preview implemented; 0 imported/approved/public items |
 | Approved content | 0 items; no reviewer or source-rights records |
-| GitHub | `458232b` pushed on feature branch `codex/sunnah-everyday-build`; public API reports no open PR, and creation or update is blocked by unavailable GitHub authentication/session |
-| CI | REL-01 quality workflow is being added; no actual workflow run is recorded yet |
+| GitHub | `766e1fb` pushed on feature branch `codex/sunnah-everyday-build`; public API reports no open PR, and creation or update is blocked by unavailable GitHub authentication/session |
+| CI | Read-only Quality run [`29677407731`](https://github.com/aafham/Sunnah-Everyday/actions/runs/29677407731) passed contracts, Flutter quality and debug/web smoke checks for `766e1fb`; it cannot release or upload |
 | Google Play | No app/AAB/upload/submission/availability |
 
 Full work tracking is in [TASKS.md](TASKS.md), [PROGRESS.md](PROGRESS.md),

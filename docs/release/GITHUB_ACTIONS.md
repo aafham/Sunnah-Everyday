@@ -85,3 +85,16 @@ do not weaken the content, signing or release gates to obtain a green run.
 REL-03 owns signed AAB and signing readiness. REL-04 owns an actual Google Play
 track upload and monitoring. Both need the documented content, security,
 privacy, owner-access and release-gate evidence before they can proceed.
+
+## Verified run
+
+- Commit: `766e1fbb4ccb78ded664216a4819c42c0246bdbc`
+- Quality run: [29677407731](https://github.com/aafham/Sunnah-Everyday/actions/runs/29677407731)
+- Result: all three jobs passed on 2026-07-19: contracts, Flutter quality, and
+  debug/web smoke checks.
+
+The first workflow run on `4ceff86` failed at design-system dependency
+resolution because that library intentionally does not commit a lockfile. The
+follow-up `766e1fb` uses normal `flutter pub get` only for that library and was
+verified by the successful run above. Neither run generated a release AAB,
+upload, Play action or deployment.

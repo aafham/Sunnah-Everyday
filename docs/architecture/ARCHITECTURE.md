@@ -12,6 +12,7 @@ packages/
   testing_utils/   Private deterministic Flutter unit/widget-test support
 supabase/          Config, four structural baseline migrations and SQL tests
 content/           Header-only templates, JSON Schemas and guarded intake boundaries
+.github/workflows/ Read-only GitHub Quality CI
 ```
 
 `apps/mobile` is currently an Android Flutter project with application ID
@@ -35,6 +36,11 @@ without creating routers, providers, API fakes or content fixtures. Mobile and
 admin test harnesses keep their application-specific setup local. The root
 Flutter runner executes each package in its own working directory because the
 monorepo root is not itself a Flutter package.
+
+`.github/workflows/quality.yml` enforces the repository's local quality parity
+on GitHub using read-only permissions. It runs contracts, Flutter quality and
+debug/web smoke jobs but cannot access secrets, publish artifacts, create a
+release, sign an AAB or contact Google Play.
 
 `packages/content_models` and `content/` define draft-only metadata shapes for
 future import tooling. `scripts/validate_content.mjs` consumes a caller-supplied

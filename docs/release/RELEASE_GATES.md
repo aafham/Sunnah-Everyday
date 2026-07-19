@@ -38,6 +38,11 @@ pipeline. It may build a debug APK and admin web smoke output on an ephemeral
 runner, but cannot sign or upload an AAB, create a release, contact Google Play
 or supply release evidence by itself. See [GitHub Actions Quality Workflow](GITHUB_ACTIONS.md).
 
+The first verified Quality run is
+[29677407731](https://github.com/aafham/Sunnah-Everyday/actions/runs/29677407731)
+for `766e1fb`; it passed all three read-only jobs. This is CI evidence only and
+does not satisfy signing, content or Play release gates.
+
 ## Content gate
 
 Public content must be immutable, approved, rights-cleared, traceable, and
