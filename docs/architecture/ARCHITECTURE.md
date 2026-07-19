@@ -9,6 +9,7 @@ apps/
 packages/
   design_system/   Shared Material 3 tokens, themes and small primitives
   content_models/  Pure-Dart draft-only content intake contract
+  testing_utils/   Private deterministic Flutter unit/widget-test support
 supabase/          Config, four structural baseline migrations and SQL tests
 content/           Header-only templates, JSON Schemas and guarded intake boundaries
 ```
@@ -27,6 +28,13 @@ present, but BE-02 auth/RLS policies and BE-03 content workflow remain pending.
 `packages/design_system` owns colour tokens, Material 3 light/dark themes and
 accessible shared primitives. It contains no licensed imagery/fonts, religious
 text or content data.
+
+`packages/testing_utils` is a private test-only Flutter package. It provides
+repeatable logical viewports, media preferences and a bounded transition helper
+without creating routers, providers, API fakes or content fixtures. Mobile and
+admin test harnesses keep their application-specific setup local. The root
+Flutter runner executes each package in its own working directory because the
+monorepo root is not itself a Flutter package.
 
 `packages/content_models` and `content/` define draft-only metadata shapes for
 future import tooling. `scripts/validate_content.mjs` consumes a caller-supplied
@@ -58,6 +66,7 @@ server.
 
 ```text
 mobile/admin UI → design_system + content_models + future domain/data packages
+mobile/admin tests → testing_utils + local application harnesses
 future data package → Drift local cache + approved public bundle contract
 Supabase baseline migrations → future workflow, rights, RLS and publication gates
 ```

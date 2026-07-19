@@ -44,9 +44,10 @@ user account, continuous location, contacts, or unneeded device permissions.
 
 ## Architecture
 
-The target monorepo contains Flutter mobile/admin apps and shared packages,
-Supabase migrations/functions/tests, a draft-only content intake contract,
-Android release materials, documentation, and GitHub Actions. Flutter stable, Dart,
+The target monorepo contains Flutter mobile/admin apps, shared packages and
+test support, Supabase migrations/functions/tests, a draft-only content intake
+contract, Android release materials, documentation, and future GitHub Actions.
+Flutter stable, Dart,
 Material 3, Riverpod, go_router, Drift, Supabase, local notifications, native
 Kotlin/Glance widget support, and ARB localisation are planned.
 
@@ -55,11 +56,11 @@ Kotlin/Glance widget support, and ARB localisation are planned.
 | Area | Status |
 | --- | --- |
 | Version / milestone | `0.1.0+1` / M0 bootstrap |
-| Completion | 13.0% weighted; PDX-01, MOB-01, CNT-01 and CNT-02 complete |
-| App / admin / migrations | Mobile and web-admin shells plus a fail-closed structural Supabase baseline are implemented; local Supabase runtime validation is pending Docker |
+| Completion | 15.0% weighted; PDX-01, MOB-01, CNT-01, CNT-02 and QLT-01 complete |
+| App / admin / migrations | Mobile and web-admin shells, a shared deterministic Flutter test harness, and a fail-closed structural Supabase baseline are implemented; local Supabase runtime validation is pending Docker |
 | Content intake | Draft-only models, schemas, header-only templates and a read-only CSV validation preview implemented; 0 imported/approved/public items |
 | Approved content | 0 items; no reviewer or source-rights records |
-| GitHub | `e0aeb6f` pushed on feature branch `codex/sunnah-everyday-build`; public API reports no open PR, and creation is blocked by unavailable GitHub authentication/session |
+| GitHub | `458232b` pushed on feature branch `codex/sunnah-everyday-build`; public API reports no open PR, and creation or update is blocked by unavailable GitHub authentication/session |
 | CI | Not configured; GitHub reports no workflow runs for this branch |
 | Google Play | No app/AAB/upload/submission/availability |
 
@@ -82,9 +83,13 @@ flutter pub get
 flutter run -d chrome
 ```
 
-Run `dart format --set-exit-if-changed .` from the repository root, then run
-`flutter analyze` and `flutter test` in `packages/design_system`, `apps/mobile`
-and `apps/admin`. The mobile Android application ID is
+Run `dart format --set-exit-if-changed .`, `npm run test:flutter-runner`, then
+`npm run check:flutter` from the repository root. The explicit runner invokes
+each Flutter workspace (`packages/testing_utils`, `packages/design_system`,
+`apps/mobile` and `apps/admin`) from its own package directory; the repository
+root itself is not a Flutter package. See
+[the Flutter testing guide](docs/testing/TESTING_GUIDE.md). The mobile Android
+application ID is
 `com.aafha.sunnaheveryday`; a debug APK was generated and inspected locally.
 
 The structural Supabase baseline has no seed data, public API access or content.

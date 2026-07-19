@@ -49,6 +49,13 @@ versioning with Android build numbers.
   gates. Structural valid/invalid fixtures contain no religious content.
 - Locale schemas and Dart draft models now reject text alongside an unavailable
   locale and reject an unavailable rationale alongside a complete locale.
+- QLT-01 Flutter test foundation: a private `testing_utils` package supplies
+  deterministic viewport, media-preference and bounded-transition helpers;
+  mobile/admin application harnesses own router/provider setup; hit-test
+  warnings are fatal; and a root Node runner invokes each Flutter target from
+  its own package directory.
+- A Flutter testing guide documents the repeatable local commands, test-data
+  boundary and intentionally deferred integration/accessibility/security work.
 
 ### Religious Content
 
@@ -61,6 +68,7 @@ versioning with Android build numbers.
   workflow/publication gates, public bundles and audit automation), CNT-03
   publication-bundle validation, approved data, notifications, offline cache,
   widget, CI, Play assets and release pipeline remain incomplete.
+- GitHub Actions are still not configured; REL-01 is the selected next task.
 - GitHub CLI is unauthenticated; governance and application-shell commits were
   pushed through git, but no pull request has been created or updated.
 
@@ -69,7 +77,8 @@ versioning with Android build numbers.
 - Governance commit: `c1b089b`, application-shell commit: `ae1cde4`, prior
   delivery-record commit: `ece499c`, schema-baseline commit: `3680dc1`,
   content-contract commit: `64ea492`, and content-validation commit:
-  `e0aeb6f` pushed to `codex/sunnah-everyday-build`.
+  `e0aeb6f`; Flutter-test-harness commit: `458232b`, pushed to
+  `codex/sunnah-everyday-build`.
 - Pull request: not created; `gh auth login` or a scoped `GH_TOKEN` is needed.
 - CI status: no workflows/runs exist yet.
 
@@ -77,6 +86,9 @@ versioning with Android build numbers.
 
 - `dart format --set-exit-if-changed .` passed.
 - `flutter analyze` and `flutter test` passed for design system, mobile and admin.
+- `npm run test:flutter-runner` passed (3 tests), and `npm run check:flutter`
+  passed analyzer plus widget/unit tests for `testing_utils` (1), design system
+  (3), mobile (4) and admin (4).
 - `node scripts/verify_supabase_baseline.mjs` passed; all four migrations also
   applied in an isolated PostgreSQL/PGlite structural harness.
 - `dart analyze` and `dart test` passed for `packages/content_models`.

@@ -22,6 +22,11 @@
   workflow server BE-03 tersedia.
 - Penjenamaan Flutter lalai telah dibuang daripada shell; aset store raster
   masih menunggu task aset release dan bukan sebahagian daripada mana-mana upload.
+- Baseline ujian Flutter kini menggunakan pakej `testing_utils` private untuk
+  viewport, MediaQuery dan transisi yang deterministik. Harness aplikasi mobile
+  dan admin mengasingkan setup router/provider; amaran hit-test adalah fatal.
+  `npm run check:flutter` menjalankan analyze dan ujian bagi semua empat target
+  Flutter dari direktori pakej yang betul.
 - Tiada kandungan agama telah diterbitkan atau diluluskan.
 
 ### English
@@ -44,6 +49,11 @@
   all writes until the BE-03 server workflow exists.
 - Default Flutter branding has been removed; reviewed raster store assets remain
   a later release task and are not part of any upload.
+- The Flutter test baseline now uses a private `testing_utils` package for
+  deterministic viewports, MediaQuery settings and transitions. Mobile/admin
+  harnesses isolate router/provider setup, hit-test warnings are fatal, and
+  `npm run check:flutter` runs analysis and tests for all four Flutter targets
+  from their package directories.
 - No religious content has been published or approved.
 
 ### Google Play
@@ -56,7 +66,7 @@
 
 ### GitHub
 
-- Branch `codex/sunnah-everyday-build` has the content-validation commit
-  `e0aeb6f` pushed.
+- Branch `codex/sunnah-everyday-build` has the Flutter-test-harness commit
+  `458232b` pushed.
 - No pull request exists: GitHub's public API reports none for the branch, and
   no authenticated GitHub CLI or browser session is available in this environment.

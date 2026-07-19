@@ -36,7 +36,7 @@ blocked work never counts as complete.
 | DEL-02 | Delivery | Local reminder, timezone and reboot behaviour | P1 | 2 | NOT_STARTED | MOB-01, DEL-01 | Scheduler/timezone tests | — | M3 | |
 | DEL-03 | Delivery | Native Android Glance widget with bridge | P0 | 3 | NOT_STARTED | DEL-01 | Widget/resizing/theme/deep-link tests | — | M3 | |
 | DEL-04 | Delivery | Background refresh and secure deep-link delivery | P1 | 1 | NOT_STARTED | DEL-01, DEL-03 | Worker/deep-link tests | — | M3 | |
-| QLT-01 | Quality | Unit/widget test harness and test utilities | P0 | 2 | NOT_STARTED | MOB-01 | `flutter test` baseline | — | M0 | |
+| QLT-01 | Quality | Unit/widget test harness and test utilities | P0 | 2 | DONE | MOB-01 | Deterministic four-target `flutter analyze`/`flutter test` baseline | `458232b` | M0 | Private shared viewport/media/transition harness, app-local setup, fatal hit-test warnings and a root runner; no integration, content or release scope added |
 | QLT-02 | Quality | Integration, accessibility and security testing | P1 | 2 | NOT_STARTED | QLT-01 | Integration/a11y/secret tests | — | M4 | |
 | QLT-03 | Quality | SQL/content-gate tests and coverage reporting | P0 | 2 | NOT_STARTED | CNT-02, BE-03 | Gate/RLS test scripts | — | M2 | |
 | QLT-04 | Quality | Dependency, permission, privacy and performance audit | P1 | 2 | NOT_STARTED | MOB-01 | Audits documented and clean | — | M4 | |
@@ -45,13 +45,13 @@ blocked work never counts as complete.
 | REL-03 | Docs & release | Play readiness, signing and release handoff | P1 | 2 | NOT_STARTED | REL-01, REL-02 | Readiness checklist and signed build proof | — | M4 | Credentials required to upload |
 | REL-04 | Docs & release | Actual Play track upload and monitoring | P0 | 1 | BLOCKED | REL-03, owner Play access, content gate | Verified Console/API result only | — | M0–M5 | Never assume account access |
 
-**Total weight:** 100. **Completed weight:** 13. **Blocked weight:** 4.
+**Total weight:** 100. **Completed weight:** 15. **Blocked weight:** 4.
 
 ## Selection rule
 
 `BE-01` is implemented and in review: its local Supabase runtime validation is
 pending a Docker engine. `CNT-02` is complete as a read-only draft validation
-preview; it does not import or publish any content. `QLT-01` is selected next
-as the available P0 M0 dependency. Do not mark BE-01 complete or count its
-weight until the documented local migration, lint and pgTAP checks have
-actually passed.
+preview; it does not import or publish any content. `QLT-01` is complete.
+`REL-01` is selected next as the available P0 M0 task now that its test-harness
+dependency has passed. Do not mark BE-01 complete or count its weight until the
+documented local migration, lint and pgTAP checks have actually passed.
