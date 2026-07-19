@@ -88,12 +88,14 @@ privacy, owner-access and release-gate evidence before they can proceed.
 
 ## Verified run
 
-- Latest verified commit: `86f80bafb97348e91417a675c1550fdf89023874`
-- Quality run: [29682293929](https://github.com/aafham/Sunnah-Everyday/actions/runs/29682293929)
+- Latest verified commit: `0f4e79bec87f4c0ed9fd62f3562d3e64d7d1e362`
+- Quality run: [29682938797](https://github.com/aafham/Sunnah-Everyday/actions/runs/29682938797)
 - Result: all three jobs passed on 2026-07-19: contracts, Flutter quality, and
   debug/web smoke checks.
 - The GitHub runner emitted Node 20 deprecation warnings while forcing the
   pinned actions to Node 24; no workflow job failed.
+- Prior private-reflection commit: `86f80bafb97348e91417a675c1550fdf89023874`
+  with successful Quality run [29682293929](https://github.com/aafham/Sunnah-Everyday/actions/runs/29682293929).
 - Prior responsive-UX commit: `56daf54e3f7bd9c98ed92a5f0c778eba75479e7d`
   with successful Quality run [29679773365](https://github.com/aafham/Sunnah-Everyday/actions/runs/29679773365).
 - Prior fail-closed-daily commit: `c8ddbebd1831ffb847ffee876006529574f68b0b`

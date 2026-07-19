@@ -134,13 +134,14 @@ versioning with Android build numbers.
   content-contract commit: `64ea492`, and content-validation commit:
   `e0aeb6f`; Flutter-test-harness commit: `458232b`, mobile-onboarding commit:
   `4913b54`, fail-closed-daily commit: `c8ddbeb`, responsive-UX commit:
-  `56daf54`, generic-RTL feature commit: `3031af2`, and private-reflection
-  feature commit: `86f80ba`, pushed to
+  `56daf54`, generic-RTL feature commit: `3031af2`, private-reflection feature
+  commit: `86f80ba`, and display-settings accessibility feature commit:
+  `0f4e79b`, pushed to
   `codex/sunnah-everyday-build`; CI workflow/hardening commits: `1c2463d`,
   `4ceff86` and `766e1fb`, pushed to the same branch.
 - Pull request: not created; `gh auth login` or a scoped `GH_TOKEN` is needed.
-- CI status: Quality run `29682293929` passed contracts, Flutter quality and
-  debug/web smoke for `86f80ba`. The runner emitted Node 20 deprecation
+- CI status: Quality run `29682938797` passed contracts, Flutter quality and
+  debug/web smoke for `0f4e79b`. The runner emitted Node 20 deprecation
   warnings while forcing actions to Node 24; this was not a test/build failure.
 
 ### Tests
@@ -194,6 +195,8 @@ versioning with Android build numbers.
   debug/web smoke checks on `3031af2`.
 - GitHub Quality run `29682293929` passed contracts, Flutter quality and
   debug/web smoke checks on `86f80ba`.
+- GitHub Quality run `29682938797` passed contracts, Flutter quality and
+  debug/web smoke checks on `0f4e79b`.
 - `node scripts/verify_supabase_baseline.mjs` passed; all four migrations also
   applied in an isolated PostgreSQL/PGlite structural harness.
 - `dart analyze` and `dart test` passed for `packages/content_models`.

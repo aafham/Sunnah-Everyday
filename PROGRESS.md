@@ -1,6 +1,6 @@
 # Progress
 
-_Last updated: 2026-07-19 (MOB-06 settings/accessibility coverage complete locally; task push/Quality run pending; BE-01 runtime verification pending)_
+_Last updated: 2026-07-19 (MOB-06 settings/accessibility delivery and remote Quality run verified; BE-01 runtime verification pending)_
 
 ## Weighted status
 
@@ -25,10 +25,10 @@ _Last updated: 2026-07-19 (MOB-06 settings/accessibility coverage complete local
 | Target version | `0.1.0+1` development baseline; M1 target remains `0.2.0+2` |
 | Current task | MOB-07 — friendly error states and deep-link app routing. MOB-04 remains dependency-blocked by DEL-01; PDX-04 needs owner support/hosting details. MOB-08 owns content-bound bookmarks, viewed history and practice tracking and remains dependency-gated by MOB-05/CNT-03/BE-04/DEL-01 rather than using fake content identifiers. BE-01 Docker-backed migration, lint and pgTAP verification remains pending |
 | Branch | `codex/sunnah-everyday-build` |
-| Last recorded task commit | `86f80ba` (`feat(mobile): add private reflection storage`); local parity, branch push and remote Quality run are verified |
+| Last recorded task commit | `0f4e79b` (`feat(mobile): strengthen display settings accessibility`); local parity, branch push and remote Quality run are verified |
 | Local checks | MOB-06: root `dart format --set-exit-if-changed .`, `npm run check:flutter` (analyzers plus testing_utils 1, design system 7, mobile 44 and admin 5 tests), Flutter-runner 3, CI-workflow 7, content-contract 5, content-validation 14, static Supabase guard, content-model analysis/tests (13), Android debug APK and admin-web smoke build passed. Widget coverage exercises System/Light/Dark selection and persistence, local/OS reduced-motion composition, bounded 90–150% nonlinear text scaling, localized BM/English semantics, large-text settings usability and theme foreground contrast. This is not a signed AAB, device security audit or Play Data Safety declaration. Docker-backed Supabase migration/lint/pgTAP have not run because no Docker engine is available. |
-| GitHub CI | Quality run [`29682293929`](https://github.com/aafham/Sunnah-Everyday/actions/runs/29682293929) passed contracts, Flutter quality and debug/web smoke for `86f80ba` on 2026-07-19. The runner emitted Node 20 deprecation warnings while forcing actions to Node 24; there was no test/build failure, release/upload/Play path |
-| GitHub push / PR | `86f80ba` pushed successfully; public GitHub API query reported 0 open PRs for the branch. `gh auth status` has no logged-in host and no authenticated browser session is available, so a PR cannot be created or edited from this environment |
+| GitHub CI | Quality run [`29682938797`](https://github.com/aafham/Sunnah-Everyday/actions/runs/29682938797) passed contracts, Flutter quality and debug/web smoke for `0f4e79b` on 2026-07-19. The runner emitted Node 20 deprecation warnings while forcing actions to Node 24; there was no test/build failure, release/upload/Play path |
+| GitHub push / PR | `0f4e79b` pushed successfully; public GitHub API query reported 0 open PRs for the branch. `gh auth status` has no logged-in host and no authenticated browser session is available, so a PR cannot be created or edited from this environment |
 | Google Play | No app, signed AAB, Console/API credential, track check, or upload |
 | Release status | No signed release AAB generated, uploaded, or submitted; local debug APK only |
 

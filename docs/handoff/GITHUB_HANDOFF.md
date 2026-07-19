@@ -15,14 +15,15 @@
 - Pushed responsive-UX commit: `56daf54e3f7bd9c98ed92a5f0c778eba75479e7d`
 - Pushed generic-RTL commit: `3031af27220f4897abfe305b63a40e2ebd8ed62b`
 - Pushed private-reflection commit: `86f80bafb97348e91417a675c1550fdf89023874`
+- Pushed display-settings accessibility commit: `0f4e79bec87f4c0ed9fd62f3562d3e64d7d1e362`
 - Pushed CI workflow/hardening commits: `1c2463d`, `4ceff86` and
   `766e1fbb4ccb78ded664216a4819c42c0246bdbc`
 - Push: successful through configured git credentials on 2026-07-19.
 - GitHub CLI authentication: unavailable (`gh auth status` has no logged-in
   account), so no pull request has been created or updated. No browser session
   was available as an authenticated fallback.
-- CI: Quality run [29682293929](https://github.com/aafham/Sunnah-Everyday/actions/runs/29682293929)
-  passed contracts, Flutter quality and debug/web smoke for `86f80ba`.
+- CI: Quality run [29682938797](https://github.com/aafham/Sunnah-Everyday/actions/runs/29682938797)
+  passed contracts, Flutter quality and debug/web smoke for `0f4e79b`.
   GitHub's public branch API query reported zero open PRs after the push.
 
 ## Owner action
@@ -71,6 +72,10 @@ Suggested PR body:
   a direction-aware return affordance, semantic app-bar headings and tests.
   The installed shell remains exactly BM/English; no Arabic locale/text/font,
   religious-content data, source record, backend or publication path is added.
+- Strengthens the display-settings accessibility contract with grouped localized
+  semantics and widget coverage for theme selection, text scale and composed
+  local/OS reduced motion. It adds no content, source, permission, account or
+  network path.
 - Validation: format, analyzer and tests passed for all Flutter packages;
   content Dart/schema tests, schema static guard and isolated PostgreSQL
   structural execution passed.
