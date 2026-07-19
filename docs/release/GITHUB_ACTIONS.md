@@ -14,7 +14,7 @@ persisted credentials. The workflow has three jobs:
 
 | Job | Purpose | Output boundary |
 | --- | --- | --- |
-| `contracts` | CI policy, current-source mobile security policy, runner, content-contract/content-validation and structural Supabase checks | No database runtime or remote connection |
+| `contracts` | CI policy, current-source mobile-security and quality-audit policies, runner, content-contract/content-validation and structural Supabase checks | No database runtime or remote connection |
 | `flutter-quality` | Locked dependencies, Dart format, Flutter analysis/tests and content-model checks | No Android release build or publishing |
 | `build-smoke` | Android debug APK and admin web build after both quality jobs pass | Ephemeral runner output only; no upload or release artifact |
 
@@ -33,6 +33,7 @@ npm ci --ignore-scripts
 npm run verify:ci-workflow
 npm run test:ci-workflow
 npm run test:mobile-security
+npm run test:quality-audit
 npm run test:flutter-runner
 npm run test:content-contract
 npm run test:content-validation
@@ -72,11 +73,22 @@ unit tests also mutate the real workflow source to exercise those fail-closed
 checks.
 
 The mobile-security command is a separate read-only current-source regression
-guard. It checks the release-source Android manifest, debug/profile tooling
+guard. It checks the Android main source manifest, debug/profile tooling
 permission allowlist, release-signing fail-closed configuration, direct mobile
 network/telemetry patterns and tracked credential-shaped files without printing
 values. It does not prove a signed artifact, resolved transitive dependency
 audit, runtime traffic posture, Play Data Safety response or release readiness.
+
+`npm run test:quality-audit` is the complementary QLT-04 read-only source-audit
+guard. It inventories six tracked direct dependency manifests, scans five
+audited Dart `lib/` roots for direct networking APIs, and requires no declared
+Flutter assets/fonts, empty content boundaries and a 512 KiB maximum for each
+candidate bundled binary. It reports policy codes, paths and dependency names
+only. It does not resolve transitive dependencies, perform CVE or license
+analysis, observe traffic or SDK behaviour, inspect a signed artifact, measure
+startup/frame/memory performance or dynamic downloads, or complete privacy,
+Data Safety, content or release gates. See
+[the QLT-04 source-audit baseline](QUALITY_AUDIT_BASELINE.md).
 
 `packages/design_system` is a library package with its lockfile intentionally
 ignored by its own `.gitignore`; its dependency resolution therefore does not
@@ -96,14 +108,18 @@ privacy, owner-access and release-gate evidence before they can proceed.
 
 ## Verified run
 
-- Latest verified commit: `2daac26c30d84db6d3ba177d01c1322fa4a38a4e`
-- Quality run: [29684226127](https://github.com/aafham/Sunnah-Everyday/actions/runs/29684226127)
+- Latest verified commit: `1aa0c83c7e92743f8b5aa6a0090faae44c5bba0a`
+- Quality run: [29685451382](https://github.com/aafham/Sunnah-Everyday/actions/runs/29685451382)
 - Result: all three jobs passed on 2026-07-19: contracts, Flutter quality, and
   debug/web smoke checks.
 - The GitHub runner emitted Node 20 deprecation warnings while forcing the
   pinned actions to Node 24; no workflow job failed.
-- The contracts result includes the current-source mobile policy guard. It is
-  not an Android-device, signed-release, privacy-form or Data Safety audit.
+- The contracts result includes the current-source mobile-security and QLT-04
+  quality-audit guards. They are not Android-device, signed-release,
+  transitive-dependency, performance, privacy-form or Data Safety audits.
+- Prior mobile quality regression commit:
+  `2daac26c30d84db6d3ba177d01c1322fa4a38a4e` with successful Quality run
+  [29684226127](https://github.com/aafham/Sunnah-Everyday/actions/runs/29684226127).
 - Prior safe-deep-link commit:
   `0437704676d4f471cf3e6aa7f27f5f598436a8ff` with successful Quality run
   [29683674702](https://github.com/aafham/Sunnah-Everyday/actions/runs/29683674702).

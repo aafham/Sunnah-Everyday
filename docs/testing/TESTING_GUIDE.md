@@ -5,8 +5,10 @@
 `QLT-01` establishes the repeatable unit and widget-test baseline for the
 Flutter workspaces. `QLT-02` extends that baseline with a bounded Android
 device smoke, 150% accessibility regressions and a read-only mobile
-source-policy check. These checks do not make a release claim, provision a
-CI service, approve religious content or complete a Data Safety/security audit.
+source-policy check. `QLT-04` adds a static direct-dependency, source-network
+and structural-payload guard. These checks do not make a release claim,
+provision a CI service, approve religious content or complete a Data
+Safety/security audit.
 
 ## Shared test support
 
@@ -39,7 +41,8 @@ Run these commands from the repository root:
 npm run test:flutter-runner  # verifies the Node runner itself
 npm run test:flutter         # Flutter unit and widget tests in every target
 npm run check:flutter        # flutter analyze for every target, then tests
-npm run test:mobile-security # shipped-source manifest/network/signing/credential guard
+npm run test:mobile-security # Android main-source manifest/network/signing/credential guard
+npm run test:quality-audit   # direct-dependency/source/payload baseline
 ```
 
 The repository root is not a Flutter package. Do not use `flutter test` or
@@ -82,15 +85,32 @@ keyboard recovery for Today and the generic safe-link recovery page. The page
 is scrollable so its recovery action remains usable at that scale.
 
 `npm run test:mobile-security` is a current-source guard in the read-only
-contracts job. It checks release-source Android manifest flags, isolated
+contracts job. It checks Android main source manifest flags, isolated
 debug/profile tooling permissions, release-signing fail-closed configuration,
 direct mobile networking/telemetry SDK and URI patterns, plus tracked
 credential-shaped files without printing values. It does not inspect resolved
 transitive dependencies, runtime traffic, a signed artifact, Play Data Safety
 answers or device-wide security posture.
 
+## QLT-04 source-audit coverage
+
+`npm run test:quality-audit` is also in the read-only contracts job. It
+inventories the six tracked direct dependency manifests and scans the five
+audited Dart `lib/` roots. It rejects unreviewed or named analytics/ads/
+network/crash SDK dependencies, direct static Dart networking APIs, declared
+Flutter assets/fonts, payloads inside the deliberately empty content boundaries,
+and candidate bundled binaries over 512 KiB. Its findings intentionally expose
+only policy codes, paths and dependency names.
+
+This is a source and structural regression baseline, not a dependency-resolution,
+CVE/license, runtime-traffic, SDK-behaviour, signed-artifact, startup/frame/
+memory, dynamic-download, privacy, Data Safety, content or release audit. The
+exact local/debug-artifact observations and re-audit triggers are in
+[the QLT-04 source-audit baseline](../release/QUALITY_AUDIT_BASELINE.md).
+
 `MOB-07` adds router/manifest widget tests under `apps/mobile/test/` for the
 current static custom-scheme boundary. They use opaque structural test tokens
 only to prove non-disclosure; they do not create a content fixture, fetch a
-bundle or exercise content delivery. Broader screen-reader, performance,
-dependency/privacy and release-security audits remain QLT-04 or later work.
+bundle or exercise content delivery. Broader screen-reader and release-security
+work remains future work; QLT-04's static source baseline does not replace
+measured performance or release-time dependency/privacy auditing.

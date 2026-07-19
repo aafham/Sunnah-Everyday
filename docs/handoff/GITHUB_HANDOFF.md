@@ -18,16 +18,18 @@
 - Pushed display-settings accessibility commit: `0f4e79bec87f4c0ed9fd62f3562d3e64d7d1e362`
 - Pushed safe-deep-link commit: `0437704676d4f471cf3e6aa7f27f5f598436a8ff`
 - Pushed mobile quality regression commit: `2daac26c30d84db6d3ba177d01c1322fa4a38a4e`
+- Pushed source-audit commit: `1aa0c83c7e92743f8b5aa6a0090faae44c5bba0a`
 - Pushed CI workflow/hardening commits: `1c2463d`, `4ceff86` and
   `766e1fbb4ccb78ded664216a4819c42c0246bdbc`
 - Push: successful through configured git credentials on 2026-07-19.
 - GitHub CLI authentication: unavailable (`gh auth status` has no logged-in
   account), so no pull request has been created or updated. No browser session
   was available as an authenticated fallback.
-- CI: Quality run [29684226127](https://github.com/aafham/Sunnah-Everyday/actions/runs/29684226127)
-  passed contracts, Flutter quality and debug/web smoke for `2daac26`.
-  The contracts job includes the current-source mobile policy guard; it is not
-  a signed-release, device-security or Data Safety audit.
+- CI: Quality run [29685451382](https://github.com/aafham/Sunnah-Everyday/actions/runs/29685451382)
+  passed contracts, Flutter quality and debug/web smoke for `1aa0c83`.
+  The contracts job includes current-source mobile-security and QLT-04 source
+  audit guards; they are not signed-release, transitive-SDK, runtime,
+  performance, device-security or Data Safety audits.
   GitHub's public branch API query reported zero open PRs after the push.
 
 ## Owner action
@@ -88,6 +90,11 @@ Suggested PR body:
   regressions and a read-only current-source mobile policy guard. The emulator
   check uses no content fixture and the source guard is not a release, runtime
   security or Data Safety declaration.
+- Adds a read-only QLT-04 source-audit baseline over direct dependency
+  manifests, static Dart network APIs in the audited roots and structural payload
+  boundaries. It records main-source and debug-artifact observations only;
+  transitive/runtime/performance/signed-release/privacy/Data Safety work remains
+  separate.
 - Validation: format, analyzer and tests passed for all Flutter packages;
   content Dart/schema tests, schema static guard and isolated PostgreSQL
   structural execution passed.

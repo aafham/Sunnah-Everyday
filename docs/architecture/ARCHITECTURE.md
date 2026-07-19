@@ -51,10 +51,12 @@ monorepo root is not itself a Flutter package.
 
 `.github/workflows/quality.yml` enforces the repository's local quality parity
 on GitHub using read-only permissions. Its contracts job includes a
-current-source mobile policy guard for manifest, direct network/signing and
-tracked credential regression patterns; it runs Flutter quality and debug/web
-smoke jobs but cannot access secrets, publish artifacts, create a release, sign
-an AAB or contact Google Play. The guard is not a runtime or release audit.
+current-source mobile policy guard for Android main-source manifest, direct
+network/signing and tracked credential regression patterns, plus the QLT-04
+direct-manifest/static-Dart/structural-payload audit. It runs Flutter quality
+and debug/web smoke jobs but cannot access secrets, publish artifacts, create a
+release, sign an AAB or contact Google Play. These guards are not transitive SDK,
+runtime, signed-release, measured-performance, privacy or Data Safety audits.
 
 `packages/content_models` and `content/` define draft-only metadata shapes for
 future import tooling. `scripts/validate_content.mjs` consumes a caller-supplied

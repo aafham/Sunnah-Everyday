@@ -1,19 +1,19 @@
 # Progress
 
-_Last updated: 2026-07-19 (QLT-02 regression delivery and remote Quality run verified; QLT-04 selected; BE-01 runtime verification pending)_
+_Last updated: 2026-07-19 (QLT-04 source-audit delivery and remote Quality run verified; no further ledger task is currently eligible; BE-01 runtime verification pending)_
 
 ## Weighted status
 
 | Measure | Value | Calculation / meaning |
 | --- | ---: | --- |
-| Overall completion | 36.0% | `DONE task weight / 100` |
-| Completed weight | 36 / 100 | PDX-01, PDX-02, PDX-03, MOB-01, MOB-02, MOB-03, MOB-05, MOB-06, MOB-07, CNT-01, CNT-02, QLT-01, QLT-02 and REL-01 are complete |
-| Remaining weight | 64 / 100 | Includes blocked work |
-| Blocked weight | 4 / 100 | CNT-06 and REL-04 |
-| Tasks completed | 14 / 39 | Ledger task count; MOB-05 was split into a completed reflection slice (weight 1) and dependency-gated MOB-08 (weight 2) without changing total weight |
-| Tasks remaining | 25 / 39 | Unfinished tasks |
-| Tasks blocked | 2 / 39 | Owner inputs/access required |
-| Software completion | 32.5% | `27 completed implementation weight / 83 implementation weight` |
+| Overall completion | 38.0% | `DONE task weight / 100` |
+| Completed weight | 38 / 100 | PDX-01, PDX-02, PDX-03, MOB-01, MOB-02, MOB-03, MOB-05, MOB-06, MOB-07, CNT-01, CNT-02, QLT-01, QLT-02, QLT-04 and REL-01 are complete |
+| Remaining weight | 62 / 100 | Includes blocked work |
+| Blocked weight | 7 / 100 | CNT-06, PDX-04 and REL-04 |
+| Tasks completed | 15 / 39 | Ledger task count; MOB-05 was split into a completed reflection slice (weight 1) and dependency-gated MOB-08 (weight 2) without changing total weight |
+| Tasks remaining | 24 / 39 | Unfinished tasks |
+| Tasks blocked | 3 / 39 | Owner inputs/access required |
+| Software completion | 34.9% | `29 completed implementation weight / 83 implementation weight` |
 | Approved religious content readiness | 0 / 120 | No approved dataset or reviewer evidence supplied |
 | Production readiness | 0.0% | Production gates are not met |
 
@@ -23,14 +23,14 @@ _Last updated: 2026-07-19 (QLT-02 regression delivery and remote Quality run ver
 | --- | --- |
 | Current milestone | M0 closeout / M1 — Core Experience started; BE-01 runtime verification remains in review |
 | Target version | `0.1.0+1` development baseline; M1 target remains `0.2.0+2` |
-| Current task | QLT-04 — dependency, permission, privacy and performance audit. It follows completed QLT-02 by ledger order. MOB-04 remains dependency-blocked by DEL-01; PDX-04 needs owner support/hosting details. MOB-08 owns content-bound bookmarks, viewed history and practice tracking and remains dependency-gated by MOB-05/CNT-03/BE-04/DEL-01 rather than using fake content identifiers. BE-01 Docker-backed migration, lint and pgTAP verification remains pending |
+| Current task | No unblocked ledger task is currently eligible. QLT-04 is complete as a source-scoped audit baseline. PDX-04 needs owner support/hosting details; BE-01 needs Docker-backed migration, lint and pgTAP verification; MOB-04, MOB-08 and all later slices remain dependency-gated. MOB-08 still owns content-bound bookmarks, viewed history and practice tracking rather than using fake content identifiers |
 | Branch | `codex/sunnah-everyday-build` |
-| Last recorded task commit | `2daac26` (`test(mobile): add safety regression gates`); local parity, branch push and remote Quality run are verified |
-| Local checks | QLT-02: root `dart format --set-exit-if-changed .` (56 files, 0 changed), mobile `flutter analyze` and 53 widget/unit tests, `npm run check:flutter` (testing_utils 1, design system 7, mobile 53 and admin 5), Flutter-runner 3, CI-workflow 8, mobile-security 6, content-contract 5, content-validation 14, static Supabase guard and content-model analysis/tests (13) passed. Android `emulator-5554` passed `flutter test integration_test/safe_shell_smoke_test.dart -d emulator-5554 -r expanded`; it clears only allowlisted UI-preference keys on the test device. Local Android debug APK and admin-web smoke builds passed. This is not a signed AAB, release/device-security audit or Play Data Safety declaration. Docker-backed Supabase migration/lint/pgTAP have not run because no Docker engine is available. |
-| GitHub CI | Quality run [`29684226127`](https://github.com/aafham/Sunnah-Everyday/actions/runs/29684226127) passed contracts, Flutter quality and debug/web smoke for `2daac26` on 2026-07-19. The job enforces only the recorded current-source mobile security policy; it has no release/upload/Play path |
-| GitHub push / PR | `2daac26` pushed successfully; public GitHub API query reported 0 open PRs for the branch. `gh auth status` has no logged-in host and no authenticated browser session is available, so a PR cannot be created or edited from this environment |
-| Google Play | No app, signed AAB, Console/API credential, track check, or upload |
-| Release status | No signed release AAB generated, uploaded, or submitted; local debug APK only |
+| Last recorded task commit | `1aa0c83` (`test(quality): add source audit baseline`); local parity, branch push and remote Quality run are verified |
+| Local checks | QLT-04: root formatting passed (57 files, 0 changed); `npm run test:quality-audit` (8), mobile-security (6), CI-workflow (9), Flutter-runner (3), content-contract (5), content-validation (14) and the static Supabase guard passed. Mobile `flutter analyze` and 55 tests, `npm run check:flutter` (testing_utils 1, design system 7, mobile 55 and admin 5), content-model analysis/tests (13), Android debug APK and admin-web smoke builds passed. `emulator-5554` passed the safe-shell integration smoke. The root Node dependency audit reported 0 high vulnerabilities, and direct Flutter dependency availability was checked; neither result is a Dart/Gradle CVE audit. The main source manifest and debug APK were inspected as recorded in [the QLT-04 baseline](docs/release/QUALITY_AUDIT_BASELINE.md). No signed AAB, performance benchmark or Play Data Safety declaration exists. Docker-backed Supabase migration/lint/pgTAP have not run because no Docker engine is available. |
+| GitHub CI | Quality run [`29685451382`](https://github.com/aafham/Sunnah-Everyday/actions/runs/29685451382) passed contracts, Flutter quality and debug/web smoke for `1aa0c83` on 2026-07-19. The contracts job includes the source-scoped quality audit and mobile-security policy guard; it has no release/upload/Play path |
+| GitHub push / PR | `1aa0c83` pushed successfully; public GitHub API query reported 0 open PRs for the branch. `gh auth status` has no logged-in host and no authenticated browser session is available, so a PR cannot be created or edited from this environment |
+| Google Play | No Console/API credential or track/app/upload state has been observed from this environment; this delivery generated no signed AAB and did not attempt an upload |
+| Release status | No signed release AAB was generated, uploaded or submitted by this delivery; local debug APK only, and Console release state is not verified |
 
 ## Production blockers
 
@@ -46,11 +46,11 @@ repository settings. See `docs/handoff/GITHUB_HANDOFF.md`.
 
 ## Next five tasks
 
-1. QLT-04: perform the separate dependency, permission, privacy and performance audit.
-2. MOB-04: implement Explore/categories/search only after DEL-01 is available.
-3. MOB-08: implement content-bound bookmarks, viewed history and practice tracking only after the verified immutable public-bundle reference contract exists.
-4. PDX-04: complete public privacy/support site only after owner support-email and hosting inputs are available.
-5. BE-01: complete Docker-backed Supabase migration, lint and pgTAP verification when a Docker engine is available.
+1. PDX-04: complete the public privacy/support site after the owner supplies support-email and hosting inputs.
+2. BE-01: complete Docker-backed Supabase migration, lint and pgTAP verification when a Docker engine is available.
+3. MOB-04: implement Explore/categories/search only after DEL-01 is available.
+4. MOB-08: implement content-bound bookmarks, viewed history and practice tracking only after the verified immutable public-bundle reference contract exists.
+5. CNT-03 / BE-03: begin the public-bundle and server publication gates only after their database prerequisites are complete.
 
 ## Update protocol
 

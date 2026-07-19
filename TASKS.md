@@ -9,7 +9,7 @@ blocked work never counts as complete.
 | PDX-01 | Product & UX | Governance, task ledger, progress, roadmap, decisions and operating rules | P0 | 3 | DONE | — | Required docs/policies/runbooks exist and are internally consistent | `c1b089b` | M0 | Documentation validation, format and analysis passed; branch push verified |
 | PDX-02 | Product & UX | Design system and mobile/admin UX specification | P1 | 2 | DONE | PDX-01 | Tokens, components, responsive/a11y requirements documented and tested in UI | `56daf54` | M0 | Shared layout tokens, 560/960/1040 responsive contract, semantic admin navigation and component/state specification; 6 design, 16 mobile and 5 admin tests plus Quality run `29679773365` passed; no content/backend path added |
 | PDX-03 | Product & UX | Localisation, RTL and accessibility baseline | P1 | 2 | DONE | MOB-01 | Exact BM/EN delegate plus semantic/scale/generic-RTL tests | `3031af2` | M1 | Directional mobile insets, direction-aware return affordance and semantic app-bar headings; test-only RTL override only. No Arabic locale/text/font, religious content/data/source, backend or publication path; Quality run `29680455827` passed |
-| PDX-04 | Product & UX | Public privacy/support site, terms and legal copy | P1 | 3 | NOT_STARTED | PDX-01 | Static pages and hosting handoff; no invented contact details | — | M4 | Owner support email/hosting needed to deploy |
+| PDX-04 | Product & UX | Public privacy/support site, terms and legal copy | P1 | 3 | BLOCKED | PDX-01, owner support/hosting inputs | Static pages and hosting handoff; no invented contact details | — | M4 | Owner support email and hosting decision are required; no safe placeholder contact details may be invented |
 | MOB-01 | Flutter core | Flutter workspace, application architecture, app/admin shell | P0 | 4 | DONE | PDX-01 | `flutter analyze`, shell tests, Android debug and web build | `ae1cde4` | M0 | Material 3 mobile/admin shells, shared design system, safe empty states and fail-closed release guard implemented |
 | MOB-02 | Flutter core | Onboarding, local preferences and language selection | P0 | 3 | DONE | MOB-01 | Widget tests for persistence/locales | `4913b54` | M1 | First-launch gate, allowlisted on-device UI preferences and BM/English ARB shell; 9 mobile tests, debug APK and Quality run `29678240092` passed; no content data added |
 | MOB-03 | Flutter core | Today, daily-card and safe detail views | P0 | 4 | DONE | MOB-01, CNT-01 | UI/state tests; only staging-safe data | `c8ddbeb` | M1 | Fail-closed reader/state, static safe-detail route and unavailable card only; no draft/religious content. 15 mobile tests, debug APK and Quality run `29678798552` passed |
@@ -40,13 +40,13 @@ blocked work never counts as complete.
 | QLT-01 | Quality | Unit/widget test harness and test utilities | P0 | 2 | DONE | MOB-01 | Deterministic four-target `flutter analyze`/`flutter test` baseline | `458232b` | M0 | Private shared viewport/media/transition harness, app-local setup, fatal hit-test warnings and a root runner; no integration, content or release scope added |
 | QLT-02 | Quality | Integration, accessibility and security testing | P1 | 2 | DONE | QLT-01 | Android emulator smoke, 150% accessibility/recovery semantics and source/credential policy tests | `2daac26` | M4 | `emulator-5554` safe-shell smoke, 150% BM/English accessibility regressions and a read-only mobile security policy guard passed. Quality run `29684226127` passed contracts, Flutter quality and debug/web smoke. The guard is a current-source baseline, not a release, Data Safety or comprehensive device-security audit. |
 | QLT-03 | Quality | SQL/content-gate tests and coverage reporting | P0 | 2 | NOT_STARTED | CNT-02, BE-03 | Gate/RLS test scripts | — | M2 | |
-| QLT-04 | Quality | Dependency, permission, privacy and performance audit | P1 | 2 | NOT_STARTED | MOB-01 | Audits documented and clean | — | M4 | |
+| QLT-04 | Quality | Dependency, permission, privacy and performance audit | P1 | 2 | DONE | MOB-01 | Audits documented and clean | `1aa0c83` | M4 | Read-only source baseline inventories six direct manifests, five audited Dart `lib/` roots and structural asset/content boundaries; it removes main-source package visibility/`PROCESS_TEXT` declarations and tests named credential ignores. Local debug APK inspection and Quality run `29685451382` passed, but this is not a transitive/runtime/performance/signed-release/privacy/Data Safety or content-gate audit. |
 | REL-01 | Docs & release | GitHub CI/CD and safe release automation | P0 | 2 | DONE | MOB-01, QLT-01 | Local policy/syntax tests and GitHub Quality run all pass | `766e1fb` | M0 | Read-only three-job workflow with SHA-pinned actions, no secrets/upload/release/Play path; Quality run `29677407731` passed on 2026-07-19 |
 | REL-02 | Docs & release | Store assets, metadata, release notes and privacy site | P1 | 2 | NOT_STARTED | PDX-04 | Asset/metadata validation | — | M4 | |
 | REL-03 | Docs & release | Play readiness, signing and release handoff | P1 | 2 | NOT_STARTED | REL-01, REL-02 | Readiness checklist and signed build proof | — | M4 | Credentials required to upload |
 | REL-04 | Docs & release | Actual Play track upload and monitoring | P0 | 1 | BLOCKED | REL-03, owner Play access, content gate | Verified Console/API result only | — | M0–M5 | Never assume account access |
 
-**Total weight:** 100. **Completed weight:** 36. **Blocked weight:** 4.
+**Total weight:** 100. **Completed weight:** 38. **Blocked weight:** 7.
 
 ## Selection rule
 
@@ -66,7 +66,9 @@ Quality verification. `MOB-07` is complete with strict static deep-link routing
 and generic recovery surfaces; it does not accept content data. `QLT-02` is
 complete with bounded device-local smoke, accessibility and source-policy
 regression coverage; it does not add content, release authority or a Data
-Safety declaration. `MOB-04` remains blocked by `DEL-01`; `PDX-04` needs owner
-support/hosting details. `QLT-04` is the next highest available unblocked task
-by ledger order. Do not mark BE-01 complete or count its weight until the
-documented local migration, lint and pgTAP checks have actually passed.
+Safety declaration. `QLT-04` is complete as a source-scoped baseline only.
+No further ledger task is currently eligible under the recorded prerequisites:
+`PDX-04` needs owner support/hosting details, `BE-01` needs a Docker engine for
+runtime verification, and the remaining work is dependency-gated. Do not mark
+BE-01 complete or count its weight until the documented local migration, lint
+and pgTAP checks have actually passed.

@@ -88,6 +88,14 @@
   memeriksa manifest sumber, pola rangkaian/SDK produksi, konfigurasi signing
   release dan calon credential yang ditrack secara read-only. Ini bukan audit
   release, Data Safety atau keselamatan peranti menyeluruh.
+- QLT-04 menambah baseline audit sumber yang read-only: enam manifest dependency
+  langsung yang ditrack, lima akar `lib/` Dart yang diaudit, deklarasi aset/font Flutter,
+  boundary kandungan kosong dan fail binari calon diperiksa secara struktur.
+  Manifest sumber utama Android tiada `<queries>` atau `PROCESS_TEXT`, manakala
+  debug/profile sengaja menggunakan `INTERNET` untuk tooling Flutter. APK debug
+  yang diperiksa mengandungi `INTERNET`, permission penerima dinamik khusus app
+  dan `debuggable=true`; ia bukan bukti release atau Data Safety. Audit ini tidak
+  mengaudit dependency transitif, trafik runtime, tingkah laku SDK atau prestasi.
 - Tiada kandungan agama telah diterbitkan atau diluluskan.
 
 ### English
@@ -172,20 +180,28 @@
   source manifests, production networking/SDK patterns, release-signing
   configuration and tracked credential candidates. This is not a release,
   Data Safety or comprehensive device-security audit.
+- QLT-04 adds a read-only source-audit baseline over six tracked direct
+  dependency manifests, five audited Dart `lib/` roots, Flutter asset/font
+  declarations, empty content boundaries and candidate binary payloads. The
+  Android main source manifest has no `<queries>` or `PROCESS_TEXT`; debug/profile
+  intentionally use `INTERNET` for Flutter tooling. The inspected debug APK has
+  `INTERNET`, an app-private dynamic-receiver permission and `debuggable=true`,
+  so it is not release or Data Safety evidence. The audit does not cover
+  transitive dependencies, runtime traffic, SDK behaviour or performance.
 - No religious content has been published or approved.
 
 ### Google Play
 
-- Track: none
-- Version code: none
-- Upload status: no signed release AAB generated or uploaded; local debug APK only
-- Review status: not submitted
-- Availability: not available
+- Track: not verified from this environment
+- Version code: no Play release version observed
+- Upload status: no signed release AAB generated/uploaded by this delivery; local debug APK only
+- Review status: not verified from this environment
+- Availability: not verified from this environment
 
 ### GitHub
 
-- Branch `codex/sunnah-everyday-build` has the mobile quality regression commit
-  `2daac26` pushed. Its Quality run `29684226127` passed
+- Branch `codex/sunnah-everyday-build` has the source-audit commit `1aa0c83`
+  pushed. Its Quality run `29685451382` passed
   contracts, Flutter quality and debug/web smoke. No release, AAB or Play
   operation exists in the workflow.
 - No pull request exists: GitHub's public API reports none for the branch, and

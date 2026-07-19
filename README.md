@@ -62,13 +62,13 @@ Kotlin/Glance widget support remain planned.
 | Area | Status |
 | --- | --- |
 | Version / milestone | `0.1.0+1` development baseline / M0 closeout with M1 core experience started |
-| Completion | 36.0% weighted; PDX-01, PDX-02, PDX-03, MOB-01, MOB-02, MOB-03, MOB-05, MOB-06, MOB-07, CNT-01, CNT-02, QLT-01, QLT-02 and REL-01 complete. MOB-05 is deliberately the bounded reflection slice; dependency-gated content-bound bookmarks/history/practice tracking are tracked separately as MOB-08 |
-| App / admin / migrations | The mobile shell now has a local first-launch onboarding gate, exactly BM/English UI selection, allowlisted device UI preferences, bounded Android-only private reflections, verified System/Light/Dark settings, 90–150% text scaling and composed reduced motion, plus fail-closed Daily/status/detail views. Android accepts only the custom `sunnah://daily`, `sunnah://content` and `sunnah://correction` link hosts; every external URI is first reduced to a static safe status/error route, with no opaque identifier passed into UI, storage, network or logs. Reflections have no content reference or network/admin/analytics path; browser and unsupported platforms fail closed. Bookmarks, view history and practice tracking remain unavailable until a verified immutable public-bundle reference exists. Shared layout tokens enforce a 560 logical-pixel mobile content cap, directional mobile page insets, a direction-aware return affordance, 960 admin drawer/rail breakpoint and 1040 admin content cap. Generic RTL layout is exercised only through a widget-test override; it does not enable an RTL locale or add Arabic text/font, religious content/data, source records, backend access or publication. QLT-02 adds a device-local Android safe-shell smoke, 150% accessibility regressions and a read-only source-policy guard; it is not a signed-build, Data Safety or comprehensive device-security audit. The web-admin shell, shared deterministic Flutter test harness, read-only GitHub Quality workflow and fail-closed structural Supabase baseline remain implemented; local Supabase runtime validation is pending Docker |
+| Completion | 38.0% weighted; PDX-01, PDX-02, PDX-03, MOB-01, MOB-02, MOB-03, MOB-05, MOB-06, MOB-07, CNT-01, CNT-02, QLT-01, QLT-02, QLT-04 and REL-01 complete. MOB-05 is deliberately the bounded reflection slice; dependency-gated content-bound bookmarks/history/practice tracking are tracked separately as MOB-08 |
+| App / admin / migrations | The mobile shell now has a local first-launch onboarding gate, exactly BM/English UI selection, allowlisted device UI preferences, bounded Android-only private reflections, verified System/Light/Dark settings, 90–150% text scaling and composed reduced motion, plus fail-closed Daily/status/detail views. Android accepts only the custom `sunnah://daily`, `sunnah://content` and `sunnah://correction` link hosts; every external URI is first reduced to a static safe status/error route, with no opaque identifier passed into UI, storage, network or logs. Reflections have no content reference or network/admin/analytics path; browser and unsupported platforms fail closed. Bookmarks, view history and practice tracking remain unavailable until a verified immutable public-bundle reference exists. Shared layout tokens enforce a 560 logical-pixel mobile content cap, directional mobile page insets, a direction-aware return affordance, 960 admin drawer/rail breakpoint and 1040 admin content cap. Generic RTL layout is exercised only through a widget-test override; it does not enable an RTL locale or add Arabic text/font, religious content/data, source records, backend access or publication. QLT-02 adds a device-local Android safe-shell smoke, 150% accessibility regressions and a read-only source-policy guard. QLT-04 adds a read-only direct-manifest, static Dart-network and structural-payload regression baseline; its main-source and debug-APK observations are not a signed-build, performance, privacy or Data Safety approval. The web-admin shell, shared deterministic Flutter test harness, read-only GitHub Quality workflow and fail-closed structural Supabase baseline remain implemented; local Supabase runtime validation is pending Docker |
 | Content intake | Draft-only models, schemas, header-only templates and a read-only CSV validation preview implemented; 0 imported/approved/public items |
 | Approved content | 0 items; no reviewer or source-rights records |
-| GitHub | `2daac26` pushed on feature branch `codex/sunnah-everyday-build`; the public GitHub API reports 0 open pull requests for the branch, and creation or update is blocked by unavailable GitHub CLI authentication/session |
-| CI | Read-only Quality run [`29684226127`](https://github.com/aafham/Sunnah-Everyday/actions/runs/29684226127) passed contracts, Flutter quality and debug/web smoke for `2daac26`; it cannot release or upload |
-| Google Play | No app/AAB/upload/submission/availability |
+| GitHub | `1aa0c83` pushed on feature branch `codex/sunnah-everyday-build`; the public GitHub API reports 0 open pull requests for the branch, and creation or update is blocked by unavailable GitHub CLI authentication/session |
+| CI | Read-only Quality run [`29685451382`](https://github.com/aafham/Sunnah-Everyday/actions/runs/29685451382) passed contracts, Flutter quality and debug/web smoke for `1aa0c83`; it cannot release or upload |
+| Google Play | No Console/API credential or track/app/upload state has been observed from this environment; this delivery generated no signed AAB and did not attempt an upload |
 
 Full work tracking is in [TASKS.md](TASKS.md), [PROGRESS.md](PROGRESS.md),
 [ROADMAP.md](ROADMAP.md), and [DECISIONS.md](DECISIONS.md). The current
@@ -91,8 +91,9 @@ flutter pub get
 flutter run -d chrome
 ```
 
-Run `dart format --set-exit-if-changed .`, `npm run test:flutter-runner`, then
-`npm run check:flutter` from the repository root. The explicit runner invokes
+Run `dart format --set-exit-if-changed .`, `npm run test:flutter-runner`,
+`npm run test:quality-audit`, then `npm run check:flutter` from the repository
+root. The explicit runner invokes
 each Flutter workspace (`packages/testing_utils`, `packages/design_system`,
 `apps/mobile` and `apps/admin`) from its own package directory; the repository
 root itself is not a Flutter package. See
@@ -135,8 +136,8 @@ structural test records, never religious data. See
 
 ## Releases and Google Play
 
-No signed release AAB has been generated or uploaded. A local debug APK exists
-for development verification only. Internal Testing is the highest possible
+No signed release AAB has been generated or uploaded by this delivery. A local
+debug APK exists for development verification only. Internal Testing is the highest possible
 future track while only staging content exists; Production is blocked
 by approved content, reviewers, source rights, privacy/support URL, signing,
 Play access, and release gates. See [release runbooks](docs/release/) and

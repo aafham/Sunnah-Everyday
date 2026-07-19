@@ -31,10 +31,11 @@ assumed track.
 ## M4 — Beta (`0.9.0`)
 
 Full UI/admin quality, privacy/site/store preparation, accessibility/security
-and pre-launch checks. The QLT-02 device-local regression baseline is complete,
-but QLT-04's broader dependency, permission, privacy and performance audit
-remains required. Open Testing only if the applicable content gate and Console
-eligibility pass; otherwise use Closed Testing or Internal Testing.
+and pre-launch checks. The QLT-02 device-local regression and QLT-04
+source-scoped audit baselines are complete. A release-time transitive dependency,
+permission, runtime traffic, privacy/Data Safety, device and measured performance
+audit remains required. Open Testing only if the applicable content gate and
+Console eligibility pass; otherwise use Closed Testing or Internal Testing.
 
 ## M5 — Production (`1.0.0`)
 

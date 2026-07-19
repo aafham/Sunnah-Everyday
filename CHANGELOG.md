@@ -68,10 +68,21 @@ versioning with Android build numbers.
   onboarding, static approved-content states, navigation and Settings without
   a content fixture; 150% BM/English semantic, focus, keyboard-recovery and
   opaque-token non-disclosure regressions protect the safe shell. A read-only
-  CI source-policy test fails closed for release-manifest weakening, unreviewed
+  CI source-policy test fails closed for Android main source manifest weakening, unreviewed
   production network SDK/source patterns, release signing material and tracked
   credential-shaped files. It is not a release, Data Safety or comprehensive
   device-security audit.
+- QLT-04 static source-audit baseline: a read-only guard inventories the six
+  tracked direct dependency manifests, scans five audited Dart `lib/` roots
+  for direct network APIs, and requires no declared Flutter assets/fonts, empty
+  content boundaries and bounded candidate binary payloads. The Android main
+  source manifest has no package-visibility `<queries>` or `PROCESS_TEXT`
+  declaration; debug/profile source manifests intentionally retain `INTERNET`
+  for Flutter tooling. Named credential-file ignores and exact source tests are
+  regression controls, not proof that every possible secret filename is caught.
+  The baseline does not resolve transitive dependencies, observe runtime traffic
+  or SDK behaviour, measure performance, inspect a signed release, or complete
+  a privacy/Data Safety/content/release audit.
 - Versioned BM/English ARB source and generated localizations now cover the
   existing mobile shell copy. They add no religious-content records or claims.
 - Flutter web admin shell with responsive navigation and explicit backend setup
@@ -151,13 +162,13 @@ versioning with Android build numbers.
   `4913b54`, fail-closed-daily commit: `c8ddbeb`, responsive-UX commit:
   `56daf54`, generic-RTL feature commit: `3031af2`, private-reflection feature
   commit: `86f80ba`, and display-settings accessibility feature commit:
-  `0f4e79b`, safe-deep-link feature commit: `0437704`, and mobile quality
-  regression commit: `2daac26`, pushed to
+  `0f4e79b`, safe-deep-link feature commit: `0437704`, mobile quality
+  regression commit: `2daac26`, and source-audit commit: `1aa0c83`, pushed to
   `codex/sunnah-everyday-build`; CI workflow/hardening commits: `1c2463d`,
   `4ceff86` and `766e1fb`, pushed to the same branch.
 - Pull request: not created; `gh auth login` or a scoped `GH_TOKEN` is needed.
-- CI status: Quality run `29684226127` passed contracts, Flutter quality and
-  debug/web smoke for `2daac26`. The runner emitted Node 20 deprecation
+- CI status: Quality run `29685451382` passed contracts, Flutter quality and
+  debug/web smoke for `1aa0c83`. The runner emitted Node 20 deprecation
   warnings while forcing actions to Node 24; this was not a test/build failure.
 
 ### Tests

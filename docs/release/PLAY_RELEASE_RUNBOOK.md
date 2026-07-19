@@ -16,13 +16,19 @@ Run, retaining concise results:
 
 ```powershell
 dart format --set-exit-if-changed .
-flutter analyze
-flutter test
+npm run test:mobile-security
+npm run test:quality-audit
+npm run check:flutter
+
+Push-Location apps/mobile
 flutter build appbundle --release
+Pop-Location
 ```
 
 Run any project-specific integration/content/Supabase/security/permission
-checks as they are added. Do not treat a failed or skipped check as passed.
+checks as they are added. Do not treat a failed or skipped check as passed. The
+root is not a Flutter package, so run Flutter analysis/tests through
+`npm run check:flutter` or from the relevant package directory.
 Inspect the generated AAB path, application ID, version code, and checksum.
 
 ## Release preparation

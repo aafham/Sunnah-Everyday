@@ -55,9 +55,13 @@ cleared through the same scoped key. It does not expose reflection text to an
 admin, a network endpoint, analytics, or an export feature. Browser and
 unsupported platforms fail closed.
 
-The app manifest currently contains no declared permission and disables backup
-with legacy and Android 12+ XML exclusion rules. This is implementation
-evidence only: it does not establish secure erasure, universal OEM transfer
-behaviour, third-party SDK behaviour, encryption claims, or a completed Play
+The Android main source manifest currently has no `<uses-permission>`, disables
+backup with legacy and Android 12+ XML exclusion rules, and has no `<queries>`
+or `PROCESS_TEXT` declaration. Debug/profile source manifests intentionally
+declare `INTERNET` for Flutter tooling. The locally inspected debug APK also
+contains `INTERNET`, an app-private dynamic-receiver permission and
+`android:debuggable="true"`; it is not release evidence. These observations do
+not establish secure erasure, universal OEM transfer behaviour, third-party SDK
+behaviour, encryption, runtime traffic, a release manifest or a completed Play
 Data Safety form. A release-time manifest, dependency, traffic and device audit
 is still mandatory.

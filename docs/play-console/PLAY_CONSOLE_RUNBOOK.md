@@ -4,8 +4,10 @@
 
 Use a real authenticated owner/developer account or least-privilege Play
 Developer API service account. Do not bypass MFA, invent identity answers, or
-store secrets in the repository. If access is unavailable, prepare local
-artifacts and use `docs/handoff/PLAY_CONSOLE_HANDOFF.md`; do not claim upload.
+store secrets in the repository. If access is unavailable, record the exact
+blocker in `PROGRESS.md` and follow
+[`docs/release/PLAY_RELEASE_RUNBOOK.md`](../release/PLAY_RELEASE_RUNBOOK.md);
+do not claim upload.
 
 Before creating an app, confirm package ID availability in the actual account
 and match it to Android configuration. Proposed setup:
