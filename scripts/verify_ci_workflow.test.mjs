@@ -127,3 +127,78 @@ test('workflow verifier requires the quality audit command', () => {
   assert.equal(result.valid, false);
   assert.ok(result.findings.some(({ code }) => code === 'CI_PARITY_COMMAND'));
 });
+
+test('workflow verifier rejects remote Supabase targets', () => {
+  const result = validateCiWorkflowText(
+    workflowSource.replace(
+      'npx --yes supabase@2.109.1 db reset --local --no-seed',
+      'npx --yes supabase@2.109.1 db reset --linked --no-seed',
+    ),
+  );
+
+  assert.equal(result.valid, false);
+  assert.ok(
+    result.findings.some(({ code }) => code === 'CI_PROHIBITED_OPERATION'),
+  );
+  assert.ok(result.findings.some(({ code }) => code === 'CI_PARITY_COMMAND'));
+});
+
+test('workflow verifier allowlists only local Supabase commands', () => {
+  const result = validateCiWorkflowText(
+    workflowSource.replace(
+      'npx --yes supabase@2.109.1 test db --local supabase/tests',
+      'npx --yes supabase@2.109.1 db push',
+    ),
+  );
+
+  assert.equal(result.valid, false);
+  assert.ok(
+    result.findings.some(
+      ({ code }) => code === 'CI_SUPABASE_COMMAND_ALLOWLIST',
+    ),
+  );
+  assert.ok(
+    result.findings.some(({ code }) => code === 'CI_PROHIBITED_OPERATION'),
+  );
+});
+
+test('workflow verifier requires failure-safe Supabase cleanup', () => {
+  const result = validateCiWorkflowText(
+    workflowSource.replace('if: always()', 'if: success()'),
+  );
+
+  assert.equal(result.valid, false);
+  assert.ok(
+    result.findings.some(({ code }) => code === 'CI_SUPABASE_CLEANUP'),
+  );
+});
+
+test('workflow verifier rejects early or duplicate Supabase cleanup', () => {
+  const result = validateCiWorkflowText(
+    workflowSource
+      .replace(
+        '      - name: Verify local Supabase migrations and database guards',
+        "      - name: Remove local Supabase database stack early\n        if: always()\n        run: npx --yes supabase@2.109.1 stop --yes --no-backup\n      - name: Verify local Supabase migrations and database guards",
+      )
+      .replace('if: always()', 'if: success()'),
+  );
+
+  assert.equal(result.valid, false);
+  assert.ok(
+    result.findings.some(({ code }) => code === 'CI_SUPABASE_CLEANUP'),
+  );
+});
+
+test('workflow verifier requires local Supabase telemetry to stay disabled', () => {
+  const result = validateCiWorkflowText(
+    workflowSource.replace(
+      "SUPABASE_TELEMETRY_DISABLED: '1'",
+      "SUPABASE_TELEMETRY_DISABLED: '0'",
+    ),
+  );
+
+  assert.equal(result.valid, false);
+  assert.ok(
+    result.findings.some(({ code }) => code === 'CI_SUPABASE_TELEMETRY'),
+  );
+});

@@ -20,6 +20,16 @@ const pinnedActions = Object.freeze({
     'subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2',
 });
 
+const localSupabaseCommands = Object.freeze({
+  start:
+    'npx --yes supabase@2.109.1 start --yes --exclude analytics,edge-runtime,functions,imgproxy,inbucket,kong,meta,realtime,rest,storage,studio,vector',
+  reset: 'npx --yes supabase@2.109.1 db reset --local --no-seed',
+  lint: 'npx --yes supabase@2.109.1 db lint --local --schema public --level warning --fail-on warning',
+  test: 'npx --yes supabase@2.109.1 test db --local supabase/tests',
+  stop: 'npx --yes supabase@2.109.1 stop --yes --no-backup',
+});
+const localSupabaseCommandSet = new Set(Object.values(localSupabaseCommands));
+
 const requiredCommands = Object.freeze([
   'npm ci --ignore-scripts',
   'npm run test:ci-workflow',
@@ -29,6 +39,11 @@ const requiredCommands = Object.freeze([
   'npm run test:content-contract',
   'npm run test:content-validation',
   'node scripts/verify_supabase_baseline.mjs',
+  localSupabaseCommands.start,
+  localSupabaseCommands.reset,
+  localSupabaseCommands.lint,
+  localSupabaseCommands.test,
+  localSupabaseCommands.stop,
   'dart format --set-exit-if-changed .',
   'npm run check:flutter',
   'dart analyze',
@@ -49,6 +64,9 @@ const prohibitedPatterns = Object.freeze([
   /upload-artifact/i,
   /gh\s+release/i,
   /create-release/i,
+  /--linked\b/i,
+  /--db-url\b/i,
+  /\bsupabase(?:@[^\s]+)?\s+(?:link|db\s+push)\b/i,
 ]);
 
 function addFinding(findings, code, detail) {
@@ -65,12 +83,20 @@ function workflowSteps(workflow) {
   );
 }
 
-function workflowRunLines(workflow) {
-  return workflowSteps(workflow)
+function jobRunLines(job) {
+  const steps = Array.isArray(job?.steps) ? job.steps : [];
+  return steps
     .map((step) => (typeof step?.run === 'string' ? step.run : ''))
     .flatMap((run) => run.split('\n'))
     .map((line) => line.trim())
     .filter((line) => line.length > 0 && !line.startsWith('#'));
+}
+
+function workflowRunLines(workflow) {
+  if (workflow?.jobs == null || typeof workflow.jobs !== 'object') {
+    return [];
+  }
+  return Object.values(workflow.jobs).flatMap(jobRunLines);
 }
 
 function validateJobShape(workflow, findings) {
@@ -222,6 +248,72 @@ function validateActionSafety(workflow, findings) {
   }
 }
 
+function validateSupabaseRuntimeSafety(workflow, findings) {
+  if (workflow?.jobs?.contracts?.env?.SUPABASE_TELEMETRY_DISABLED !== '1') {
+    addFinding(
+      findings,
+      'CI_SUPABASE_TELEMETRY',
+      'The local Supabase runtime must disable optional CLI telemetry.',
+    );
+  }
+
+  const contractsSteps = Array.isArray(workflow?.jobs?.contracts?.steps)
+    ? workflow.jobs.contracts.steps
+    : [];
+  const contractsRunLines = new Set(jobRunLines(workflow?.jobs?.contracts));
+  for (const command of Object.values(localSupabaseCommands)) {
+    if (!contractsRunLines.has(command)) {
+      addFinding(
+        findings,
+        'CI_SUPABASE_RUNTIME_LOCATION',
+        'Local Supabase runtime validation must remain in the contracts job.',
+      );
+      break;
+    }
+  }
+
+  for (const line of workflowRunLines(workflow)) {
+    if (
+      /\bsupabase(?:@[^\s]+)?\b/i.test(line) &&
+      !localSupabaseCommandSet.has(line)
+    ) {
+      addFinding(
+        findings,
+        'CI_SUPABASE_COMMAND_ALLOWLIST',
+        'Only the reviewed local Supabase commands are allowed in this workflow.',
+      );
+      break;
+    }
+  }
+
+  const runtimeValidationStepIndex = contractsSteps.findIndex((step) => {
+    const runLines = new Set(jobRunLines({ steps: [step] }));
+    return [
+      localSupabaseCommands.start,
+      localSupabaseCommands.reset,
+      localSupabaseCommands.lint,
+      localSupabaseCommands.test,
+    ].every((command) => runLines.has(command));
+  });
+  const stopSteps = contractsSteps
+    .map((step, index) => ({ step, index }))
+    .filter(({ step }) => step?.run === localSupabaseCommands.stop);
+  const stopStep = stopSteps[0];
+  if (
+    runtimeValidationStepIndex < 0 ||
+    stopSteps.length !== 1 ||
+    stopStep == null ||
+    stopStep.index <= runtimeValidationStepIndex ||
+    stopStep.step.if !== 'always()'
+  ) {
+    addFinding(
+      findings,
+      'CI_SUPABASE_CLEANUP',
+      'The local Supabase stack must be removed after validation even when it fails.',
+    );
+  }
+}
+
 /// Validates the parsed GitHub Actions workflow against this repository's
 /// read-only quality policy. Findings are safe policy codes and descriptions.
 export function validateCiWorkflowText(source) {
@@ -278,6 +370,7 @@ export function validateCiWorkflowText(source) {
 
   validateJobShape(workflow, findings);
   validateActionSafety(workflow, findings);
+  validateSupabaseRuntimeSafety(workflow, findings);
 
   const runLines = new Set(workflowRunLines(workflow));
   for (const command of requiredCommands) {
