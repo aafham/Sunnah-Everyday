@@ -1,1 +1,5 @@
 node_modules/
+
+# Flutter and Dart regenerate these package-local artifacts.
+**/.dart_tool/
+**/build/

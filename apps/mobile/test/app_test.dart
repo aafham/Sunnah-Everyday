@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sunnaheveryday/app.dart';
 import 'package:sunnaheveryday/src/app_preferences.dart';
+import 'package:testing_utils/testing_utils.dart';
+
+import 'support/mobile_app_harness.dart';
 
 void main() {
   testWidgets('mobile shell starts with a safe approved-content empty state', (
     tester,
   ) async {
-    await tester.pumpWidget(const ProviderScope(child: SunnahEverydayApp()));
-    await tester.pumpAndSettle();
+    await pumpMobileApp(tester);
 
     expect(find.text('Hari Ini'), findsWidgets);
     expect(find.text('Belum ada kandungan yang diluluskan'), findsOneWidget);
@@ -19,11 +19,10 @@ void main() {
   });
 
   testWidgets('settings route exposes real display controls', (tester) async {
-    await tester.pumpWidget(const ProviderScope(child: SunnahEverydayApp()));
-    await tester.pumpAndSettle();
+    await pumpMobileApp(tester);
 
     await tester.tap(find.text('Tetapan'));
-    await tester.pumpAndSettle();
+    await settleSunnahTestWidget(tester);
 
     expect(find.text('Tema'), findsOneWidget);
     expect(find.text('Kurangkan animasi'), findsOneWidget);
@@ -40,11 +39,10 @@ void main() {
           matching: find.text(label),
         ),
       );
-      await tester.pumpAndSettle();
+      await settleSunnahTestWidget(tester);
     }
 
-    await tester.pumpWidget(const ProviderScope(child: SunnahEverydayApp()));
-    await tester.pumpAndSettle();
+    await pumpMobileApp(tester);
 
     await navigateTo('Teroka');
     expect(find.text('Belum ada koleksi untuk diterokai'), findsOneWidget);
@@ -62,23 +60,14 @@ void main() {
   testWidgets(
     'app preserves nonlinear accessibility scaling and motion settings',
     (tester) async {
-      final container = ProviderContainer();
-      addTearDown(container.dispose);
-      container.read(appPreferencesProvider.notifier).setTextScale(1.2);
-
-      await tester.pumpWidget(
-        MediaQuery(
-          data: MediaQueryData(
-            textScaler: const _NonlinearTextScaler(),
-            disableAnimations: true,
-          ),
-          child: UncontrolledProviderScope(
-            container: container,
-            child: const SunnahEverydayApp(),
-          ),
-        ),
+      await pumpMobileApp(
+        tester,
+        textScaler: const _NonlinearTextScaler(),
+        disableAnimations: true,
+        configure: (container) {
+          container.read(appPreferencesProvider.notifier).setTextScale(1.2);
+        },
       );
-      await tester.pumpAndSettle();
 
       final context = tester.element(
         find.text('Belum ada kandungan yang diluluskan'),

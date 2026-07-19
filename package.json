@@ -6,7 +6,10 @@
     "test:content-contract": "node --test scripts/verify_content_contract.test.mjs",
     "test:content-validation": "node --test scripts/validate_content.test.mjs",
     "validate:content": "node scripts/validate_content.mjs",
-    "import:content": "node scripts/import_content.mjs"
+    "import:content": "node scripts/import_content.mjs",
+    "test:flutter": "node scripts/run_flutter_tests.mjs",
+    "check:flutter": "node scripts/run_flutter_tests.mjs --check",
+    "test:flutter-runner": "node --test scripts/run_flutter_tests.test.mjs"
   },
   "devDependencies": {
     "ajv": "8.20.0",
