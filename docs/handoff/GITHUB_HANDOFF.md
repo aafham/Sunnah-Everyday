@@ -22,9 +22,8 @@
   account), so no pull request has been created or updated. No browser session
   was available as an authenticated fallback.
 - CI: Quality run [29682293929](https://github.com/aafham/Sunnah-Everyday/actions/runs/29682293929)
-  is in progress for `86f80ba`; contracts and Flutter quality have passed,
-  while debug/web smoke remains in progress. GitHub's public branch API query
-  reported zero open PRs after the push.
+  passed contracts, Flutter quality and debug/web smoke for `86f80ba`.
+  GitHub's public branch API query reported zero open PRs after the push.
 
 ## Owner action
 

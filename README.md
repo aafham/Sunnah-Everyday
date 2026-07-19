@@ -67,7 +67,7 @@ Kotlin/Glance widget support remain planned.
 | Content intake | Draft-only models, schemas, header-only templates and a read-only CSV validation preview implemented; 0 imported/approved/public items |
 | Approved content | 0 items; no reviewer or source-rights records |
 | GitHub | `86f80ba` pushed on feature branch `codex/sunnah-everyday-build`; the public GitHub API reports 0 open pull requests for the branch, and creation or update is blocked by unavailable GitHub CLI authentication/session |
-| CI | Read-only Quality run [`29682293929`](https://github.com/aafham/Sunnah-Everyday/actions/runs/29682293929) is in progress for `86f80ba`: contracts and Flutter quality have passed while debug/web smoke remains in progress; it cannot release or upload |
+| CI | Read-only Quality run [`29682293929`](https://github.com/aafham/Sunnah-Everyday/actions/runs/29682293929) passed contracts, Flutter quality and debug/web smoke for `86f80ba`; it cannot release or upload |
 | Google Play | No app/AAB/upload/submission/availability |
 
 Full work tracking is in [TASKS.md](TASKS.md), [PROGRESS.md](PROGRESS.md),

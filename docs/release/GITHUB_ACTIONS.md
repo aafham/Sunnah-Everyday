@@ -88,10 +88,12 @@ privacy, owner-access and release-gate evidence before they can proceed.
 
 ## Verified run
 
-- Latest verified commit: `3031af27220f4897abfe305b63a40e2ebd8ed62b`
-- Quality run: [29680455827](https://github.com/aafham/Sunnah-Everyday/actions/runs/29680455827)
+- Latest verified commit: `86f80bafb97348e91417a675c1550fdf89023874`
+- Quality run: [29682293929](https://github.com/aafham/Sunnah-Everyday/actions/runs/29682293929)
 - Result: all three jobs passed on 2026-07-19: contracts, Flutter quality, and
   debug/web smoke checks.
+- The GitHub runner emitted Node 20 deprecation warnings while forcing the
+  pinned actions to Node 24; no workflow job failed.
 - Prior responsive-UX commit: `56daf54e3f7bd9c98ed92a5f0c778eba75479e7d`
   with successful Quality run [29679773365](https://github.com/aafham/Sunnah-Everyday/actions/runs/29679773365).
 - Prior fail-closed-daily commit: `c8ddbebd1831ffb847ffee876006529574f68b0b`
@@ -101,13 +103,6 @@ privacy, owner-access and release-gate evidence before they can proceed.
 - Prior workflow-hardening commit: `766e1fbb4ccb78ded664216a4819c42c0246bdbc`
   with successful Quality run [29677407731](https://github.com/aafham/Sunnah-Everyday/actions/runs/29677407731).
 
-## Current run
-
-- Current commit: `86f80bafb97348e91417a675c1550fdf89023874`
-- Quality run: [29682293929](https://github.com/aafham/Sunnah-Everyday/actions/runs/29682293929)
-- Status at documentation update: in progress. Contracts and Flutter quality
-  have passed; debug/web smoke remains in progress. This is not a verified
-  successful run and does not create a release, AAB or Play operation.
 
 The first workflow run on `4ceff86` failed at design-system dependency
 resolution because that library intentionally does not commit a lockfile. The

@@ -132,8 +132,9 @@ versioning with Android build numbers.
   `codex/sunnah-everyday-build`; CI workflow/hardening commits: `1c2463d`,
   `4ceff86` and `766e1fb`, pushed to the same branch.
 - Pull request: not created; `gh auth login` or a scoped `GH_TOKEN` is needed.
-- CI status: Quality run `29682293929` is in progress for `86f80ba`; contracts
-  and Flutter quality have passed, while debug/web smoke remains in progress.
+- CI status: Quality run `29682293929` passed contracts, Flutter quality and
+  debug/web smoke for `86f80ba`. The runner emitted Node 20 deprecation
+  warnings while forcing actions to Node 24; this was not a test/build failure.
 
 ### Tests
 
@@ -179,6 +180,8 @@ versioning with Android build numbers.
   debug/web smoke checks on `56daf54`.
 - GitHub Quality run `29680455827` passed contracts, Flutter quality and
   debug/web smoke checks on `3031af2`.
+- GitHub Quality run `29682293929` passed contracts, Flutter quality and
+  debug/web smoke checks on `86f80ba`.
 - `node scripts/verify_supabase_baseline.mjs` passed; all four migrations also
   applied in an isolated PostgreSQL/PGlite structural harness.
 - `dart analyze` and `dart test` passed for `packages/content_models`.

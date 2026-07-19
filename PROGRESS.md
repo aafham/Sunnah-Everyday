@@ -1,6 +1,6 @@
 # Progress
 
-_Last updated: 2026-07-19 (MOB-05 private-reflection slice pushed; Quality run in progress; content-bound remainder moved to dependency-gated MOB-08; BE-01 runtime verification pending)_
+_Last updated: 2026-07-19 (MOB-05 private-reflection slice and Quality run passed; content-bound remainder moved to dependency-gated MOB-08; BE-01 runtime verification pending)_
 
 ## Weighted status
 
@@ -25,9 +25,9 @@ _Last updated: 2026-07-19 (MOB-05 private-reflection slice pushed; Quality run i
 | Target version | `0.1.0+1` development baseline; M1 target remains `0.2.0+2` |
 | Current task | MOB-06 — extend settings coverage for dark mode, scaling and reduced motion. MOB-08 owns content-bound bookmarks, viewed history and practice tracking, and remains dependency-gated by MOB-05/CNT-03/BE-04/DEL-01 rather than using fake content identifiers. BE-01 Docker-backed migration, lint and pgTAP verification remains pending |
 | Branch | `codex/sunnah-everyday-build` |
-| Last recorded task commit | `86f80ba` (`feat(mobile): add private reflection storage`); local parity and branch push are verified, while its remote Quality run remains in progress |
+| Last recorded task commit | `86f80ba` (`feat(mobile): add private reflection storage`); local parity, branch push and remote Quality run are verified |
 | Local checks | MOB-05 reflection slice: `flutter gen-l10n`, `dart format --set-exit-if-changed lib test`, `flutter analyze` and `flutter test` passed for mobile (39 tests); Android debug APK built successfully. The tests cover bounded reflection persistence/reopen, generic errors, failed-write rollback with retained input, individual and confirmed all-delete, corrupt-envelope recovery deletion, hanging secure-read failure, unsupported-platform failure, UI-preference allowlisting, and Android backup-rule source. Root `npm run check:flutter` also passed analyzers/tests for `testing_utils` (1), design system (6), mobile (39) and admin (5); root format, content-contract (5), content-validation (14), Flutter-runner (3), CI-workflow (7) and static Supabase checks passed. This is not a signed AAB, device security audit or Play Data Safety declaration. Docker-backed Supabase migration/lint/pgTAP have not run because no Docker engine is available. |
-| GitHub CI | Quality run [`29682293929`](https://github.com/aafham/Sunnah-Everyday/actions/runs/29682293929) is in progress for `86f80ba`: contracts and Flutter quality have passed; debug/web smoke remains in progress. It has no release/upload/Play path |
+| GitHub CI | Quality run [`29682293929`](https://github.com/aafham/Sunnah-Everyday/actions/runs/29682293929) passed contracts, Flutter quality and debug/web smoke for `86f80ba` on 2026-07-19. The runner emitted Node 20 deprecation warnings while forcing actions to Node 24; there was no test/build failure, release/upload/Play path |
 | GitHub push / PR | `86f80ba` pushed successfully; public GitHub API query reported 0 open PRs for the branch. `gh auth status` has no logged-in host and no authenticated browser session is available, so a PR cannot be created or edited from this environment |
 | Google Play | No app, signed AAB, Console/API credential, track check, or upload |
 | Release status | No signed release AAB generated, uploaded, or submitted; local debug APK only |
